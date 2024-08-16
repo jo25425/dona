@@ -1,0 +1,13 @@
+{
+  "landing": {
+    "header": {
+      "title": "Illuminate the darkness with your social media data",
+      "body": "We are researching how people interact in the digital space and what those interactions mean for human well-being."
+    },
+    "what": {
+      "title": "What is this about?",
+      "body1": "Social interactions play a significant role in human well-being. To better understand this relationship, we are developing methods to measure digital social interactions for research.",
+      "body2": "You can support us by anonymously donating your chat meta-data from WhatsApp, Facebook or Instagram."
+    }
+  }
+}
