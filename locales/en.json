@@ -16,23 +16,20 @@
         "body": "You will receive graphs on your messaging behavior, such as in which chats you write the most, when are you the most active, how fast you reply, etc. This study is not intended to be a clinical-psychological diagnosis."
       },
       "col2": {
-        "title": "Support research",
-        "body_html": "The results of this study will contribute to the overall goal of better understanding the effects of social interactions on human well-being."
+        "title": "Stay anonymous",
+        "body1": "We will ask you to donate  ",
+        "link_text": "anonymized chat data",
+        "body2": "  (number of words for text messages, length in seconds for voice messages, message timestamp and pseudonyms of the chat participants). We will have no access to any names, message texts, voice message content or any other content."
       },
       "col3": {
-        "title": "Stay anonymous",
-        "body_html": "We will ask you to donate  <strong><a href=\"/learn-more\">anonymized chat data </a></strong>  (number of words for text messages, length in seconds for voice messages, message timestamp and pseudonyms of the chat participants). We will have no access to any names, message texts, voice message content or any other content."
+        "title": "Support research",
+        "body": "The results of this study will contribute to the overall goal of better understanding the effects of social interactions on human well-being."
       }
     },
     "contact": {
       "body_html": "The purpose of this website is to inform you about the background and process of this online study. If any questions or concerns arise during the process, please write to the principal investigator (Prof. Dr. Hanna Drimalla, AG Multimodal Behavior Processing, Technische Fakultät, Universität Bielefeld, <a href=\"mailto:drimalla@techfak.uni-bielefeld.de\">drimalla@techfak.uni-bielefeld.de</a>, Tel. +49 521 106-12043)"
     },
-    "imagePath": {
-      "donationProcedure1 ": "images/landingDonationProcedure_1_English.png",
-      "donationProcedure2 ": "images/landingDonationProcedure_2_English.png",
-      "donationProcedure3 ": "images/landingDonationProcedure_3_English.png",
-      "exampleFeedback ": "images/landingExampleFeedback_English.png"
-    }
+    "feedback_image": "images/landingExampleFeedback_English.png"
   },
   "learn-more": {
     "how-to-participate": {
@@ -95,9 +92,21 @@
   },
   "donation-info": {
     "title": "How do I donate my data?",
-    "data-request": "<strong>Data request: </strong>You request your social media data from a platform of your choice (currently supported: Facebook, WhatsApp, and Instagram) and download it to your device.",
-    "anonymisation": "<strong>Anonymization: </strong>We will remove all content from your data and limit it to metadata (e.g. length and timestamp of message). Your name, as well as the names of other participants, will get replaced by random pseudonyms (eg. \"James\" &rarr; \"anonymous13\"). You may examine the anonymization of your data before uploading it to our servers.",
-    "storage": "<strong> Storage: </strong>Only anonymized and reduced data will be uploaded to one of our secure servers."
+    "data-request": {
+      "image": "images/landingDonationProcedure_1_English.png",
+      "title": "Data request: ",
+      "body": "You request your social media data from a platform of your choice (currently supported: Facebook, WhatsApp, and Instagram) and download it to your device."
+    },
+    "anonymisation": {
+      "image": "images/landingDonationProcedure_2_English.png",
+      "title": "Anonymization: ",
+      "body": "We will remove all content from your data and limit it to metadata (e.g. length and timestamp of message). Your name, as well as the names of other participants, will get replaced by random pseudonyms (eg. \"James\" &rarr; \"anonymous13\"). You may examine the anonymization of your data before uploading it to our servers."
+    },
+    "storage": {
+      "image": "images/landingDonationProcedure_3_English.png",
+      "title": "Storage: ",
+      "body": "Only anonymized and reduced data will be uploaded to one of our secure servers."
+    }
   },
   "consent": {
     "title": "Informed Consent",

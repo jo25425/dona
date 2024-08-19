@@ -5,6 +5,8 @@ import {Inter} from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import {Locale} from "@/config";
+import CssBaseline from "@mui/material/CssBaseline";
+import { ThemeProvider } from '@mui/material/styles';
 
 const inter = Inter({subsets: ["latin"]});
 
@@ -26,8 +28,11 @@ export default async function RootLayout({
         <html lang={locale}>
         <body className={inter.className}>
         <NextIntlClientProvider messages={messages}>
-            <Header locale={locale}/>
-            {children}
+            {/*<AppRouterCacheProvider options={{ enableCssLayer: true }}>*/}
+                <CssBaseline />
+                <Header locale={locale} />
+                {children}
+            {/*</AppRouterCacheProvider>*/}
         </NextIntlClientProvider>
         </body>
         </html>
