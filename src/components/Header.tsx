@@ -1,7 +1,10 @@
 import {useTranslations} from "next-intl";
-import Link from "next/link";
-import LocaleSwitcher from "@/components/LanguageSwitcher";
+import HomeIcon from '@mui/icons-material/Home';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 import {Locale} from "@/config";
+import {AppBar, IconButton, Toolbar} from "@mui/material";
 
 export default function Header({
                                    locale,
@@ -11,20 +14,24 @@ export default function Header({
     const t = useTranslations("landing.header");
 
     return (
-        <header className="mb-3 flex justify-between border-b border-sky-900/75 pb-2 text-sm">
-            <nav>
-                <ul className="flex gap-4">
-                    <li>
-                        <Link
-                            href="/"
-                            className="font-medium text-sky-300"
-                        >
-                            {t("title")}
-                        </Link>
-                    </li>
-                </ul>
-            </nav>
-            <LocaleSwitcher locale={locale}/>
-        </header>
+        <Box sx={{ flexGrow: 1 }}>
+            <AppBar position="static">
+                <Toolbar>
+                    <IconButton
+                        size="large"
+                        edge="start"
+                        color="inherit"
+                        aria-label="home"
+                        sx={{ mr: 2 }}
+                    >
+                        <HomeIcon />  {/*TODO: Add link to / page */}
+                    </IconButton>
+                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                        {t("title")}
+                    </Typography>
+                    <LanguageSwitcher locale={locale}/>
+                </Toolbar>
+            </AppBar>
+        </Box>
     );
 }

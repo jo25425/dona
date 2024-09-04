@@ -2,32 +2,44 @@
 
 import {Locale, localeNames, locales} from '@/config';
 import {setUserLocale} from '@/services/locale';
+import MenuItem from '@mui/material/MenuItem';
+import Select, {SelectChangeEvent} from '@mui/material/Select';
+import Box from "@mui/material/Box";
 
-export default function LocaleSwitcher({
+export default function LanguageSwitcher({
                                            locale,
                                        }: {
     locale: Locale;
 }) {
     const changeLocale = (
-        event: React.ChangeEvent<HTMLSelectElement>,
+        event: SelectChangeEvent,
     ) => {
-        const newLocale = event.target.value as Locale;
-        setUserLocale(newLocale);
+        setUserLocale(event.target.value as Locale);
     };
 
     return (
-        <div>
-            <select
+        <Box>
+            <Select
+                size="small"
                 value={locale}
                 onChange={changeLocale}
-                className="..."
+                variant="outlined"
+                sx={{
+                    color: 'inherit',
+                    '& .MuiOutlinedInput-notchedOutline': {
+                        borderColor: 'inherit'
+                    },
+                    '& .MuiSvgIcon-root': {
+                        color: 'inherit'
+                    }
+                }}
             >
                 {locales.map((loc) => (
-                    <option key={loc} value={loc}>
+                    <MenuItem key={loc} value={loc}>
                         {localeNames[loc]}
-                    </option>
+                    </MenuItem>
                 ))}
-            </select>
-        </div>
+            </Select>
+        </Box>
     );
 }

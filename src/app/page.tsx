@@ -65,7 +65,7 @@ export default function HomePage() {
                                 margin-bottom={'1rem'}
                                 loading="lazy"
                             />
-                            <Typography variant="h6">{t('why.col3.title')}</Typography>
+                            <Typography variant="h6">{t('why.col2.title')}</Typography>
                             <Typography>
                                 {t('why.col2.body1')}
                                 <Link href="#" color="primary">{t('why.col2.link_text')}</Link>
@@ -102,7 +102,6 @@ export default function HomePage() {
                     </Typography>
                 </Box>
                 <Box my={4}>
-
                     <Typography variant="h4" textAlign="center">
                         {t_donation('title')}
                     </Typography>
