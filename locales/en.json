@@ -17,9 +17,7 @@
       },
       "col2": {
         "title": "Stay anonymous",
-        "body1": "We will ask you to donate  ",
-        "link_text": "anonymized chat data",
-        "body2": "  (number of words for text messages, length in seconds for voice messages, message timestamp and pseudonyms of the chat participants). We will have no access to any names, message texts, voice message content or any other content."
+        "body": "We will ask you to donate <strong><link>anonymized chat data</link></strong> (number of words for text messages, length in seconds for voice messages, message timestamp and pseudonyms of the chat participants). We will have no access to any names, message texts, voice message content or any other content."
       },
       "col3": {
         "title": "Support research",
@@ -27,9 +25,10 @@
       }
     },
     "contact": {
-      "body_html": "The purpose of this website is to inform you about the background and process of this online study. If any questions or concerns arise during the process, please write to the principal investigator (Prof. Dr. Hanna Drimalla, AG Multimodal Behavior Processing, Technische Fakultät, Universität Bielefeld, <a href=\"mailto:drimalla@techfak.uni-bielefeld.de\">drimalla@techfak.uni-bielefeld.de</a>, Tel. +49 521 106-12043)"
+      "body": "The purpose of this website is to inform you about the background and process of this online study. If any questions or concerns arise during the process, please write to the principal investigator (Prof. Dr. Hanna Drimalla, AG Multimodal Behavior Processing, Technische Fakultät, Universität Bielefeld, <email>drimalla@techfak.uni-bielefeld.de</email>, Tel. +49 521 106-12043)"
     },
-    "feedback_image": "images/landingExampleFeedback_English.png"
+    "feedback_image": "images/landingExampleFeedback_English.png",
+    "start": "Start"
   },
   "learn-more": {
     "how-to-participate": {

@@ -6,7 +6,6 @@ import "./globals.css";
 import Header from "@/components/Header";
 import {Locale} from "@/config";
 import CssBaseline from "@mui/material/CssBaseline";
-import { ThemeProvider } from '@mui/material/styles';
 
 const inter = Inter({subsets: ["latin"]});
 

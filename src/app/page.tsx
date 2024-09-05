@@ -4,7 +4,7 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import Link from "next/link";
+import {Button} from "@mui/material";
 
 export default function HomePage() {
     const t = useTranslations('landing');
@@ -22,6 +22,7 @@ export default function HomePage() {
                     textAlign: 'center'
                 }}
             >
+
                 <Box my={4}>
                     <Typography variant="h4" >
                         {t('what.title')}
@@ -67,9 +68,9 @@ export default function HomePage() {
                             />
                             <Typography variant="h6">{t('why.col2.title')}</Typography>
                             <Typography>
-                                {t('why.col2.body1')}
-                                <Link href="#" color="primary">{t('why.col2.link_text')}</Link>
-                                {t('why.col2.body2')}
+                                {t.rich('why.col2.body', {
+                                    link: (txt) => <a href="/learn-more">{txt}</a>
+                                })}
                             </Typography>
                         </Box>
                         <Box>
@@ -152,6 +153,19 @@ export default function HomePage() {
                         </Grid>
                     </Grid>
                 </Box>
+                <Box my={4}>
+                    <Typography variant="body2" sx={{
+                        fontStyle: "italic",
+                    }}>
+                        {t.rich('contact.body')}
+                    </Typography>
+                </Box>
+                <Box my={4}>
+                    <Button variant="contained">
+                        {t('start')}
+                    </Button>
+                </Box>
+
             </Stack>
         </Container>
     );
