@@ -12,7 +12,7 @@ export default function HomePage() {
     const t_donation = useTranslations('donation-info');
 
     return (
-        <Container maxWidth="lg">
+        <Container maxWidth="md">
             <Stack
                 sx={{
                     display: 'flex',
