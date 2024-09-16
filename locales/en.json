@@ -1,4 +1,11 @@
 {
+  "actions": {
+    "yes": "Yes",
+    "no": "No",
+    "previous": "Back",
+    "next": "Continue",
+    "start": "Start"
+  },
   "landing": {
     "header": {
       "title": "Illuminate the darkness with your social media data",
@@ -24,13 +31,6 @@
         "body": "The results of this study will contribute to the overall goal of better understanding the effects of social interactions on human well-being."
       }
     },
-    "contact": {
-      "body": "The purpose of this website is to inform you about the background and process of this online study. If any questions or concerns arise during the process, please write to the principal investigator (Prof. Dr. Hanna Drimalla, AG Multimodal Behavior Processing, Technische Fakultät, Universität Bielefeld, <email>drimalla@techfak.uni-bielefeld.de</email>, Tel. +49 521 106-12043)"
-    },
-    "feedback_image": "images/landingExampleFeedback_English.png",
-    "start": "Start"
-  },
-  "learn-more": {
     "how-to-participate": {
       "title": "How do I participate in the study?",
       "body": "This study will be completely anonymous and online. To participate in this study, we will ask you to donate your anonymized messages and complete  questionnaires. After  downloading the interaction data of a platform of your choice, the study will only last for about 10 minutes."
@@ -39,27 +39,29 @@
       "title": "Can I drop out during the study?",
       "body": "First things first: participation is entirely voluntary. You can drop out at any point during the study. Please note that due to the anonymous nature of the data, we cannot identify and delete your data after participation."
     },
-    "data-storage": {
-      "title": "What data will be used?"
+    "contact": {
+      "body": "The purpose of this website is to inform you about the background and process of this online study. If any questions or concerns arise during the process, please write to the principal investigator (Prof. Dr. Hanna Drimalla, AG Multimodal Behavior Processing, Technische Fakultät, Universität Bielefeld, <email>drimalla@techfak.uni-bielefeld.de</email>, Tel. +49 521 106-12043)"
     },
-    "imagePath": {
-      "text": "images/dataAnonymizationExample-text-English.svg",
-      "voice": "images/dataAnonymizationExample-voice-English.svg"
-    },
-    "storage": {
-      "body1_html": "<strong><em>Data donation: </strong></em>When donating your interaction data, we extract metadata (e.g. length and timestamp of message as well as pseudonyms of conversation participants) and no actual contents (e.g. message text or name of message sender). To ensure that, we anonymize your data on the user-side, meaning that your private data is anonymized locally and does not leave your device. This means that we will never see the content of your conversations. Before uploading, we will show you a preview of the data so that you can verify that it is sufficiently anonymous.",
-      "body2_html": "<strong><em>Questionnaires: </strong></em>You first fill out questionnaires about your demographic information. You can then carry out the data donation and receive feedback. Questionnaire data is also collected completely anonymously using <a target=\"_blank\" href=\"https://www.limesurvey.org/support/faq/39-data-protection-and-policy\">LimeSurvey</a>."
+    "feedback_image": "images/landingExampleFeedback_English.png"
+  },
+  "learn-more": {
+    "data-used": {
+      "title": "What data will be used?",
+      "body1": "<strong>Data donation:</strong> When donating your interaction data, we extract metadata (e.g. length and timestamp of message as well as pseudonyms of conversation participants) and no actual contents (e.g. message text or name of message sender). To ensure that, we anonymize your data on the user-side, meaning that your private data is anonymized locally and does not leave your device. This means that we will never see the content of your conversations. Before uploading, we will show you a preview of the data so that you can verify that it is sufficiently anonymous.",
+      "body2": "<strong>Questionnaires:</strong> You first fill out questionnaires about your demographic information. You can then carry out the data donation and receive feedback. Questionnaire data is also collected completely anonymously using <link>LimeSurvey</link>."
     },
     "data-handling": {
       "title": "What happens to my data?",
       "body1": "Since we are not collecting any names or other person-specific information, we will not be able to associate you with your data once the study has been completed - the donated data is anonymous. This means that your data cannot be deleted on request.",
       "body2": "The data and results of this study will be published in scientific journals. The published data will be anonymous, meaning that individuals cannot be identified. The fully anonymized data will be uploaded to a research data repository and qualified scientists will be granted access."
     },
-    "image": {
+    "images": {
       "text-messages": {
+        "image-path": "images/dataAnonymizationExample-text-English.svg",
         "caption": "Example of an anonymized text message."
       },
       "voice-messages": {
+        "image-path": "images/dataAnonymizationExample-voice-English.svg",
         "caption": "Example of an anonymized voice message."
       }
     }
@@ -498,12 +500,6 @@
     "data-protection": "Data Protection",
     "imprint": "Imprint",
     "reportProblem": "https://survey.mbp.tf.uni-bielefeld.de/index.php?r=survey/index&sid=486423&lang=en"
-  },
-  "yes": "Yes",
-  "no": "No",
-  "actions": {
-    "previous": "Back",
-    "next": "Continue"
   },
   "whatsapp": {
     "instructions": {

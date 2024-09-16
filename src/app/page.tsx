@@ -7,8 +7,8 @@ import Typography from '@mui/material/Typography';
 import {Button} from "@mui/material";
 
 export default function HomePage() {
+    const a = useTranslations('actions');
     const t = useTranslations('landing');
-    const t2 = useTranslations('learn-more');
     const t_donation = useTranslations('donation-info');
 
     return (
@@ -23,7 +23,7 @@ export default function HomePage() {
                 }}
             >
 
-                <Box my={4}>
+                <Box sx={{my: 4}}>
                     <Typography variant="h4" >
                         {t('what.title')}
                     </Typography>
@@ -34,8 +34,7 @@ export default function HomePage() {
                         {t('what.body2')}
                     </Typography>
                 </Box>
-                <Box my={4}
-                     sx={{
+                <Box sx={{my: 4,
                          display: 'flex',
                          flexDirection: 'column',
                          justifyContent: 'center',
@@ -86,23 +85,23 @@ export default function HomePage() {
                         </Box>
                     </Stack>
                 </Box>
-                <Box my={4}>
+                <Box sx={{my: 4}}>
                     <Typography variant="h4" >
-                        {t2('how-to-participate.title')}
+                        {t('how-to-participate.title')}
                     </Typography>
                     <Typography variant="body1">
-                        {t2('how-to-participate.body')}
+                        {t('how-to-participate.body')}
                     </Typography>
                 </Box>
-                <Box my={4}>
+                <Box sx={{my: 4}}>
                     <Typography variant="h4" >
-                        {t2('how-to-cancel.title')}
+                        {t('how-to-cancel.title')}
                     </Typography>
                     <Typography variant="body1">
-                        {t2('how-to-cancel.body')}
+                        {t('how-to-cancel.body')}
                     </Typography>
                 </Box>
-                <Box my={4}>
+                <Box sx={{my: 4}}>
                     <Typography variant="h4" textAlign="center">
                         {t_donation('title')}
                     </Typography>
@@ -153,16 +152,16 @@ export default function HomePage() {
                         </Grid>
                     </Grid>
                 </Box>
-                <Box my={4}>
+                <Box sx={{my: 4}}>
                     <Typography variant="body2" sx={{
                         fontStyle: "italic",
                     }}>
                         {t.rich('contact.body')}
                     </Typography>
                 </Box>
-                <Box my={4}>
+                <Box sx={{my: 4}}>
                     <Button variant="contained">
-                        {t('start')}
+                        {a('start')}
                     </Button>
                 </Box>
 
