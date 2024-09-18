@@ -4,13 +4,13 @@
     "no": "Nein",
     "previous": "Zurück",
     "next": "Vor",
-    "start": "Start"
+    "start": "Start",
+    "donate": "Ja, jetzt teilnehmen"
   },
   "links": {
     "learn-more": "Mehr Erfahren",
     "instructions": "Start",
     "donation-info": "Daten Spenden",
-    "donate": "Ja, jetzt teilnehmen",
     "data-protection": "Datenschutz",
     "imprint": "Impressum",
     "report-problem": "Problem melden",
@@ -76,11 +76,6 @@
       }
     }
   },
-  "footer": {
-    "title": "Haben Sie Ihre Daten bereit?",
-    "project-number": "Kennzeichen: 01IS20046"
-  },
-
   "instructions": {
     "about": {
       "title": "Wie erhalte ich meine Daten?",
@@ -95,8 +90,13 @@
     "continue": {
       "body": "Wenn Sie anhand dieser Anleitung Ihre Daten erhalten haben, können Sie jetzt mit der Einverständniserklärung und dem  Fragebogen beginnen. Im Anschluss können Sie dann Ihre Daten spenden."
     },
-    "haveData": "Sie brauchen 5-7 WhatsApp-Chats (.txt-Dateien)."
+    "haveData": "Sie brauchen 5-7 WhatsApp-Chats (.txt-Dateien).",
+    "buttons-header": "Haben Sie Ihre Daten bereit?"
   },
+  "footer": {
+    "project-number": "Kennzeichen: 01IS20046"
+  },
+
   "donorIdInput": {
     "title": "ID-Eingabe",
     "body": "Bitte geben Sie Ihre ID ein, um fortzufahren:",

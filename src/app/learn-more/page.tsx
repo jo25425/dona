@@ -79,7 +79,7 @@ export default function LearnMore() {
                         {t('data-handling.body2')}
                     </Typography>
                 </Box>
-                <Box sx={{mb: 10}}>
+                <Box>
                     <Stack spacing={2} direction="row">
                         <Button variant="contained" href={"/"}>
                             {a('previous')}

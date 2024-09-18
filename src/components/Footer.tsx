@@ -1,28 +1,28 @@
 import {useTranslations} from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
 
 export default function Footer() {
     const l = useTranslations("links")
     const project_number = useTranslations("footer")("project-number")
 
     return (
-        <Box sx={{flexGrow: 1, mt: 10}}>
+        <Box sx={{flexShrink: 1, mt: 10}}>
             <Toolbar>
                 <Stack spacing={2} direction="row"  sx={{flexGrow: 1}}>
                     <Button variant="contained" href={l("report-problem-url")}>
-                        {l('report-problem')}
+                        {l("report-problem")}
                     </Button>
                     <Button href="/data-protection">
-                        {l('data-protection')}
+                        {l("data-protection")}
                     </Button>
                     <Button href="/imprint">
-                        {l('imprint')}
+                        {l("imprint")}
                     </Button>
                 </Stack>
                 <Stack spacing={2} direction="row">

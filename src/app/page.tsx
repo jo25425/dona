@@ -13,7 +13,7 @@ export default function HomePage() {
     const t_donation = useTranslations('donation-info');
 
     return (
-        <Container maxWidth="md">
+        <Container maxWidth="md" sx={{flexGrow: 1}}>
             <Stack
                 sx={{
                     display: 'flex',
@@ -23,7 +23,6 @@ export default function HomePage() {
                     textAlign: 'center'
                 }}
             >
-
                 <Box sx={{my: 4}}>
                     <Typography variant="h4" >
                         {t('what.title')}
@@ -166,11 +165,10 @@ export default function HomePage() {
                     </Typography>
                 </Box>
                 <Box>
-                    <Button variant="contained">
+                    <Button variant="contained" href="/instructions">
                         {a('start')}
                     </Button>
                 </Box>
-
             </Stack>
         </Container>
     );

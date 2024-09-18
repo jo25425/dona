@@ -4,13 +4,13 @@
     "no": "No",
     "previous": "Back",
     "next": "Continue",
-    "start": "Start"
+    "start": "Start",
+    "donate": "Yes, participate now"
   },
   "links": {
     "learn-more": "Learn more",
     "instructions": "Start",
     "donation-info": "Donate data",
-    "donate": "Yes, participate now",
     "data-protection": "Data Protection",
     "imprint": "Imprint",
     "report-problem": "Report Problem",
@@ -90,10 +90,10 @@
     "continue": {
       "body": "If you have received your data using these instructions, you can now start with the declaration of consent and survey. Afterwards you can donate your data."
     },
-    "haveData": "You need 5-7 WhatsApp chat files."
+    "haveData": "You need 5-7 WhatsApp chat files.",
+    "buttons-header": "Do you have your data ready?"
   },
   "footer": {
-    "title": "Do you have your data ready?",
     "project-number": "Project No.: 01IS20046"
   },
 

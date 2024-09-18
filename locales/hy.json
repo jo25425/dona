@@ -76,12 +76,6 @@
       }
     }
   },
-  "footer": {
-    "title": "Ստացե՞լ եք Ձեր տվյալները",
-    "project-number": "Project No.: 01IS20046"
-  },
-
-
   "instructions": {
     "about": {
       "title": "Ինչպե՞ս կարող եմ ներբեռնել տվյալներս",
@@ -95,8 +89,13 @@
     },
     "continue": {
       "body": "Ձեր հաղորդագրությունները ներբեռնելուց հետո, հաջորդ քայլով կարող եք տալ Ձեր համաձայնությունն ու սկսել մասնակցությունը։ Այնուհետև կարող եք տվյալները վերբեռնել, անանուն դարձնել ու նվիրաբերել։"
-    }
+    },
+    "buttons-header": "Ստացե՞լ եք Ձեր տվյալները"
   },
+  "footer": {
+    "project-number": "Project No.: 01IS20046"
+  },
+
   "donorIdInput": {
     "title": "ID-Input",
     "body": "Please enter your ID to continue:",
@@ -111,7 +110,7 @@
     "data-request": {
       "image": "/images/landingDonationProcedure_1_Armenian.png",
       "title": "Տվյալների ներբեռնում - ",
-      "body": "Տվյալները կարող եք ներբեռնել Ձեր ընտրած սոցհարթակից  (Facebook և/կամ WhatsApp և/կամ Instagram)։"
+      "body": "Տվյալները կարող եք ներբեռնել Ձեր ընտրած սոցհարթակից (Facebook և/կամ WhatsApp և/կամ Instagram)։"
     },
     "anonymisation": {
       "image": "/images/landingDonationProcedure_2_Armenian.png",

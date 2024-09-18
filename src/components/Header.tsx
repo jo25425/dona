@@ -18,7 +18,7 @@ export default function Header({
     const t = useTranslations("landing.header");
 
     return (
-        <Box sx={{flexGrow: 1}}>
+        <Box sx={{flexShrink: 1}}>
             <AppBar position="static">
                 <Toolbar>
                     <IconButton
