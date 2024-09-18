@@ -6,6 +6,16 @@
     "next": "Continue",
     "start": "Start"
   },
+  "links": {
+    "learn-more": "Learn more",
+    "instructions": "Start",
+    "donation-info": "Donate data",
+    "donate": "Yes, participate now",
+    "data-protection": "Data Protection",
+    "imprint": "Imprint",
+    "report-problem": "Report Problem",
+    "report-problem-url": "https://survey.mbp.tf.uni-bielefeld.de/index.php?r=survey/index&sid=486423&lang=en"
+  },
   "landing": {
     "header": {
       "title": "Illuminate the darkness with your social media data",
@@ -20,6 +30,7 @@
       "title": "Why should I participate?",
       "col1": {
         "title": "Receive feedback",
+        "image-path": "/images/landingExampleFeedback_English.png",
         "body": "You will receive graphs on your messaging behavior, such as in which chats you write the most, when are you the most active, how fast you reply, etc. This study is not intended to be a clinical-psychological diagnosis."
       },
       "col2": {
@@ -41,8 +52,7 @@
     },
     "contact": {
       "body": "The purpose of this website is to inform you about the background and process of this online study. If any questions or concerns arise during the process, please write to the principal investigator (Prof. Dr. Hanna Drimalla, AG Multimodal Behavior Processing, Technische Fakultät, Universität Bielefeld, <email>drimalla@techfak.uni-bielefeld.de</email>, Tel. +49 521 106-12043)"
-    },
-    "feedback_image": "images/landingExampleFeedback_English.png"
+    }
   },
   "learn-more": {
     "data-used": {
@@ -57,11 +67,11 @@
     },
     "images": {
       "text-messages": {
-        "image-path": "images/dataAnonymizationExample-text-English.svg",
+        "image-path": "/images/dataAnonymizationExample-text-English.svg",
         "caption": "Example of an anonymized text message."
       },
       "voice-messages": {
-        "image-path": "images/dataAnonymizationExample-voice-English.svg",
+        "image-path": "/images/dataAnonymizationExample-voice-English.svg",
         "caption": "Example of an anonymized voice message."
       }
     }
@@ -82,6 +92,12 @@
     },
     "haveData": "You need 5-7 WhatsApp chat files."
   },
+  "footer": {
+    "title": "Do you have your data ready?",
+    "project-number": "Project No.: 01IS20046"
+  },
+
+
   "donorIdInput": {
     "title": "ID-Input",
     "body": "Please enter your ID to continue:",
@@ -94,17 +110,17 @@
   "donation-info": {
     "title": "How do I donate my data?",
     "data-request": {
-      "image": "images/landingDonationProcedure_1_English.png",
+      "image": "/images/landingDonationProcedure_1_English.png",
       "title": "Data request: ",
       "body": "You request your social media data from a platform of your choice (currently supported: Facebook, WhatsApp, and Instagram) and download it to your device."
     },
     "anonymisation": {
-      "image": "images/landingDonationProcedure_2_English.png",
+      "image": "/images/landingDonationProcedure_2_English.png",
       "title": "Anonymization: ",
       "body": "We will remove all content from your data and limit it to metadata (e.g. length and timestamp of message). Your name, as well as the names of other participants, will get replaced by random pseudonyms (eg. \"James\" &rarr; \"anonymous13\"). You may examine the anonymization of your data before uploading it to our servers."
     },
     "storage": {
-      "image": "images/landingDonationProcedure_3_English.png",
+      "image": "/images/landingDonationProcedure_3_English.png",
       "title": "Storage: ",
       "body": "Only anonymized and reduced data will be uploaded to one of our secure servers."
     }
@@ -474,10 +490,6 @@
       "am": "Հայերեն"
     }
   },
-  "footer": {
-    "title": "Do you have your data ready?",
-    "projectNumber": "Project No.: 01IS20046"
-  },
   "browser-warning": {
     "text": "You are using an unsupported browser. The page may not appear or work correctly as a result. Please use the latest version of Chrome or Firefox to view this page."
   },
@@ -491,15 +503,6 @@
   "data-storage": {
     "body1_html": "<em>Data Donation: </em>When donating your interaction data, we extract metadata (e.g. length and timestamp of message as well as pseudonyms of conversation participants) and no actual contents (e.g. message text or name of message sender). To ensure that, we anonymize your data client-side, meaning that your private data is anonymized locally and does not leave your device. This means that we will never see the content of your conversations. Before uploading, we will show you a preview of the data so that you can verify it is sufficiently anonymous.",
     "body2_html": "<em>Questionnaires: </em>You first fill out questionnaires about your demographic information. You can then carry out the data donation and receive feedback. Questionnaire data is also collected completely anonymously using <a target=\"_blank\" href=\"https://www.limesurvey.org/support/faq/39-data-protection-and-policy\">LimeSurvey</a>."
-  },
-  "links": {
-    "learn-more": "Learn more",
-    "instructions": "Start",
-    "donation-info": "Donate data",
-    "donate": "Yes, participate now",
-    "data-protection": "Data Protection",
-    "imprint": "Imprint",
-    "reportProblem": "https://survey.mbp.tf.uni-bielefeld.de/index.php?r=survey/index&sid=486423&lang=en"
   },
   "whatsapp": {
     "instructions": {

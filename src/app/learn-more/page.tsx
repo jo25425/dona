@@ -1,12 +1,13 @@
 import {useTranslations} from 'next-intl';
+import Image from "next/image";
 import Box from '@mui/material/Box';
+import Button from "@mui/material/Button";
 import Container from '@mui/material/Container';
+import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import {Button, Paper} from "@mui/material";
-import Image from "next/image";
 
-export default function HomePage() {
+export default function LearnMore() {
     const a = useTranslations('actions');
     const t = useTranslations('learn-more');
 
@@ -78,9 +79,9 @@ export default function HomePage() {
                         {t('data-handling.body2')}
                     </Typography>
                 </Box>
-                <Box sx={{my: 4}}>
+                <Box sx={{mb: 10}}>
                     <Stack spacing={2} direction="row">
-                        <Button variant="contained">
+                        <Button variant="contained" href={"/"}>
                             {a('previous')}
                         </Button>
                         <Button variant="contained">
@@ -88,7 +89,6 @@ export default function HomePage() {
                         </Button>
                     </Stack>
                 </Box>
-
             </Stack>
         </Container>
     );

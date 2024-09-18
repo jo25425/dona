@@ -1,11 +1,14 @@
 import {useTranslations} from "next-intl";
-import HomeIcon from '@mui/icons-material/Home';
+import Image from "next/image";
+import Link from "next/link";
+import AppBar from "@mui/material/AppBar";
 import Box from '@mui/material/Box';
+import HomeIcon from '@mui/icons-material/Home';
+import IconButton from "@mui/material/IconButton";
+import Toolbar from "@mui/material/Toolbar";
 import Typography from '@mui/material/Typography';
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import {Locale} from "@/config";
-import {AppBar, IconButton, Toolbar} from "@mui/material";
-import Image from "next/image";
 
 export default function Header({
                                    locale,
@@ -24,8 +27,9 @@ export default function Header({
                         color="inherit"
                         aria-label="home"
                         sx={{mr: 2}}
+                        href="/"
                     >
-                        <HomeIcon/> {/*TODO: Add link to / page */}
+                        <HomeIcon/>
                     </IconButton>
                     <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
                         {t("title")}
@@ -34,7 +38,7 @@ export default function Header({
                 </Toolbar>
             </AppBar>
             <Box sx={{ml: '1.5em'}}>
-                <a
+                <Link
                     href="https://www.uni-bielefeld.de/"
                     target="_blank"
                 >
@@ -44,7 +48,7 @@ export default function Header({
                         width={200}
                         height={100}
                     />
-                </a>
+                </Link>
             </Box>
         </Box>
     );
