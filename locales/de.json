@@ -84,14 +84,51 @@
     "datasource": {
       "title-format": "Anleitung zum Erhalten von {datasource}-Daten"
     },
-    "download-procedure": {
-      "title": "Übersicht über den Download & Datenspende Prozess:"
+    "headers": {
+      "devices": "Was für ein Gerät soll ich benutzen?",
+      "data-deletion": "Wie kann ich meine Daten von meinem Gerät wieder löschen?",
+      "overview": "Übersicht über den Download & Datenspende Prozess:"
     },
     "continue": {
       "buttons-header": "Haben Sie Ihre Daten bereit?",
       "body": "Wenn Sie anhand dieser Anleitung Ihre Daten erhalten haben, können Sie jetzt mit der Einverständniserklärung und dem  Fragebogen beginnen. Im Anschluss können Sie dann Ihre Daten spenden."
     },
     "haveData": "Sie brauchen 5-7 WhatsApp-Chats (.txt-Dateien)."
+  },
+  "whatsapp": {
+    "instructions": {
+      "devices": {
+        "body": "Sie benötigen Ihr Smartphone, auf dem Sie WhatsApp nutzen. Bitte stellen Sie sicher, dass Sie die Daten auf einem Gerät speichern, auf das außer Ihnen niemand Zugriff hat."
+      },
+      "p2": {
+        "title": "Welche Chats soll ich auswählen?",
+        "body": "Von Zeit zu Zeit besprechen die meisten Menschen wichtige Angelegenheiten mit Anderen und wir brauchen Menschen, auf deren Hilfe wir uns verlassen können. Das können Familienangehörige, Freunde oder Menschen sein, die Ihnen wirklich geholfen haben - <strong>was uns interessiert, sind die Chats mit den Menschen, mit denen Sie am ehesten über wirklich wichtige Angelegenheiten in Ihrem Leben sprechen.</strong><br></br><br></br><strong>Bitte wählen Sie 5-7 Chats mit Menschen aus, mit denen Sie wichtige Dinge in Ihrem Leben besprechen (auch Gruppenchats sind möglich).</strong>"
+      },
+      "data-deletion": {
+        "body": "Wir empfehlen Ihnen ausdrücklich, Ihre Originaldaten (Chatdateien) nach Abschluss der Spende von Ihrem Gerät und aus Ihrem E-Mail-System (Posteingang und gesendete E-Mails) zu löschen. Beachten Sie, dass das einfache Löschen der Dateien möglicherweise nicht ausreicht, um die Daten dauerhaft von Ihrem Gerät zu entfernen. Weitere Informationen zum dauerhaften Löschen von Dateien finden Sie auf <link>der Seite des Bundesamt für Sicherheit in der Informationstechnik</link> und <link2>Datenschutz.org</link2>.",
+        "secure-delete-url": "https://www.bsi.bund.de/DE/Themen/Verbraucherinnen-und-Verbraucher/Informationen-und-Empfehlungen/Cyber-Sicherheitsempfehlungen/Daten-sichern-verschluesseln-und-loeschen/Daten-endgueltig-loeschen/daten-endgueltig-loeschen.html",
+        "datenschutz-url": "https://www.datenschutz.org/daten-loeschen/"
+      },
+      "video": {
+        "ios": "/images/whatsapp/whatsapp_ger_iOS.mp4",
+        "android": "/images/whatsapp/whatsapp_ger_android.mp4",
+        "ios-caption": "Dies ist der Chat Export-Prozess auf einem iPhone.",
+        "android-caption": "Dies ist der Chat Export-Prozess auf einem Android-Gerät. Der Prozess könnte auf verschiedenen Geräten leicht anders sein."
+      }
+    },
+    "overview": {
+      "1": "Öffnen Sie WhatsApp auf Ihrem Smartphone.",
+      "2": "Überlegen Sie, welche fünf Chats für Sie besonders wichtig sind (z.B. Partner/in, beste/r Freund/in o.ä.).",
+      "3": "Wählen Sie einen der Chats aus und öffnen Sie diesen.",
+      "4": "Klicken Sie oben in der Mitte auf den Namen des Kontakts.",
+      "5": "Scrollen Sie runter und klicken Sie auf „Chat exportieren“. Ein Fenster öffnet sich. Wählen Sie \"OHNE MEDIEN\".",
+      "6": "Wählen Sie \"Mail\" (Briefumschlag) aus und senden Sie die Mail mit der angehangenen Chat-Datei an sich selbst. Bitte (ver)senden Sie nur von/an einen sicheren Maildienst (z.B. Uni-Mailadresse). Alternativ können Sie die Dateien auch via Bluetooth oder Airdrop an Ihren Computer senden.",
+      "7": "Laden Sie die Chatdatei aus der E-mail auf Ihrem Computer herunter.",
+      "8": "Wiederholen Sie die Schritte 3-7 für alle Chats."
+    },
+    "description_html": "<i>Hinweis: Die Chat-Exportfunktion wird nicht von allen WhatsApp-Versionen unterstützt! <strong>Das Exportieren und Speichern von WhatsApp-Daten funktioniert nicht mit der WhatsApp Web-Version. Außerdem kann es bei verschiedenen Android-Versionen sein, dass die Daten nicht lokal auf Ihrem Gerät gespeichert werden können.</i></strong> <br><br>Von Zeit zu Zeit besprechen die meisten Menschen wichtige Angelegenheiten mit anderen, und wir brauchen Menschen, auf deren Hilfe wir uns verlassen können. Das können Familienangehörige, Freunde oder Menschen sein, die Ihnen wirklich geholfen haben - was uns interessiert, sind diejenigen, mit denen Sie am ehesten über wirklich wichtige Angelegenheiten in Ihrem Leben sprechen. <br><br>Bitte wählen Sie <strong>5</strong> Chats mit Menschen aus, mit denen Sie wichtige Dinge in Ihrem Leben besprechen (auch Gruppenchats sind möglich). Bitte denken Sie daran, dass die Chats nur nacheinander heruntergeladen werden können. Eine Mehrfachauswahl von Chats wird derzeit nicht unterstützt.",
+    "external-documentation_html": "Die offizielle Dokumentation zum Herunterladen Ihrer Daten können Sie für <a target=\"_blank\" href=\"https://faq.whatsapp.com/618575946635920/?cms_platform=iphone&helpref=platform_switcher\" target=\"_blank\">iOS</a> und <a target=\"_blank\" href=\"https://faq.whatsapp.com/de/android/23756533\" target=\"_blank\">Android</a> hier finden.",
+    "logo": "w-logo.svg"
   },
   "footer": {
     "project-number": "Kennzeichen: 01IS20046"
@@ -502,43 +539,6 @@
   "data-storage": {
     "body1_html": "<em>Datenspende: </em>Bei der Datenspende Ihrer Social-Media-Daten erfassen wir ausschließlich Metadaten (e.g. Nachrichtenlänge, Nachrichtenzeitpunkt und Pseudonyme der UnterhaltungsteilnehmerInnen) und keine Inhalte (e.g. Nachrichtentext oder Name der UnterhaltungsteilnehmerInnen). Ihre Online-Interaktions-Daten werden bereits auf Ihrem Rechner anonymisiert. Wir sehen also niemals Ihre Nachrichten. Bevor wir Ihre anonymisierten Nachrichten speichern, können Sie diese begutachten. So können Sie sich davon überzeugen, dass diese ausreichend anonymisiert sind.",
     "body2_html": "<em>Fragebögen: </em>Sie füllen zunächst Fragebögen zu Ihren demographischen Informationen aus. Danach können Sie die Datenspende durchführen und erhalten Feedback. Die Erhebung von Fragebogendaten findet ebenfalls komplett anonym auf der Plattform <a target=\"_blank\" href=\"https://www.limesurvey.org/de/hilfe/faq/39-datenschutz%20und%20datenschutzpolitik\">LimeSurvey</a> statt."
-  },
-  "whatsapp": {
-    "instructions": {
-      "p1": {
-        "title": "Was für ein Gerät soll ich benutzen?",
-        "body": "Sie benötigen Ihr Smartphone, auf dem Sie WhatsApp nutzen. Bitte stellen Sie sicher, dass Sie die Daten auf einem Gerät speichern, auf das außer Ihnen niemand Zugriff hat."
-      },
-      "p2": {
-        "title": "Welche Chats soll ich auswählen?",
-        "body": "Von Zeit zu Zeit besprechen die meisten Menschen wichtige Angelegenheiten mit Anderen und wir brauchen Menschen, auf deren Hilfe wir uns verlassen können. Das können Familienangehörige, Freunde oder Menschen sein, die Ihnen wirklich geholfen haben - <strong>was uns interessiert, sind die Chats mit den Menschen, mit denen Sie am ehesten über wirklich wichtige Angelegenheiten in Ihrem Leben sprechen.</strong><br></br><br></br><strong>Bitte wählen Sie 5-7 Chats mit Menschen aus, mit denen Sie wichtige Dinge in Ihrem Leben besprechen (auch Gruppenchats sind möglich).</strong>"
-      },
-      "p3": {
-        "title": "Wie kann ich meine Daten von meinem Gerät wieder löschen?",
-        "body": "Wir empfehlen Ihnen ausdrücklich, Ihre Originaldaten (Chatdateien) nach Abschluss der Spende von Ihrem Gerät und aus Ihrem E-Mail-System (Posteingang und gesendete E-Mails) zu löschen. Beachten Sie, dass das einfache Löschen der Dateien möglicherweise nicht ausreicht, um die Daten dauerhaft von Ihrem Gerät zu entfernen. Weitere Informationen zum dauerhaften Löschen von Dateien finden Sie auf <link>der Seite des Bundesamt für Sicherheit in der Informationstechnik</link> und <link2>Datenschutz.org</link2>.",
-        "secure-delete-url": "https://www.bsi.bund.de/DE/Themen/Verbraucherinnen-und-Verbraucher/Informationen-und-Empfehlungen/Cyber-Sicherheitsempfehlungen/Daten-sichern-verschluesseln-und-loeschen/Daten-endgueltig-loeschen/daten-endgueltig-loeschen.html",
-        "datenschutz-url": "https://www.datenschutz.org/daten-loeschen/"
-      },
-      "video": {
-        "ios": "/images/whatsapp/whatsapp_ger_iOS.mp4",
-        "android": "/images/whatsapp/whatsapp_ger_android.mp4",
-        "ios-caption": "Dies ist der Chat Export-Prozess auf einem iPhone.",
-        "android-caption": "Dies ist der Chat Export-Prozess auf einem Android-Gerät. Der Prozess könnte auf verschiedenen Geräten leicht anders sein."
-      }
-    },
-    "description_html": "<i>Hinweis: Die Chat-Exportfunktion wird nicht von allen WhatsApp-Versionen unterstützt! <strong>Das Exportieren und Speichern von WhatsApp-Daten funktioniert nicht mit der WhatsApp Web-Version. Außerdem kann es bei verschiedenen Android-Versionen sein, dass die Daten nicht lokal auf Ihrem Gerät gespeichert werden können.</i></strong> <br><br>Von Zeit zu Zeit besprechen die meisten Menschen wichtige Angelegenheiten mit anderen, und wir brauchen Menschen, auf deren Hilfe wir uns verlassen können. Das können Familienangehörige, Freunde oder Menschen sein, die Ihnen wirklich geholfen haben - was uns interessiert, sind diejenigen, mit denen Sie am ehesten über wirklich wichtige Angelegenheiten in Ihrem Leben sprechen. <br><br>Bitte wählen Sie <strong>5</strong> Chats mit Menschen aus, mit denen Sie wichtige Dinge in Ihrem Leben besprechen (auch Gruppenchats sind möglich). Bitte denken Sie daran, dass die Chats nur nacheinander heruntergeladen werden können. Eine Mehrfachauswahl von Chats wird derzeit nicht unterstützt.",
-    "external-documentation_html": "Die offizielle Dokumentation zum Herunterladen Ihrer Daten können Sie für <a target=\"_blank\" href=\"https://faq.whatsapp.com/618575946635920/?cms_platform=iphone&helpref=platform_switcher\" target=\"_blank\">iOS</a> und <a target=\"_blank\" href=\"https://faq.whatsapp.com/de/android/23756533\" target=\"_blank\">Android</a> hier finden.",
-    "donation-procedure": {
-      "1": "Öffnen Sie WhatsApp auf Ihrem Smartphone.",
-      "2": "Überlegen Sie, welche fünf Chats für Sie besonders wichtig sind (z.B. Partner/in, beste/r Freund/in o.ä.).",
-      "3": "Wählen Sie einen der Chats aus und öffnen Sie diesen.",
-      "4": "Klicken Sie oben in der Mitte auf den Namen des Kontakts.",
-      "5": "Scrollen Sie runter und klicken Sie auf „Chat exportieren“. Ein Fenster öffnet sich. Wählen Sie \"OHNE MEDIEN\".",
-      "6": "Wählen Sie \"Mail\" (Briefumschlag) aus und senden Sie die Mail mit der angehangenen Chat-Datei an sich selbst. Bitte (ver)senden Sie nur von/an einen sicheren Maildienst (z.B. Uni-Mailadresse). Alternativ können Sie die Dateien auch via Bluetooth oder Airdrop an Ihren Computer senden.",
-      "7": "Laden Sie die Chatdatei aus der E-mail auf Ihrem Computer herunter.",
-      "8": "Wiederholen Sie die Schritte 3-7 für alle Chats."
-    },
-    "logo": "w-logo.svg"
   },
   "facebook": {
     "instructions": {

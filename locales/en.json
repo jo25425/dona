@@ -84,14 +84,51 @@
     "datasource": {
       "title-format": "Instructions for getting {datasource} data"
     },
-    "download-procedure": {
-      "title": "Overview of the download & donation procedure:"
+    "headers": {
+      "devices": "What type of device should I use?",
+      "data-deletion": "How can I delete my data from my device?",
+      "overview": "Overview of the download & donation procedure:"
     },
     "continue": {
       "buttons-header": "Do you have your data ready?",
       "body": "If you have received your data using these instructions, you can now start with the declaration of consent and survey. Afterwards you can donate your data."
     },
     "haveData": "You need 5-7 WhatsApp chat files."
+  },
+  "whatsapp": {
+    "instructions": {
+      "devices": {
+        "body": "You need your smartphone, on which you use WhatsApp. Please make sure that you are storing the data on a device that no one but you has access to."
+      },
+      "p2": {
+        "title": "Which chats should I choose?",
+        "body": "From time to time most people discuss important matters with others and we need people we can rely on for help. They may be family, friends, or people who have really helped you - <strong>we are interested in the chats with the people you are most likely to talk to about really important things in your life.</strong><br></br><br></br><strong>Please select 5-7 chats with people with whom you discuss important things in your life (group chats are also possible).</strong>"
+      },
+      "data-deletion": {
+        "body": "We strongly recommend that you delete your original data (chat files) from your device and from your e-mail system (inbox and sent) after completing the donation. Note that simply deleting the files may not be enough to permanently remove the data from your device. Further information on the permanent deletion of files can be found <link>on the website of the University of Michigan</link>.",
+        "secure-delete-url": "https://safecomputing.umich.edu/protect-yourself/prepare-devices-disposal/securely-delete-files"
+      },
+      "video": {
+        "ios": "/images/whatsapp/whatsapp_eng_iOS.mp4",
+        "android": "/images/whatsapp/whatsapp_eng_android.mp4",
+        "ios-caption": "This is the chat export process on an iPhone.",
+        "android-caption": "This is the chat export process on an Android device. The process may vary on different devices."
+      }
+    },
+    "overview": {
+      "1": "Open WhatsApp on your smartphone.",
+      "2": "Think about which five chats are most relevant to you (e.g. close friend, partner).",
+      "3": "Pick one of the selected chats and open it.",
+      "4": "Click on the contact's name in the top center.",
+      "5": "Scroll down and click on \"Export chat\". A window will open. Select \"WITHOUT MEDIA\".",
+      "6": "Select \"Mail\" (envelope) and send the mail with the attached chat file to yourself. Please only send from/to a secure mail service (e.g. university mail address). Alternatively, you can send the files to your computer via Bluetooth or Airdrop.",
+      "7": "Download the chat file from the email to your computer.",
+      "8": "Repeat the steps 3-7 for all chats."
+    },
+    "external-documentation_html": "The official documentation on how to download your data can be found here for <a target=\"_blank\" href=\"https://faq.whatsapp.com/618575946635920/?cms_platform=iphone&helpref=platform_switcher\" target=\"_blank\">iOS</a> or <a target=\"_blank\" href=\"https://faq.whatsapp.com/en/android/23756533\" target=\"_blank\">Android</a>.",
+    "description_html": "<i>Note: The chat export function is not supported by all WhatsApp versions! <strong> Exporting and saving WhatsApp data does not work with the WhatsApp web version. Also, on different Android versions, you may not be able to store your data locally on your device.</i></strong> <br><br>From time to time, most people discuss important matters with other people, and we need people we can depend on for help. These can be family, friends, or people who have been really helpful to you – what we are interested in are the ones that you are most likely to talk about really important matters in your life. <br><br>Please choose <strong>5</strong> chats with people with whom you discuss important matters in your life (group chats are possible too). Please bear in mind that the chats can only be downloaded one after the other. Multiple selection of chats is currently not supported.",
+
+    "logo": "w-logo.svg"
   },
   "footer": {
     "project-number": "Project No.: 01IS20046"
@@ -503,42 +540,6 @@
   "data-storage": {
     "body1_html": "<em>Data Donation: </em>When donating your interaction data, we extract metadata (e.g. length and timestamp of message as well as pseudonyms of conversation participants) and no actual contents (e.g. message text or name of message sender). To ensure that, we anonymize your data client-side, meaning that your private data is anonymized locally and does not leave your device. This means that we will never see the content of your conversations. Before uploading, we will show you a preview of the data so that you can verify it is sufficiently anonymous.",
     "body2_html": "<em>Questionnaires: </em>You first fill out questionnaires about your demographic information. You can then carry out the data donation and receive feedback. Questionnaire data is also collected completely anonymously using <a target=\"_blank\" href=\"https://www.limesurvey.org/support/faq/39-data-protection-and-policy\">LimeSurvey</a>."
-  },
-  "whatsapp": {
-    "instructions": {
-      "p1": {
-        "title": "What type of device should I use?",
-        "body": "You need your smartphone, on which you use WhatsApp. Please make sure that you are storing the data on a device that no one but you has access to."
-      },
-      "p2": {
-        "title": "Which chats should I choose?",
-        "body": "From time to time most people discuss important matters with others and we need people we can rely on for help. They may be family, friends, or people who have really helped you - <strong>we are interested in the chats with the people you are most likely to talk to about really important things in your life.</strong><br></br><br></br><strong>Please select 5-7 chats with people with whom you discuss important things in your life (group chats are also possible).</strong>"
-      },
-      "p3": {
-        "title": "How can I delete my data from my device?",
-        "body": "We strongly recommend that you delete your original data (chat files) from your device and from your e-mail system (inbox and sent) after completing the donation. Note that simply deleting the files may not be enough to permanently remove the data from your device. Further information on the permanent deletion of files can be found <link>on the website of the University of Michigan</link>.",
-        "secure-delete-url": "https://safecomputing.umich.edu/protect-yourself/prepare-devices-disposal/securely-delete-files"
-      },
-      "video": {
-        "ios": "/images/whatsapp/whatsapp_eng_iOS.mp4",
-        "android": "/images/whatsapp/whatsapp_eng_android.mp4",
-        "ios-caption": "This is the chat export process on an iPhone.",
-        "android-caption": "This is the chat export process on an Android device. The process may vary on different devices."
-      }
-    },
-    "description_html": "<i>Note: The chat export function is not supported by all WhatsApp versions! <strong> Exporting and saving WhatsApp data does not work with the WhatsApp web version. Also, on different Android versions, you may not be able to store your data locally on your device.</i></strong> <br><br>From time to time, most people discuss important matters with other people, and we need people we can depend on for help. These can be family, friends, or people who have been really helpful to you – what we are interested in are the ones that you are most likely to talk about really important matters in your life. <br><br>Please choose <strong>5</strong> chats with people with whom you discuss important matters in your life (group chats are possible too). Please bear in mind that the chats can only be downloaded one after the other. Multiple selection of chats is currently not supported.",
-    "external-documentation_html": "The official documentation on how to download your data can be found here for <a target=\"_blank\" href=\"https://faq.whatsapp.com/618575946635920/?cms_platform=iphone&helpref=platform_switcher\" target=\"_blank\">iOS</a> or <a target=\"_blank\" href=\"https://faq.whatsapp.com/en/android/23756533\" target=\"_blank\">Android</a>.",
-    "donation-procedure": {
-      "1": "Open WhatsApp on your smartphone.",
-      "2": "Think about which five chats are most relevant to you (e.g. close friend, partner).",
-      "3": "Pick one of the selected chats and open it.",
-      "4": "Click on the contact's name in the top center.",
-      "5": "Scroll down and click on \"Export chat\". A window will open. Select \"WITHOUT MEDIA\".",
-      "6": "Select \"Mail\" (envelope) and send the mail with the attached chat file to yourself. Please only send from/to a secure mail service (e.g. university mail address). Alternatively, you can send the files to your computer via Bluetooth or Airdrop.",
-      "7": "Download the chat file from the email to your computer.",
-      "8": "Repeat the steps 3-7 for all chats."
-    },
-    "logo": "w-logo.svg"
   },
   "facebook": {
     "instructions": {
