@@ -4,13 +4,13 @@
     "no": "Ոչ",
     "previous": "Հետ",
     "next": "Շարունակել",
-    "start": "Մեկնարկ"
+    "start": "Մեկնարկ",
+    "donate": "Այո, սկսել մասնակցությունը"
   },
   "links": {
     "learn-more": "Իմանալ ավելին",
     "instructions": "Մեկնարկ",
     "donation-info": "Նվիրաբերել տվյալները",
-    "donate": "Այո, սկսել մասնակցությունը",
     "data-protection": "Գաղտնիության քաղաքականություն",
     "imprint": "Imprint",
     "report-problem": "Հաղորդել խնդրի մասին",
@@ -82,15 +82,15 @@
       "body_html": "Մասնակցելուց առաջ խնդրում ենք ներբեռնել Ձեր տվյալները Facebook, WhatsApp կամ Instagram հարթակներից։ Կարող եք տվյալներ նվիրաբերել միաժամանակ երկու հարթակից։ Եթե ընտրում եք հարթակներից միայն մեկը, խնդրում ենք ընտրել այն հարթակը, որն ավելի կարևոր է Ձեզ համար։  <b>Խնդրում ենք ուշադիր կարդալ ստորև տրամադրված հրահանգները, քանի որ դրանք կարևոր են հաջորդ քայլերի համար</b>"
     },
     "datasource": {
-      "title_format ": "Ներբեռնելու հրահանգներ %s հարթակի համար"
+      "title-format": "Ներբեռնելու հրահանգներ {datasource} հարթակի համար"
     },
     "download-procedure": {
       "title": "Ներբեռնման հրահանգներ"
     },
     "continue": {
+      "buttons-header": "Ստացե՞լ եք Ձեր տվյալները",
       "body": "Ձեր հաղորդագրությունները ներբեռնելուց հետո, հաջորդ քայլով կարող եք տալ Ձեր համաձայնությունն ու սկսել մասնակցությունը։ Այնուհետև կարող եք տվյալները վերբեռնել, անանուն դարձնել ու նվիրաբերել։"
-    },
-    "buttons-header": "Ստացե՞լ եք Ձեր տվյալները"
+    }
   },
   "footer": {
     "project-number": "Project No.: 01IS20046"
@@ -510,11 +510,20 @@
       },
       "p2": {
         "title": "Ի՞նչ չատ ընտրել",
-        "body": "Մարդիկ հաճախ կարիք ունեն կարևոր թեմաներով կիսվելու այն մարդկանց հետ, որոնց վստահում են։  Խոսքը ընտանիքի, ընկերների կամ այլ մարդկանց մասին է, որոնք Ձեզ աջակցել են։ <b>Ընտրեք հաղորդագրություններ այն մարդկանց հետ, որոնց հետ կարող եք խոսել Ձեր կյանքի կարևոր հարցերի մասին։</b> <br> <br><b>Ընտրեք 5-7 չատ այն մարդկանց հետ, որոնց հետ կարևոր թեմաներ եք քննարկում, կարող եք ընտրել նաև խմբային չատեր։ </b>"
+        "body": "Մարդիկ հաճախ կարիք ունեն կարևոր թեմաներով կիսվելու այն մարդկանց հետ, որոնց վստահում են։  Խոսքը ընտանիքի, ընկերների կամ այլ մարդկանց մասին է, որոնք Ձեզ աջակցել են։ <strong>Ընտրեք հաղորդագրություններ այն մարդկանց հետ, որոնց հետ կարող եք խոսել Ձեր կյանքի կարևոր հարցերի մասին։</strong><br></br><br></br><strong>Ընտրեք 5-7 չատ այն մարդկանց հետ, որոնց հետ կարևոր թեմաներ եք քննարկում, կարող եք ընտրել նաև խմբային չատեր։ </strong>"
       },
       "p3": {
         "title": "Ինչպե՞ս կարող եմ ներբեռնած տվյալները ջնջել իմ սարքից",
-        "body": "Խորհուրդ ենք տալիս մասնակցությունից հետո ներբեռնած ֆայլերը  ջնջել Ձեր սարքից և էլ․փոստից։ Ուշադրություն դարձրեք, որ տվյալները վերջնականապես հեռացվեն սարքից, ոչ թե տեղափոխվեն զամբյուղ։ Ֆայլերը ջնջելու մասին լրացուցիչ ինֆորմացիա կարող եք ստանալ  <a target=\"_blank\" href=\"https://safecomputing.umich.edu/protect-yourself/prepare-devices-disposal/securely-delete-files\">այստեղ</a>։"
+        "body": "Խորհուրդ ենք տալիս մասնակցությունից հետո ներբեռնած ֆայլերը  ջնջել Ձեր սարքից և էլ․փոստից։ Ուշադրություն դարձրեք, որ տվյալները վերջնականապես հեռացվեն սարքից, ոչ թե տեղափոխվեն զամբյուղ։ Ֆայլերը ջնջելու մասին լրացուցիչ ինֆորմացիա կարող եք ստանալ  <link>այստեղ</link>։",
+        "secure-delete-url": "https://safecomputing.umich.edu/protect-yourself/prepare-devices-disposal/securely-delete-files"
+      },
+      "video": {
+        "": "/images/whatsapp/whatsapp_am.mp4",
+        "ios ": "/images/whatsapp/whatsapp_eng_iOS.mp4",
+        "android ": "/images/whatsapp/whatsapp_eng_android.mp4",
+        "caption": "Սա Android համակարգով ստեղծված օրինակ է։ Այլ սարքերում քայլերը կարող են փոքր-ինչ տարբերվել, սակայն տրամաբանությունը նույնն է։",
+        "ios-caption": "Սա տեսանյութի համար օգտագործվել է iPhone։",
+        "android-caption": "Այս տեսանյութի համար օգտագործվել է Android սարք։ Կախված սարքից՝ քայլերը կարող են փոքր-ինչ տարբերվել։"
       }
     },
     "description_html": "<i>Note: The chat export function is not supported by all WhatsApp versions! <strong> Exporting and saving WhatsApp data does not work with the WhatsApp web version. Also, on different Android versions, you may not be able to store your data locally on your device.</i></strong> <br><br>From time to time, most people discuss important matters with other people, and we need people we can depend on for help. These can be family, friends, or people who have been really helpful to you – what we are interested in are the ones that you are most likely to talk about really important matters in your life. <br><br>Please choose <strong>5</strong> chats with people with whom you discuss important matters in your life (group chats are possible too). Please bear in mind that the chats can only be downloaded one after the other. Multiple selection of chats is currently not supported.",
@@ -528,18 +537,6 @@
       "6": "Ընտրեք, թե որտեղ եք ցանկանում պահպանել ֆայլերը։ Կարող եք Ձեր անձնական էլ․հասցեով ինքներդ Ձեզ կամ Bluetooth-ի կամ Airdrop-ի միջոցով Ձեր համակարգչին ուղարկել։",
       "7": "Ներբեռնեք ֆայլերը Ձեր համակարգիչ։",
       "8": "Կրկնեք 3-7 հրահանգները բոլոր չատերի համար։"
-    },
-    "instruction": {
-      "gif": {
-        "": "whatsapp_am.mp4",
-        "subtitle": {
-          "": "Սա Android համակարգով ստեղծված օրինակ է։ Այլ սարքերում քայլերը կարող են փոքր-ինչ տարբերվել, սակայն տրամաբանությունը նույնն է։",
-          "iOS": "Սա տեսանյութի համար օգտագործվել է iPhone։",
-          "android": "Այս տեսանյութի համար օգտագործվել է Android սարք։ Կախված սարքից՝ քայլերը կարող են փոքր-ինչ տարբերվել։"
-        }
-      },
-      "gifiOS ": "whatsapp_eng_iOS.mp4",
-      "gifAndroid ": "whatsapp_eng_android.mp4"
     },
     "logo": "w-logo.svg"
   },

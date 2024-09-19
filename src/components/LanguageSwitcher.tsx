@@ -2,9 +2,9 @@
 
 import {Locale, localeNames, locales} from '@/config';
 import {setUserLocale} from '@/services/locale';
-import MenuItem from '@mui/material/MenuItem';
-import Select, {SelectChangeEvent} from '@mui/material/Select';
 import Box from "@mui/material/Box";
+import Select, {SelectChangeEvent} from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
 
 export default function LanguageSwitcher({
                                            locale,

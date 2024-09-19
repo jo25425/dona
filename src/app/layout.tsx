@@ -7,7 +7,6 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import "./globals.css";
 import {Locale} from "@/config";
-import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 
 const inter = Inter({subsets: ["latin"]});

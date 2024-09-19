@@ -82,16 +82,16 @@
       "body_html": "Bevor Sie an der Studie teilnehmen, fordern Sie bitte Ihre Daten direkt von Facebook und/oder WhatsApp und/oder Instagram an. Sie können Daten von jeder dieser Plattformen spenden. Falls Sie nur Daten von einer Plattform spenden möchten, wählen Sie bitte die Plattform, die für Sie wichtiger ist. <b>Bitte sehen Sie sich die entsprechenden Anleitungen genau an, da sie wichtige Informationen für die weiteren Schritte enthalten.</b>"
     },
     "datasource": {
-      "title_format ": "Anleitung zum Erhalten von %s-Daten"
+      "title-format": "Anleitung zum Erhalten von {datasource}-Daten"
     },
     "download-procedure": {
       "title": "Übersicht über den Download & Datenspende Prozess:"
     },
     "continue": {
+      "buttons-header": "Haben Sie Ihre Daten bereit?",
       "body": "Wenn Sie anhand dieser Anleitung Ihre Daten erhalten haben, können Sie jetzt mit der Einverständniserklärung und dem  Fragebogen beginnen. Im Anschluss können Sie dann Ihre Daten spenden."
     },
-    "haveData": "Sie brauchen 5-7 WhatsApp-Chats (.txt-Dateien).",
-    "buttons-header": "Haben Sie Ihre Daten bereit?"
+    "haveData": "Sie brauchen 5-7 WhatsApp-Chats (.txt-Dateien)."
   },
   "footer": {
     "project-number": "Kennzeichen: 01IS20046"
@@ -511,11 +511,19 @@
       },
       "p2": {
         "title": "Welche Chats soll ich auswählen?",
-        "body": "Von Zeit zu Zeit besprechen die meisten Menschen wichtige Angelegenheiten mit Anderen und wir brauchen Menschen, auf deren Hilfe wir uns verlassen können. Das können Familienangehörige, Freunde oder Menschen sein, die Ihnen wirklich geholfen haben - <b>was uns interessiert, sind die Chats mit den Menschen, mit denen Sie am ehesten über wirklich wichtige Angelegenheiten in Ihrem Leben sprechen.</b> <br><br><b>Bitte wählen Sie 5-7 Chats mit Menschen aus, mit denen Sie wichtige Dinge in Ihrem Leben besprechen (auch Gruppenchats sind möglich).</b>"
+        "body": "Von Zeit zu Zeit besprechen die meisten Menschen wichtige Angelegenheiten mit Anderen und wir brauchen Menschen, auf deren Hilfe wir uns verlassen können. Das können Familienangehörige, Freunde oder Menschen sein, die Ihnen wirklich geholfen haben - <strong>was uns interessiert, sind die Chats mit den Menschen, mit denen Sie am ehesten über wirklich wichtige Angelegenheiten in Ihrem Leben sprechen.</strong><br></br><br></br><strong>Bitte wählen Sie 5-7 Chats mit Menschen aus, mit denen Sie wichtige Dinge in Ihrem Leben besprechen (auch Gruppenchats sind möglich).</strong>"
       },
       "p3": {
         "title": "Wie kann ich meine Daten von meinem Gerät wieder löschen?",
-        "body": "Wir empfehlen Ihnen ausdrücklich, Ihre Originaldaten (Chatdateien) nach Abschluss der Spende von Ihrem Gerät und aus Ihrem E-Mail-System (Posteingang und gesendete E-Mails) zu löschen. Beachten Sie, dass das einfache Löschen der Dateien möglicherweise nicht ausreicht, um die Daten dauerhaft von Ihrem Gerät zu entfernen. Weitere Informationen zum dauerhaften Löschen von Dateien finden Sie auf <a target=\"_blank\" href=\"https://www.bsi.bund.de/DE/Themen/Verbraucherinnen-und-Verbraucher/Informationen-und-Empfehlungen/Cyber-Sicherheitsempfehlungen/Daten-sichern-verschluesseln-und-loeschen/Daten-endgueltig-loeschen/daten-endgueltig-loeschen.html\">der Seite des Bundesamt für Sicherheit in der Informationstechnik</a> und <a target=\"_blank\" href=\"https://www.datenschutz.org/daten-loeschen/\"> Datenschutz.org</a>."
+        "body": "Wir empfehlen Ihnen ausdrücklich, Ihre Originaldaten (Chatdateien) nach Abschluss der Spende von Ihrem Gerät und aus Ihrem E-Mail-System (Posteingang und gesendete E-Mails) zu löschen. Beachten Sie, dass das einfache Löschen der Dateien möglicherweise nicht ausreicht, um die Daten dauerhaft von Ihrem Gerät zu entfernen. Weitere Informationen zum dauerhaften Löschen von Dateien finden Sie auf <link>der Seite des Bundesamt für Sicherheit in der Informationstechnik</link> und <link2>Datenschutz.org</link2>.",
+        "secure-delete-url": "https://www.bsi.bund.de/DE/Themen/Verbraucherinnen-und-Verbraucher/Informationen-und-Empfehlungen/Cyber-Sicherheitsempfehlungen/Daten-sichern-verschluesseln-und-loeschen/Daten-endgueltig-loeschen/daten-endgueltig-loeschen.html",
+        "datenschutz-url": "https://www.datenschutz.org/daten-loeschen/"
+      },
+      "video": {
+        "ios": "/images/whatsapp/whatsapp_ger_iOS.mp4",
+        "android": "/images/whatsapp/whatsapp_ger_android.mp4",
+        "ios-caption": "Dies ist der Chat Export-Prozess auf einem iPhone.",
+        "android-caption": "Dies ist der Chat Export-Prozess auf einem Android-Gerät. Der Prozess könnte auf verschiedenen Geräten leicht anders sein."
       }
     },
     "description_html": "<i>Hinweis: Die Chat-Exportfunktion wird nicht von allen WhatsApp-Versionen unterstützt! <strong>Das Exportieren und Speichern von WhatsApp-Daten funktioniert nicht mit der WhatsApp Web-Version. Außerdem kann es bei verschiedenen Android-Versionen sein, dass die Daten nicht lokal auf Ihrem Gerät gespeichert werden können.</i></strong> <br><br>Von Zeit zu Zeit besprechen die meisten Menschen wichtige Angelegenheiten mit anderen, und wir brauchen Menschen, auf deren Hilfe wir uns verlassen können. Das können Familienangehörige, Freunde oder Menschen sein, die Ihnen wirklich geholfen haben - was uns interessiert, sind diejenigen, mit denen Sie am ehesten über wirklich wichtige Angelegenheiten in Ihrem Leben sprechen. <br><br>Bitte wählen Sie <strong>5</strong> Chats mit Menschen aus, mit denen Sie wichtige Dinge in Ihrem Leben besprechen (auch Gruppenchats sind möglich). Bitte denken Sie daran, dass die Chats nur nacheinander heruntergeladen werden können. Eine Mehrfachauswahl von Chats wird derzeit nicht unterstützt.",
@@ -529,17 +537,6 @@
       "6": "Wählen Sie \"Mail\" (Briefumschlag) aus und senden Sie die Mail mit der angehangenen Chat-Datei an sich selbst. Bitte (ver)senden Sie nur von/an einen sicheren Maildienst (z.B. Uni-Mailadresse). Alternativ können Sie die Dateien auch via Bluetooth oder Airdrop an Ihren Computer senden.",
       "7": "Laden Sie die Chatdatei aus der E-mail auf Ihrem Computer herunter.",
       "8": "Wiederholen Sie die Schritte 3-7 für alle Chats."
-    },
-    "instruction": {
-      "gif": {
-        "": "whatsapp_ger.mp4",
-        "subtitle": {
-          "iOS": "Dies ist der Chat Export-Prozess auf einem iPhone.",
-          "android": "Dies ist der Chat Export-Prozess auf einem Android-Gerät. Der Prozess könnte auf verschiedenen Geräten leicht anders sein."
-        }
-      },
-      "gifiOS": "whatsapp_ger_iOS.mp4",
-      "gifAndroid": "whatsapp_ger_android.mp4"
     },
     "logo": "w-logo.svg"
   },

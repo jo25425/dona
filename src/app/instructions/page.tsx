@@ -1,11 +1,17 @@
 import {useTranslations} from 'next-intl';
-import Image from "next/image";
+import Accordion from '@mui/material/Accordion';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import AccordionSummary from '@mui/material/AccordionSummary';
 import Box from '@mui/material/Box';
 import Button from "@mui/material/Button";
 import Container from '@mui/material/Container';
-import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import WhatsappIcon from '@mui/icons-material/Whatsapp';
+import WhatsappInstructions from "@/components/WhatsappInstructions";
 
 export default function Instructions() {
     const a = useTranslations('actions');
@@ -30,10 +36,56 @@ export default function Instructions() {
                         {t.rich('about.body_html')}
                     </Typography>
                 </Box>
-
+                <Box sx={{my: 5}}>
+                    {/* WhatsApp */}
+                    <Accordion>
+                        <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
+                            <WhatsappIcon sx={{mr: 1, mt: 0.5}}/>
+                            <Typography variant="h6">
+                                {t("datasource.title-format", {datasource: "Whatsapp"})}
+                            </Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <WhatsappInstructions />
+                        </AccordionDetails>
+                    </Accordion>
+                    {/* Facebook */}
+                    <Accordion>
+                        <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
+                            <FacebookIcon sx={{mr: 1, mt: 0.5}}/>
+                            <Typography variant="h6">
+                                {t("datasource.title-format", {datasource: "Facebook"})}
+                            </Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <Typography>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+                                malesuada lacus ex, sit amet blandit leo lobortis eget.
+                            </Typography>
+                        </AccordionDetails>
+                    </Accordion>
+                    {/* Instagram */}
+                    <Accordion>
+                        <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
+                            <InstagramIcon sx={{mr: 1, mt: 0.5}}/>
+                            <Typography variant="h6">
+                                {t("datasource.title-format", {datasource: "Instagram"})}
+                            </Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <Typography>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+                                malesuada lacus ex, sit amet blandit leo lobortis eget.
+                            </Typography>
+                        </AccordionDetails>
+                    </Accordion>
+                </Box>
                 <Box>
-                    <Typography variant="h5" sx={{margin: 2}}>
-                        {t('buttons-header')}
+                    <Typography variant="body1">
+                        {t('continue.body')}
+                    </Typography>
+                    <Typography variant="h5" sx={{margin: 3}}>
+                        {t('continue.buttons-header')}
                     </Typography>
                     <Stack spacing={2} direction="row" sx={{justifyContent: "center"}}>
                         <Button variant="contained" href={"/"}>
