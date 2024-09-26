@@ -12,6 +12,8 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import WhatsappIcon from '@mui/icons-material/Whatsapp';
 import WhatsappInstructions from "@/components/WhatsappInstructions";
+import FacebookInstructions from "@/components/FacebookInstructions";
+import InstagramInstructions from "@/components/InstagramInstructions";
 
 export default function Instructions() {
     const a = useTranslations('actions');
@@ -58,10 +60,7 @@ export default function Instructions() {
                             </Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <Typography>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                                malesuada lacus ex, sit amet blandit leo lobortis eget.
-                            </Typography>
+                            <FacebookInstructions />
                         </AccordionDetails>
                     </Accordion>
                     {/* Instagram */}
@@ -73,10 +72,7 @@ export default function Instructions() {
                             </Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <Typography>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                                malesuada lacus ex, sit amet blandit leo lobortis eget.
-                            </Typography>
+                            <InstagramInstructions />
                         </AccordionDetails>
                     </Accordion>
                 </Box>

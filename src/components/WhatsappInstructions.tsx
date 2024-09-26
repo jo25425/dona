@@ -75,11 +75,11 @@ export default function WhatsappInstructions() {
                     {headers("data-deletion")}
                 </Typography>
                 <Typography variant="body1">
-                        {t.rich("instructions.data-deletion.body", {
-                            link: (txt) => <a target="_blank" href={t("instructions.data-deletion.secure-delete-url")}>{txt}</a>,
-                            link2: (txt) => <a target="_blank" href={t("instructions.data-deletion.datenschutz-url")}>{txt}</a>
-                        })}
-                    </Typography>
+                    {t.rich("instructions.data-deletion.body", {
+                        link: (txt) => <a target="_blank" href={t("instructions.data-deletion.secure-delete-url")}>{txt}</a>,
+                        link2: (txt) => <a target="_blank" href={t("instructions.data-deletion.datenschutz-url")}>{txt}</a>
+                    })}
+                </Typography>
             </Grid>
             <Grid size={{xs: 12, sm: 6}}>
                 <Box sx={{borderBottom: 1, borderColor: "divider"}}>
@@ -125,6 +125,14 @@ export default function WhatsappInstructions() {
                     <li key="step-7">{t("overview.7")}</li>
                     <li key="step-8">{t("overview.8")}</li>
                 </ol>
+            </Grid>
+            <Grid>
+                <Typography variant="body1">
+                    {t.rich("external-documentation", {
+                        ios_link: (txt) => <a target="_blank" href="https://faq.whatsapp.com/618575946635920/?cms_platform=iphone&helpref=platform_switcher">{txt}</a>,
+                        android_link: (txt) => <a target="_blank" href={t("android-link")}>{txt}</a>
+                    })}
+                </Typography>
             </Grid>
         </Grid>
     );

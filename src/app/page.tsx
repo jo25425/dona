@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Box from '@mui/material/Box';
 import Button from "@mui/material/Button";
 import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';
+import Grid from '@mui/material/Grid2';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
@@ -113,7 +113,7 @@ export default function HomePage() {
                               alignItems: 'center'
                         }}
                     >
-                        <Grid item xs={6} sx={{textAlign: "left"}}>
+                        <Grid size={6} sx={{textAlign: "left"}}>
                             <Image
                                 src={t_donation('data-request.image')}
                                 alt={t_donation('data-request.title')}
@@ -123,11 +123,11 @@ export default function HomePage() {
                                 style={{width: "auto", margin: "1rem 0"}}
                             />
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid size={6}>
                             <Typography fontWeight={'bold'}>{t_donation('data-request.title')}</Typography>
                             <Typography>{t_donation('data-request.body')}</Typography>
                         </Grid>
-                        <Grid item xs={6} sx={{textAlign: "left"}}>
+                        <Grid size={6} sx={{textAlign: "left"}}>
                             <Image
                                 src={t_donation('anonymisation.image')}
                                 alt={t_donation('anonymisation.title')}
@@ -137,11 +137,11 @@ export default function HomePage() {
                                 style={{width: "auto", margin: "1rem 0"}}
                             />
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid size={6}>
                             <Typography fontWeight={'bold'}>{t_donation('anonymisation.title')}</Typography>
                             <Typography>{t_donation('anonymisation.body')}</Typography>
                         </Grid>
-                        <Grid item xs={6} sx={{textAlign: "left"}}>
+                        <Grid size={6} sx={{textAlign: "left"}}>
                             <Image
                                 src={t_donation('storage.image')}
                                 alt={t_donation('storage.title')}
@@ -151,7 +151,7 @@ export default function HomePage() {
                                 style={{width: "auto", margin: "1rem 0", alignSelf: "left"}}
                             />
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid size={6}>
                             <Typography fontWeight={'bold'}>{t_donation('storage.title')}</Typography>
                             <Typography>{t_donation('storage.body')}</Typography>
                         </Grid>
