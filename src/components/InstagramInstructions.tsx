@@ -1,11 +1,5 @@
-"use client";
-
-import React from "react";
 import {useTranslations} from "next-intl";
-import Box from "@mui/material/Box";
 import CardMedia from "@mui/material/CardMedia";
-import Tab from "@mui/material/Tab";
-import Tabs from "@mui/material/Tabs";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid2";
 
@@ -68,7 +62,7 @@ export default function InstagramInstructions() {
                     <li key="step-5">{t("overview.5")}</li>
                     <li key="step-6">{t("overview.6")}</li>
                     <li key="step-7">{t("overview.7")}</li>
-                    <li key="step-8">{t("overview.8")}</li>
+                    <li key="step-8">{t.rich("overview.8", {b: (content) => <b>{content}</b>})}</li>
                     <li key="step-9">{t("overview.9")}</li>
                     <li key="step-10">{t("overview.10")}</li>
                     <li key="step-11">{t("overview.11")}</li>

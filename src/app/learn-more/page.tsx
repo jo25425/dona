@@ -34,6 +34,7 @@ export default function LearnMore() {
                             link: (txt) => <a target="_blank"
                                               href="https://www.limesurvey.org/de/hilfe/faq/39-datenschutz%20und%20datenschutzpolitik">{txt}</a>
                         })}
+                        {/* TODO: Make link dynamic (language-dependant) */}
                     </Typography>
                 </Box>
                 <Box>

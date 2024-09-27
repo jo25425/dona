@@ -1,11 +1,5 @@
-"use client";
-
-import React from "react";
 import {useTranslations} from "next-intl";
-import Box from "@mui/material/Box";
 import CardMedia from "@mui/material/CardMedia";
-import Tab from "@mui/material/Tab";
-import Tabs from "@mui/material/Tabs";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid2";
 

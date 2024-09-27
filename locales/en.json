@@ -5,7 +5,9 @@
     "previous": "Back",
     "next": "Continue",
     "start": "Start",
-    "donate": "Yes, participate now"
+    "donate": "Yes, participate now",
+    "agree": "Agree",
+    "close": "Close"
   },
   "links": {
     "learn-more": "Learn more",
@@ -197,6 +199,37 @@
     "video": "/images/instagram/instagram_eng.mp4",
     "logo": "i-logo.svg"
   },
+  "consent": {
+    "title": "Informed Consent",
+    "pdf": "Download PDF",
+    "about": {
+      "title": "Information about the Study",
+      "body1": "The aim of this study is to measure the dynamics of social interaction of people by leveraging their social media data. This study is completely anonymous and online. It includes only the donation of your anonymized social media data. After having downloaded your interaction data from a platform of your choice, participation in the study will only take about 10 minutes.",
+      "body2": "By agreeing, you confirm that you have read and understood the background and process of this online study."
+    },
+    "benefit": {
+      "title": "Benefits and risks",
+      "body": "With your participation you enable us to identify and characterise new insights about social interactions between humans. You gain insights into your own personal messaging behavior. Furthermore, at the end of the study, you can participate in a raffle for a 50€ voucher (<link>Cadooz-Bestchoice</link>). This is an ongoing study, so a voucher is drawn every time a set of 100 participants is achieved (winning chance: 1/100). We only collect anonymized data. Before the donation of your data you have to download the messaging data locally on your own device. Since this data contains sensitive information we recommend to delete the local copy of your data after the end of the study. Please conduct the study alone and in a calm environment to ensure your privacy.",
+      "link-url": "https://www.cadooz.com/en/products/bestchoice-shopping-gift-card/"
+    },
+    "data-storage": {
+      "title": "Collected Data"
+    },
+    "voluntary": {
+      "title": "Voluntary Participation",
+      "body": "The participation in this study is entirely voluntary. At any time you may revoke your consent concerning your participation in this study, without giving any reason and without any kind of negative consequences. Before uploading the data to our research platform, you may revoke, without giving reason, your consent concerning the storage of your anonymized data, without any negative consequences."
+    },
+    "data-protection": {
+      "title": "Data Protection",
+      "body": "Since we are not collecting any names or other person-specific data, we will not be able to associate you with your data once the study has been completed from your side - the donated data is anonymous. This means that your data cannot be deleted on your request after submission. Due to the completely anonymous data handling and processing, the General Data Protection Regulation (GDPR) does not apply. In case of questions or concerns, please contact the office for data protection at the University of Bielefeld:",
+      "contact": "Data protection officer<br></br>University Bielefeld<br></br>Office: UHG T6-234<br></br>Phone +49 521 106-5225<br></br><email>datenschutzbeauftragte@uni-bielefeld.de</email>"
+    },
+    "data-purpose": {
+      "title": "Usage of data",
+      "body": "The data and results of these surveys will be published in scientific journals. The published data will be anonymous, meaning that it cannot be associated with individuals. The fully anonymized data will be uploaded to a research data repository and qualified scientists will be granted access."
+    },
+    "confirmation": "I hereby confirm that I have read and understood the information above and agree to the conditions for participation."
+  },
   "footer": {
     "project-number": "Project No.: 01IS20046"
   },
@@ -229,44 +262,7 @@
       "body": "Only anonymized and reduced data will be uploaded to one of our secure servers."
     }
   },
-  "consent": {
-    "title": "Informed Consent",
-    "pdf": "Download PDF",
-    "about": {
-      "title": "Information about the Study",
-      "body1": "The aim of this study is to measure the dynamics of social interaction of people by leveraging their social media data. This study is completely anonymous and online. It includes only the donation of your anonymized social media data. After having downloaded your interaction data from a platform of your choice, participation in the study will only take about 10 minutes.",
-      "body2_html": "By agreeing, you confirm that you have read and understood the background and process of this online study."
-    },
-    "benefit": {
-      "title": "Benefits and risks",
-      "body": "With your participation you enable us to identify and characterise new insights about social interactions between humans. You gain insights into your own personal messaging behavior. Furthermore, at the end of the study, you can participate in a raffle for a 50€ voucher (<a target=\"_blank\" href=\"https://www.cadooz.com/en/products/bestchoice-shopping-gift-card/\">Cadooz-Bestchoice</a>). This is an ongoing study, so a voucher is drawn every time a set of 100 participants is achieved (winning chance: 1/100). We only collect anonymized data. Before the donation of your data you have to download the messaging data locally on your own device. Since this data contains sensitive information we recommend to delete the local copy of your data after the end of the study. Please conduct the study alone and in a calm environment to ensure your privacy."
-    },
-    "data-storage": {
-      "title": "Collected Data"
-    },
-    "voluntary": {
-      "title": "Voluntary Participation",
-      "body": "The participation in this study is entirely voluntary. At any time you may revoke your consent concerning your participation in this study, without giving any reason and without any kind of negative consequences. Before uploading the data to our research platform, you may revoke, without giving reason, your consent concerning the storage of your anonymized data, without any negative consequences."
-    },
-    "data-protection": {
-      "title": "Data Security",
-      "body": "Since we are not collecting any names or other person-specific data, we will not be able to associate you with your data once the study has been completed from your side - the donated data is anonymous. This means that your data cannot be deleted on your request after submission. Due to the completely anonymous data handling and processing, the General Data Protection Regulation (GDPR) does not apply. In case of questions or concerns, please contact the office for data protection at the University of Bielefeld:",
-      "address_html": "Data protection officer <br /> University Bielefeld <br /> Office: UHG T6-234  <br />Phone +49 521 106-5225 <br /><a href=\"mailto:datenschutzbeauftragte@uni-bielefeld.de\">datenschutzbeauftragte@uni-bielefeld.de</a>"
-    },
-    "data-purpose": {
-      "title": "Usage of data",
-      "body": "The data and results of these surveys will be published in scientific journals. The published data will be anonymous, meaning that it cannot be associated with individuals. The fully anonymized data will be uploaded to a research data repository and qualified scientists will be granted access."
-    },
-    "confirmation": "I hereby confirm that I have read and understood the information above and agree to the conditions for participation.",
-    "buttons": {
-      "agree": {
-        "caption": "Agree"
-      },
-      "close": {
-        "caption": "Close"
-      }
-    }
-  },
+
   "informedConsent": {
     "pdf": "informedConsents/InformedConsent_eng.pdf"
   },

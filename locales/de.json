@@ -5,7 +5,9 @@
     "previous": "Zurück",
     "next": "Vor",
     "start": "Start",
-    "donate": "Ja, jetzt teilnehmen"
+    "donate": "Ja, jetzt teilnehmen",
+    "agree": "Einverstanden",
+    "close": "Schließen"
   },
   "links": {
     "learn-more": "Mehr Erfahren",
@@ -195,7 +197,37 @@
     "video": "/images/instagram/instagram_ger.mp4",
     "logo": "i-logo.svg"
   },
-
+  "consent": {
+    "title": "Einwilligungserklärung",
+    "pdf": "Download PDF",
+    "about": {
+      "title": "Information zur Studie",
+      "body1": "Ziel der Studie ist es, die soziale Interaktionsdynamiken von Menschen anhand ihrer Social Media Nachrichten zu erfassen. Die Studie findet komplett online und anonym statt. Die Studie beinhaltet lediglich die Datenspende Ihrer anonymisierten Online-Nachrichten. Nachdem Sie Ihre Online-Interaktionsdaten heruntergeladen haben, dauert die Studie nur 10 Minuten.",
+      "body2": "Mit Ihrer Einwilligung bestätigen Sie, dass Sie die vorherige Informationswebseite zum Zweck, Ablauf und Umfang der Online-Studie gelesen und verstanden haben."
+    },
+    "benefit": {
+      "title": "Nutzen und Risiken",
+      "body": "Mit Ihrer Teilnahme helfen Sie dabei, neue Erkenntnisse über das soziale Interaktionsverhalten der Menschen zu identifizieren und charakterisieren. Sie erhalten zudem einen Einblick in Ihr eigenes Messaging-Verhalten. Außerdem können Sie am Ende der Studie an einer Verlosung eines 50€ Gutscheins (<link>Cadooz-Bestchoice</link>) teilnehmen. Dies ist eine fortlaufende Studie, daher wird je 100 TeilnehmerInnen ein Gutschein verlost (Gewinnchance: 1/100). Wir erheben nur anonymisierte Daten. Vor der Datenspende müssen Sie die Messaging-Daten auf Ihr Gerät herunterladen. Da es sich um sensible Daten handelt, empfehlen wir Ihnen ausdrücklich, die Original-Daten nach dem Abschluss der Spende von Ihrem Gerät zu löschen. Um Ihre Privatsphäre zu sichern, führen Sie die Studie in ungestörter Umgebung und allein durch.",
+      "link-url": "https://www.cadooz.com/produkte/bestchoice-einkaufsgutschein-von-cadooz/"
+    },
+    "data-storage": {
+      "title": "Erhobene Daten"
+    },
+    "voluntary": {
+      "title": "Freiwilligkeit",
+      "body": "Die Teilnahme an der Studie ist freiwillig. Sie können jederzeit und ohne Angabe von Gründen Ihre Einwilligung zur Teilnahme an dieser Studie widerrufen, ohne dass Ihnen daraus Nachteile entstehen. Sie können Ihre Einwilligung zur Speicherung der Daten bis zum Ende der Datenerhebung widerrufen, ohne dass Ihnen daraus Nachteile entstehen."
+    },
+    "data-protection": {
+      "title": "Datenschutz",
+      "body": "Da wir weder Ihren Namen oder andere personenbezogenen Daten erheben, können wir nach Abschluss der Studie, Ihre Daten nicht mehr Ihrer Person zuordnen – der Datensatz ist anonym. Entsprechend können wir Ihren Datensatz jedoch auch nicht gezielt löschen. Aufgrund der von vornherein vollständig anonymisierter Verarbeitung findet außerdem die Datenschutzgrundverordnung keine Anwendung. Bei Fragen zum Datenschutz können Sie sich an den behördlichen Datenschutzbeauftragten der Universität wenden:",
+      "contact": "Behördliche Datenschutzbeauftragte<br></br>Universität Bielefeld<br></br>Büro: UHG T6-234<br></br>Telefon +49 521 106-5225<br></br><email>datenschutzbeauftragte@uni-bielefeld.de</email>"
+    },
+    "data-purpose": {
+      "title": "Verwendung der anonymisierten Daten",
+      "body": "Die Ergebnisse und Daten dieser Studie werden als wissenschaftliche Publikation veröffentlicht. Dies geschieht in anonymisierter Form, d. h. ohne dass die Daten einer spezifischen Person zugeordnet werden können. Die vollständig anonymisierten Daten dieser Studie werden online in einem Forschungsdaten-Repositorium gespeichert und qualifizierten Wissenschaftlern auf Antrag zugänglich gemacht."
+    },
+    "confirmation": "Hiermit versichere ich, dass ich die oben beschriebenen Teilnehmerinformationen verstanden habe und mit den genannten Teilnahmebedingungen einverstanden bin."
+  },
   "footer": {
     "project-number": "Kennzeichen: 01IS20046"
   },
@@ -225,44 +257,6 @@
       "image": "/images/landingDonationProcedure_3_German.png",
       "title": "Speicherung: ",
       "body": "Nur diese anonymisierten und reduzierten Daten werden hochgeladen und von uns auf einem sicheren Server gespeichert."
-    }
-  },
-  "consent": {
-    "title": "Einwilligungserklärung",
-    "pdf": "Download PDF",
-    "about": {
-      "title": "Information zur Studie",
-      "body1": "Ziel der Studie ist es, die soziale Interaktionsdynamiken von Menschen anhand ihrer Social Media Nachrichten zu erfassen. Die Studie findet komplett online und anonym statt. Die Studie beinhaltet lediglich die Datenspende Ihrer anonymisierten Online-Nachrichten. Nachdem Sie Ihre Online-Interaktionsdaten heruntergeladen haben, dauert die Studie nur 10 Minuten.",
-      "body2_html": "Mit Ihrer Einwilligung bestätigen Sie, dass Sie die vorherige Informationswebseite zum Zweck, Ablauf und Umfang der Online-Studie gelesen und verstanden haben."
-    },
-    "benefit": {
-      "title": "Nutzen und Risiken",
-      "body": "Mit Ihrer Teilnahme helfen Sie dabei, neue Erkenntnisse über das soziale Interaktionsverhalten der Menschen zu identifizieren und charakterisieren. Sie erhalten zudem einen Einblick in Ihr eigenes Messaging-Verhalten. Außerdem können Sie am Ende der Studie an einer Verlosung eines 50€ Gutscheins (<a target=\"_blank\" href=\"https://www.cadooz.com/produkte/bestchoice-einkaufsgutschein-von-cadooz/\">Cadooz-Bestchoice</a>) teilnehmen. Dies ist eine fortlaufende Studie, daher wird je 100 TeilnehmerInnen ein Gutschein verlost (Gewinnchance: 1/100). Wir erheben nur anonymisierte Daten. Vor der Datenspende müssen Sie die Messaging-Daten auf Ihr Gerät herunterladen. Da es sich um sensible Daten handelt, empfehlen wir Ihnen ausdrücklich, die Original-Daten nach dem Abschluss der Spende von Ihrem Gerät zu löschen. Um Ihre Privatsphäre zu sichern, führen Sie die Studie in ungestörter Umgebung und allein durch."
-    },
-    "data-storage": {
-      "title": "Erhobene Daten"
-    },
-    "voluntary": {
-      "title": "Freiwilligkeit",
-      "body": "Die Teilnahme an der Studie ist freiwillig. Sie können jederzeit und ohne Angabe von Gründen Ihre Einwilligung zur Teilnahme an dieser Studie widerrufen, ohne dass Ihnen daraus Nachteile entstehen. Sie können Ihre Einwilligung zur Speicherung der Daten bis zum Ende der Datenerhebung widerrufen, ohne dass Ihnen daraus Nachteile entstehen."
-    },
-    "data-protection": {
-      "title": "Datenschutz",
-      "body": "Da wir weder Ihren Namen oder andere personenbezogenen Daten erheben, können wir nach Abschluss der Studie, Ihre Daten nicht mehr Ihrer Person zuordnen – der Datensatz ist anonym. Entsprechend können wir Ihren Datensatz jedoch auch nicht gezielt löschen. Aufgrund der von vornherein vollständig anonymisierter Verarbeitung findet außerdem die Datenschutzgrundverordnung keine Anwendung. Bei Fragen zum Datenschutz können Sie sich an den behördlichen Datenschutzbeauftragten der Universität wenden:",
-      "address_html": "Behördliche Datenschutzbeauftragte <br /> Universität Bielefeld <br /> Büro: UHG T6-234  <br />Telefon +49 521 106-5225 <br /><a href=\"mailto:datenschutzbeauftragte@uni-bielefeld.de\">datenschutzbeauftragte@uni-bielefeld.de</a>"
-    },
-    "data-purpose": {
-      "title": "Verwendung der anonymisierten Daten",
-      "body": "Die Ergebnisse und Daten dieser Studie werden als wissenschaftliche Publikation veröffentlicht. Dies geschieht in anonymisierter Form, d. h. ohne dass die Daten einer spezifischen Person zugeordnet werden können. Die vollständig anonymisierten Daten dieser Studie werden online in einem Forschungsdaten-Repositorium gespeichert und qualifizierten Wissenschaftlern auf Antrag zugänglich gemacht."
-    },
-    "confirmation": "Hiermit versichere ich, dass ich die oben beschriebenen Teilnehmerinformationen verstanden habe und mit den genannten Teilnahmebedingungen einverstanden bin.",
-    "buttons": {
-      "agree": {
-        "caption": "Einverstanden"
-      },
-      "close": {
-        "caption": "Schließen"
-      }
     }
   },
   "informedConsent": {

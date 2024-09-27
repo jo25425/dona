@@ -14,6 +14,8 @@ import WhatsappIcon from '@mui/icons-material/Whatsapp';
 import WhatsappInstructions from "@/components/WhatsappInstructions";
 import FacebookInstructions from "@/components/FacebookInstructions";
 import InstagramInstructions from "@/components/InstagramInstructions";
+import ConsentModal from "@/components/ConsentModal";
+
 
 export default function Instructions() {
     const a = useTranslations('actions');
@@ -38,7 +40,7 @@ export default function Instructions() {
                         {t.rich('about.body_html')}
                     </Typography>
                 </Box>
-                <Box sx={{my: 5}}>
+                <Box sx={{my: 4}}>
                     {/* WhatsApp */}
                     <Accordion>
                         <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
@@ -87,13 +89,10 @@ export default function Instructions() {
                         <Button variant="contained" href={"/"}>
                             {a('previous')}
                         </Button>
-                        <Button variant="contained">
-                            {a('donate')}
-                        </Button>
+                        <ConsentModal />
                     </Stack>
                 </Box>
             </Stack>
         </Container>
     );
-
 }
