@@ -243,6 +243,7 @@
       "datasource": {
         "title-format": "{datasource} Datenspende"
       },
+      "select-header": "Wählen Sie hier die Dateien aus, die Sie spenden möchten:",
       "input1": "Dateien auswählen",
       "input2": "Durchsuchen",
       "remove": "Entfernen"
@@ -287,7 +288,6 @@
     "alias-not-required": "Nicht notwendig",
     "alias": "Nutzername",
     "please-insert-alias": "Bitte geben Sie Ihren Nutzernamen ein, um das Hochladen zu ermöglichen",
-    "choose-files-here": "Wählen Sie hier die Dateien aus, die Sie spenden möchten:",
     "choose-period": "Hier können Sie den Zeitraum Ihrer Datenspende eingrenzen:",
     "aliases-overview": "Decknamen Ihrer Kontakte:",
     "processing": "Daten werden extrahiert und anonymisiert...",

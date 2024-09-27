@@ -243,6 +243,7 @@
       "datasource": {
         "title-format": "{datasource} data donation"
       },
+      "select-header": "Select the files you would like to donate here:",
       "input1": "Choose files",
       "input2": "Browse",
       "remove": "Remove"

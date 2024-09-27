@@ -11,11 +11,24 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import WhatsappIcon from '@mui/icons-material/Whatsapp';
+import TextField from "@mui/material/TextField";
 
 
 export default function DataDonation() {
     const a = useTranslations('actions');
     const t = useTranslations('donation');
+
+    const MultiFileSelect = () => (
+        <Box>
+            <Typography variant="body1" sx={{mb: 1, fontWeight: "bold"}}>
+                {t('select-data.select-header')}
+            </Typography>
+            {/* TODO: Make input labels language-specific */}
+            <TextField fullWidth type={"file"} slotProps={{
+                input: { inputProps: { accept: ".txt,.zip", multiple: true }}
+            }}/>
+        </Box>
+    );
 
     return (
         <Container maxWidth="md" sx={{flexGrow: 1}}>
@@ -40,9 +53,9 @@ export default function DataDonation() {
                         {t.rich('select-data.body2')}
                     </Typography>
                 </Box>
-                <Box sx={{my: 4}}>
+                <Box sx={{my: 4, minWidth: "80%", textAlign: 'left'}}>
                     {/* WhatsApp */}
-                    <Accordion>
+                    <Accordion sx={{my: 1}}>
                         <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
                             <WhatsappIcon sx={{mr: 1, mt: 0.5}}/>
                             <Typography variant="h6">
@@ -50,11 +63,11 @@ export default function DataDonation() {
                             </Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-
+                            <MultiFileSelect />
                         </AccordionDetails>
                     </Accordion>
                     {/* Facebook */}
-                    <Accordion>
+                    <Accordion sx={{my: 1}}>
                         <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
                             <FacebookIcon sx={{mr: 1, mt: 0.5}}/>
                             <Typography variant="h6">
@@ -62,11 +75,11 @@ export default function DataDonation() {
                             </Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-
+                            <MultiFileSelect />
                         </AccordionDetails>
                     </Accordion>
                     {/* Instagram */}
-                    <Accordion>
+                    <Accordion sx={{my: 1}}>
                         <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
                             <InstagramIcon sx={{mr: 1, mt: 0.5}}/>
                             <Typography variant="h6">
@@ -74,7 +87,7 @@ export default function DataDonation() {
                             </Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-
+                            <MultiFileSelect />
                         </AccordionDetails>
                     </Accordion>
                 </Box>
