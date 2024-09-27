@@ -11,15 +11,11 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import WhatsappIcon from '@mui/icons-material/Whatsapp';
-import WhatsappInstructions from "@/components/WhatsappInstructions";
-import FacebookInstructions from "@/components/FacebookInstructions";
-import InstagramInstructions from "@/components/InstagramInstructions";
-import ConsentModal from "@/components/ConsentModal";
 
 
-export default function Instructions() {
+export default function DataDonation() {
     const a = useTranslations('actions');
-    const t = useTranslations('instructions');
+    const t = useTranslations('donation');
 
     return (
         <Container maxWidth="md" sx={{flexGrow: 1}}>
@@ -33,63 +29,63 @@ export default function Instructions() {
                 }}
             >
                 <Box>
-                    <Typography variant="h4">
-                        {t('about.title')}
+                    <Typography variant="h4" sx={{my: 2}}>
+                        {t('select-data.title')}
                     </Typography>
                     <Typography variant="body1">
-                        {t.rich('about.body_html')}
+                        {t('select-data.body1')}
+                    </Typography>
+                    <br/>
+                    <Typography variant="body1">
+                        {t.rich('select-data.body2')}
                     </Typography>
                 </Box>
                 <Box sx={{my: 4}}>
                     {/* WhatsApp */}
-                    <Accordion sx={{my: 1}}>
+                    <Accordion>
                         <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
                             <WhatsappIcon sx={{mr: 1, mt: 0.5}}/>
                             <Typography variant="h6">
-                                {t("datasource.title-format", {datasource: "Whatsapp"})}
+                                {t("select-data.datasource.title-format", {datasource: "Whatsapp"})}
                             </Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <WhatsappInstructions />
+
                         </AccordionDetails>
                     </Accordion>
                     {/* Facebook */}
-                    <Accordion sx={{my: 1}}>
+                    <Accordion>
                         <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
                             <FacebookIcon sx={{mr: 1, mt: 0.5}}/>
                             <Typography variant="h6">
-                                {t("datasource.title-format", {datasource: "Facebook"})}
+                                {t("select-data.datasource.title-format", {datasource: "Facebook"})}
                             </Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <FacebookInstructions />
+
                         </AccordionDetails>
                     </Accordion>
                     {/* Instagram */}
-                    <Accordion sx={{my: 1}}>
+                    <Accordion>
                         <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
                             <InstagramIcon sx={{mr: 1, mt: 0.5}}/>
                             <Typography variant="h6">
-                                {t("datasource.title-format", {datasource: "Instagram"})}
+                                {t("select-data.datasource.title-format", {datasource: "Instagram"})}
                             </Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <InstagramInstructions />
+
                         </AccordionDetails>
                     </Accordion>
                 </Box>
                 <Box>
-                    <Typography variant="body1">
-                        {t('continue.body')}
-                    </Typography>
-                    <Typography variant="h5" sx={{margin: 3}}>
-                        {t('continue.buttons-header')}
-                    </Typography>
                     <Stack spacing={2} direction="row" sx={{justifyContent: "center"}}>
-                        <Button variant="contained" href="/">
+                        <Button variant="contained" href="/instructions">
                             {a('previous')}
                         </Button>
-                        <ConsentModal />
+                        <Button variant="contained">
+                            {a('submit')}
+                        </Button>
                     </Stack>
                 </Box>
             </Stack>

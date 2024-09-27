@@ -7,7 +7,8 @@
     "start": "Start",
     "donate": "Yes, participate now",
     "agree": "Agree",
-    "close": "Close"
+    "close": "Close",
+    "submit": "Submit"
   },
   "links": {
     "learn-more": "Learn more",
@@ -60,7 +61,8 @@
     "data-used": {
       "title": "What data will be used?",
       "body1": "<strong>Data donation:</strong> When donating your interaction data, we extract metadata (e.g. length and timestamp of message as well as pseudonyms of conversation participants) and no actual contents (e.g. message text or name of message sender). To ensure that, we anonymize your data on the user-side, meaning that your private data is anonymized locally and does not leave your device. This means that we will never see the content of your conversations. Before uploading, we will show you a preview of the data so that you can verify that it is sufficiently anonymous.",
-      "body2": "<strong>Questionnaires:</strong> You first fill out questionnaires about your demographic information. You can then carry out the data donation and receive feedback. Questionnaire data is also collected completely anonymously using <link>LimeSurvey</link>."
+      "body2": "<strong>Questionnaires:</strong> You first fill out questionnaires about your demographic information. You can then carry out the data donation and receive feedback. Questionnaire data is also collected completely anonymously using <link>LimeSurvey</link>.",
+      "survey-url": "https://www.limesurvey.org/support/faq/39-data-protection-and-policy"
     },
     "data-handling": {
       "title": "What happens to my data?",
@@ -201,7 +203,10 @@
   },
   "consent": {
     "title": "Informed Consent",
-    "pdf": "Download PDF",
+    "pdf": {
+      "button": "Download PDF",
+      "file": "documents/InformedConsent_eng.pdf"
+    },
     "about": {
       "title": "Information about the Study",
       "body1": "The aim of this study is to measure the dynamics of social interaction of people by leveraging their social media data. This study is completely anonymous and online. It includes only the donation of your anonymized social media data. After having downloaded your interaction data from a platform of your choice, participation in the study will only take about 10 minutes.",
@@ -230,48 +235,14 @@
     },
     "confirmation": "I hereby confirm that I have read and understood the information above and agree to the conditions for participation."
   },
-  "footer": {
-    "project-number": "Project No.: 01IS20046"
-  },
-
-
-  "donorIdInput": {
-    "title": "ID-Input",
-    "body": "Please enter your ID to continue:",
-    "nextButton": "Continue"
-  },
-  "donorId": {
-    "remember": "Please note your ID:",
-    "yourid": "Your ID:"
-  },
-  "donation-info": {
-    "title": "How do I donate my data?",
-    "data-request": {
-      "image": "/images/landingDonationProcedure_1_English.png",
-      "title": "Data request: ",
-      "body": "You request your social media data from a platform of your choice (currently supported: Facebook, WhatsApp, and Instagram) and download it to your device."
-    },
-    "anonymisation": {
-      "image": "/images/landingDonationProcedure_2_English.png",
-      "title": "Anonymization: ",
-      "body": "We will remove all content from your data and limit it to metadata (e.g. length and timestamp of message). Your name, as well as the names of other participants, will get replaced by random pseudonyms (eg. \"James\" &rarr; \"anonymous13\"). You may examine the anonymization of your data before uploading it to our servers."
-    },
-    "storage": {
-      "image": "/images/landingDonationProcedure_3_English.png",
-      "title": "Storage: ",
-      "body": "Only anonymized and reduced data will be uploaded to one of our secure servers."
-    }
-  },
-
-  "informedConsent": {
-    "pdf": "informedConsents/InformedConsent_eng.pdf"
-  },
   "donation": {
     "select-data": {
       "title": "Choose data for donation",
       "body1": "Please choose the platform from which you want to donate your data. To successfully anonymize your data your username is automatically determined. Your username will not be saved or donated.",
       "body2": "You can now upload your files to your browser for anonymization. Note that you will have the opportunity to view your anonymized data before submitting it to us.",
-      "donation": "Data Donation",
+      "datasource": {
+        "title-format": "{datasource} data donation"
+      },
       "input1": "Choose files",
       "input2": "Browse",
       "remove": "Remove"
@@ -362,8 +333,38 @@
       "dates-not-enough-months": "To donate your data, please select a period of at least 6 months within the period of your donation.",
       "somewhereError": "There is an error somewhere. Please check your data donation.",
       "emptyOrJustOnePerson": "All your chats should contain at least 100 messages and at least one contact (other than yourself)."
+    }
+  },
+  "footer": {
+    "project-number": "Project No.: 01IS20046"
+  },
+
+  "donorIdInput": {
+    "title": "ID-Input",
+    "body": "Please enter your ID to continue:",
+    "nextButton": "Continue"
+  },
+  "donorId": {
+    "remember": "Please note your ID:",
+    "yourid": "Your ID:"
+  },
+  "donation-info": {
+    "title": "How do I donate my data?",
+    "data-request": {
+      "image": "/images/landingDonationProcedure_1_English.png",
+      "title": "Data request: ",
+      "body": "You request your social media data from a platform of your choice (currently supported: Facebook, WhatsApp, and Instagram) and download it to your device."
     },
-    "submit": "Submit"
+    "anonymisation": {
+      "image": "/images/landingDonationProcedure_2_English.png",
+      "title": "Anonymization: ",
+      "body": "We will remove all content from your data and limit it to metadata (e.g. length and timestamp of message). Your name, as well as the names of other participants, will get replaced by random pseudonyms (eg. \"James\" &rarr; \"anonymous13\"). You may examine the anonymization of your data before uploading it to our servers."
+    },
+    "storage": {
+      "image": "/images/landingDonationProcedure_3_English.png",
+      "title": "Storage: ",
+      "body": "Only anonymized and reduced data will be uploaded to one of our secure servers."
+    }
   },
   "feedback": {
     "thanks": {

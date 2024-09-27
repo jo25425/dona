@@ -31,10 +31,8 @@ export default function LearnMore() {
                     </Typography>
                     <Typography variant="body1">
                         {t.rich('data-used.body2', {
-                            link: (txt) => <a target="_blank"
-                                              href="https://www.limesurvey.org/de/hilfe/faq/39-datenschutz%20und%20datenschutzpolitik">{txt}</a>
+                            link: (txt) => <a target="_blank" href={t('data-used.survey-url')}>{txt}</a>
                         })}
-                        {/* TODO: Make link dynamic (language-dependant) */}
                     </Typography>
                 </Box>
                 <Box>

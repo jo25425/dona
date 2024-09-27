@@ -7,7 +7,8 @@
     "start": "Start",
     "donate": "Ja, jetzt teilnehmen",
     "agree": "Einverstanden",
-    "close": "Schließen"
+    "close": "Schließen",
+    "submit": "Senden"
   },
   "links": {
     "learn-more": "Mehr Erfahren",
@@ -60,7 +61,8 @@
     "data-used": {
       "title": "Welche Daten werden gespeichert?",
       "body1": "<strong>Datenspende:</strong> Wenn Sie Ihre Interaktionsdaten spenden, extrahieren wir Metadaten (z.B. Länge und Zeitstempel der Nachricht sowie Pseudonyme der Gesprächsteilnehmer) und keine eigentlichen Inhalte (z.B. Nachrichtentext oder Name des Absenders). Um dies zu gewährleisten, anonymisieren wir Ihre Daten auf der Nutzerseite, d.h. Ihre privaten Daten werden lokal anonymisiert und verlassen Ihr Gerät nicht. Das bedeutet, dass wir den Inhalt Ihrer Unterhaltungen niemals sehen werden. Vor dem Hochladen zeigen wir Ihnen eine Vorschau der Daten, damit Sie sich davon überzeugen können, dass sie ausreichend anonymisiert sind.",
-      "body2": "<strong>Fragebögen:</strong> Sie füllen zunächst Fragebögen zu Ihren demographischen Informationen aus. Danach können Sie die Datenspende durchführen und erhalten Feedback. Die Erhebung von Fragebogendaten findet ebenfalls komplett anonym auf der Plattform <link>LimeSurvey</link> statt."
+      "body2": "<strong>Fragebögen:</strong> Sie füllen zunächst Fragebögen zu Ihren demographischen Informationen aus. Danach können Sie die Datenspende durchführen und erhalten Feedback. Die Erhebung von Fragebogendaten findet ebenfalls komplett anonym auf der Plattform <link>LimeSurvey</link> statt.",
+      "survey-url": "https://www.limesurvey.org/de/hilfe/faq/39-datenschutz%20und%20datenschutzpolitik"
     },
     "data-handling": {
       "title": "Was passiert später mit meinen Daten?",
@@ -149,7 +151,7 @@
       }
     },
     "description_html": "Bitte fordern Sie Ihre Nachrichtendaten von Facebook an. Sie erhalten eine Benachrichtigung von Facebook, sobald die Daten zum Download bereitstehen, und können dann mit der Teilnahme an der Studie beginnen. <strong>Wir empfehlen, einen Computer zu verwenden, wenn Sie von Facebook spenden, da die Datenmenge relativ groß sein kann.</strong>",
-    "external-documentation": "Die offizielle Dokumentation zum Herunterladen Ihrer Daten können Sie <link>hier</alink> finden.",
+    "external-documentation": "Die offizielle Dokumentation zum Herunterladen Ihrer Daten können Sie <link>hier</link> finden.",
     "overview": {
       "1": "Öffnen Sie Facebook und melden Sie sich an.",
       "2": "Klicken Sie in der oberen rechten Ecke auf die Schaltfläche \"Dein Profil\" und wählen Sie \"Einstellungen & Privatsphäre\".",
@@ -176,7 +178,9 @@
       },
       "data-deletion": {
         "title": "Wie kann ich meine Daten von meinem Gerät wieder löschen?",
-        "body": "Wir empfehlen Ihnen ausdrücklich, Ihre Originaldaten nach dem Abschluss der Spende wieder zu löschen.  Beachten Sie, dass ein einfaches Löschen der Dateien ggf. nicht ausreicht, um die Daten endgültig von Ihrem Gerät zu entfernen. Weitere Informationen zur endgültigen Löschung von Dateien finden Sie unter anderem <a target=\"_blank\" href=\"https://www.bsi.bund.de/DE/Themen/Verbraucherinnen-und-Verbraucher/Informationen-und-Empfehlungen/Cyber-Sicherheitsempfehlungen/Daten-sichern-verschluesseln-und-loeschen/Daten-endgueltig-loeschen/daten-endgueltig-loeschen.html\">auf der Seite des Bundesamt für Sicherheit in der Informationstechnik</a> und <a target=\"_blank\" href=\"https://www.datenschutz.org/daten-loeschen/\"> Datenschutz.org</a>."
+        "body": "Wir empfehlen Ihnen ausdrücklich, Ihre Originaldaten nach dem Abschluss der Spende wieder zu löschen.  Beachten Sie, dass ein einfaches Löschen der Dateien ggf. nicht ausreicht, um die Daten endgültig von Ihrem Gerät zu entfernen. Weitere Informationen zur endgültigen Löschung von Dateien finden Sie unter anderem <link>auf der Seite des Bundesamt für Sicherheit in der Informationstechnik</link> und <link2> Datenschutz.org</link2>.",
+        "link-url": "https://www.bsi.bund.de/DE/Themen/Verbraucherinnen-und-Verbraucher/Informationen-und-Empfehlungen/Cyber-Sicherheitsempfehlungen/Daten-sichern-verschluesseln-und-loeschen/Daten-endgueltig-loeschen/daten-endgueltig-loeschen.html",
+        "link-url-2": "https://www.datenschutz.org/daten-loeschen/"
       }
     },
     "description_html": "Bitte fordern Sie Ihre Nachrichtendaten von Instagram an. Sie erhalten eine Benachrichtigung von Instagram, sobald die Daten zum Download bereitstehen, und können dann mit der Teilnahme an der Studie beginnen.",
@@ -199,7 +203,10 @@
   },
   "consent": {
     "title": "Einwilligungserklärung",
-    "pdf": "Download PDF",
+    "pdf": {
+      "button": "Download PDF",
+      "file": "documents/InformedConsent_de.pdf"
+    },
     "about": {
       "title": "Information zur Studie",
       "body1": "Ziel der Studie ist es, die soziale Interaktionsdynamiken von Menschen anhand ihrer Social Media Nachrichten zu erfassen. Die Studie findet komplett online und anonym statt. Die Studie beinhaltet lediglich die Datenspende Ihrer anonymisierten Online-Nachrichten. Nachdem Sie Ihre Online-Interaktionsdaten heruntergeladen haben, dauert die Studie nur 10 Minuten.",
@@ -228,46 +235,14 @@
     },
     "confirmation": "Hiermit versichere ich, dass ich die oben beschriebenen Teilnehmerinformationen verstanden habe und mit den genannten Teilnahmebedingungen einverstanden bin."
   },
-  "footer": {
-    "project-number": "Kennzeichen: 01IS20046"
-  },
-
-  "donorIdInput": {
-    "title": "ID-Eingabe",
-    "body": "Bitte geben Sie Ihre ID ein, um fortzufahren:",
-    "nextButton": "Weiter"
-  },
-  "donorId": {
-    "remember": "Bitte notieren Sie sich Ihre ID:",
-    "yourid": "Ihre ID:"
-  },
-  "donation-info": {
-    "title": "Wie spende ich meine Daten?",
-    "data-request": {
-      "image": "/images/landingDonationProcedure_1_German.png",
-      "title": "Datenanfrage: ",
-      "body": "Sie fordern Ihre Online-Nachrichten-Daten vom Online-Netzwerk (z.B. Facebook) an und laden diese auf Ihren Rechner."
-    },
-    "anonymisation": {
-      "image": "/images/landingDonationProcedure_2_German.png",
-      "title": "Anonymisierung: ",
-      "body": "Wir entfernen den Inhalt aus diesen Daten und reduzieren die Daten auf sogenannte Meta-Informationen (z.B. Länge und Zeitpunkt der Nachrichten). Ihr Name sowie die Namen aller Ihrer Kontakte werden durch zufällige Pseudonyme (z.B. „Tim“ &rarr;„anonymous13“) ersetzt. Sie können den Inhalt der anonymisierten Datei vor dem Upload begutachten."
-    },
-    "storage": {
-      "image": "/images/landingDonationProcedure_3_German.png",
-      "title": "Speicherung: ",
-      "body": "Nur diese anonymisierten und reduzierten Daten werden hochgeladen und von uns auf einem sicheren Server gespeichert."
-    }
-  },
-  "informedConsent": {
-    "pdf": "informedConsents/InformedConsent_de.pdf"
-  },
   "donation": {
     "select-data": {
       "title": "Wählen Sie Ihre Daten für die Spende aus",
       "body1": "Wählen Sie aus, welche Daten Sie spenden möchten. Zur Anonymisierung Ihrer Daten wird Ihr Nutzername automatisch ermittelt. Ihr Nutzername wird nicht gespendet und wir werden ihn nicht erfahren.",
       "body2": "Sie können nun Ihre Dateien zur Anonymisierung in Ihren Browser hochladen. Bitte beachten Sie, dass Sie die Möglichkeit haben, Ihre anonymisierten Daten einzusehen, bevor Sie sie an uns übermitteln.",
-      "donation": "Datenspende",
+      "datasource": {
+        "title-format": "{datasource} Datenspende"
+      },
       "input1": "Dateien auswählen",
       "input2": "Durchsuchen",
       "remove": "Entfernen"
@@ -358,8 +333,38 @@
       "dates-not-enough-months": "Bitte wählen Sie zum Spenden Ihrer Daten einen Zeitraum von mindestens 6 Monaten innerhalb des Zeitraums Ihrer Spende aus.",
       "somewhereError": "Es gibt einen Fehler. Bitte überprüfen Sie Ihre Datenspende.",
       "emptyOrJustOnePerson": "Alle Ihre Chats sollten mindestens 100 Nachrichten und mindestens einen Kontakt (der nicht Sie selbst sind) enthalten."
+    }
+  },
+  "footer": {
+    "project-number": "Kennzeichen: 01IS20046"
+  },
+
+  "donorIdInput": {
+    "title": "ID-Eingabe",
+    "body": "Bitte geben Sie Ihre ID ein, um fortzufahren:",
+    "nextButton": "Weiter"
+  },
+  "donorId": {
+    "remember": "Bitte notieren Sie sich Ihre ID:",
+    "yourid": "Ihre ID:"
+  },
+  "donation-info": {
+    "title": "Wie spende ich meine Daten?",
+    "data-request": {
+      "image": "/images/landingDonationProcedure_1_German.png",
+      "title": "Datenanfrage: ",
+      "body": "Sie fordern Ihre Online-Nachrichten-Daten vom Online-Netzwerk (z.B. Facebook) an und laden diese auf Ihren Rechner."
     },
-    "submit": "Senden"
+    "anonymisation": {
+      "image": "/images/landingDonationProcedure_2_German.png",
+      "title": "Anonymisierung: ",
+      "body": "Wir entfernen den Inhalt aus diesen Daten und reduzieren die Daten auf sogenannte Meta-Informationen (z.B. Länge und Zeitpunkt der Nachrichten). Ihr Name sowie die Namen aller Ihrer Kontakte werden durch zufällige Pseudonyme (z.B. „Tim“ &rarr;„anonymous13“) ersetzt. Sie können den Inhalt der anonymisierten Datei vor dem Upload begutachten."
+    },
+    "storage": {
+      "image": "/images/landingDonationProcedure_3_German.png",
+      "title": "Speicherung: ",
+      "body": "Nur diese anonymisierten und reduzierten Daten werden hochgeladen und von uns auf einem sicheren Server gespeichert."
+    }
   },
   "feedback": {
     "thanks": {

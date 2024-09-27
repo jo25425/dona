@@ -42,11 +42,15 @@ export default function Instructions() {
                 aria-labelledby="modal-modal-title"
             >
                 <Box sx={modal_style}>
-                    <Box>
-                        <Typography variant="h4"  sx={{my: 4}} id="modal-modal-title">
+                    <Box sx={{display: 'flex'}}>
+                        <Typography variant="h4"  sx={{my: 4, flexGrow: 1}} id="modal-modal-title">
                             {t('title')}
                         </Typography>
-                        {/* TODO: Add button to download PDF */}
+                        <Box sx={{alignSelf: "center"}}>
+                            <Button variant="contained" target="_blank" href={t("pdf.file")} size={"small"}>
+                                {t('pdf.button')}
+                            </Button>
+                        </Box>
                     </Box>
                     <Box>
                         <Typography variant="h5" sx={{my: 2}}>
@@ -101,7 +105,7 @@ export default function Instructions() {
                             <Button variant="contained" onClick={handleClose}>
                                 {a('close')}
                             </Button>
-                            <Button variant="contained">
+                            <Button variant="contained" href="/data-donation">
                                 {a('agree')}
                             </Button>
                         </Stack>

@@ -14,7 +14,7 @@ export default function Footer() {
     return (
         <Box sx={{flexShrink: 1, mt: 10}}>
             <Toolbar>
-                <Stack spacing={2} direction="row"  sx={{flexGrow: 1}}>
+                <Stack spacing={2} direction="row" sx={{flexGrow: 1}}>
                     <Button variant="contained" href={l("report-problem-url")}>
                         {l("report-problem")}
                     </Button>
