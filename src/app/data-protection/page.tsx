@@ -2,7 +2,6 @@ import {useTranslations} from 'next-intl';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
-import React from "react";
 
 
 export default function LearnMore() {
@@ -40,10 +39,7 @@ export default function LearnMore() {
                 <Typography variant="h5" sx={{my: 2}}> {consent('data-protection.title')} </Typography>
                 <Typography variant="body1">{consent('data-protection.body')}</Typography>
                 <Typography variant="body1" sx={{my: 1.5, mx: 3}}>
-                    {consent.rich('data-protection.contact', {
-                        br: (_) => <br/>,
-                        email: (address) => <a href={"mailto:" + address}>{address}</a>
-                    })}
+                    {consent.rich('data-protection.contact')}
                 </Typography>
 
                 <Typography variant="h5" sx={{my: 2}}>
