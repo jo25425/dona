@@ -18,10 +18,10 @@ export default function Footer() {
                     <Button variant="contained" href={l("report-problem-url")}>
                         {l("report-problem")}
                     </Button>
-                    <Button href="/data-protection">
+                    <Button target="_blank" href="/data-protection">
                         {l("data-protection")}
                     </Button>
-                    <Button href="/imprint">
+                    <Button target="_blank" href="/imprint">
                         {l("imprint")}
                     </Button>
                 </Stack>

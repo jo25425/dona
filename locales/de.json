@@ -217,12 +217,9 @@
       "body": "Mit Ihrer Teilnahme helfen Sie dabei, neue Erkenntnisse über das soziale Interaktionsverhalten der Menschen zu identifizieren und charakterisieren. Sie erhalten zudem einen Einblick in Ihr eigenes Messaging-Verhalten. Außerdem können Sie am Ende der Studie an einer Verlosung eines 50€ Gutscheins (<link>Cadooz-Bestchoice</link>) teilnehmen. Dies ist eine fortlaufende Studie, daher wird je 100 TeilnehmerInnen ein Gutschein verlost (Gewinnchance: 1/100). Wir erheben nur anonymisierte Daten. Vor der Datenspende müssen Sie die Messaging-Daten auf Ihr Gerät herunterladen. Da es sich um sensible Daten handelt, empfehlen wir Ihnen ausdrücklich, die Original-Daten nach dem Abschluss der Spende von Ihrem Gerät zu löschen. Um Ihre Privatsphäre zu sichern, führen Sie die Studie in ungestörter Umgebung und allein durch.",
       "link-url": "https://www.cadooz.com/produkte/bestchoice-einkaufsgutschein-von-cadooz/"
     },
-    "data-storage": {
-      "title": "Erhobene Daten"
-    },
     "voluntary": {
       "title": "Freiwilligkeit",
-      "body": "Die Teilnahme an der Studie ist freiwillig. Sie können jederzeit und ohne Angabe von Gründen Ihre Einwilligung zur Teilnahme an dieser Studie widerrufen, ohne dass Ihnen daraus Nachteile entstehen. Sie können Ihre Einwilligung zur Speicherung der Daten bis zum Ende der Datenerhebung widerrufen, ohne dass Ihnen daraus Nachteile entstehen."
+      "body": "Die Teilnahme an der Studie ist freiwillig. Sie können Ihre Einwilligung zur Speicherung der Daten bis zum Ende der Datenerhebung widerrufen, ohne dass Ihnen daraus Nachteile entstehen."
     },
     "data-protection": {
       "title": "Datenschutz",
@@ -334,6 +331,29 @@
       "somewhereError": "Es gibt einen Fehler. Bitte überprüfen Sie Ihre Datenspende.",
       "emptyOrJustOnePerson": "Alle Ihre Chats sollten mindestens 100 Nachrichten und mindestens einen Kontakt (der nicht Sie selbst sind) enthalten."
     }
+  },
+  "data-protection": {
+    "title": "Datenschutzhinweise",
+    "technical-details": {
+      "title": "Anonyme Nutzung der Website",
+      "body1": "Bei Aufruf und Nutzung der Website werden keine personenbezogenen Daten von Ihnen erhoben oder gespeichert.. Wenn Sie unsere Website aufrufen, teilt Ihr Webbrowser unserem Webserver Ihre IP-Adresse mit, um eine Kommunikation zu ermöglichen. Die IP-Adresse wird von uns dabei nur gekürzt gespeichert, um eine Identifikation Ihrer Person bei Aufruf der Website vollständig ausschließen zu können.",
+      "body2": "Bei jedem Zugriff auf die Website werden die folgenden technischen Daten übertragen: Name der abgerufenen Datei; Datum und Uhrzeit des Abrufs; Übertragene Datenmenge; Benachrichtigung, ob der Abruf erfolgreich war; die Webadresse, von der aus auf die Datei zugegriffen wurde (Referrer URL); Informationen über das Betriebssystem und den Browser (User-Agent-String); IP-Adresse (wird nur gekürzt gespeichert).",
+      "body3": "Die Daten werden nach Beendigung Ihrer Sitzung automatisch gelöscht und nicht von uns gespeichert (z.B. in Protokolldateien).",
+      "body4": "Außerdem verwenden wir Cookies, um die technische Funktionalität unserer Webseite gewähren zu können. Cookies sind kleine Textdateien mit Informationen über die Nutzung unseres Dienstes, die auf Ihrer Festplatte/Gerätgespeichert werden, wenn Sie diese Speicherung über die Einstellung Ihres Browsers erlauben. Cookies können keine Programme ausführen oder Viren auf Ihren Computer übertragen. Die von uns eingesetzten Cookies sind sog. Session Cookies, die nur für die Dauer des Websitebesuchs gespeichert werden, nicht darüber hinaus. Anhand dieser Cookies ist keine Identifikation Ihrer Person möglich."
+    },
+    "participation": {
+      "title": "Teilnahme an der Studie/Datenspende",
+      "usage": {
+        "title": "Verwendung der anonymisierten Daten",
+        "body": "Die Ergebnisse und Daten dieser Studie werden als wissenschaftliche Publikation veröffentlicht. Dies geschieht in anonymisierter Form, d. h. ohne dass die Daten einer spezifischen Person zugeordnet werden können. Die vollständig anonymisierten Daten dieser Studie werden online in einem Forschungsdaten-Repositorium gespeichert und qualifizierten Wissenschaftlern auf Antrag zugänglich gemacht."
+      }
+    }
+  },
+  "data-storage": {
+    "title": "Erhobene Daten",
+    "body1": "<em>Datenspende:</em> Bei der Datenspende Ihrer Social-Media-Daten erfassen wir ausschließlich Metadaten (e.g. Nachrichtenlänge, Nachrichtenzeitpunkt und Pseudonyme der UnterhaltungsteilnehmerInnen) und keine Inhalte (e.g. Nachrichtentext oder Name der UnterhaltungsteilnehmerInnen). Ihre Online-Interaktions-Daten werden bereits auf Ihrem Rechner anonymisiert. Wir sehen also niemals Ihre Nachrichten. Bevor wir Ihre anonymisierten Nachrichten speichern, können Sie diese begutachten. So können Sie sich davon überzeugen, dass diese ausreichend anonymisiert sind.",
+    "body2": "<em>Fragebögen:</em> Sie füllen zunächst Fragebögen zu Ihren demographischen Informationen aus. Danach können Sie die Datenspende durchführen und erhalten Feedback. Die Erhebung von Fragebogendaten findet ebenfalls komplett anonym auf der Plattform <link>LimeSurvey</link> statt.",
+    "url-limesurvey": "https://www.limesurvey.org/de/hilfe/faq/39-datenschutz%20und%20datenschutzpolitik"
   },
   "footer": {
     "project-number": "Kennzeichen: 01IS20046"
@@ -566,23 +586,6 @@
       }
     }
   },
-  "data-protection": {
-    "title": "Datenschutz",
-    "technical-details": {
-      "title": "Datenschutzhinweise – Anonyme Nutzung der Website",
-      "body1": "Bei Aufruf und Nutzung der Website werden keine personenbezogenen Daten von Ihnen erhoben oder gespeichert.. Wenn Sie unsere Website aufrufen, teilt Ihr Webbrowser unserem Webserver Ihre IP-Adresse mit, um eine Kommunikation zu ermöglichen. Die IP-Adresse wird von uns dabei nur gekürzt gespeichert, um eine Identifikation Ihrer Person bei Aufruf der Website vollständig ausschließen zu können",
-      "body2": "Bei jedem Zugriff auf die Website werden die folgenden technischen Daten übertragen: Name der abgerufenen Datei; Datum und Uhrzeit des Abrufs; Übertragene Datenmenge; Benachrichtigung, ob der Abruf erfolgreich war; die Webadresse, von der aus auf die Datei zugegriffen wurde (Referrer URL); Informationen über das Betriebssystem und den Browser (User-Agent-String); IP-Adresse (wird nur gekürzt gespeichert)",
-      "body3": "Die Daten werden nach Beendigung Ihrer Sitzung automatisch gelöscht und nicht von uns gespeichert (z.B. in Protokolldateien).",
-      "body4": "Außerdem verwenden wir Cookies, um die technische Funktionalität unserer Webseite gewähren zu können. Cookies sind kleine Textdateien mit Informationen über die Nutzung unseres Dienstes, die auf Ihrer Festplatte/Gerätgespeichert werden, wenn Sie diese Speicherung über die Einstellung Ihres Browsers erlauben. Cookies können keine Programme ausführen oder Viren auf Ihren Computer übertragen. Die von uns eingesetzten Cookies sind sog. Session Cookies, die nur für die Dauer des Websitebesuchs gespeichert werden, nicht darüber hinaus. Anhand dieser Cookies ist keine Identifikation Ihrer Person möglich."
-    },
-    "participation": {
-      "title": "Datenschutzhinweise – Teilnahme an der Studie/Datenspende",
-      "usage": {
-        "title": "Verwendung der anonymisierten Daten",
-        "body": "Die Ergebnisse und Daten dieser Studie werden als wissenschaftliche Publikation veröffentlicht. Dies geschieht in anonymisierter Form, d. h. ohne dass die Daten einer spezifischen Person zugeordnet werden können. Die vollständig anonymisierten Daten dieser Studie werden online in einem Forschungsdaten-Repositorium gespeichert und qualifizierten Wissenschaftlern auf Antrag zugänglich gemacht."
-      }
-    }
-  },
   "language": {
     "current": "DEU",
     "options": {
@@ -600,10 +603,6 @@
     "image": "images/problemReport_ger.png",
     "title": "Problembericht und Empfehlungen",
     "body": "Falls während Ihrer Nutzung unserer Anwendung ein Problem auftritt oder Sie sonstige Empfehlungen und Rückmeldungen für uns haben, nutzen Sie bitte den Knopf \"Problem melden\" oben rechts auf der Seite. Wir arbeiten kontinuierlich an der Verbesserung der Anwendung.<br> Vielen Dank!"
-  },
-  "data-storage": {
-    "body1_html": "<em>Datenspende: </em>Bei der Datenspende Ihrer Social-Media-Daten erfassen wir ausschließlich Metadaten (e.g. Nachrichtenlänge, Nachrichtenzeitpunkt und Pseudonyme der UnterhaltungsteilnehmerInnen) und keine Inhalte (e.g. Nachrichtentext oder Name der UnterhaltungsteilnehmerInnen). Ihre Online-Interaktions-Daten werden bereits auf Ihrem Rechner anonymisiert. Wir sehen also niemals Ihre Nachrichten. Bevor wir Ihre anonymisierten Nachrichten speichern, können Sie diese begutachten. So können Sie sich davon überzeugen, dass diese ausreichend anonymisiert sind.",
-    "body2_html": "<em>Fragebögen: </em>Sie füllen zunächst Fragebögen zu Ihren demographischen Informationen aus. Danach können Sie die Datenspende durchführen und erhalten Feedback. Die Erhebung von Fragebogendaten findet ebenfalls komplett anonym auf der Plattform <a target=\"_blank\" href=\"https://www.limesurvey.org/de/hilfe/faq/39-datenschutz%20und%20datenschutzpolitik\">LimeSurvey</a> statt."
   },
   "imprint": {
     "title": "Impressum",

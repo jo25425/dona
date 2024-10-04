@@ -217,12 +217,9 @@
       "body": "With your participation you enable us to identify and characterise new insights about social interactions between humans. You gain insights into your own personal messaging behavior. Furthermore, at the end of the study, you can participate in a raffle for a 50€ voucher (<link>Cadooz-Bestchoice</link>). This is an ongoing study, so a voucher is drawn every time a set of 100 participants is achieved (winning chance: 1/100). We only collect anonymized data. Before the donation of your data you have to download the messaging data locally on your own device. Since this data contains sensitive information we recommend to delete the local copy of your data after the end of the study. Please conduct the study alone and in a calm environment to ensure your privacy.",
       "link-url": "https://www.cadooz.com/en/products/bestchoice-shopping-gift-card/"
     },
-    "data-storage": {
-      "title": "Collected Data"
-    },
     "voluntary": {
       "title": "Voluntary Participation",
-      "body": "The participation in this study is entirely voluntary. At any time you may revoke your consent concerning your participation in this study, without giving any reason and without any kind of negative consequences. Before uploading the data to our research platform, you may revoke, without giving reason, your consent concerning the storage of your anonymized data, without any negative consequences."
+      "body": "The participation in this study is entirely voluntary. Before uploading the data to our research platform, you may revoke, without giving reason, your consent concerning the storage of your anonymized data, without any negative consequences."
     },
     "data-protection": {
       "title": "Data Protection",
@@ -335,6 +332,29 @@
       "somewhereError": "There is an error somewhere. Please check your data donation.",
       "emptyOrJustOnePerson": "All your chats should contain at least 100 messages and at least one contact (other than yourself)."
     }
+  },
+  "data-protection": {
+    "title": "Data Protection Notice",
+    "technical-details": {
+      "title": "Anonymous usage of website",
+      "body1": "During the access and use of the website, no private information will be saved. If you access our website, your browser will transmit your IP address to our server in order to establish communication via the Internet. Your IP address will be saved but modified in order to eliminate any chance of identification.",
+      "body2": "When calling up our website the following technical data will be transmitted: Name of accessed file; date and time of visit; transmitted data volume; notification whether the transfer was successful; web address, from which the data was accessed (Referrer URL); operating system as well as browser type (User Agent string); IP address (will only be saved in modified form).",
+      "body3": "At the end of your session, i.e. after leaving our website or upon closing your browser, this information is automatically deleted and will not be saved (e.g. in log files).",
+      "body4": "This website uses cookies in order to allow technical functionality and a smooth user experience. Cookies are small text files with information about the use of specific services, such as ours, which are stored on your device locally if you give permission through your browser settings. Cookies cannot execute programs or transmit viruses. This website is only using session cookies, which save information during the ongoing session but are deleted once the session finishes. No identification of your person is possible through these cookies."
+    },
+    "participation": {
+      "title": "Participation in the study",
+      "usage": {
+        "title": "Usage of data",
+        "body": "The data and results of these surveys will be published in scientific journals. The published data will be anonymous, meaning that it cannot be associated with individuals. The fully anonymized data will be uploaded to a research data repository and qualified scientists will be granted access."
+      }
+    }
+  },
+  "data-storage": {
+    "title": "Collected Data",
+    "body1": "<em>Data Donation:</em> When donating your interaction data, we extract metadata (e.g. length and timestamp of message as well as pseudonyms of conversation participants) and no actual contents (e.g. message text or name of message sender). To ensure that, we anonymize your data client-side, meaning that your private data is anonymized locally and does not leave your device. This means that we will never see the content of your conversations. Before uploading, we will show you a preview of the data so that you can verify it is sufficiently anonymous.",
+    "body2": "<em>Questionnaires:</em> You first fill out questionnaires about your demographic information. You can then carry out the data donation and receive feedback. Questionnaire data is also collected completely anonymously using <link>LimeSurvey</link>.",
+    "url-limesurvey": "https://www.limesurvey.org/support/faq/39-data-protection-and-policy"
   },
   "footer": {
     "project-number": "Project No.: 01IS20046"
@@ -567,23 +587,6 @@
       }
     }
   },
-  "data-protection": {
-    "title": "Data protection",
-    "technical-details": {
-      "title": "Data Protection Notice - Anonymous usage of website",
-      "body1": "During the access and use of the website, no private information will be saved. If you access our website, your browser will transmit your IP address to our server in order to establish communication via the Internet. Your IP address will be saved but modified in order to eliminate any chance of identification.",
-      "body2": "When calling up our website the following technical data will be transmitted: Name of accessed file; date and time of visit; transmitted data volume; notification whether the transfer was successful; web address, from which the data was accessed (Referrer URL); operating system as well as browser type (User Agent string); IP address (will only be saved in modified form)",
-      "body3": "At the end of your session, i.e. after leaving our website or upon closing your browser, this information is automatically deleted and will not be saved (e.g. in log files)",
-      "body4": "This website uses cookies in order to allow technical functionality and a smooth user experience. Cookies are small text files with information about the use of specific services, such as ours, which are stored on your device locally if you give permission through your browser settings. Cookies cannot execute programs or transmit viruses. This website is only using session cookies, which save information during the ongoing session but are deleted once the session finishes. No identification of your person is possible through these cookies."
-    },
-    "participation": {
-      "title": "Data Protection Notice - Participation in the study",
-      "usage": {
-        "title": "Usage of data",
-        "body": "The data and results of these surveys will be published in scientific journals. The published data will be anonymous, meaning that it cannot be associated with individuals. The fully anonymized data will be uploaded to a research data repository and qualified scientists will be granted access."
-      }
-    }
-  },
   "language": {
     "current": "ENG",
     "options": {
@@ -601,10 +604,6 @@
     "image": "images/problemReport_eng.png",
     "title": "Problem Report and Suggestions",
     "body": "If you encounter a problem while using our application or you have other recommendations and feedback for us, please use the \"Report Problem\" button at the top right of the page. We are continuously working to improve the application.<br> Thank you!"
-  },
-  "data-storage": {
-    "body1_html": "<em>Data Donation: </em>When donating your interaction data, we extract metadata (e.g. length and timestamp of message as well as pseudonyms of conversation participants) and no actual contents (e.g. message text or name of message sender). To ensure that, we anonymize your data client-side, meaning that your private data is anonymized locally and does not leave your device. This means that we will never see the content of your conversations. Before uploading, we will show you a preview of the data so that you can verify it is sufficiently anonymous.",
-    "body2_html": "<em>Questionnaires: </em>You first fill out questionnaires about your demographic information. You can then carry out the data donation and receive feedback. Questionnaire data is also collected completely anonymously using <a target=\"_blank\" href=\"https://www.limesurvey.org/support/faq/39-data-protection-and-policy\">LimeSurvey</a>."
   },
   "imprint": {
     "title": "Imprint",
