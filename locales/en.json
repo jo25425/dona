@@ -291,7 +291,7 @@
     "processing": "Your data is being extracted and anonymized...",
     "be-patient": "The data extraction process may take some time. Please be patient...",
     "successful": "Your data has been successfully anonymized.",
-    "error": "An error occured:",
+    "error": "An error occurred:",
     "anonymisation": {
       "donor": "Donor",
       "friend": "Contact",

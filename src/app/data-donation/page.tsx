@@ -1,3 +1,5 @@
+"use client";
+
 import {useTranslations} from 'next-intl';
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -11,24 +13,40 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import WhatsappIcon from '@mui/icons-material/Whatsapp';
-import TextField from "@mui/material/TextField";
+import React, {useState} from "react";
+import axios from "axios";
+import MultiFileSelect from '@/components/MultiFileSelect';
 
 
 export default function DataDonation() {
     const a = useTranslations('actions');
     const t = useTranslations('donation');
 
-    const MultiFileSelect = () => (
-        <Box>
-            <Typography variant="body1" sx={{mb: 1, fontWeight: "bold"}}>
-                {t('select-data.select-header')}
-            </Typography>
-            {/* TODO: Make input labels language-specific */}
-            <TextField fullWidth type={"file"} slotProps={{
-                input: { inputProps: { accept: ".txt,.zip", multiple: true }}
-            }}/>
-        </Box>
-    );
+    // State to hold the files from all multiselect elements
+    const [allFiles, setAllFiles] = useState<File[]>([]);
+
+    // Callback to handle file changes from child components
+    const handleFileChange = (files: File[]) => {
+        setAllFiles((prevFiles) => [...prevFiles, ...files]); // Add new files to the existing list
+    };
+
+    // On file upload
+    const onFileUpload = () => {
+        if (allFiles.length > 0) {
+            const formData = new FormData();
+            allFiles.forEach((file) => {
+                formData.append("myFiles", file, file.name);
+            });
+            // Upload all files at once
+            axios.post("api/uploadfile", formData)
+                .then(response => {
+                    console.log("Upload successful:", response.data);
+                })
+                .catch(error => {
+                    console.error("Upload failed:", error);
+                });
+        }
+    };
 
     return (
         <Container maxWidth="md" sx={{flexGrow: 1}}>
@@ -63,7 +81,7 @@ export default function DataDonation() {
                             </Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <MultiFileSelect />
+                            <MultiFileSelect onFileChange={handleFileChange} />
                         </AccordionDetails>
                     </Accordion>
                     {/* Facebook */}
@@ -75,7 +93,7 @@ export default function DataDonation() {
                             </Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <MultiFileSelect />
+                            <MultiFileSelect onFileChange={handleFileChange} />
                         </AccordionDetails>
                     </Accordion>
                     {/* Instagram */}
@@ -87,7 +105,7 @@ export default function DataDonation() {
                             </Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <MultiFileSelect />
+                            <MultiFileSelect onFileChange={handleFileChange} />
                         </AccordionDetails>
                     </Accordion>
                 </Box>
@@ -96,7 +114,7 @@ export default function DataDonation() {
                         <Button variant="contained" href="/instructions">
                             {a('previous')}
                         </Button>
-                        <Button variant="contained">
+                        <Button variant="contained" onClick={onFileUpload} >
                             {a('submit')}
                         </Button>
                     </Stack>
