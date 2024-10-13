@@ -14,7 +14,9 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InsertDriveFile from "@mui/icons-material/InsertDriveFile";
 import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css"; // import datepicker styles
+import "react-datepicker/dist/react-datepicker.css";
+import {anonymize_data} from "@/services/anonymization";
+import AnonymizationSection from "@/components/AnonymizationSection"; // import datepicker styles
 
 interface MultiFileSelectProps {
     onFileChange: (files: File[]) => void;
@@ -33,34 +35,48 @@ const MultiFileSelect: React.FC<MultiFileSelectProps> = ({ onFileChange }) => {
 
     // States
     const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
-    const [validationError, setValidationError] = useState<string | null>(null);
+    // const [validationError, setValidationError] = useState<string | null>(null);
+    const [error, setError] = useState<string | null>(null);
     const [startDate, setStartDate] = useState<Date | null>(null);
     const [endDate, setEndDate] = useState<Date | null>(null);
+    const [anonymizedData, setAnonymizedData] = useState<string[] | null>(null);
 
     // Validation logic
-    const validateFiles = (files: File[]) => {
+    const validateFiles = (files: File[]): boolean => {
         const fileNames = files.map(file => file.name);
         const uniqueFileNames = new Set(fileNames);
 
         if (files.length < 5 || files.length > 7) {
-            setValidationError(
+            setError(
                 t('errors.not-enough-chats_format', { count: files.length })
             );
+            return false;
         } else if (uniqueFileNames.size !== files.length) {
-            setValidationError(t('errors.same-file'));
+            setError(t('errors.same-file'));
+            return false;
         } else {
-            setValidationError(null); // No errors
+            setError(null); // No errors
+            return true;
         }
     };
 
     // Handle file selection
-    const handleFiles = (event: ChangeEvent<HTMLInputElement>) => {
+    const handleFiles = async (event: ChangeEvent<HTMLInputElement>) => {
         const files = event.target.files ? Array.from(event.target.files) : [];
         setSelectedFiles(files); // Local state for file feedback
         onFileChange(files);     // Pass the files up to the parent
 
         // Run validation on selected files
-        validateFiles(files);
+        const valid = validateFiles(files);
+
+        if (valid) {
+            try {
+                const data = await anonymize_data(files); // Anonymize on selection
+                setAnonymizedData(data);
+            } catch (err) {
+                setError("An error occurred during anonymization.");
+            }
+        }
     };
 
     return (
@@ -79,10 +95,10 @@ const MultiFileSelect: React.FC<MultiFileSelectProps> = ({ onFileChange }) => {
             />
 
             {/* Show selected files for feedback */}
-            {FilesFeedbackSection(selectedFiles, validationError)}
+            {FilesFeedbackSection(selectedFiles, error)}
 
             {/* Show date pickers if validation passes */}
-            {!validationError && selectedFiles.length > 0 && (
+            {!error && selectedFiles.length > 0 && (
                 <DateRangePicker
                     startDate={startDate}
                     endDate={endDate}
@@ -90,12 +106,25 @@ const MultiFileSelect: React.FC<MultiFileSelectProps> = ({ onFileChange }) => {
                     setEndDate={setEndDate}
                 />
             )}
+
+            {/*/!* Error handling *!/*/}
+            {/*{error && <Typography color="error">{error}</Typography>}*/}
+
+            {/* Display anonymized data */}
+            {!error && anonymizedData && (
+                <Box sx={{flexDirection: "row"}}>
+                    {anonymizedData.map((data, index) =>
+                        // <Typography variant="body1">- Anon. data bit #{index}</Typography>
+                        <AnonymizationSection key={index} data={data} />
+                    )}
+                </Box>
+            )}
         </Box>
     );
 };
 
 const FilesFeedbackSection= (
-    selectedFiles: File[], validationError: string | null
+    selectedFiles: File[], errorMessage: string | null
 ) => {
     return (
         <Box>
@@ -114,7 +143,7 @@ const FilesFeedbackSection= (
                                     />
                                 </ListItem>
                                 {index < selectedFiles.length - 1 && (
-                                    <Divider component="li" />
+                                    <Divider key={"divider-" + index} component="li" />
                                 )}
                             </Box>
                         ))}
@@ -122,10 +151,10 @@ const FilesFeedbackSection= (
                 </Box>
             )}
 
-            {/* Validation error message */}
-            {validationError && (
+            {/* Error message */}
+            {errorMessage && (
                 <Alert severity="error" sx={{ mt: 2 }}>
-                    <span dangerouslySetInnerHTML={{ __html: validationError }} />
+                    <span dangerouslySetInnerHTML={{ __html: errorMessage }} />
                 </Alert>
             )}
         </Box>

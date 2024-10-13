@@ -323,7 +323,7 @@
     "errors": {
       "no-profile": "The uploaded data does not include profile information.",
       "no-alias": "Please enter your username. You can find it in your WhatsApp profile.",
-      "not-enough-chats_format": "Please choose your 5-7 most important conversations. You have selected %s. <br>Press and hold the ctrl/command key to select multiple files at the same time.",
+      "not-enough-chats_format": "Please choose your 5-7 most important conversations. You have selected {count}. Press and hold the ctrl/command key to select multiple files at the same time.",
       "something-went-wrong": "Something went wrong! Please go back to the start and repeat the process.",
       "same-file": "You can only select files that differ. Please choose your 5-7 most important conversations.",
       "no-messages-time-period": "There are no messages in the selected period. Please select a longer and valid period.",
@@ -339,7 +339,7 @@
       "title": "Anonymous usage of website",
       "body1": "During the access and use of the website, no private information will be saved. If you access our website, your browser will transmit your IP address to our server in order to establish communication via the Internet. Your IP address will be saved but modified in order to eliminate any chance of identification.",
       "body2": "When calling up our website the following technical data will be transmitted: Name of accessed file; date and time of visit; transmitted data volume; notification whether the transfer was successful; web address, from which the data was accessed (Referrer URL); operating system as well as browser type (User Agent string); IP address (will only be saved in modified form).",
-      "body3": "At the end of your session, i.e. after leaving our website or upon closing your browser, this information is automatically deleted and will not be saved (e.g. in log files).",
+      "body3": "At the end of your session, i.e. after leaving our webs§ite or upon closing your browser, this information is automatically deleted and will not be saved (e.g. in log files).",
       "body4": "This website uses cookies in order to allow technical functionality and a smooth user experience. Cookies are small text files with information about the use of specific services, such as ours, which are stored on your device locally if you give permission through your browser settings. Cookies cannot execute programs or transmit viruses. This website is only using session cookies, which save information during the ongoing session but are deleted once the session finishes. No identification of your person is possible through these cookies."
     },
     "participation": {

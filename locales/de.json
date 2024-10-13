@@ -322,7 +322,7 @@
     "errors": {
       "no-profile": "Die Datei enthält keine Profildaten.",
       "no-alias": "Ein Nutzername muss angegeben werden. Sie können ihn in Ihrem WhatsApp-Profil finden.",
-      "not-enough-chats_format": "Bitte wählen Sie Ihre 5-7 wichtigsten Unterhaltungen aus. Sie haben %s ausgewählt. <br>Drücken und halten Sie die Strg-/Befehlstaste, um mehrere Dateien gleichzeitig auszuwählen.",
+      "not-enough-chats_format": "Bitte wählen Sie Ihre 5-7 wichtigsten Unterhaltungen aus. Sie haben {count} ausgewählt. Drücken und halten Sie die Strg-/Befehlstaste, um mehrere Dateien gleichzeitig auszuwählen.",
       "something-went-wrong": "Etwas ist schief gelaufen! Bitte kehren Sie zum Start zurück und wiederholen Sie den Vorgang.",
       "same-file": "Sie können nur Dateien auswählen, die sich voneinander unterscheiden. Bitte wählen Sie Ihre 5-7 wichtigsten Unterhaltungen aus.",
       "no-messages-time-period": "In dem ausgewählten Zeitraum befinden sich keine Nachrichten. Bitte wählen Sie einen größeren und validen Zeitraum.",
