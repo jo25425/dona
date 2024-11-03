@@ -14,7 +14,6 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import WhatsappIcon from '@mui/icons-material/Whatsapp';
 import React, {useState} from "react";
-import axios from "axios";
 import MultiFileSelect from '@/components/MultiFileSelect';
 
 
@@ -22,29 +21,18 @@ export default function DataDonation() {
     const a = useTranslations('actions');
     const t = useTranslations('donation');
 
-    // State to hold the files from all multiselect elements
-    const [allFiles, setAllFiles] = useState<File[]>([]);
+    // State to hold the donated data from all multiselect elements
+    const [allDonatedData, setAllDonatedData] = useState<String[]>([]);
 
-    // Callback to handle file changes from child components
-    const handleFileChange = (files: File[]) => {
-        setAllFiles((prevFiles) => [...prevFiles, ...files]); // Add new files to the existing list
+    // Callback to handle donated data changes from child components
+    const handleDonatedDataChange = (newDonatedData: String[]) => {
+        setAllDonatedData((prevDonatedData) => [...prevDonatedData, ...newDonatedData]); // Add new files to the existing list
     };
 
-    // On file upload
-    const onFileUpload = () => {
-        if (allFiles.length > 0) {
-            const formData = new FormData();
-            allFiles.forEach((file) => {
-                formData.append("myFiles", file, file.name);
-            });
-            // Upload all files at once
-            axios.post("api/uploadfile", formData)
-                .then(response => {
-                    console.log("Upload successful:", response.data);
-                })
-                .catch(error => {
-                    console.error("Upload failed:", error);
-                });
+    // On "Submit" click
+    const onDataDonationUpload = () => {
+        if (allDonatedData.length > 0) {
+            // Do something
         }
     };
 
@@ -81,7 +69,7 @@ export default function DataDonation() {
                             </Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <MultiFileSelect onFileChange={handleFileChange} />
+                            <MultiFileSelect onDonatedDataChange={handleDonatedDataChange} />
                         </AccordionDetails>
                     </Accordion>
                     {/* Facebook */}
@@ -93,7 +81,7 @@ export default function DataDonation() {
                             </Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <MultiFileSelect onFileChange={handleFileChange} />
+                            <MultiFileSelect onDonatedDataChange={handleDonatedDataChange} />
                         </AccordionDetails>
                     </Accordion>
                     {/* Instagram */}
@@ -105,7 +93,7 @@ export default function DataDonation() {
                             </Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <MultiFileSelect onFileChange={handleFileChange} />
+                            <MultiFileSelect onDonatedDataChange={handleDonatedDataChange} />
                         </AccordionDetails>
                     </Accordion>
                 </Box>
@@ -114,7 +102,7 @@ export default function DataDonation() {
                         <Button variant="contained" href="/instructions">
                             {a('previous')}
                         </Button>
-                        <Button variant="contained" onClick={onFileUpload} >
+                        <Button variant="contained" onClick={onDataDonationUpload} >
                             {a('submit')}
                         </Button>
                     </Stack>

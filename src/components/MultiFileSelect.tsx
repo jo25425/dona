@@ -19,7 +19,7 @@ import {anonymize_data} from "@/services/anonymization";
 import AnonymizationSection from "@/components/AnonymizationSection"; // import datepicker styles
 
 interface MultiFileSelectProps {
-    onFileChange: (files: File[]) => void;
+    onDonatedDataChange: (newDonatedData: String[]) => void;
 }
 
 const listStyle = {
@@ -30,7 +30,7 @@ const listStyle = {
     backgroundColor: 'background.paper',
 };
 
-const MultiFileSelect: React.FC<MultiFileSelectProps> = ({ onFileChange }) => {
+const MultiFileSelect: React.FC<MultiFileSelectProps> = ({ onDonatedDataChange }) => {
     const t = useTranslations('donation');
 
     // States
@@ -64,7 +64,6 @@ const MultiFileSelect: React.FC<MultiFileSelectProps> = ({ onFileChange }) => {
     const handleFiles = async (event: ChangeEvent<HTMLInputElement>) => {
         const files = event.target.files ? Array.from(event.target.files) : [];
         setSelectedFiles(files); // Local state for file feedback
-        onFileChange(files);     // Pass the files up to the parent
 
         // Run validation on selected files
         const valid = validateFiles(files);
@@ -73,6 +72,7 @@ const MultiFileSelect: React.FC<MultiFileSelectProps> = ({ onFileChange }) => {
             try {
                 const data = await anonymize_data(files); // Anonymize on selection
                 setAnonymizedData(data);
+                onDonatedDataChange(data);     // Pass the transformed data up to the parent
             } catch (err) {
                 setError("An error occurred during anonymization.");
             }
