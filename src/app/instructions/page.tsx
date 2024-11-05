@@ -10,7 +10,7 @@ import Typography from '@mui/material/Typography';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
-import WhatsappIcon from '@mui/icons-material/Whatsapp';
+import WhatsappIcon from '@mui/icons-material/WhatsApp';
 import WhatsappInstructions from "@/components/WhatsappInstructions";
 import FacebookInstructions from "@/components/FacebookInstructions";
 import InstagramInstructions from "@/components/InstagramInstructions";

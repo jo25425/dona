@@ -31,7 +31,8 @@
       "@components": [
         "./src/components"
       ]
-    }
+    },
+    "target": "ESNext"
   },
   "include": [
     "next-env.d.ts",
