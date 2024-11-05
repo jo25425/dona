@@ -22,15 +22,10 @@
       }
     ],
     "paths": {
-      "@": [
-        "./src"
-      ],
-      "@/*": [
-        "./src/*"
-      ],
-      "@components": [
-        "./src/components"
-      ]
+      "@locales": ["./locales"],
+      "@components/*": ["./src/components/*"],
+      "@": ["./src"],
+      "@/*": ["./src/*"]
     },
     "target": "ESNext"
   },

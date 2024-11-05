@@ -6,10 +6,7 @@ const AnonymizationSection: React.FC<{ data: string }> = ({ data }) => {
     return (
         <Box>
             <Typography variant="h6">Anonymized Data</Typography>
-            <Typography
-                variant="body2"
-                // sx={{ whiteSpace: "pre-wrap"}}
-            >{data.substring(0,100)}</Typography>
+            <Typography variant="body2">{data.substring(0,100)}</Typography>
         </Box>
     );
 };
