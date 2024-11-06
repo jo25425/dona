@@ -23,8 +23,8 @@
     ],
     "paths": {
       "@locales": ["./locales"],
-      "@components/*": ["src/components/*"],
-      "@models/*": ["src/models/*"],
+      "@components/*": ["./src/components/*"],
+      "@models/*": ["./src/models/*"],
 //      "@": ["./src"],
       "@/*": ["./src/*"]
     },

@@ -29,11 +29,6 @@ const testData = {
 
 describe("addDonation", () => {
 
-    // test('TextEncoder is globally defined in Jest', () => {
-    //     expect(global.TextEncoder).toBeDefined();
-    //     expect(TextEncoder).toBeDefined();
-    // });
-
     test("adds a new donation to the database", async () => {
         await addDonation(testData)
     })
