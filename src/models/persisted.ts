@@ -1,23 +1,53 @@
 import {conversations, messages, messagesAudio} from "@/db/schema";
 
-type NewConversation = typeof conversations.$inferInsert;
-// namespace NewConversation {
-//     export function create(
-//         donationId: string,
-//         dataSource: string,
-//         dataSourceOptions: { name: string; id: string }[],
-//         isGroupConversation?: boolean
-//     ): NewConversation {
-//         return {
-//             donationId,
-//             dataSourceId: dataSourceOptions.find(({ name }) => name === dataSource)!.id,
-//             isGroupConversation: isGroupConversation || undefined,
-//         };
-//     }
-// }
+import {Conversation, Message, DataSource, MessageAudio} from "@models/processed";
 
+type NewConversation = typeof conversations.$inferInsert;
+namespace NewConversation {
+    export function create(
+        donationId: string,
+        convo: Conversation,
+        dataSourceOptions: DataSource[]
+    ): NewConversation {
+        const {isGroupConversation, dataSource} = convo;
+        return {
+            donationId,
+            dataSourceId: dataSourceOptions.find(({ name }) => name === dataSource)!.id,
+            isGroupConversation: isGroupConversation || undefined,
+        };
+    }
+}
 
 type NewMessage = typeof messages.$inferInsert;
-type NewMessageAudio = typeof messagesAudio.$inferInsert;
+namespace NewMessage {
+    export function create(
+        conversationId: string,
+        message: Message
+    ): NewMessage {
+        const {wordCount, timestamp, sender} = message;
+        return {
+            wordCount,
+            dateTime: new Date(timestamp),
+            senderId: sender || undefined,
+            conversationId: conversationId
+        }
+    }
+}
 
-export type {NewConversation, NewMessage, NewMessageAudio};
+type NewMessageAudio = typeof messagesAudio.$inferInsert;
+namespace NewMessageAudio {
+    export function create(
+        conversationId: string,
+        message: MessageAudio
+    ): NewMessageAudio {
+        const {lengthSeconds, timestamp, sender} = message;
+        return {
+            lengthSeconds,
+            dateTime: new Date(timestamp),
+            senderId: sender || undefined,
+            conversationId: conversationId
+        }
+    }
+}
+
+export {NewConversation, NewMessage, NewMessageAudio};

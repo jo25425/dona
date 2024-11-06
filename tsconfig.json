@@ -25,7 +25,6 @@
       "@locales": ["./locales"],
       "@components/*": ["./src/components/*"],
       "@models/*": ["./src/models/*"],
-//      "@": ["./src"],
       "@/*": ["./src/*"]
     },
     "target": "ESNext"

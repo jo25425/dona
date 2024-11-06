@@ -8,33 +8,33 @@ enum DataSourceValue {
     Instagram = "Instagram",
 }
 
-enum DonationStatus {
+export enum DonationStatus {
     NotStarted = "notstarted",
     Pending = "pending",
     Complete = "complete",
     Deleted = "deleted",
 }
 
-interface DataSource {
-    id?: number,
+export interface DataSource {
+    id: number,
     name: DataSourceValue
 }
 
-interface Message {
+export interface Message {
     id?: string,
     wordCount: number,
     timestamp: number,
     sender: string,
 }
 
-interface MessageAudio {
+export interface MessageAudio {
     id?: string,
     lengthSeconds: number,
     timestamp: number,
     sender: string,
 }
 
-interface Conversation {
+export interface Conversation {
     id?: string,
     isGroupConversation?: boolean,
     conversationId?: string,
@@ -44,7 +44,7 @@ interface Conversation {
     participants: Array<Participant>,
 }
 
-interface DataDonation {
+export interface DataDonation {
     id?: string,
     donorId: string,
     status?: DonationStatus,
