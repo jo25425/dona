@@ -15,11 +15,13 @@ import ListItemText from "@mui/material/ListItemText";
 import InsertDriveFile from "@mui/icons-material/InsertDriveFile";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import {Conversation, DataSourceValue} from "@models/processed";
 import {anonymize_data} from "@/services/anonymization";
-import AnonymizationSection from "@/components/AnonymizationSection"; // import datepicker styles
+import AnonymizationSection from "@/components/AnonymizationSection";
 
 interface MultiFileSelectProps {
-    onDonatedDataChange: (newDonatedData: String[]) => void;
+    dataSourceValue: DataSourceValue;
+    onDonatedConversationsChange: (newDonatedConversations: Conversation[]) => void;
 }
 
 const listStyle = {
@@ -30,7 +32,7 @@ const listStyle = {
     backgroundColor: 'background.paper',
 };
 
-const MultiFileSelect: React.FC<MultiFileSelectProps> = ({ onDonatedDataChange }) => {
+const MultiFileSelect: React.FC<MultiFileSelectProps> = ({ dataSourceValue, onDonatedConversationsChange }) => {
     const t = useTranslations('donation');
 
     // States
@@ -39,7 +41,7 @@ const MultiFileSelect: React.FC<MultiFileSelectProps> = ({ onDonatedDataChange }
     const [error, setError] = useState<string | null>(null);
     const [startDate, setStartDate] = useState<Date | null>(null);
     const [endDate, setEndDate] = useState<Date | null>(null);
-    const [anonymizedData, setAnonymizedData] = useState<string[] | null>(null);
+    const [anonymizedConversations, setAnonymizedConversations] = useState<Conversation[] | null>(null);
 
     // Validation logic
     const validateFiles = (files: File[]): boolean => {
@@ -70,9 +72,9 @@ const MultiFileSelect: React.FC<MultiFileSelectProps> = ({ onDonatedDataChange }
 
         if (valid) {
             try {
-                const data = await anonymize_data(files); // Anonymize on selection
-                setAnonymizedData(data);
-                onDonatedDataChange(data);     // Pass the transformed data up to the parent
+                const data = await anonymize_data(dataSourceValue, files); // Anonymize on selection
+                setAnonymizedConversations(data);
+                onDonatedConversationsChange(data);  // Pass the transformed data up to the parent
             } catch (err) {
                 setError("An error occurred during anonymization.");
             }
@@ -111,11 +113,11 @@ const MultiFileSelect: React.FC<MultiFileSelectProps> = ({ onDonatedDataChange }
             {/*{error && <Typography color="error">{error}</Typography>}*/}
 
             {/* Display anonymized data */}
-            {!error && anonymizedData && (
+            {!error && anonymizedConversations && (
                 <Box sx={{flexDirection: "row"}}>
-                    {anonymizedData.map((data, index) =>
+                    {anonymizedConversations.map((convo, index) =>
                         // <Typography variant="body1">- Anon. data bit #{index}</Typography>
-                        <AnonymizationSection key={index} data={data} />
+                        <AnonymizationSection key={index} conversation={convo} />
                     )}
                 </Box>
             )}

@@ -1,4 +1,4 @@
-import {Conversation, DataDonation, Message, MessageAudio} from "@models/processed";
+import {Conversation, DataSourceValue, Message, MessageAudio} from "@models/processed";
 import JSZip from "jszip";
 
 
@@ -22,9 +22,11 @@ function parseAudioFile(file: File): MessageAudio {
 }
 
 // Main function to process files
-export async function processFiles(files: File[]): Promise<{ messages: Message[]; audioMessages: MessageAudio[] }> {
+async function processFiles(dataSourceValue: DataSourceValue, files: File[]): Promise<{ messages: Message[]; messagesAudio: MessageAudio[] }> {
     const messages: Message[] = [];
-    const audioMessages: MessageAudio[] = [];
+    const messagesAudio: MessageAudio[] = [];
+
+    // Datasource impacts the way files are processed?
 
     for (const file of files) {
         if (file.type === "application/zip") {
@@ -39,7 +41,7 @@ export async function processFiles(files: File[]): Promise<{ messages: Message[]
                     const content = await zipFile.async("string");
                     messages.push(parseTextFile(content));
                 } else if (filename.endsWith(".mp3") || filename.endsWith(".wav")) {
-                    audioMessages.push(parseAudioFile(file));
+                    messagesAudio.push(parseAudioFile(file));
                 }
             }
         } else if (file.type === "text/plain") {
@@ -48,56 +50,32 @@ export async function processFiles(files: File[]): Promise<{ messages: Message[]
             messages.push(parseTextFile(content));
         } else if (file.type.startsWith("audio/")) {
             // Handle audio files
-            audioMessages.push(parseAudioFile(file));
+            messagesAudio.push(parseAudioFile(file));
         }
     }
 
-    return { messages, audioMessages };
+    return { messages, messagesAudio };
 }
 
-// export async function anonymize_data(files: File[]): Promise<DataDonation> {
-//     return new Promise((resolve, reject) => {
-//         try {
-//
-//             const donorId: string = "";
-//             const conversations: Conversation[] = [];
-//             const messages: Message[] = [];
-//             const audioMessages: MessageAudio[] = [];
-//
-//             for (const file of files) {
-//                 if (file.type === "application/zip") {
-//                     // Handle zip files
-//                     const zip = await JSZip.loadAsync(file);
-//                     const zipFiles = zip.files;
-//
-//                     for (const filename in zipFiles) {
-//                         const zipFile = zipFiles[filename];
-//
-//                         if (filename.endsWith(".txt")) {
-//                             const content = await zipFile.async("string");
-//                             messages.push(parseTextFile(content));
-//                         } else if (filename.endsWith(".mp3") || filename.endsWith(".wav")) {
-//                             audioMessages.push(parseAudioFile(file));
-//                         }
-//                     }
-//                 } else if (file.type === "text/plain") {
-//                     // Handle plain text files
-//                     const content = await file.text();
-//                     messages.push(parseTextFile(content));
-//                 } else if (file.type.startsWith("audio/")) {
-//                     // Handle audio files
-//                     audioMessages.push(parseAudioFile(file));
-//                 }
-//             }
-//
-//             const anonymizedData: DataDonation = {
-//                 donorId,
-//                 conversations
-//             } ;
-//             return anonymizedData;
-//
-//         } catch (error) {
-//             reject(error);
-//         }
-//     });
-// };
+export async function anonymize_data(dataSourceValue: DataSourceValue, files: File[]): Promise<Conversation[]> {
+
+    return new Promise(async (resolve, reject) => {
+        try {
+            const {messages, messagesAudio} = await processFiles(dataSourceValue, files)
+            // TODO Actually use the distinct conversations uploaded
+            const conversation: Conversation = {
+                // id?: string,
+                // isGroupConversation?: boolean,
+                // conversationId?: string,
+                dataSource: dataSourceValue,
+                messages,
+                messagesAudio,
+                participants: []
+            };
+            return [conversation];
+
+        } catch (error) {
+            reject(error);
+        }
+    });
+}

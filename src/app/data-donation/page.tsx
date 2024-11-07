@@ -15,24 +15,33 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import React, {useState} from "react";
 import MultiFileSelect from '@components/MultiFileSelect';
-import { addDonation } from './actions';
+import {Conversation, DataSourceValue} from "@models/processed";
+import {addDonation} from './actions';
 
-export default function DataDonation() {
+export default function DataDonationPage() {
     const a = useTranslations('actions');
     const t = useTranslations('donation');
 
-    // State to hold the donated data from all multiselect elements
-    const [allDonatedData, setAllDonatedData] = useState<String[]>([]);
+    // State to hold the donated conversations from all multiselect elements
+    const [allDonatedConversations, setAllDonatedConversations] = useState<Conversation[]>([]);
 
-    // Callback to handle donated data changes from child components
-    const handleDonatedDataChange = (newDonatedData: String[]) => {
-        setAllDonatedData((prevDonatedData) => [...prevDonatedData, ...newDonatedData]); // Add new files to the existing list
+    // Callback to handle donated conversations changes from child components
+    const handleDonatedConversationsChange = (newConversations: Conversation[]) => {
+        setAllDonatedConversations((prevDonatedConversations) => [...prevDonatedConversations, ...newConversations]); // Add new donated conversations to the existing list
     };
 
     // On "Submit" click
     const onDataDonationUpload = () => {
-        if (allDonatedData.length > 0) {
-            // Do something
+        if (allDonatedConversations.length > 0) {
+            const newDonation = {
+                // id?: string,
+                donorId: "unknown",
+                // status?: DonationStatus, DonationStatus.NotStarted?
+                // externalDonorId?: ExternalDonorId,
+                conversations: allDonatedConversations
+            };
+            // TODO: Return status and use it for feedback on the page
+            addDonation(newDonation)
         }
     };
 
@@ -69,7 +78,7 @@ export default function DataDonation() {
                             </Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <MultiFileSelect onDonatedDataChange={handleDonatedDataChange} />
+                            <MultiFileSelect dataSourceValue={DataSourceValue.WhatsApp} onDonatedConversationsChange={handleDonatedConversationsChange} />
                         </AccordionDetails>
                     </Accordion>
                     {/* Facebook */}
@@ -81,7 +90,7 @@ export default function DataDonation() {
                             </Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <MultiFileSelect onDonatedDataChange={handleDonatedDataChange} />
+                            <MultiFileSelect dataSourceValue={DataSourceValue.Facebook} onDonatedConversationsChange={handleDonatedConversationsChange} />
                         </AccordionDetails>
                     </Accordion>
                     {/* Instagram */}
@@ -93,7 +102,7 @@ export default function DataDonation() {
                             </Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <MultiFileSelect onDonatedDataChange={handleDonatedDataChange} />
+                            <MultiFileSelect dataSourceValue={DataSourceValue.Instagram} onDonatedConversationsChange={handleDonatedConversationsChange} />
                         </AccordionDetails>
                     </Accordion>
                 </Box>

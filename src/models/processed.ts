@@ -2,7 +2,7 @@ type Participant = string;
 
 type ExternalDonorId = string;
 
-enum DataSourceValue {
+export enum DataSourceValue {
     WhatsApp = "WhatsApp",
     Facebook = "Facebook",
     Instagram = "Instagram",
