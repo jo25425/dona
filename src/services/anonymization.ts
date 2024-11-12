@@ -1,6 +1,8 @@
 import {Conversation, DataSourceValue, Message, MessageAudio} from "@models/processed";
-import JSZip from "jszip";
-
+// const facebookZipFileHandler = require('./parsing/facebook/facebookZipFileHandler');
+// const whatsappTxtFileHandler = require('./parsing/whatsapp/whatsappTxtFileHandler');
+// const instagramZipFileHandler = require('./parsing/instagram/instagramZipFileHandler');
+// const whatsappZipFileHandler = require("./parsing/whatsapp/whatsappZipFileHandler");
 
 // Function to parse the content of a text file to create a Message object
 function parseTextFile(content: string): Message {
@@ -26,33 +28,42 @@ async function processFiles(dataSourceValue: DataSourceValue, files: File[]): Pr
     const messages: Message[] = [];
     const messagesAudio: MessageAudio[] = [];
 
-    // Datasource impacts the way files are processed?
+    let handler;
 
-    for (const file of files) {
-        if (file.type === "application/zip") {
-            // Handle zip files
-            const zip = await JSZip.loadAsync(file);
-            const zipFiles = zip.files;
+    switch (dataSourceValue) {
+        case DataSourceValue.WhatsApp:
+            let txtFiles = []
+            let zipFiles = []
 
-            for (const filename in zipFiles) {
-                const zipFile = zipFiles[filename];
-
-                if (filename.endsWith(".txt")) {
-                    const content = await zipFile.async("string");
-                    messages.push(parseTextFile(content));
-                } else if (filename.endsWith(".mp3") || filename.endsWith(".wav")) {
-                    messagesAudio.push(parseAudioFile(file));
+            // there can be zip or txt files
+            // collect all txt files and extract txt files from zip files
+            for (let i = 0; i < files.length; i++) {
+                if (files[i].type == "text/plain") {
+                    txtFiles.push(files[i])
+                } else {
+                    zipFiles.push(whatsappZipFileHandler(files[i]))
                 }
             }
-        } else if (file.type === "text/plain") {
-            // Handle plain text files
-            const content = await file.text();
-            messages.push(parseTextFile(content));
-        } else if (file.type.startsWith("audio/")) {
-            // Handle audio files
-            messagesAudio.push(parseAudioFile(file));
-        }
+
+            if (zipFiles.length > 0) {
+                handler = Promise.all(zipFiles)
+                    .then(res => {
+                        // filter out null, null would be other files in the zip that are not .txt
+                        return whatsappTxtFileHandler(txtFiles.concat(res.flat().filter(file => file != null)))
+                    })
+            } else {
+                handler = whatsappTxtFileHandler(txtFiles);
+            }
+            break;
+        // case DataSourceValue.Facebook:
+        //     handler = facebookZipFileHandler(files);
+        //     break;
+        // case DataSourceValue.Instagram:
+        //     handler = instagramZipFileHandler(files);
+        //     break;
     }
+
+    const res = await handler()
 
     return { messages, messagesAudio };
 }
