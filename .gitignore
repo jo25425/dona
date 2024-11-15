@@ -5,6 +5,7 @@
 /.pnp
 .pnp.js
 .yarn/install-state.gz
+.env
 
 # testing
 /coverage
@@ -36,4 +37,4 @@ next-env.d.ts
 .idea
 
 # Data
-example_data
+sample_data

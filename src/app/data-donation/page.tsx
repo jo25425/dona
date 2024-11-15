@@ -12,10 +12,10 @@ import Typography from '@mui/material/Typography';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
-import WhatsappIcon from '@mui/icons-material/Whatsapp';
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import React, {useState} from "react";
-import MultiFileSelect from '@/components/MultiFileSelect';
-
+import MultiFileSelect from '@components/MultiFileSelect';
+import { addDonation } from './actions';
 
 export default function DataDonation() {
     const a = useTranslations('actions');
@@ -63,7 +63,7 @@ export default function DataDonation() {
                     {/* WhatsApp */}
                     <Accordion sx={{my: 1}}>
                         <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
-                            <WhatsappIcon sx={{mr: 1, mt: 0.5}}/>
+                            <WhatsAppIcon sx={{mr: 1, mt: 0.5}}/>
                             <Typography variant="h6">
                                 {t("select-data.datasource.title-format", {datasource: "Whatsapp"})}
                             </Typography>
