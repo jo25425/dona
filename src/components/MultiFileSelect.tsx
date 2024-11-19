@@ -17,7 +17,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import {Conversation, DataSourceValue} from "@models/processed";
 import {anonymizeData} from "@/services/anonymization";
-import {ValidationErrors} from "@services/validation";
+import {DonationErrors} from "@services/validation";
 import AnonymizationSection from "@/components/AnonymizationSection";
 
 interface MultiFileSelectProps {
@@ -56,19 +56,25 @@ const MultiFileSelect: React.FC<MultiFileSelectProps> = ({ dataSourceValue, onDo
             onDonatedConversationsChange(data.anonymizedConversations);
         } catch (err) {
             let errorMessage: string;
+            // TODO: Use internationalized string for all validation errors, no hardcoded messages!
             switch(err) {
-                case ValidationErrors.NoFiles:
+                case DonationErrors.NoFiles:
                     errorMessage = "";
                     break;
-                case ValidationErrors.Not5to7Files:
+                case DonationErrors.Not5to7Files:
                     errorMessage = t('errors.not-enough-chats_format', { count: files.length });
                     break;
-                case ValidationErrors.SameFiles:
+                case DonationErrors.SameFiles:
                     errorMessage = t('errors.same-file');
                     break;
-                case ValidationErrors.EmptyOrOneContact:
+                case DonationErrors.NoMessageEntries:
+                    errorMessage = "No message entries found.";
+                case DonationErrors.NoDonorNameFound:
+                    errorMessage = "Donor name not found in profile information";
+                    break;
+                case DonationErrors.NoProfile:
+                case DonationErrors.EmptyOrOneContact:
                 default:
-                    // TODO: Use internationalized string
                     errorMessage = "An error occurred during anonymization.";
                     break;
             }

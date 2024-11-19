@@ -42,7 +42,7 @@ export interface ChatContent {
 
 export interface AnonymizationResult {
     anonymizedConversations: Conversation[];
-    participantNameToRandomIds: Record<string, string>;
+    participantNamesToPseudonyms: Record<string, string>;
     chatsToShowMapping: { name: string }[][];
 }
 

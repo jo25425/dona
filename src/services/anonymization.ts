@@ -1,16 +1,18 @@
 import {AnonymizationResult, DataSourceValue} from "@models/processed";
 import handleWhatsappTxtFiles from "@services/parsing/whatsapp/whatsappHandler";
-import extractTxtFilesFromZip from "@services/parsing/whatsapp/utils/extractTxtFilesFromZip";
-import {ValidationErrors} from "@services/validation";
+import {extractTxtFilesFromZip} from "@services/parsing/shared/zipExtraction";
+import {DonationErrors} from "@services/validation";
+import handleInstagramZipFiles from "@services/parsing/meta/instagramHandler";
+import handleFacebookZipFiles from "@services/parsing/meta/facebookHandler";
 
 export async function anonymizeData(dataSourceValue: DataSourceValue, files: File[]): Promise<AnonymizationResult> {
     if (files.length == 0) {
-        throw ValidationErrors.NoFiles;
+        throw DonationErrors.NoFiles;
     }
 
+    let resultPromise;
     switch (dataSourceValue) {
-        default:
-        // case DataSourceValue.WhatsApp:
+        case DataSourceValue.WhatsApp:
             const txtFiles: File[] = [];
             const zipFilesPromises: Promise<File[]>[] = [];
 
@@ -23,15 +25,15 @@ export async function anonymizeData(dataSourceValue: DataSourceValue, files: Fil
                 }
             });
 
-            const resultPromise = Promise.all(zipFilesPromises)
-                    .then(unzippedFiles => handleWhatsappTxtFiles(txtFiles.concat(unzippedFiles.flat())));
-            return resultPromise;
+            resultPromise = Promise.all(zipFilesPromises)
+                .then(unzippedFiles => handleWhatsappTxtFiles(txtFiles.concat(unzippedFiles.flat())));
             break;
-        // case DataSourceValue.Facebook:
-        //     //     resultPromise = facebookZipFileHandler(files);
-        //     break;
-        // case DataSourceValue.Instagram:
-        //     //     resultPromise = instagramZipFileHandler(files);
-        //     break;
+        case DataSourceValue.Facebook:
+            resultPromise = handleFacebookZipFiles(files);
+            break;
+        case DataSourceValue.Instagram:
+            resultPromise = handleInstagramZipFiles(files);
+            break;
     }
+    return resultPromise;
 }
