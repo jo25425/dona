@@ -16,7 +16,8 @@ import InsertDriveFile from "@mui/icons-material/InsertDriveFile";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import {Conversation, DataSourceValue} from "@models/processed";
-import {anonymize_data} from "@/services/anonymization";
+import {anonymizeData} from "@/services/anonymization";
+import {ValidationErrors} from "@services/validation";
 import AnonymizationSection from "@/components/AnonymizationSection";
 
 interface MultiFileSelectProps {
@@ -43,41 +44,35 @@ const MultiFileSelect: React.FC<MultiFileSelectProps> = ({ dataSourceValue, onDo
     const [endDate, setEndDate] = useState<Date | null>(null);
     const [anonymizedConversations, setAnonymizedConversations] = useState<Conversation[] | null>(null);
 
-    // Validation logic
-    const validateFiles = (files: File[]): boolean => {
-        const fileNames = files.map(file => file.name);
-        const uniqueFileNames = new Set(fileNames);
-
-        if (files.length < 5 || files.length > 7) {
-            setError(
-                t('errors.not-enough-chats_format', { count: files.length })
-            );
-            return false;
-        } else if (uniqueFileNames.size !== files.length) {
-            setError(t('errors.same-file'));
-            return false;
-        } else {
-            setError(null); // No errors
-            return true;
-        }
-    };
-
     // Handle file selection
     const handleFiles = async (event: ChangeEvent<HTMLInputElement>) => {
         const files = event.target.files ? Array.from(event.target.files) : [];
         setSelectedFiles(files); // Local state for file feedback
 
-        // Run validation on selected files
-        const valid = validateFiles(files);
-
-        if (valid) {
-            try {
-                const data = await anonymize_data(dataSourceValue, files); // Anonymize on selection
-                setAnonymizedConversations(data);
-                onDonatedConversationsChange(data);  // Pass the transformed data up to the parent
-            } catch (err) {
-                setError("An error occurred during anonymization.");
+        try {
+            const data = await anonymizeData(dataSourceValue, files); // Anonymize on selection
+            setAnonymizedConversations(data.anonymizedConversations);
+            // TODO: Use rest of the anonymization result
+            onDonatedConversationsChange(data.anonymizedConversations);
+        } catch (err) {
+            let errorMessage: string;
+            switch(err) {
+                case ValidationErrors.NoFiles:
+                    errorMessage = "";
+                    break;
+                case ValidationErrors.Not5to7Files:
+                    errorMessage = t('errors.not-enough-chats_format', { count: files.length });
+                    break;
+                case ValidationErrors.SameFiles:
+                    errorMessage = t('errors.same-file');
+                    break;
+                case ValidationErrors.EmptyOrOneContact:
+                default:
+                    // TODO: Use internationalized string
+                    errorMessage = "An error occurred during anonymization.";
+                    break;
             }
+            setError(errorMessage);
         }
     };
 

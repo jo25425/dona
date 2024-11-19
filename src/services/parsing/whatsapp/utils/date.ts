@@ -1,4 +1,4 @@
-import { indexAboveValue, isNegative, groupArrayByValueAtIndex } from './utils';
+import {groupArrayByValueAtIndex, indexAboveValue, isNegative} from './utils';
 
 export type NumericDate = [number, number, number];
 

@@ -34,6 +34,18 @@ export interface MessageAudio {
     sender: string,
 }
 
+export interface ChatContent {
+    participants: { name: string }[];
+    messages: Message[];
+    thread_type: string;
+}
+
+export interface AnonymizationResult {
+    anonymizedConversations: Conversation[];
+    participantNameToRandomIds: Record<string, string>;
+    chatsToShowMapping: { name: string }[][];
+}
+
 export interface Conversation {
     id?: string,
     isGroupConversation?: boolean,
@@ -51,3 +63,4 @@ export interface DataDonation {
     externalDonorId?: ExternalDonorId,
     conversations: Array<Conversation>,
 }
+

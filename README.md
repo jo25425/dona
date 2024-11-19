@@ -44,8 +44,8 @@ load Inter, a custom Google Font.
 #### next/drizzle
 __installed packages:__
 1. drizzle-orm [docs](https://orm.drizzle.team/docs/overview)
-1. drizzle-kit: cli for setup, migrations etc [docs](https://orm.drizzle.team/docs/kit-overview)
-1. pg, @types/pg: driver and interfaces 
+2. drizzle-kit: cli for setup, migrations etc [docs](https://orm.drizzle.team/docs/kit-overview)
+3. pg, @types/pg: driver and interfaces 
 
 __relevant files:__
 - drizzle.config.ts: global configuration for drizzle ORM. contains path to schema, migrations etc
@@ -70,7 +70,7 @@ __considerations:__
 - For `uuid` primary keys, default values are generated on insert by postgres. 
 - `uuid` for participantId as well
 - datasources `integer` id is also always incremented and set automatically
-- `uuid` for donor_id in donations table isn't since it didn't have a not null contraint.
+- `uuid` for donor_id in donations table isn't since it didn't have a not null constraint.
 
 __relations:__
 - donations has many conversations

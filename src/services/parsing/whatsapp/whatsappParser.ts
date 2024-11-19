@@ -1,5 +1,5 @@
 import {daysBeforeMonths, normalizeDate, NumericDate} from './utils/date';
-import { convertTime12to24, normalizeAMPM, normalizeTime } from './utils/time';
+import {convertTime12to24, normalizeAMPM, normalizeTime} from './utils/time';
 
 const regexParser = /\[?(\d{1,2}[-/.]\d{1,2}[-/.]\d{2,4}),? (\d{1,2}[.:]\d{1,2}(?:[.:]\d{1,2})?)(?: ([ap]\.?m\.?))?\]?(?: -|:)? (.+?): ((?:.|\s)*)/i;
 const regexParserSystem = /\[?(\d{1,2}[-/.]\d{1,2}[-/.]\d{2,4}),? (\d{1,2}[.:]\d{1,2}(?:[.:]\d{1,2})?)(?: ([ap]\.?m\.?))?\]?(?: -|:)? ((?:.|\s)+)/i;

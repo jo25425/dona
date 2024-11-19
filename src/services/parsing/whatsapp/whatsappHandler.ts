@@ -1,26 +1,14 @@
 import wordCount from '@/services/parsing/shared/wordCount';
 import {makeArrayOfMessages, ParsedMessage, parseMessages, ParsingResult} from './whatsappParser';
 import _ from "lodash";
-import {Message} from "@models/processed";
+import {AnonymizationResult, Conversation, DataSourceValue, Message} from "@models/processed";
+import {ValidationErrors} from "@services/validation";
 
 const SYSTEM_MESSAGE = "Messages to this chat and calls are now secured with end-to-end encryption.";
 const SYSTEM_ALIAS = "System";  // TODO: Get from text files (SYSTEM_MESSAGE too? Use class to pass translations?)
 const FRIEND_ALIAS = "Contact";   // TODO: Get from text files
 
-interface ChatContent {
-    participants: { name: string }[];
-    messages: Message[];
-    thread_type: string;
-}
-
-enum ValidationErrors {
-    SameFiles = "SameFiles",
-    Not5to7Files = "Not5to7Files",
-    EmptyOrOneContact = "EmptyOrOneContact"
-}
-
-async function whatsappTxtFilesHandler(fileList: File[]): Promise<any> {
-    // const i18nSupport = document.getElementById('i18n-support') as HTMLElement;
+async function handleWhatsappTxtFiles(fileList: File[]): Promise<AnonymizationResult> {
     const files = Array.from(fileList);
 
     return new Promise((resolve, reject) => {
@@ -37,7 +25,7 @@ async function whatsappTxtFilesHandler(fileList: File[]): Promise<any> {
             return;
         }
 
-        const parsedFiles = files.map(file => handleFile(file)
+        const parsedFiles = files.map(file => readFile(file)
             .then(data => data.split('\n'))
             .then(makeArrayOfMessages)
             .then(messages => parseMessages(messages))
@@ -54,20 +42,20 @@ async function whatsappTxtFilesHandler(fileList: File[]): Promise<any> {
             const contacts = parsed.map((obj) => obj.contacts);
             const possibleUserNames = _.intersection(...contacts);
 
+            resolve(deIdentification(textList, possibleUserNames[0]));
+            // TODO: How to ask user for username? Is it required?
             // Determine which of usernames found is the donor's
-            if (possibleUserNames.length === 1) {
-                resolve(deIdentification(textList, possibleUserNames[0]));
-            } else {
-                // TODO: How to ask user for username? Is it required?
-                resolve(deIdentification(textList, possibleUserNames[0]));
+            // if (possibleUserNames.length === 1) {
+            //     resolve(deIdentification(textList, possibleUserNames[0]));
+            // } else {
                 // askUserForUsername(possibleUserNames)
                 //     .then(username => resolve(deIdentification(textList, username)));
-            }
+            // }
         }).catch((error) => reject(error));
     });
 }
 
-async function handleFile(file: File): Promise<string> {
+async function readFile(file: File): Promise<string> {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.onload = event => resolve(event.target?.result as string);
@@ -92,18 +80,17 @@ async function handleFile(file: File): Promise<string> {
 //     });
 // }
 
-async function deIdentification(parsedFiles: ParsedMessage[][], alias: string): Promise<any> {
+async function deIdentification(parsedFiles: ParsedMessage[][], alias: string): Promise<AnonymizationResult> {
     const participantNameToRandomIds: Record<string, string> = {};
-    const deIdentifiedJsonContents: ChatContent[] = [];
+    const deIdentifiedJsonContents: Conversation[] = [];
     let i = 1;
 
     parsedFiles.forEach(lines => {
-        let jsonContent: ChatContent = { participants: [], messages: [], thread_type: "Regular" };
+        // let jsonContent: ChatContent = { participants: [], messages: [], thread_type: "Regular" };
         const eachFileParticipants = new Set<string>();
-        // const i18nSupport = document.getElementById('i18n-support') as HTMLElement;
         participantNameToRandomIds[alias] = "Donor";  // Get this from text file
 
-        jsonContent.messages = lines
+        const messages: Message[] = lines
             .filter(line => line.message && !line.message.includes(SYSTEM_MESSAGE)) // Filter first to exclude unwanted lines
             .map(line => {
                 const participant = getDeIdentifiedId(line.author);
@@ -114,32 +101,40 @@ async function deIdentification(parsedFiles: ParsedMessage[][], alias: string): 
                     wordCount: wordCount(line.message),
                 };
             })
-        jsonContent.participants = Array.from(eachFileParticipants).map(participantId => ({ name: participantId }));
+        const participants = Array.from(eachFileParticipants);//.map(participantId => ({ name: participantId }));
+        const isGroupConversation = (
+            participants.length === 3 && !eachFileParticipants.has(SYSTEM_ALIAS)
+            || participants.length > 2
+        );
 
-        if (
-            jsonContent.participants.length === 3 && !eachFileParticipants.has(SYSTEM_ALIAS)
-            || jsonContent.participants.length > 2
-        ) {
-            jsonContent.thread_type = "RegularGroup";
-        }
-
-        deIdentifiedJsonContents.push(jsonContent);
+        deIdentifiedJsonContents.push({
+            isGroupConversation,
+            dataSource: DataSourceValue.WhatsApp,
+            messages,
+            messagesAudio: [],
+            participants
+        });
     });
 
+    const chatsToShowMapping = deIdentifiedJsonContents.map(
+        chat => chat.participants.map(
+            participantId => ({ name: participantId })
+        )
+    );
     return {
-        deIdentifiedJsonContents,
+        anonymizedConversations: deIdentifiedJsonContents,
         participantNameToRandomIds,
-        chatsToShowMapping: deIdentifiedJsonContents.map(chat => chat.participants)
+        chatsToShowMapping
     };
 
     function getDeIdentifiedId(name: string): string {
         if (!participantNameToRandomIds[name]) {
             participantNameToRandomIds[name] = name === SYSTEM_ALIAS
                 ? SYSTEM_ALIAS!
-        : `${FRIEND_ALIAS}${i++}`;
+                : `${FRIEND_ALIAS}${i++}`;
         }
         return participantNameToRandomIds[name];
     }
 }
 
-export default whatsappTxtFilesHandler;
+export default handleWhatsappTxtFiles;
