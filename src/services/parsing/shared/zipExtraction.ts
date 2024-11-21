@@ -1,9 +1,9 @@
-import {BlobReader, Entry, TextWriter, ZipReader} from "@zip.js/zip.js";
+import {BlobReader, BlobWriter, Entry, TextWriter, ZipReader} from "@zip.js/zip.js";
 
 
 // Custom type for entries with getData
 export interface ValidEntry extends Entry {
-    getData: (writer: TextWriter) => Promise<any>;
+    getData: (writer: TextWriter | BlobWriter) => Promise<any>;
 }
 
 // Type guard to check for valid entries

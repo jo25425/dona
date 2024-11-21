@@ -3,11 +3,10 @@ import {makeArrayOfMessages, ParsedMessage, parseMessages, ParsingResult} from '
 import _ from "lodash";
 import {AnonymizationResult, Conversation, DataSourceValue, Message} from "@models/processed";
 import {DonationErrors} from "@services/validation";
+import {DONOR_ALIAS, FRIEND_ALIAS, SYSTEM_ALIAS} from "@services/parsing/meta/deIdentify";
 
 const SYSTEM_MESSAGE = "Messages to this chat and calls are now secured with end-to-end encryption.";
-const SYSTEM_ALIAS = "System";  // TODO: Get from text files (SYSTEM_MESSAGE too? Use class to pass translations?)
-const FRIEND_ALIAS = "Contact";   // TODO: Get from text files
-const DONOR_ALIAS = "Donor";   // TODO: Get from text files
+
 
 async function handleWhatsappTxtFiles(fileList: File[]): Promise<AnonymizationResult> {
     const files = Array.from(fileList);
@@ -39,18 +38,18 @@ async function handleWhatsappTxtFiles(fileList: File[]): Promise<AnonymizationRe
                 return;
             }
 
-            const textList = parsed.map((obj) => obj.texts);
+            const parsedConversations = parsed.map((obj) => obj.texts);
             const contacts = parsed.map((obj) => obj.contacts);
             const possibleUserNames = _.intersection(...contacts);
 
-            resolve(deIdentification(textList, possibleUserNames[0]));
+            resolve(deIdentification(parsedConversations, possibleUserNames[0]));
             // TODO: How to ask user for username? Is it required?
             // Determine which of usernames found is the donor's
             // if (possibleUserNames.length === 1) {
-            //     resolve(deIdentification(textList, possibleUserNames[0]));
+            //     resolve(deIdentification(parsedConversations, possibleUserNames[0]));
             // } else {
                 // askUserForUsername(possibleUserNames)
-                //     .then(username => resolve(deIdentification(textList, username)));
+                //     .then(username => resolve(deIdentification(parsedConversations, username)));
             // }
         }).catch((error) => reject(error));
     });
@@ -81,33 +80,42 @@ async function readFile(file: File): Promise<string> {
 //     });
 // }
 
-async function deIdentification(parsedFiles: ParsedMessage[][], userName: string): Promise<AnonymizationResult> {
+async function deIdentification(parsedFiles: ParsedMessage[][], donorName: string): Promise<AnonymizationResult> {
     const namesToPseudonyms: Record<string, string> = {};
-    const deIdentifiedJsonContents: Conversation[] = [];
-    let i = 1;
+    const deIdentifiedConversations: Conversation[] = [];
+    let counter = 1;
+
+    const getDeIdentifiedId= (name: string): string => {
+        if (!namesToPseudonyms[name]) {
+            namesToPseudonyms[name] = name === SYSTEM_ALIAS
+                ? SYSTEM_ALIAS!
+                : `${FRIEND_ALIAS}${counter++}`;
+        }
+        return namesToPseudonyms[name];
+    }
 
     parsedFiles.forEach(lines => {
-        const eachFileParticipants = new Set<string>();
-        namesToPseudonyms[userName] = DONOR_ALIAS;  // Get this from text file
+        const uniqueParticipants = new Set<string>();
+        namesToPseudonyms[donorName] = DONOR_ALIAS;
 
         const messages: Message[] = lines
             .filter(line => line.message && !line.message.includes(SYSTEM_MESSAGE)) // Filter first to exclude unwanted lines
             .map(line => {
                 const participant = getDeIdentifiedId(line.author);
-                eachFileParticipants.add(participant);
+                uniqueParticipants.add(participant);
                 return {
                     sender: participant,
                     timestamp: line.date,
                     wordCount: wordCount(line.message),
                 };
             })
-        const participants = Array.from(eachFileParticipants);//.map(participantId => ({ name: participantId }));
+        const participants = Array.from(uniqueParticipants);
         const isGroupConversation = (
-            participants.length === 3 && !eachFileParticipants.has(SYSTEM_ALIAS)
+            participants.length === 3 && !uniqueParticipants.has(SYSTEM_ALIAS)
             || participants.length > 2
         );
 
-        deIdentifiedJsonContents.push({
+        deIdentifiedConversations.push({
             isGroupConversation,
             dataSource: DataSourceValue.WhatsApp,
             messages,
@@ -116,25 +124,16 @@ async function deIdentification(parsedFiles: ParsedMessage[][], userName: string
         });
     });
 
-    const chatsToShowMapping = deIdentifiedJsonContents.map(
+    const chatsToShowMapping = deIdentifiedConversations.map(
         chat => chat.participants.map(
             participantId => ({ name: participantId })
         )
     );
     return {
-        anonymizedConversations: deIdentifiedJsonContents,
+        anonymizedConversations: deIdentifiedConversations,
         participantNamesToPseudonyms: namesToPseudonyms,
         chatsToShowMapping
     };
-
-    function getDeIdentifiedId(name: string): string {
-        if (!namesToPseudonyms[name]) {
-            namesToPseudonyms[name] = name === SYSTEM_ALIAS
-                ? SYSTEM_ALIAS!
-                : `${FRIEND_ALIAS}${i++}`;
-        }
-        return namesToPseudonyms[name];
-    }
 }
 
 export default handleWhatsappTxtFiles;

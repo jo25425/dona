@@ -34,12 +34,6 @@ export interface MessageAudio {
     sender: string,
 }
 
-export interface ChatContent {
-    participants: { name: string }[];
-    messages: Message[];
-    thread_type: string;
-}
-
 export interface AnonymizationResult {
     anonymizedConversations: Conversation[];
     participantNamesToPseudonyms: Record<string, string>;

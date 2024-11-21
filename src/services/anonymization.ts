@@ -2,8 +2,7 @@ import {AnonymizationResult, DataSourceValue} from "@models/processed";
 import handleWhatsappTxtFiles from "@services/parsing/whatsapp/whatsappHandler";
 import {extractTxtFilesFromZip} from "@services/parsing/shared/zipExtraction";
 import {DonationErrors} from "@services/validation";
-import handleInstagramZipFiles from "@services/parsing/meta/instagramHandler";
-import handleFacebookZipFiles from "@services/parsing/meta/facebookHandler";
+import {handleFacebookZipFiles, handleInstagramZipFiles} from "@services/parsing/meta/metaHandlers";
 
 export async function anonymizeData(dataSourceValue: DataSourceValue, files: File[]): Promise<AnonymizationResult> {
     if (files.length == 0) {
