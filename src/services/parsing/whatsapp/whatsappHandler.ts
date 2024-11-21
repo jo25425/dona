@@ -1,9 +1,14 @@
 import wordCount from '@/services/parsing/shared/wordCount';
-import {makeArrayOfMessages, ParsedMessage, parseMessages, ParsingResult} from './whatsappParser';
+import {
+    makeArrayOfMessages,
+    ParsedMessage,
+    parseMessages,
+    ParsingResult
+} from '@services/parsing/whatsapp/whatsappParser';
 import _ from "lodash";
 import {AnonymizationResult, Conversation, DataSourceValue, Message} from "@models/processed";
 import {DonationErrors} from "@services/validation";
-import {DONOR_ALIAS, FRIEND_ALIAS, SYSTEM_ALIAS} from "@services/parsing/meta/deIdentify";
+import {getAliasConfig} from "@services/parsing/shared/aliasConfig";
 
 const SYSTEM_MESSAGE = "Messages to this chat and calls are now secured with end-to-end encryption.";
 
@@ -81,27 +86,18 @@ async function readFile(file: File): Promise<string> {
 // }
 
 async function deIdentification(parsedFiles: ParsedMessage[][], donorName: string): Promise<AnonymizationResult> {
-    const namesToPseudonyms: Record<string, string> = {};
+    const aliasConfig = getAliasConfig();
+    const deIdentifier = new DeIdentifier(aliasConfig.friendAlias, aliasConfig.systemAlias);
     const deIdentifiedConversations: Conversation[] = [];
-    let counter = 1;
-
-    const getDeIdentifiedId= (name: string): string => {
-        if (!namesToPseudonyms[name]) {
-            namesToPseudonyms[name] = name === SYSTEM_ALIAS
-                ? SYSTEM_ALIAS!
-                : `${FRIEND_ALIAS}${counter++}`;
-        }
-        return namesToPseudonyms[name];
-    }
 
     parsedFiles.forEach(lines => {
         const uniqueParticipants = new Set<string>();
-        namesToPseudonyms[donorName] = DONOR_ALIAS;
+        deIdentifier.setPseudonym(donorName, aliasConfig.donorAlias);
 
         const messages: Message[] = lines
             .filter(line => line.message && !line.message.includes(SYSTEM_MESSAGE)) // Filter first to exclude unwanted lines
             .map(line => {
-                const participant = getDeIdentifiedId(line.author);
+                const participant = deIdentifier.getDeIdentifiedId(line.author);
                 uniqueParticipants.add(participant);
                 return {
                     sender: participant,
@@ -111,7 +107,7 @@ async function deIdentification(parsedFiles: ParsedMessage[][], donorName: strin
             })
         const participants = Array.from(uniqueParticipants);
         const isGroupConversation = (
-            participants.length === 3 && !uniqueParticipants.has(SYSTEM_ALIAS)
+            participants.length === 3 && !uniqueParticipants.has(aliasConfig.systemAlias)
             || participants.length > 2
         );
 
@@ -131,7 +127,7 @@ async function deIdentification(parsedFiles: ParsedMessage[][], donorName: strin
     );
     return {
         anonymizedConversations: deIdentifiedConversations,
-        participantNamesToPseudonyms: namesToPseudonyms,
+        participantNamesToPseudonyms: deIdentifier.getPseudonymMap(),
         chatsToShowMapping
     };
 }

@@ -17,10 +17,12 @@ import React, {useState} from "react";
 import MultiFileSelect from '@components/MultiFileSelect';
 import {Conversation, DataSourceValue} from "@models/processed";
 import {addDonation} from './actions';
+import {useAliasConfig} from "@services/parsing/shared/aliasConfig";
 
 export default function DataDonationPage() {
     const a = useTranslations('actions');
     const t = useTranslations('donation');
+    useAliasConfig(); // Will allow donation logic to use translations for aliases in anonymization
 
     // State to hold the donated conversations from all multiselect elements
     const [allDonatedConversations, setAllDonatedConversations] = useState<Conversation[]>([]);
