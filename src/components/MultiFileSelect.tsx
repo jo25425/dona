@@ -15,7 +15,7 @@ import ListItemText from "@mui/material/ListItemText";
 import InsertDriveFile from "@mui/icons-material/InsertDriveFile";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import {Conversation, DataSourceValue} from "@models/processed";
+import {AnonymizationResult, Conversation, DataSourceValue} from "@models/processed";
 import {anonymizeData} from "@/services/anonymization";
 import {DonationErrors} from "@services/validation";
 import AnonymizationSection from "@/components/AnonymizationSection";
@@ -38,11 +38,10 @@ const MultiFileSelect: React.FC<MultiFileSelectProps> = ({ dataSourceValue, onDo
 
     // States
     const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
-    // const [validationError, setValidationError] = useState<string | null>(null);
     const [error, setError] = useState<string | null>(null);
     const [startDate, setStartDate] = useState<Date | null>(null);
     const [endDate, setEndDate] = useState<Date | null>(null);
-    const [anonymizedConversations, setAnonymizedConversations] = useState<Conversation[] | null>(null);
+    const [anonymizationResult, setAnonymizationResult] = useState<AnonymizationResult | null>(null);
 
     // Handle file selection
     const handleFiles = async (event: ChangeEvent<HTMLInputElement>) => {
@@ -51,34 +50,24 @@ const MultiFileSelect: React.FC<MultiFileSelectProps> = ({ dataSourceValue, onDo
 
         try {
             const data = await anonymizeData(dataSourceValue, files); // Anonymize on selection
-            setAnonymizedConversations(data.anonymizedConversations);
+            setError(null);
+            setAnonymizationResult(data);
             // TODO: Use rest of the anonymization result
             onDonatedConversationsChange(data.anonymizedConversations);
         } catch (err) {
             let errorMessage: string;
-            // TODO: Use internationalized string for all validation errors, no hardcoded messages!
-            switch(err) {
-                case DonationErrors.NoFiles:
-                    errorMessage = "";
+            switch (true) {
+                case err === DonationErrors.Not5to7Files:
+                    errorMessage = t('errors.Not5to7Files', { count: selectedFiles.length });
                     break;
-                case DonationErrors.Not5to7Files:
-                    errorMessage = t('errors.not-enough-chats_format', { count: files.length });
+                case Object.values(DonationErrors).includes(err as DonationErrors):
+                    errorMessage = t(`errors.${err}`);
                     break;
-                case DonationErrors.SameFiles:
-                    errorMessage = t('errors.same-file');
-                    break;
-                case DonationErrors.NoMessageEntries:
-                    errorMessage = "No message entries found.";
-                case DonationErrors.NoDonorNameFound:
-                    errorMessage = "Donor name not found in profile information";
-                    break;
-                case DonationErrors.NoProfile:
-                case DonationErrors.EmptyOrOneContact:
                 default:
                     errorMessage = "An error occurred during anonymization.";
-                    break;
             }
             setError(errorMessage);
+
         }
     };
 
@@ -110,13 +99,10 @@ const MultiFileSelect: React.FC<MultiFileSelectProps> = ({ dataSourceValue, onDo
                 />
             )}
 
-            {/*/!* Error handling *!/*/}
-            {/*{error && <Typography color="error">{error}</Typography>}*/}
-
             {/* Display anonymized data */}
-            {!error && anonymizedConversations && (
+            {!error && anonymizationResult && (
                 <Box sx={{flexDirection: "row"}}>
-                    {anonymizedConversations.map((convo, index) =>
+                    {anonymizationResult.anonymizedConversations.map((convo, index) =>
                         // <Typography variant="body1">- Anon. data bit #{index}</Typography>
                         <AnonymizationSection key={index} conversation={convo} />
                     )}

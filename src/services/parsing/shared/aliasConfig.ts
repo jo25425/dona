@@ -4,11 +4,13 @@ export class AliasConfig {
     systemAlias: string;
     friendAlias: string;
     donorAlias: string;
+    chatAlias: string;
 
-    constructor(systemAlias: string, friendAlias: string, donorAlias: string) {
+    constructor(systemAlias: string, friendAlias: string, donorAlias: string, chatAlias: string) {
         this.systemAlias = systemAlias;
         this.friendAlias = friendAlias;
         this.donorAlias = donorAlias;
+        this.chatAlias = chatAlias;
     }
 }
 
@@ -17,7 +19,7 @@ let aliasConfig: AliasConfig | null = null;
 export function useAliasConfig(): AliasConfig {
     const t = useTranslations("donation.anonymisation");
     if (!aliasConfig) {
-        aliasConfig = new AliasConfig(t('system'), t('friend'), t('donor'));
+        aliasConfig = new AliasConfig(t('system'), t('friend'), t('donor'), t('chat'));
     }
     return aliasConfig;
 }

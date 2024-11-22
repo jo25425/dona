@@ -272,7 +272,6 @@
       },
       "onlySeven": "Dies sind nur die Kontakte Ihrer 7 Chats, in denen insgesamt die meisten Wörter gesendet wurden. <b>Unten können Sie auch andere Chats auswählen. </b>",
       "moreFriends": "und {0} weitere.",
-      "chat": "Chat",
       "onlyYouInConv": "Nur Sie befinden sich in diesem Chat. Es könnte z.B. sein, dass die andere Person/en den Chat verlassen haben."
     },
     "sendData": {
@@ -294,6 +293,7 @@
     "anonymisation": {
       "donor": "Spender",
       "friend": "Kontakt",
+      "chat": "Chat",
       "friendInitial": "K",
       "chatInitialW": "W",
       "chatInitialF": "F",

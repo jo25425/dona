@@ -1,19 +1,10 @@
-import wordCount from '@/services/parsing/shared/wordCount';
-import {
-    makeArrayOfMessages,
-    ParsedMessage,
-    parseMessages,
-    ParsingResult
-} from '@services/parsing/whatsapp/whatsappParser';
+import {makeArrayOfMessages, parseMessages, ParsingResult} from '@services/parsing/whatsapp/whatsappParser';
 import _ from "lodash";
-import {AnonymizationResult, Conversation, DataSourceValue, Message} from "@models/processed";
+import {AnonymizationResult} from "@models/processed";
 import {DonationErrors} from "@services/validation";
-import {getAliasConfig} from "@services/parsing/shared/aliasConfig";
+import deIdentify from "@services/parsing/whatsapp/deIdentify";
 
-const SYSTEM_MESSAGE = "Messages to this chat and calls are now secured with end-to-end encryption.";
-
-
-async function handleWhatsappTxtFiles(fileList: File[]): Promise<AnonymizationResult> {
+export default async function handleWhatsappTxtFiles(fileList: File[]): Promise<AnonymizationResult> {
     const files = Array.from(fileList);
 
     return new Promise((resolve, reject) => {
@@ -39,7 +30,7 @@ async function handleWhatsappTxtFiles(fileList: File[]): Promise<AnonymizationRe
         Promise.all(parsedFiles).then((parsed: ParsingResult[]) => {
             const hasInvalidData = parsed.some(({ texts, contacts }) => texts.length < 100 || contacts.length <= 1);
             if (hasInvalidData) {
-                reject(DonationErrors.EmptyOrOneContact);
+                reject(DonationErrors.TooFewContactsOrMessages);
                 return;
             }
 
@@ -47,7 +38,7 @@ async function handleWhatsappTxtFiles(fileList: File[]): Promise<AnonymizationRe
             const contacts = parsed.map((obj) => obj.contacts);
             const possibleUserNames = _.intersection(...contacts);
 
-            resolve(deIdentification(parsedConversations, possibleUserNames[0]));
+            resolve(deIdentify(parsedConversations, possibleUserNames[0]));
             // TODO: How to ask user for username? Is it required?
             // Determine which of usernames found is the donor's
             // if (possibleUserNames.length === 1) {
@@ -84,52 +75,3 @@ async function readFile(file: File): Promise<string> {
 //         $('#usernameModal').modal('show');
 //     });
 // }
-
-async function deIdentification(parsedFiles: ParsedMessage[][], donorName: string): Promise<AnonymizationResult> {
-    const aliasConfig = getAliasConfig();
-    const deIdentifier = new DeIdentifier(aliasConfig.friendAlias, aliasConfig.systemAlias);
-    const deIdentifiedConversations: Conversation[] = [];
-
-    parsedFiles.forEach(lines => {
-        const uniqueParticipants = new Set<string>();
-        deIdentifier.setPseudonym(donorName, aliasConfig.donorAlias);
-
-        const messages: Message[] = lines
-            .filter(line => line.message && !line.message.includes(SYSTEM_MESSAGE)) // Filter first to exclude unwanted lines
-            .map(line => {
-                const participant = deIdentifier.getDeIdentifiedId(line.author);
-                uniqueParticipants.add(participant);
-                return {
-                    sender: participant,
-                    timestamp: line.date,
-                    wordCount: wordCount(line.message),
-                };
-            })
-        const participants = Array.from(uniqueParticipants);
-        const isGroupConversation = (
-            participants.length === 3 && !uniqueParticipants.has(aliasConfig.systemAlias)
-            || participants.length > 2
-        );
-
-        deIdentifiedConversations.push({
-            isGroupConversation,
-            dataSource: DataSourceValue.WhatsApp,
-            messages,
-            messagesAudio: [],
-            participants
-        });
-    });
-
-    const chatsToShowMapping = deIdentifiedConversations.map(
-        chat => chat.participants.map(
-            participantId => ({ name: participantId })
-        )
-    );
-    return {
-        anonymizedConversations: deIdentifiedConversations,
-        participantNamesToPseudonyms: deIdentifier.getPseudonymMap(),
-        chatsToShowMapping
-    };
-}
-
-export default handleWhatsappTxtFiles;

@@ -105,7 +105,7 @@ async function handleMetaZipFiles(
         const parsedConversations = await getConversationsFromEntries(messageEntries)
 
         // Process the extracted data
-        return deIdentify(parsedConversations, audioEntries, dataSourceValue);
+        return deIdentify(parsedConversations, audioEntries, donorName, dataSourceValue);
 
     } catch (error) {
         throw new DonationError(DonationErrors.UnknownError);

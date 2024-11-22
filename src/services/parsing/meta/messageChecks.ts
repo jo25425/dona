@@ -1,4 +1,4 @@
-function isVoiceMessage(message: Record<string, any>): boolean {
+export function isVoiceMessage(message: Record<string, any>): boolean {
     const messageKeys = Object.keys(message);
     return (
         messageKeys.includes("sender_name") &&
@@ -7,7 +7,7 @@ function isVoiceMessage(message: Record<string, any>): boolean {
     );
 }
 
-function isTextMessage(message: Record<string, any>): boolean {
+export function isTextMessage(message: Record<string, any>): boolean {
     const messageKeys = Object.keys(message);
     return (
         messageKeys.includes("sender_name") &&
@@ -15,5 +15,3 @@ function isTextMessage(message: Record<string, any>): boolean {
         messageKeys.includes("timestamp_ms")
     );
 }
-
-export { isTextMessage, isVoiceMessage };

@@ -37,7 +37,7 @@ export interface MessageAudio {
 export interface AnonymizationResult {
     anonymizedConversations: Conversation[];
     participantNamesToPseudonyms: Record<string, string>;
-    chatsToShowMapping: { name: string }[][];
+    chatMappingToShow: Map<string, string[]>;
 }
 
 export interface Conversation {
