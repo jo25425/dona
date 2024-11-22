@@ -5,7 +5,7 @@ import {isTextMessage, isVoiceMessage} from "@services/parsing/meta/messageCheck
 import {ParsedConversation} from "@services/parsing/meta/metaHandlers";
 import {AnonymizationResult, Conversation, DataSourceValue, Message, MessageAudio} from "@models/processed";
 import {getAliasConfig} from "@services/parsing/shared/aliasConfig";
-import {ChatPseudonyms, ContactPseudonyms} from "@services/parsing/shared/contactPseudonyms";
+import {ChatPseudonyms, ContactPseudonyms} from "@services/parsing/shared/pseudonyms";
 
 
 export default async function deIdentify(
@@ -16,7 +16,7 @@ export default async function deIdentify(
 ): Promise<AnonymizationResult> {
     const aliasConfig = getAliasConfig();
     const contactPseudonyms = new ContactPseudonyms(aliasConfig.friendAlias);
-    const chatPseudonyms = new ChatPseudonyms(aliasConfig.donorAlias, aliasConfig.chatAlias);
+    const chatPseudonyms = new ChatPseudonyms(aliasConfig.donorAlias, aliasConfig.chatAlias, dataSourceValue);
     chatPseudonyms.setDonorName(donorName);
 
     const deIdentifiedConversations: Conversation[] = await Promise.all(

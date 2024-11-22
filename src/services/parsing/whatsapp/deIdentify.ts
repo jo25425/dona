@@ -2,14 +2,14 @@ import {ParsedMessage} from "@services/parsing/whatsapp/whatsappParser";
 import {AnonymizationResult, Conversation, DataSourceValue, Message} from "@models/processed";
 import {getAliasConfig} from "@services/parsing/shared/aliasConfig";
 import wordCount from "@services/parsing/shared/wordCount";
-import {ChatPseudonyms, ContactPseudonyms} from "@services/parsing/shared/contactPseudonyms";
+import {ChatPseudonyms, ContactPseudonyms} from "@services/parsing/shared/pseudonyms";
 
 const SYSTEM_MESSAGE = "Messages to this chat and calls are now secured with end-to-end encryption.";
 
 export default async function deIdentify(parsedFiles: ParsedMessage[][], donorName: string): Promise<AnonymizationResult> {
     const aliasConfig = getAliasConfig();
     const contactPseudonyms = new ContactPseudonyms(aliasConfig.friendAlias, aliasConfig.systemAlias);
-    const chatPseudonyms = new ChatPseudonyms(aliasConfig.donorAlias, aliasConfig.chatAlias);
+    const chatPseudonyms = new ChatPseudonyms(aliasConfig.donorAlias, aliasConfig.chatAlias, DataSourceValue.WhatsApp);
     chatPseudonyms.setDonorName(donorName);
 
     const deIdentifiedConversations: Conversation[] = [];

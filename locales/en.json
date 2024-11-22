@@ -246,6 +246,7 @@
       "remove": "Remove"
     },
     "select-date": {
+      "choose-period": "Here you can limit the period of your data donation:",
       "start": "Start of donation:",
       "end": "End of donation:"
     },
@@ -263,8 +264,8 @@
       "group-conversation": "Group conversation",
       "voice-message": "Voice message"
     },
-    "friendsMapping": {
-      "title": "<b>Aliases for your contacts</b>",
+    "contacts-mapping": {
+      "title": "Aliases for your contacts",
       "subtitle": {
         "facebook": "We have anonymized your data and your contacts. If, in the next step, you want to reconstruct which conversations and contacts are involved in the anonymized evaluation, make a note of the following assignments of contacts (e.g. A**** B*****) and chats (e.g. “F4\"). From now on, these are the anonymized names for your chats. The assignment is not saved and is lost as soon as you leave this page.",
         "whatsapp": "We have anonymized your data and your contacts. If, in the next step, you want to reconstruct which conversations and contacts are involved in the anonymized evaluation, make a note of the following assignments of contacts (e.g. A**** B*****) and chats (e.g. “W4\"). From now on, these are the anonymized names for your chats. The assignment is not saved and is lost as soon as you leave this page.",
@@ -285,7 +286,6 @@
     "alias": "Username",
     "please-insert-alias": "Please enter your username to enable anonymization.",
     "choose-files-here": "Select the files you would like to donate here:",
-    "choose-period": "Here you can limit the period of your data donation:",
     "aliases-overview": "Aliases of your contacts:",
     "processing": "Your data is being extracted and anonymized...",
     "be-patient": "The data extraction process may take some time. Please be patient...",
@@ -296,9 +296,6 @@
       "friend": "Contact",
       "chat": "Chat",
       "friendInitial": "C",
-      "chatInitialW": "W",
-      "chatInitialF": "F",
-      "chatInitialI": "I",
       "system": "System",
       "chooseUsername": "Please choose your username. Your username will not be saved and we will not know it.",
       "loading": {

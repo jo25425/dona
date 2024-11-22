@@ -91,21 +91,35 @@ const MultiFileSelect: React.FC<MultiFileSelectProps> = ({ dataSourceValue, onDo
 
             {/* Show date pickers if validation passes */}
             {!error && selectedFiles.length > 0 && (
-                <DateRangePicker
-                    startDate={startDate}
-                    endDate={endDate}
-                    setStartDate={setStartDate}
-                    setEndDate={setEndDate}
-                />
+                <Box sx={{mb: 2}}>
+                    <Typography variant="body1" sx={{mb: 1, fontWeight: "bold"}}>
+                        {t('select-date.choose-period')}
+                    </Typography>
+                    <DateRangePicker
+                        startDate={startDate}
+                        endDate={endDate}
+                        setStartDate={setStartDate}
+                        setEndDate={setEndDate}
+                    />
+                </Box>
             )}
 
             {/* Display anonymized data */}
             {!error && anonymizationResult && (
-                <Box sx={{flexDirection: "row"}}>
-                    {anonymizationResult.anonymizedConversations.map((convo, index) =>
-                        // <Typography variant="body1">- Anon. data bit #{index}</Typography>
-                        <AnonymizationSection key={index} conversation={convo} />
-                    )}
+                <Box sx={{mb: 2}}>
+                    <Typography variant="body1" sx={{mb: 1, fontWeight: "bold"}}>
+                        {t('contacts-mapping.title')}
+                    </Typography>
+                    <Typography variant="body2">
+                        {t(`contacts-mapping.subtitle.${dataSourceValue.toLowerCase()}`)}
+                    </Typography>
+                    <ul>
+                        {Array.from(anonymizationResult.chatMappingToShow.entries()).map(([chatPseudonym, chatParticipants]: [string, string[]]) =>
+                            <li key={chatPseudonym}>
+                                <Typography variant="body1">{chatPseudonym}: {chatParticipants.join(", ")}</Typography>
+                            </li>
+                        )}
+                    </ul>
                 </Box>
             )}
         </Box>
@@ -118,7 +132,7 @@ const FilesFeedbackSection= (
     return (
         <Box>
             {selectedFiles.length > 0 && (
-                <Box sx={{ mt: 2 }}>
+                <Box sx={{ my: 2 }}>
                     <List sx={listStyle} aria-label="files chosen">
                         {Array.from(selectedFiles).map((file: File, index: number) => (
                             <Box key={index}>
@@ -156,10 +170,11 @@ const DateRangePicker: React.FC<{
     setStartDate: (date: Date | null) => void;
     setEndDate: (date: Date | null) => void;
 }> = ({ startDate, endDate, setStartDate, setEndDate }) => {
+    const t = useTranslations('donation.select-date');
     return (
         <Grid container spacing={2} sx={{ mt: 2 }}>
             <Grid size={6}>
-                <Typography variant="body2">Start Date</Typography>
+                <Typography variant="body2">{t('start')}</Typography>
                 <DatePicker
                     showIcon
                     selected={startDate}
@@ -170,7 +185,7 @@ const DateRangePicker: React.FC<{
                 />
             </Grid>
             <Grid size={6}>
-                <Typography variant="body2">End Date</Typography>
+                <Typography variant="body2">{t('end')}</Typography>
                 <DatePicker
                     showIcon
                     selected={endDate}

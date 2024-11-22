@@ -45,15 +45,17 @@ export class ChatPseudonyms {
     private counter: number = 1;
     private readonly donorAlias: string;
     private readonly chatAlias: string;
+    private readonly dataSourceInitial: string;
 
-    constructor(donorAlias: string, chatAlias: string) {
+    constructor(donorAlias: string, chatAlias: string, dataSourceValue: string) {
         this.donorAlias = donorAlias;
         this.chatAlias = chatAlias;
+        this.dataSourceInitial = dataSourceValue[0];
     }
 
     setChatVsParticipants(participants: string[]): string {
         const decodedNames = participants.map(decode);
-        const pseudonym = `${this.chatAlias}${this.counter++}`;
+        const pseudonym = `${this.chatAlias} ${this.dataSourceInitial}${this.counter++}`;
         this.chatPseudonymToParticipants.set(pseudonym, decodedNames.map(maskName));
         return pseudonym;
     }
