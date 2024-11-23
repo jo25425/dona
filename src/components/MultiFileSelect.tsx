@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, ChangeEvent } from "react";
+import React, {ChangeEvent, useState} from "react";
 import {useTranslations} from "next-intl";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
@@ -18,7 +18,15 @@ import "react-datepicker/dist/react-datepicker.css";
 import {AnonymizationResult, Conversation, DataSourceValue} from "@models/processed";
 import {anonymizeData} from "@/services/anonymization";
 import {DonationErrors} from "@services/validation";
-import AnonymizationSection from "@/components/AnonymizationSection";
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import Button from "@mui/material/Button";
+import CheckIcon from '@mui/icons-material/Check';
 
 interface MultiFileSelectProps {
     dataSourceValue: DataSourceValue;
@@ -106,21 +114,50 @@ const MultiFileSelect: React.FC<MultiFileSelectProps> = ({ dataSourceValue, onDo
 
             {/* Display anonymized data */}
             {!error && anonymizationResult && (
-                <Box sx={{mb: 2}}>
+                <>
+                <Box sx={{my: 1}}>
                     <Typography variant="body1" sx={{mb: 1, fontWeight: "bold"}}>
                         {t('contacts-mapping.title')}
                     </Typography>
                     <Typography variant="body2">
                         {t(`contacts-mapping.subtitle.${dataSourceValue.toLowerCase()}`)}
                     </Typography>
-                    <ul>
-                        {Array.from(anonymizationResult.chatMappingToShow.entries()).map(([chatPseudonym, chatParticipants]: [string, string[]]) =>
-                            <li key={chatPseudonym}>
-                                <Typography variant="body1">{chatPseudonym}: {chatParticipants.join(", ")}</Typography>
-                            </li>
-                        )}
-                    </ul>
+                    <TableContainer component={Paper} sx={{mt: 2}}>
+                        <Table size="small" aria-label="pseudonyms table">
+                            <TableHead>
+                                <TableRow sx={{'th': {fontWeight: "bold"}}}>
+                                    <TableCell>Pseudonym</TableCell>
+                                    <TableCell>Contacts</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {Array.from(anonymizationResult.chatMappingToShow.entries()).map(([chatPseudonym, chatParticipants]: [string, string[]]) => (
+                                    <TableRow
+                                        key={chatPseudonym}
+                                        sx={{'&:last-child td, &:last-child th': {border: 0}}}
+                                    >
+                                        <TableCell component="th" scope="row">{chatPseudonym}</TableCell>
+                                        <TableCell>{chatParticipants.join(", ")}</TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
                 </Box>
+                <Box sx={{
+                    my: 2,
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                }}>
+                    <Button>
+                        {t('preview-data.button')}
+                    </Button>
+                </Box>
+                <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">
+                    {t('successful')} {t('preview-data.body2')}
+                </Alert>
+                </>
             )}
         </Box>
     );
