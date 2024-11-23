@@ -1,7 +1,7 @@
 import {makeArrayOfMessages, parseMessages, ParsingResult} from '@services/parsing/whatsapp/whatsappParser';
 import _ from "lodash";
 import {AnonymizationResult} from "@models/processed";
-import {DonationErrors} from "@services/validation";
+import {DonationError, DonationErrors} from "@services/validation";
 import deIdentify from "@services/parsing/whatsapp/deIdentify";
 
 export default async function handleWhatsappTxtFiles(fileList: File[]): Promise<AnonymizationResult> {
@@ -10,14 +10,14 @@ export default async function handleWhatsappTxtFiles(fileList: File[]): Promise<
     return new Promise((resolve, reject) => {
 
         if (files.length !== 0 && (files.length < 5 || files.length > 7)) {
-            reject(DonationErrors.Not5to7Files);
+            reject(new DonationError(DonationErrors.Not5to7Files));
             return;
         }
 
         const fileSize = files[0].size;
         const allSameSize = files.every(file => file.size === fileSize);
         if (allSameSize) {
-            reject(DonationErrors.SameFiles);
+            reject(new DonationError(DonationErrors.SameFiles));
             return;
         }
 
@@ -30,7 +30,7 @@ export default async function handleWhatsappTxtFiles(fileList: File[]): Promise<
         Promise.all(parsedFiles).then((parsed: ParsingResult[]) => {
             const hasInvalidData = parsed.some(({ texts, contacts }) => texts.length < 100 || contacts.length <= 1);
             if (hasInvalidData) {
-                reject(DonationErrors.TooFewContactsOrMessages);
+                reject(new DonationError(DonationErrors.TooFewContactsOrMessages));
                 return;
             }
 

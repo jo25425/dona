@@ -2,36 +2,29 @@
 
 import React, {ChangeEvent, useState} from "react";
 import {useTranslations} from "next-intl";
+import {AnonymizationResult, Conversation, DataSourceValue} from "@models/processed";
+import {anonymizeData} from "@/services/anonymization";
+import {DonationError, DonationErrors} from "@services/validation";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import Alert from "@mui/material/Alert";
-import Grid from "@mui/material/Grid2";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InsertDriveFile from "@mui/icons-material/InsertDriveFile";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import {AnonymizationResult, Conversation, DataSourceValue} from "@models/processed";
-import {anonymizeData} from "@/services/anonymization";
-import {DonationErrors} from "@services/validation";
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import Button from "@mui/material/Button";
-import CheckIcon from '@mui/icons-material/Check';
+import {calculateMinMaxDates} from "@services/rangeFiltering";
+import AnonymizationPreview from "@components/AnonymizationPreview";
+import DateRangePicker from "@components/DateRangePicker";
 
 interface MultiFileSelectProps {
     dataSourceValue: DataSourceValue;
     onDonatedConversationsChange: (newDonatedConversations: Conversation[]) => void;
 }
+
+type NullableDateRange = [Date | null, Date | null];
 
 const listStyle = {
     p: 0,
@@ -47,35 +40,39 @@ const MultiFileSelect: React.FC<MultiFileSelectProps> = ({ dataSourceValue, onDo
     // States
     const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
     const [error, setError] = useState<string | null>(null);
-    const [startDate, setStartDate] = useState<Date | null>(null);
-    const [endDate, setEndDate] = useState<Date | null>(null);
+    const [selectedRange, setSelectedRange] = useState<[Date | null, Date | null]>([null, null]);
+    const [calculatedRange, setCalculatedRange] = useState<[Date | null, Date | null]>([null, null]);
     const [anonymizationResult, setAnonymizationResult] = useState<AnonymizationResult | null>(null);
 
     // Handle file selection
     const handleFiles = async (event: ChangeEvent<HTMLInputElement>) => {
+        setError(null);
+
         const files = event.target.files ? Array.from(event.target.files) : [];
         setSelectedFiles(files); // Local state for file feedback
 
+        // TODO: Message / wheel to signal ongoing processing
+
         try {
             const data = await anonymizeData(dataSourceValue, files); // Anonymize on selection
-            setError(null);
+            const { minDate, maxDate } = calculateMinMaxDates(data.anonymizedConversations);
             setAnonymizationResult(data);
-            // TODO: Use rest of the anonymization result
-            onDonatedConversationsChange(data.anonymizedConversations);
+            setCalculatedRange([minDate, maxDate]);
+            onDonatedConversationsChange(data.anonymizedConversations); // Feedback to donation page
         } catch (err) {
             let errorMessage: string;
-            switch (true) {
-                case err === DonationErrors.Not5to7Files:
-                    errorMessage = t('errors.Not5to7Files', { count: selectedFiles.length });
-                    break;
-                case Object.values(DonationErrors).includes(err as DonationErrors):
-                    errorMessage = t(`errors.${err}`);
-                    break;
-                default:
-                    errorMessage = "An error occurred during anonymization.";
+            if (err instanceof DonationError) {
+                switch(err.reason) {
+                    case DonationErrors.Not5to7Files:
+                        errorMessage = t('errors.Not5to7Files', { count: selectedFiles.length });
+                        break;
+                    default:
+                        errorMessage = t(`errors.${err.reason}`);
+                }
+            } else {
+                errorMessage = "An error occurred during anonymization.";
             }
             setError(errorMessage);
-
         }
     };
 
@@ -97,67 +94,18 @@ const MultiFileSelect: React.FC<MultiFileSelectProps> = ({ dataSourceValue, onDo
             {/* Show selected files for feedback */}
             {FilesFeedbackSection(selectedFiles, error)}
 
-            {/* Show date pickers if validation passes */}
-            {!error && selectedFiles.length > 0 && (
-                <Box sx={{mb: 2}}>
-                    <Typography variant="body1" sx={{mb: 1, fontWeight: "bold"}}>
-                        {t('select-date.choose-period')}
-                    </Typography>
-                    <DateRangePicker
-                        startDate={startDate}
-                        endDate={endDate}
-                        setStartDate={setStartDate}
-                        setEndDate={setEndDate}
-                    />
-                </Box>
-            )}
-
             {/* Display anonymized data */}
             {!error && anonymizationResult && (
-                <>
-                <Box sx={{my: 1}}>
-                    <Typography variant="body1" sx={{mb: 1, fontWeight: "bold"}}>
-                        {t('contacts-mapping.title')}
-                    </Typography>
-                    <Typography variant="body2">
-                        {t(`contacts-mapping.subtitle.${dataSourceValue.toLowerCase()}`)}
-                    </Typography>
-                    <TableContainer component={Paper} sx={{mt: 2}}>
-                        <Table size="small" aria-label="pseudonyms table">
-                            <TableHead>
-                                <TableRow sx={{'th': {fontWeight: "bold"}}}>
-                                    <TableCell>Pseudonym</TableCell>
-                                    <TableCell>Contacts</TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {Array.from(anonymizationResult.chatMappingToShow.entries()).map(([chatPseudonym, chatParticipants]: [string, string[]]) => (
-                                    <TableRow
-                                        key={chatPseudonym}
-                                        sx={{'&:last-child td, &:last-child th': {border: 0}}}
-                                    >
-                                        <TableCell component="th" scope="row">{chatPseudonym}</TableCell>
-                                        <TableCell>{chatParticipants.join(", ")}</TableCell>
-                                    </TableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
+                <Box sx={{mb: 2}}>
+                    <DateRangePicker
+                        calculatedRange={calculatedRange}
+                        setSelectedRange={setSelectedRange}
+                    />
+                    <AnonymizationPreview
+                        dataSourceValue={dataSourceValue}
+                        anonymizationResult={anonymizationResult}
+                    />
                 </Box>
-                <Box sx={{
-                    my: 2,
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center'
-                }}>
-                    <Button>
-                        {t('preview-data.button')}
-                    </Button>
-                </Box>
-                <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">
-                    {t('successful')} {t('preview-data.body2')}
-                </Alert>
-                </>
             )}
         </Box>
     );
@@ -198,41 +146,6 @@ const FilesFeedbackSection= (
                 </Alert>
             )}
         </Box>
-    )
-};
-
-const DateRangePicker: React.FC<{
-    startDate: Date | null;
-    endDate: Date | null;
-    setStartDate: (date: Date | null) => void;
-    setEndDate: (date: Date | null) => void;
-}> = ({ startDate, endDate, setStartDate, setEndDate }) => {
-    const t = useTranslations('donation.select-date');
-    return (
-        <Grid container spacing={2} sx={{ mt: 2 }}>
-            <Grid size={6}>
-                <Typography variant="body2">{t('start')}</Typography>
-                <DatePicker
-                    showIcon
-                    selected={startDate}
-                    onChange={setStartDate}
-                    dateFormat="dd.MM.yyyy"
-                    placeholderText="dd.MM.yyyy"
-                    customInput={<TextField />}
-                />
-            </Grid>
-            <Grid size={6}>
-                <Typography variant="body2">{t('end')}</Typography>
-                <DatePicker
-                    showIcon
-                    selected={endDate}
-                    onChange={setEndDate}
-                    dateFormat="dd.MM.yyyy"
-                    placeholderText="dd.MM.yyyy"
-                    customInput={<TextField />}
-                />
-            </Grid>
-        </Grid>
     )
 };
 

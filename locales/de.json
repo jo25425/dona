@@ -246,6 +246,7 @@
       "remove": "Entfernen"
     },
     "select-date": {
+      "choose-period": "Hier können Sie den Zeitraum Ihrer Datenspende eingrenzen:",
       "start": "Anfang der Spende:",
       "end": "Ende der Spende:"
     },
@@ -263,8 +264,8 @@
       "group-conversation": "Gruppenunterhaltung",
       "voice-message": "Sprachnachricht"
     },
-    "friendsMapping": {
-      "title": "<b>Decknamen für Ihre Kontakte</b>",
+    "contacts-mapping": {
+      "title": "Decknamen Ihrer Kontakte:",
       "subtitle": {
         "facebook": "Wir haben Ihre Daten und Ihre Kontakte anonymisiert. Falls Sie in der anonymisierten Auswertung im nächsten Schritt rekonstruieren wollen, um welche Konversationen und Kontakte es sich jeweils handelt, notieren Sie sich die folgenden Zuordnungen von Kontakten (z.B. A**** B*****) und Chatnamen (z.B. “F4”). Ab jetzt sind dies die anonymisierten Decknamen für Ihre Chats. Die Zuordnung wird nicht gespeichert und geht verloren, sobald Sie diese Seite verlassen.",
         "whatsapp": "Wir haben Ihre Daten und Ihre Kontakte anonymisiert. Falls Sie in der anonymisierten Auswertung im nächsten Schritt rekonstruieren wollen, um welche Konversationen und Kontakte es sich jeweils handelt, notieren Sie sich die folgenden Zuordnungen von Kontakten (z.B. A**** B*****) und Chatnamen (z.B. “W4” ). Ab jetzt sind dies die anonymisierten Decknamen für Ihre Chats. Die Zuordnung wird nicht gespeichert und geht verloren, sobald Sie diese Seite verlassen.",
@@ -284,8 +285,6 @@
     "alias-not-required": "Nicht notwendig",
     "alias": "Nutzername",
     "please-insert-alias": "Bitte geben Sie Ihren Nutzernamen ein, um das Hochladen zu ermöglichen",
-    "choose-period": "Hier können Sie den Zeitraum Ihrer Datenspende eingrenzen:",
-    "aliases-overview": "Decknamen Ihrer Kontakte:",
     "processing": "Daten werden extrahiert und anonymisiert...",
     "be-patient": "Das Extrahieren der Daten kann einige Minuten dauern. Haben Sie bitte Geduld...",
     "successful": "Ihre Daten wurden erfolgreich anonymisiert.",

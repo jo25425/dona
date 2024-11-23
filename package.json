@@ -10,14 +10,17 @@
     "test": "jest"
   },
   "dependencies": {
+    "@date-io/dayjs": "^3.0.0",
     "@emotion/react": "^11.13.5",
     "@emotion/styled": "^11.13.5",
     "@mui/icons-material": "^6.1.8",
     "@mui/material": "^6.1.8",
+    "@mui/x-date-pickers": "^7.22.3",
     "@types/lodash": "^4.17.13",
     "@zip.js/zip.js": "^2.7.53",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
+    "dayjs": "^1.11.13",
     "dotenv": "^16.4.5",
     "drizzle-orm": "^0.36.3",
     "lodash": "^4.17.21",
