@@ -35,7 +35,7 @@ export default async function deIdentify(parsedFiles: ParsedMessage[][], donorNa
 
         // Add to chats to show
         contactPseudonyms.setPseudonym(donorName, aliasConfig.donorAlias);
-        chatPseudonyms.setChatVsParticipants(contactPseudonyms.getOriginalNames(participants));
+        const conversationPseudonym = chatPseudonyms.getPseudonym(contactPseudonyms.getOriginalNames(participants));
 
         // Add to conversations
         deIdentifiedConversations.push({
@@ -43,7 +43,8 @@ export default async function deIdentify(parsedFiles: ParsedMessage[][], donorNa
             dataSource: DataSourceValue.WhatsApp,
             messages,
             messagesAudio: [],
-            participants
+            participants,
+            conversationPseudonym
         });
     });
 

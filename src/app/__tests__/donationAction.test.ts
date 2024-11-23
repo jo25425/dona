@@ -23,6 +23,7 @@ const testData = {
                 }
             ],
             "dataSource": "WhatsApp",
+            "conversationPseudonym": "Chat W1"
         }
     ]
 }

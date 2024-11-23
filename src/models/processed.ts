@@ -48,6 +48,7 @@ export interface Conversation {
     messages: Array<Message>,
     messagesAudio: Array<MessageAudio>,
     participants: Array<Participant>,
+    conversationPseudonym: string
 }
 
 export interface DataDonation {

@@ -53,7 +53,7 @@ export class ChatPseudonyms {
         this.dataSourceInitial = dataSourceValue[0];
     }
 
-    setChatVsParticipants(participants: string[]): string {
+    getPseudonym(participants: string[]): string {
         const decodedNames = participants.map(decode);
         const pseudonym = `${this.chatAlias} ${this.dataSourceInitial}${this.counter++}`;
         this.chatPseudonymToParticipants.set(pseudonym, decodedNames.map(maskName));

@@ -9,7 +9,8 @@ CREATE TABLE IF NOT EXISTS "conversations" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"is_group_conversation" boolean DEFAULT false NOT NULL,
 	"data_source_id" integer NOT NULL,
-	"donation_id" uuid NOT NULL
+	"donation_id" uuid NOT NULL,
+    "conversation_pseudonym" VARCHAR(10)
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "data_sources" (

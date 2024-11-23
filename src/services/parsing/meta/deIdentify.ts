@@ -20,7 +20,7 @@ export default async function deIdentify(
     chatPseudonyms.setDonorName(donorName);
 
     const deIdentifiedConversations: Conversation[] = await Promise.all(
-        parsedConversations.map(async (jsonContent) => {
+        parsedConversations.map(async (jsonContent): Promise<Conversation | null> => {
             const participantPseudonyms = new Set<string>();
             const textMessages: Message[] = [];
             const audioMessages: MessageAudio[] = [];
@@ -59,14 +59,15 @@ export default async function deIdentify(
 
             // Add to chats to show
             contactPseudonyms.setPseudonym(donorName, aliasConfig.donorAlias);
-            chatPseudonyms.setChatVsParticipants(contactPseudonyms.getOriginalNames(participants));
+            const conversationPseudonym = chatPseudonyms.getPseudonym(contactPseudonyms.getOriginalNames(participants));
 
             return {
                 isGroupConversation,
                 dataSource: dataSourceValue,
                 messages: textMessages,
                 messagesAudio: audioMessages,
-                participants
+                participants,
+                conversationPseudonym
             } as Conversation;
         })
     ).then((results) => results.filter(Boolean) as Conversation[]);

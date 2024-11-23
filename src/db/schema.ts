@@ -19,6 +19,7 @@ export const conversations = p.pgTable("conversations", {
     isGroupConversation: p.boolean("is_group_conversation").default(false).notNull(),
     dataSourceId: p.integer("data_source_id").notNull().references(() => dataSources.id),
     donationId: p.uuid("donation_id").notNull().references(() => donations.id),
+    conversationPseudonym: p.varchar("conversation_pseudonym", { length: 10 }).notNull(),
 });
 
 export const conversationParticipants = p.pgTable("conversation_participants", {
