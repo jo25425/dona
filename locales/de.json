@@ -262,7 +262,8 @@
       "length-seconds": "Länge in Sekunden",
       "timestamp": "Zeitpunkt der Nachricht",
       "group-conversation": "Gruppenunterhaltung",
-      "voice-message": "Sprachnachricht"
+      "voice-message": "Sprachnachricht",
+      "data-explanation_format": "Unten können Sie {num_messages} Ihrer anonymisierten Nachrichten sehen. Falls Sie alle anonymisierten Nachrichten anschauen möchten, <b>werfen Sie einen Blick in Ihre <link>Rohdaten</link></b>."
     },
     "contacts-mapping": {
       "title": "Decknamen Ihrer Kontakte:",
@@ -277,10 +278,6 @@
     },
     "sendData": {
       "wait": "Das Senden der Daten kann ein paar Minuten dauern. Bitte warten Sie und lassen Sie diese Seite geöffnet. Danke!"
-    },
-    "raw-data-explanation_format": "Unten können Sie %s Ihrer anonymisierten Nachrichten sehen. Falls Sie alle anonymisierten Nachrichten anschauen möchten, <b>werfen Sie einen Blick in Ihre</b>",
-    "raw-data-link": {
-      "text": "<b>Rohdaten</b>"
     },
     "alias-not-required": "Nicht notwendig",
     "alias": "Nutzername",

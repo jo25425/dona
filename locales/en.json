@@ -262,7 +262,8 @@
       "length-seconds": "Length in seconds",
       "timestamp": "Timestamp of message",
       "group-conversation": "Group conversation",
-      "voice-message": "Voice message"
+      "voice-message": "Voice message",
+      "data-explanation_format": "Below, you may view {num_messages} of your anonymized messages. In case you want to view all anonymized messages, <b>take a look at the <link>raw data</link></b>."
     },
     "contacts-mapping": {
       "title": "Aliases of your contacts:",
@@ -277,10 +278,6 @@
     },
     "sendData": {
       "wait": "Sending the data could take a few minutes. Please wait and keep this website open. Thanks!"
-    },
-    "raw-data-explanation_format": "Below, you may view %s of your anonymized messages. In case you want to view all anonymized messages, <b>take a look at the</b>",
-    "raw-data-link": {
-      "text": "<b>raw data</b>"
     },
     "alias-not-required": "Not required",
     "alias": "Username",

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {useTranslations} from "next-intl";
 import {AnonymizationResult, DataSourceValue} from "@models/processed";
 import Alert from "@mui/material/Alert";
@@ -13,6 +13,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from "@mui/material/Button";
 import CheckIcon from '@mui/icons-material/Check';
+import AnonymizationModal from "@components/AnonymizationModal";
 
 interface AnonymizationPreviewProps {
     dataSourceValue: DataSourceValue;
@@ -21,6 +22,9 @@ interface AnonymizationPreviewProps {
 
 const AnonymizationPreview: React.FC<AnonymizationPreviewProps> = ({ dataSourceValue, anonymizationResult }) => {
     const t = useTranslations('donation');
+    const [isModalOpen, setModalOpen] = useState(false);
+    const handleOpenModal = () => setModalOpen(true);
+    const handleCloseModal = () => setModalOpen(false);
 
     return (
         <>
@@ -59,13 +63,22 @@ const AnonymizationPreview: React.FC<AnonymizationPreviewProps> = ({ dataSourceV
                 justifyContent: 'center',
                 alignItems: 'center'
             }}>
-                <Button>
+                <Button onClick={handleOpenModal}>
                     {t('preview-data.button')}
                 </Button>
             </Box>
             <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">
                 {t('successful')} {t('preview-data.body2')}
             </Alert>
+
+            {/* Modal Integration */}
+            <AnonymizationModal
+                open={isModalOpen}
+                onClose={handleCloseModal}
+                conversations={anonymizationResult.anonymizedConversations}
+                n_listed_receivers={3}
+                n_messages={100}
+            />
         </>
     );
 };
