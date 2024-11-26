@@ -2,6 +2,7 @@
 
 import React, {useState} from "react";
 import {useTranslations} from 'next-intl';
+import { v4 as uuidv4 } from 'uuid';
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -18,30 +19,35 @@ import {Conversation, DataSourceValue, DonationStatus} from "@models/processed";
 import {addDonation} from './actions';
 import {useAliasConfig} from "@services/parsing/shared/aliasConfig";
 import MultiFileSelect from '@components/MultiFileSelect';
-import {calculateMinMaxDates} from "@services/rangeFiltering";
+
+type ConversationsBySource = Record<DataSourceValue, Conversation[]>;
 
 export default function DataDonationPage() {
     const a = useTranslations('actions');
     const t = useTranslations('donation');
     useAliasConfig(); // Will allow donation logic to use translations for aliases in anonymization
 
-    // State to hold the donated conversations from all multiselect elements
-    const [allDonatedConversations, setAllDonatedConversations] = useState<Conversation[]>([]);
+    const [allDonatedConversationsBySource, setAllDonatedConversationsBySource] = useState<ConversationsBySource>({} as ConversationsBySource);
 
     // Callback to handle donated conversations changes from child components
-    const handleDonatedConversationsChange = (newConversations: Conversation[]) => {
-        setAllDonatedConversations((prevDonatedConversations) => [...prevDonatedConversations, ...newConversations]); // Add new donated conversations to the existing list
+    const handleDonatedConversationsChange = (dataSource: DataSourceValue, newConversations: Conversation[]) => {
+        setAllDonatedConversationsBySource((prevConversations) => ({
+            ...prevConversations,
+            [dataSource]: newConversations, // Replace conversations for the given data source
+        }));
+    };
+    const donationChangeWrapper = (dataSource: DataSourceValue) => {
+        return (newConversations: Conversation[]) => handleDonatedConversationsChange(dataSource, newConversations);
     };
 
     // On "Submit" click
     const onDataDonationUpload = () => {
-        if (allDonatedConversations.length > 0) {
+        const allConversations = Object.values(allDonatedConversationsBySource).flat();
+        if (allConversations.length > 0) {
             const newDonation = {
-                // id?: string,
-                donorId: "unknown",
+                donorId: uuidv4(),
                 status: DonationStatus.Complete,
-                // externalDonorId?: ExternalDonorId,
-                conversations: allDonatedConversations
+                conversations: allConversations,
             };
             // TODO: Return status and use it for feedback on the page
             addDonation(newDonation)
@@ -81,7 +87,10 @@ export default function DataDonationPage() {
                             </Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <MultiFileSelect dataSourceValue={DataSourceValue.WhatsApp} onDonatedConversationsChange={handleDonatedConversationsChange} />
+                            <MultiFileSelect
+                                dataSourceValue={DataSourceValue.WhatsApp}
+                                onDonatedConversationsChange={donationChangeWrapper(DataSourceValue.WhatsApp)}
+                            />
                         </AccordionDetails>
                     </Accordion>
                     {/* Facebook */}
@@ -93,7 +102,10 @@ export default function DataDonationPage() {
                             </Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <MultiFileSelect dataSourceValue={DataSourceValue.Facebook} onDonatedConversationsChange={handleDonatedConversationsChange} />
+                            <MultiFileSelect
+                                dataSourceValue={DataSourceValue.Facebook}
+                                onDonatedConversationsChange={donationChangeWrapper(DataSourceValue.Facebook)}
+                            />
                         </AccordionDetails>
                     </Accordion>
                     {/* Instagram */}
@@ -105,7 +117,10 @@ export default function DataDonationPage() {
                             </Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <MultiFileSelect dataSourceValue={DataSourceValue.Instagram} onDonatedConversationsChange={handleDonatedConversationsChange} />
+                            <MultiFileSelect
+                                dataSourceValue={DataSourceValue.Instagram}
+                                onDonatedConversationsChange={donationChangeWrapper(DataSourceValue.Instagram)}
+                            />
                         </AccordionDetails>
                     </Accordion>
                 </Box>
