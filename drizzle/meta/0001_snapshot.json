@@ -1,6 +1,6 @@
 {
-  "id": "5d28f129-7db3-40ab-ae74-1aa8c9b72cf5",
-  "prevId": "8f258b44-5953-40ed-a350-5e71ec4b350f",
+  "id": "2c9dbf85-f949-4f67-9cef-c8bf78b5b675",
+  "prevId": "34ec2aa9-dea6-4e09-a409-308c0870e7c4",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -78,6 +78,12 @@
         "donation_id": {
           "name": "donation_id",
           "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "conversation_pseudonym": {
+          "name": "conversation_pseudonym",
+          "type": "varchar(10)",
           "primaryKey": false,
           "notNull": true
         }

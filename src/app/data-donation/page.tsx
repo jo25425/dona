@@ -31,7 +31,6 @@ export default function DataDonationPage() {
     // Callback to handle donated conversations changes from child components
     const handleDonatedConversationsChange = (newConversations: Conversation[]) => {
         setAllDonatedConversations((prevDonatedConversations) => [...prevDonatedConversations, ...newConversations]); // Add new donated conversations to the existing list
-        console.log("DataDonationPage:handleDonatedConversationsChange, min date =", calculateMinMaxDates(newConversations).minDate?.toString());
     };
 
     // On "Submit" click

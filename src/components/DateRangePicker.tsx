@@ -20,9 +20,6 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({calculatedRange, setSe
     const [endDate, setEndDate] = useState<Dayjs | null>(calculatedRange[1] ? dayjs(calculatedRange[1]) : null);
 
     const handleStartDateChange = (date: Dayjs | null) => {
-
-        console.log("handleStartDateChange");
-
         setStartDate(date);
         if (date) {
             // Adjust end date if necessary

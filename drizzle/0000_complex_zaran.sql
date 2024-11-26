@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS "conversations" (
 	"is_group_conversation" boolean DEFAULT false NOT NULL,
 	"data_source_id" integer NOT NULL,
 	"donation_id" uuid NOT NULL,
-    "conversation_pseudonym" VARCHAR(10)
+	"conversation_pseudonym" varchar(10) NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "data_sources" (

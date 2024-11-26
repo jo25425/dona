@@ -1,17 +1,19 @@
 import React from "react";
 import {useTranslations} from "next-intl";
 import {ChatMapping, Conversation, DataSourceValue} from "@models/processed";
+import Alert from "@mui/material/Alert";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
 import AnonymizationModal from "@components/AnonymizationModal";
+import CheckIcon from '@mui/icons-material/Check';
 
 interface AnonymizationPreviewProps {
     dataSourceValue: DataSourceValue;
@@ -67,6 +69,9 @@ const AnonymizationPreview: React.FC<AnonymizationPreviewProps> = (
             >
                 <Button onClick={handleOpenModal}>{t("preview-data.button")}</Button>
             </Box>
+            <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">
+                {t('successful')} {t('preview-data.body2')}
+            </Alert>
 
             <AnonymizationModal
                 open={isModalOpen}
