@@ -1,5 +1,5 @@
 import deIdentify from "./deIdentify";
-import {DonationError, DonationErrors} from "@services/validation";
+import {DonationError, DonationErrors} from "@services/errors";
 import {
     extractEntriesFromZips,
     getEntryText,
@@ -64,9 +64,7 @@ const extractDonorNameFromInstagramProfile = (profileText: string): string => {
     const profileJson: ProfileInfo = JSON.parse(profileText);
 
     const name = profileJson?.profile_user?.[0]?.string_map_data?.Name?.value;
-    if (!name) {
-        return name;
-    }
+    if (name) return name;
 
     throw new DonationError(DonationErrors.NoDonorNameFound);
 }

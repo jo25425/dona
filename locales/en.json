@@ -233,22 +233,21 @@
     "confirmation": "I hereby confirm that I have read and understood the information above and agree to the conditions for participation."
   },
   "donation": {
+    "datasource-title_format": "{datasource} data donation",
     "select-data": {
       "title": "Choose data for donation",
       "body1": "Please choose the platform from which you want to donate your data. To successfully anonymize your data your username is automatically determined. Your username will not be saved or donated.",
       "body2": "You can now upload your files to your browser for anonymization. Note that you will have the opportunity to view your anonymized data before submitting it to us.",
-      "datasource": {
-        "title-format": "{datasource} data donation"
-      },
-      "select-header": "Select the files you would like to donate here:",
-      "input1": "Choose files",
-      "input2": "Browse",
+      "instruction": "Select the files you would like to donate here:",
+      "choose": "Choose files",
+      "browse": "Browse",
       "remove": "Remove"
     },
     "select-date": {
       "choose-period": "Here you can limit the period of your data donation:",
       "start": "Start of donation",
-      "end": "End of donation"
+      "end": "End of donation",
+      "reset": "Reset"
     },
     "preview-data": {
       "title": "Preview of your anonymized data",
@@ -272,6 +271,8 @@
         "whatsapp": "We have anonymized your data and your contacts. If, in the next step, you want to reconstruct which conversations and contacts are involved in the anonymized evaluation, make a note of the following assignments of contacts (e.g. A**** B*****) and chats (e.g. “W4\"). From now on, these are the anonymized names for your chats. The assignment is not saved and is lost as soon as you leave this page.",
         "instagram": "We have anonymized your data and your contacts. If, in the next step, you want to reconstruct which conversations and contacts are involved in the anonymized evaluation, make a note of the following assignments of contacts (e.g. A**** B*****) and chats (e.g. “I4\"). From now on, these are the anonymized names for your chats. The assignment is not saved and is lost as soon as you leave this page."
       },
+      "pseudonyms": "Pseudonyms",
+      "contacts": "Contacts",
       "onlySeven": "These are just the contacts of your 7 chats in which overall the most words were sent. <b> Below you can also select different chats. </b>",
       "moreFriends": "and {0} others.",
       "onlyYouInConv": "You are the only member in this chat. This could be because the other people have left the chat."
@@ -316,16 +317,16 @@
     "errors": {
       "NoProfile": "The uploaded data does not include profile information.",
       "SameFiles": "You can only select files that differ. Please choose your 5-7 most important conversations.",
-      "Not5to7Files": "Please choose your 5-7 most important conversations. You have selected {count}. Press and hold the ctrl/command key to select multiple files at the same time.",
+      "Not5to7Files_format": "Please choose your 5-7 most important conversations. You have selected {count}. Press and hold the ctrl/command key to select multiple files at the same time.",
       "TooFewContactsOrMessages": "All your chats should contain at least 100 messages and at least one contact (other than yourself).",
+      "NonsenseDateRange": "The selected period is not valid. Please check the correctness of the selected dates.",
+      "NoMessagesInRange": "There are no messages in the selected period. Please select a longer and valid period.",
+      "NotEnoughMonthsInRange": "To donate your data, please select a period of at least 6 months within the period of your donation.",
+      "UnknownError": "There is an error somewhere. Please check your data donation.",
 
       "no-alias": "Please enter your username. You can find it in your WhatsApp profile.",
-      "something-went-wrong": "Something went wrong! Please go back to the start and repeat the process.",
-      "no-messages-time-period": "There are no messages in the selected period. Please select a longer and valid period.",
-      "dates-no-sense": "The selected period is not valid. Please check the correctness of the selected dates.",
-      "dates-not-enough-months": "To donate your data, please select a period of at least 6 months within the period of your donation.",
-      "somewhereError": "There is an error somewhere. Please check your data donation."
-      }
+      "something-went-wrong": "Something went wrong! Please go back to the start and repeat the process."
+    }
   },
   "data-protection": {
     "title": "Data Protection Notice",

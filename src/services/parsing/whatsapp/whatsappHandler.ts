@@ -1,7 +1,7 @@
 import {makeArrayOfMessages, parseMessages, ParsingResult} from '@services/parsing/whatsapp/whatsappParser';
 import _ from "lodash";
 import {AnonymizationResult} from "@models/processed";
-import {DonationError, DonationErrors} from "@services/validation";
+import {DonationError, DonationErrors} from "@services/errors";
 import deIdentify from "@services/parsing/whatsapp/deIdentify";
 
 export default async function handleWhatsappTxtFiles(fileList: File[]): Promise<AnonymizationResult> {

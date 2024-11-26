@@ -1,23 +1,24 @@
 "use client";
 
+import React, {useState} from "react";
 import {useTranslations} from 'next-intl';
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import Box from '@mui/material/Box';
 import Button from "@mui/material/Button";
 import Container from '@mui/material/Container';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
-import React, {useState} from "react";
-import MultiFileSelect from '@components/MultiFileSelect';
-import {Conversation, DataSourceValue} from "@models/processed";
+import {Conversation, DataSourceValue, DonationStatus} from "@models/processed";
 import {addDonation} from './actions';
 import {useAliasConfig} from "@services/parsing/shared/aliasConfig";
+import MultiFileSelect from '@components/MultiFileSelect';
+import {calculateMinMaxDates} from "@services/rangeFiltering";
 
 export default function DataDonationPage() {
     const a = useTranslations('actions');
@@ -30,6 +31,7 @@ export default function DataDonationPage() {
     // Callback to handle donated conversations changes from child components
     const handleDonatedConversationsChange = (newConversations: Conversation[]) => {
         setAllDonatedConversations((prevDonatedConversations) => [...prevDonatedConversations, ...newConversations]); // Add new donated conversations to the existing list
+        console.log("DataDonationPage:handleDonatedConversationsChange, min date =", calculateMinMaxDates(newConversations).minDate?.toString());
     };
 
     // On "Submit" click
@@ -38,7 +40,7 @@ export default function DataDonationPage() {
             const newDonation = {
                 // id?: string,
                 donorId: "unknown",
-                // status?: DonationStatus, DonationStatus.NotStarted?
+                status: DonationStatus.Complete,
                 // externalDonorId?: ExternalDonorId,
                 conversations: allDonatedConversations
             };
@@ -76,7 +78,7 @@ export default function DataDonationPage() {
                         <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
                             <WhatsAppIcon sx={{mr: 1, mt: 0.5}}/>
                             <Typography variant="h6">
-                                {t("select-data.datasource.title-format", {datasource: "Whatsapp"})}
+                                {t("datasource-title_format", {datasource: "Whatsapp"})}
                             </Typography>
                         </AccordionSummary>
                         <AccordionDetails>
@@ -88,7 +90,7 @@ export default function DataDonationPage() {
                         <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
                             <FacebookIcon sx={{mr: 1, mt: 0.5}}/>
                             <Typography variant="h6">
-                                {t("select-data.datasource.title-format", {datasource: "Facebook"})}
+                                {t("datasource-title_format", {datasource: "Facebook"})}
                             </Typography>
                         </AccordionSummary>
                         <AccordionDetails>
@@ -100,7 +102,7 @@ export default function DataDonationPage() {
                         <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
                             <InstagramIcon sx={{mr: 1, mt: 0.5}}/>
                             <Typography variant="h6">
-                                {t("select-data.datasource.title-format", {datasource: "Instagram"})}
+                                {t("datasource-title_format", {datasource: "Instagram"})}
                             </Typography>
                         </AccordionSummary>
                         <AccordionDetails>

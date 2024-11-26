@@ -233,22 +233,21 @@
     "confirmation": "Hiermit versichere ich, dass ich die oben beschriebenen Teilnehmerinformationen verstanden habe und mit den genannten Teilnahmebedingungen einverstanden bin."
   },
   "donation": {
+    "datasource-title_format": "{datasource} Datenspende",
     "select-data": {
       "title": "Wählen Sie Ihre Daten für die Spende aus",
       "body1": "Wählen Sie aus, welche Daten Sie spenden möchten. Zur Anonymisierung Ihrer Daten wird Ihr Nutzername automatisch ermittelt. Ihr Nutzername wird nicht gespendet und wir werden ihn nicht erfahren.",
       "body2": "Sie können nun Ihre Dateien zur Anonymisierung in Ihren Browser hochladen. Bitte beachten Sie, dass Sie die Möglichkeit haben, Ihre anonymisierten Daten einzusehen, bevor Sie sie an uns übermitteln.",
-      "datasource": {
-        "title-format": "{datasource} Datenspende"
-      },
-      "select-header": "Wählen Sie hier die Dateien aus, die Sie spenden möchten:",
-      "input1": "Dateien auswählen",
-      "input2": "Durchsuchen",
+      "instruction": "Wählen Sie hier die Dateien aus, die Sie spenden möchten:",
+      "choose": "Dateien auswählen",
+      "browse": "Durchsuchen",
       "remove": "Entfernen"
     },
     "select-date": {
       "choose-period": "Hier können Sie den Zeitraum Ihrer Datenspende eingrenzen:",
-      "start": "Anfang der Spende:",
-      "end": "Ende der Spende:"
+      "start": "Anfang der Spende",
+      "end": "Ende der Spende",
+      "reset": "Zurücksetzen"
     },
     "preview-data": {
       "title": "Vorschau Ihrer anonymisierten Daten",
@@ -272,6 +271,8 @@
         "whatsapp": "Wir haben Ihre Daten und Ihre Kontakte anonymisiert. Falls Sie in der anonymisierten Auswertung im nächsten Schritt rekonstruieren wollen, um welche Konversationen und Kontakte es sich jeweils handelt, notieren Sie sich die folgenden Zuordnungen von Kontakten (z.B. A**** B*****) und Chatnamen (z.B. “W4” ). Ab jetzt sind dies die anonymisierten Decknamen für Ihre Chats. Die Zuordnung wird nicht gespeichert und geht verloren, sobald Sie diese Seite verlassen.",
         "instagram": "Wir haben Ihre Daten und Ihre Kontakte anonymisiert. Falls Sie in der anonymisierten Auswertung im nächsten Schritt rekonstruieren wollen, um welche Konversationen und Kontakte es sich jeweils handelt, notieren Sie sich die folgenden Zuordnungen von Kontakten (z.B. A**** B*****) und Chatnamen (z.B. “I4”). Ab jetzt sind dies die anonymisierten Decknamen für Ihre Chats. Die Zuordnung wird nicht gespeichert und geht verloren, sobald Sie diese Seite verlassen."
       },
+      "pseudonyms": "Pseudonyme",
+      "contacts": "Kontakte",
       "onlySeven": "Dies sind nur die Kontakte Ihrer 7 Chats, in denen insgesamt die meisten Wörter gesendet wurden. <b>Unten können Sie auch andere Chats auswählen. </b>",
       "moreFriends": "und {0} weitere.",
       "onlyYouInConv": "Nur Sie befinden sich in diesem Chat. Es könnte z.B. sein, dass die andere Person/en den Chat verlassen haben."
@@ -316,16 +317,17 @@
       }
     },
     "errors": {
-      "no-profile": "Die Datei enthält keine Profildaten.",
+      "NoProfile": "Die Datei enthält keine Profildaten.",
+      "SameFiles": "Sie können nur Dateien auswählen, die sich voneinander unterscheiden. Bitte wählen Sie Ihre 5-7 wichtigsten Unterhaltungen aus.",
+      "Not5to7Files_format": "Bitte wählen Sie Ihre 5-7 wichtigsten Unterhaltungen aus. Sie haben {count} ausgewählt. Drücken und halten Sie die Strg-/Befehlstaste, um mehrere Dateien gleichzeitig auszuwählen.",
+      "TooFewContactsOrMessages": "Alle Ihre Chats sollten mindestens 100 Nachrichten und mindestens einen Kontakt (der nicht Sie selbst sind) enthalten.",
+      "NonsenseRange": "Der ausgewählte Zeitraum ist ungültig. Bitte überprüfen Sie die Richtigkeit der ausgewählten Daten.",
+      "NotEnoughMonthsInRange": "Bitte wählen Sie zum Spenden Ihrer Daten einen Zeitraum von mindestens 6 Monaten innerhalb des Zeitraums Ihrer Spende aus.",
+      "NoMessagesInRange": "In dem ausgewählten Zeitraum befinden sich keine Nachrichten. Bitte wählen Sie einen größeren und validen Zeitraum.",
+      "UnknownError": "Es gibt einen Fehler. Bitte überprüfen Sie Ihre Datenspende.",
+
       "no-alias": "Ein Nutzername muss angegeben werden. Sie können ihn in Ihrem WhatsApp-Profil finden.",
-      "not-enough-chats_format": "Bitte wählen Sie Ihre 5-7 wichtigsten Unterhaltungen aus. Sie haben {count} ausgewählt. Drücken und halten Sie die Strg-/Befehlstaste, um mehrere Dateien gleichzeitig auszuwählen.",
-      "something-went-wrong": "Etwas ist schief gelaufen! Bitte kehren Sie zum Start zurück und wiederholen Sie den Vorgang.",
-      "same-file": "Sie können nur Dateien auswählen, die sich voneinander unterscheiden. Bitte wählen Sie Ihre 5-7 wichtigsten Unterhaltungen aus.",
-      "no-messages-time-period": "In dem ausgewählten Zeitraum befinden sich keine Nachrichten. Bitte wählen Sie einen größeren und validen Zeitraum.",
-      "dates-no-sense": "Der ausgewählte Zeitraum ist ungültig. Bitte überprüfen Sie die Richtigkeit der ausgewählten Daten.",
-      "dates-not-enough-months": "Bitte wählen Sie zum Spenden Ihrer Daten einen Zeitraum von mindestens 6 Monaten innerhalb des Zeitraums Ihrer Spende aus.",
-      "somewhereError": "Es gibt einen Fehler. Bitte überprüfen Sie Ihre Datenspende.",
-      "emptyOrJustOnePerson": "Alle Ihre Chats sollten mindestens 100 Nachrichten und mindestens einen Kontakt (der nicht Sie selbst sind) enthalten."
+      "something-went-wrong": "Etwas ist schief gelaufen! Bitte kehren Sie zum Start zurück und wiederholen Sie den Vorgang."
     }
   },
   "data-protection": {

@@ -4,18 +4,19 @@ import React, {ChangeEvent, useState} from "react";
 import {useTranslations} from "next-intl";
 import {AnonymizationResult, Conversation, DataSourceValue} from "@models/processed";
 import {anonymizeData} from "@/services/anonymization";
-import {DonationError, DonationErrors} from "@services/validation";
-import Box from "@mui/material/Box";
-import Divider from "@mui/material/Divider";
-import TextField from "@mui/material/TextField";
-import Typography from "@mui/material/Typography";
+import {calculateMinMaxDates, filterDataByRange, NullableRange, validateDateRange} from "@services/rangeFiltering";
+import {DonationError} from "@services/errors";
 import Alert from "@mui/material/Alert";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import CircularProgress from "@mui/material/CircularProgress";
+import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
+import Typography from "@mui/material/Typography";
 import InsertDriveFile from "@mui/icons-material/InsertDriveFile";
-import {calculateMinMaxDates} from "@services/rangeFiltering";
 import AnonymizationPreview from "@components/AnonymizationPreview";
 import DateRangePicker from "@components/DateRangePicker";
 
@@ -23,8 +24,6 @@ interface MultiFileSelectProps {
     dataSourceValue: DataSourceValue;
     onDonatedConversationsChange: (newDonatedConversations: Conversation[]) => void;
 }
-
-type NullableDateRange = [Date | null, Date | null];
 
 const listStyle = {
     p: 0,
@@ -40,70 +39,99 @@ const MultiFileSelect: React.FC<MultiFileSelectProps> = ({ dataSourceValue, onDo
     // States
     const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
     const [error, setError] = useState<string | null>(null);
-    const [selectedRange, setSelectedRange] = useState<[Date | null, Date | null]>([null, null]);
-    const [calculatedRange, setCalculatedRange] = useState<[Date | null, Date | null]>([null, null]);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
     const [anonymizationResult, setAnonymizationResult] = useState<AnonymizationResult | null>(null);
+    const [calculatedRange, setCalculatedRange] = useState<NullableRange>([null, null]);
+    const [dateRangeError, setDateRangeError] = useState<string | null>(null);
+    const [filteredConversations, setFilteredConversations] = useState<Conversation[]>([]);
+
 
     // Handle file selection
-    const handleFiles = async (event: ChangeEvent<HTMLInputElement>) => {
+    const handleFileSelection = async (event: ChangeEvent<HTMLInputElement>) => {
         setError(null);
+        setDateRangeError(null);
+        setIsLoading(true);
 
         const files = event.target.files ? Array.from(event.target.files) : [];
-        setSelectedFiles(files); // Local state for file feedback
-
-        // TODO: Message / wheel to signal ongoing processing
+        setSelectedFiles(files);
 
         try {
-            const data = await anonymizeData(dataSourceValue, files); // Anonymize on selection
-            const { minDate, maxDate } = calculateMinMaxDates(data.anonymizedConversations);
-            setAnonymizationResult(data);
+            const result = await anonymizeData(dataSourceValue, files);
+            const { minDate, maxDate } = calculateMinMaxDates(result.anonymizedConversations);
+            setAnonymizationResult(result);
             setCalculatedRange([minDate, maxDate]);
-            onDonatedConversationsChange(data.anonymizedConversations); // Feedback to donation page
+            setFilteredConversations(result.anonymizedConversations);
+            onDonatedConversationsChange(result.anonymizedConversations); // Update data for parent
         } catch (err) {
-            let errorMessage: string;
-            if (err instanceof DonationError) {
-                switch(err.reason) {
-                    case DonationErrors.Not5to7Files:
-                        errorMessage = t('errors.Not5to7Files', { count: selectedFiles.length });
-                        break;
-                    default:
-                        errorMessage = t(`errors.${err.reason}`);
-                }
-            } else {
-                errorMessage = "An error occurred during anonymization.";
-            }
+            const errorMessage = err instanceof DonationError
+                ? t(`errors.${err.reason}`) || t(`errors.${err.reason}_format`, { count: selectedFiles.length })
+                : t(`errors.UnknownError`);
             setError(errorMessage);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    // Handle date range selection
+    const handleDateRangeChange = (newRange: NullableRange) => {
+        // Validate the selected range
+        const errorReason = validateDateRange(anonymizationResult?.anonymizedConversations!, newRange);
+        setDateRangeError(errorReason);
+
+        if (!error && anonymizationResult) {
+            const filteredConversations = filterDataByRange(anonymizationResult.anonymizedConversations, newRange);
+            setFilteredConversations(filteredConversations);
+            onDonatedConversationsChange(filteredConversations); // Update parent with filtered data
         }
     };
 
     return (
         <Box>
             <Typography variant="body1" sx={{mb: 1, fontWeight: "bold"}}>
-                {t('select-data.select-header')}
+                {t('select-data.instruction')}
             </Typography>
-            {/* TODO: Make input labels language-specific */}
-            <TextField
-                fullWidth
-                type={"file"}
-                slotProps={{
-                    input: { inputProps: { accept: ".txt,.zip", multiple: true }}
-                }}
-                onChange={handleFiles}
-            />
+            <Button
+                variant="contained"
+                component="label"
+                sx={{ mb: 2 }}
+            >
+                {selectedFiles.length === 0
+                    ? t('select-data.choose')
+                    : t('select-data.browse')}
+                <input
+                    hidden
+                    type="file"
+                    accept=".txt,.zip"
+                    multiple
+                    onChange={handleFileSelection}
+                />
+            </Button>
 
             {/* Show selected files for feedback */}
             {FilesFeedbackSection(selectedFiles, error)}
 
+            {/* Loading indicator */}
+            {isLoading && (
+                <Box sx={{ mt: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                    <CircularProgress />
+                    <Alert severity="info" sx={{ mt: 2 }}>{t('sendData.wait')}</Alert>
+                </Box>
+            )}
+
             {/* Display anonymized data */}
-            {!error && anonymizationResult && (
+            {!error && !isLoading && anonymizationResult && filteredConversations && (
                 <Box sx={{mb: 2}}>
                     <DateRangePicker
                         calculatedRange={calculatedRange}
-                        setSelectedRange={setSelectedRange}
+                        setSelectedRange={handleDateRangeChange}
                     />
+                    {dateRangeError && (
+                        <Alert severity="error" sx={{ mt: 2 }}>{t(`errors.${dateRangeError}`)}</Alert>
+                    )}
                     <AnonymizationPreview
                         dataSourceValue={dataSourceValue}
-                        anonymizationResult={anonymizationResult}
+                        anonymizedConversations={filteredConversations}
+                        chatMappingToShow={anonymizationResult.chatMappingToShow}
                     />
                 </Box>
             )}
@@ -141,9 +169,7 @@ const FilesFeedbackSection= (
 
             {/* Error message */}
             {errorMessage && (
-                <Alert severity="error" sx={{ mt: 2 }}>
-                    <span dangerouslySetInnerHTML={{ __html: errorMessage }} />
-                </Alert>
+                <Alert severity="error" sx={{ mt: 2 }}>{errorMessage}</Alert>
             )}
         </Box>
     )
