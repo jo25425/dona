@@ -1,5 +1,5 @@
 import deIdentify from "./deIdentify";
-import {DonationError, DonationErrors} from "@services/errors";
+import {DonationValidationError, DonationErrors} from "@services/errors";
 import {
     extractEntriesFromZips,
     getEntryText,
@@ -47,7 +47,7 @@ const extractDonorNameFromFacebookProfile = (profileText: string): string => {
         return profileJson[profileKey].name.full_name;
     }
 
-    throw new DonationError(DonationErrors.NoDonorNameFound);
+    throw new DonationValidationError(DonationErrors.NoDonorNameFound);
 }
 
 const extractDonorNameFromInstagramProfile = (profileText: string): string => {
@@ -66,7 +66,7 @@ const extractDonorNameFromInstagramProfile = (profileText: string): string => {
     const name = profileJson?.profile_user?.[0]?.string_map_data?.Name?.value;
     if (name) return name;
 
-    throw new DonationError(DonationErrors.NoDonorNameFound);
+    throw new DonationValidationError(DonationErrors.NoDonorNameFound);
 }
 
 async function handleMetaZipFiles(
@@ -83,14 +83,14 @@ async function handleMetaZipFiles(
         isMatchingEntry(entry,profileInfoFilePattern)
     );
     if (!profileInfoEntry) {
-        throw new DonationError(DonationErrors.NoProfile);
+        throw new DonationValidationError(DonationErrors.NoProfile);
     }
     // Filter for message entries
     const messageEntries = allEntries.filter(entry =>
         isMatchingEntry(entry, "message.json") || isMatchingEntry(entry, "message_1.json")
     );
     if (messageEntries.length < 1) {
-        throw new DonationError(DonationErrors.NoMessageEntries);
+        throw new DonationValidationError(DonationErrors.NoMessageEntries);
     }
     // Select audio entries
     const audioEntries = allEntries.filter(entry => isMatchingEntry(entry, ".wav"));
@@ -106,7 +106,7 @@ async function handleMetaZipFiles(
         return deIdentify(parsedConversations, audioEntries, donorName, dataSourceValue);
 
     } catch (error) {
-        throw new DonationError(DonationErrors.UnknownError);
+        throw new DonationValidationError(DonationErrors.UnknownError);
     }
 }
 

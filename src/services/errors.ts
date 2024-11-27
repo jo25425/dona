@@ -6,6 +6,7 @@ export enum DonationErrors {
     NoProfile = "NoProfile",
     NoMessageEntries = "NoMessageEntries",
     NoDonorNameFound = "NoDonorNameFound",
+    TransactionFailed = "TransactionFailed",
     UnknownError = "UnknownError"
 }
 
@@ -16,13 +17,29 @@ export enum RangeErrors {
 }
 
 export class DonationError extends Error {
-    reason: DonationErrors;
+    public readonly reason: DonationErrors;
+    public readonly context?: Record<string, any>;
 
-    constructor(reason: DonationErrors) {
+    constructor(reason: DonationErrors, context?: Record<string, any>) {
         super(reason);
-        this.name = this.constructor.name;
+        this.name = 'DonationError';
         this.reason = reason;
-        Object.setPrototypeOf(this, DonationError.prototype);
+        this.context = context;
+    }
+}
+
+export class DonationValidationError extends DonationError {
+    constructor(reason: DonationErrors, context?: Record<string, any>) {
+        super(reason, context);
+        this.name = 'DonationValidationError';
+    }
+}
+
+// Processing-specific error
+export class DonationProcessingError extends DonationError {
+    constructor(reason: DonationErrors, context?: Record<string, any>) {
+        super(reason, context);
+        this.name = 'DonationProcessingError';
     }
 }
 

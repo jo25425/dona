@@ -5,7 +5,7 @@ import {useTranslations} from "next-intl";
 import {AnonymizationResult, Conversation, DataSourceValue} from "@models/processed";
 import {anonymizeData} from "@/services/anonymization";
 import {calculateMinMaxDates, filterDataByRange, NullableRange, validateDateRange} from "@services/rangeFiltering";
-import {DonationError, getErrorMessage} from "@services/errors";
+import {DonationValidationError, getErrorMessage} from "@services/errors";
 import Alert from "@mui/material/Alert";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";

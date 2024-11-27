@@ -2,55 +2,77 @@
 
 import {db} from "@/db/drizzle";
 import {v4 as uuidv4} from 'uuid';
-import {conversationParticipants, conversations, donations, messages, messagesAudio} from "@/db/schema";
-import {NewConversation, NewMessage, NewMessageAudio} from "@models/persisted";
+import {conversationParticipants, conversations, donations, messages} from "@/db/schema";
+import {NewConversation, NewMessage} from "@models/persisted";
 import {Conversation, DataSource, DonationStatus} from "@models/processed";
+import {DonationErrors, DonationProcessingError} from "@services/errors";
 
 
 function generateExternalDonorId(): string {
     return Math.random().toString(36).substring(2, 8);
 }
 
-export async function addDonation(donatedConversations: Conversation[], donorAlias: string, externalDonorId?: string) {
+interface AddDonationResult {
+    success: boolean;
+    donationId?: string;
+    error?: Error;
+}
 
+export async function addDonation(
+    donatedConversations: Conversation[],
+    donorAlias: string,
+    externalDonorId?: string
+): Promise<AddDonationResult> {
     const donorId = uuidv4();
     const dataSourceOptions: DataSource[] = await db.query.dataSources.findMany() as DataSource[];
 
     try {
-        await db.transaction(async (tx) => {
-
-            // Insert the donation and get its ID
-            const donationId = await tx.insert(donations).values({
+        const donationId = await db.transaction(async (tx) => {
+            const insertedDonation = await tx.insert(donations).values({
                 donorId,
                 externalDonorId: externalDonorId || generateExternalDonorId(),
-                status: DonationStatus.Complete
+                status: DonationStatus.Complete,
             }).returning({ id: donations.id });
 
+            const donationId = insertedDonation[0]?.id;
+
+            if (!donationId) {
+                throw new Error('Failed to insert donation.');
+            }
+
             for (const convo of donatedConversations) {
-                const newConversation: NewConversation = NewConversation.create(donationId[0].id, convo, dataSourceOptions);
-                const conversationId = await tx.insert(conversations).values(newConversation).returning({ id: conversations.id });
+                const newConversation: NewConversation = NewConversation.create(
+                    donationId,
+                    convo,
+                    dataSourceOptions
+                );
 
-                // Map to track participant IDs for this conversation
+                const insertedConversation = await tx
+                    .insert(conversations)
+                    .values(newConversation)
+                    .returning({ id: conversations.id });
+
+                const conversationId = insertedConversation[0]?.id;
+
+                if (!conversationId) {
+                    throw new Error('Failed to insert conversation.');
+                }
+
                 const participantIdMap: Record<string, string> = {};
-
-                // Function to resolve participant IDs within the conversation
                 const resolveParticipantId = (participant: string): string => {
-                    if (participant === donorAlias) return donorId; // Use donorId for the donor
-                    if (!participantIdMap[participant]) participantIdMap[participant] = uuidv4(); // Assign new ID if not already assigned
+                    if (participant === donorAlias) return donorId;
+                    if (!participantIdMap[participant]) participantIdMap[participant] = uuidv4();
                     return participantIdMap[participant];
                 };
 
                 // Insert messages
                 for (const message of convo.messages) {
                     const senderId = resolveParticipantId(message.sender);
-                    const newMessage: NewMessage = NewMessage.create(conversationId[0].id, { ...message, sender: senderId });
+                    const newMessage: NewMessage = NewMessage.create(conversationId, {
+                        ...message,
+                        sender: senderId,
+                    });
                     await tx.insert(messages).values(newMessage);
-                }
-
-                for (const messageAudio of convo.messagesAudio) {
-                    const senderId = resolveParticipantId(messageAudio.sender);
-                    const newMessageAudio: NewMessageAudio = NewMessageAudio.create(conversationId[0].id, { ...messageAudio, sender: senderId });
-                    await tx.insert(messagesAudio).values(newMessageAudio);
                 }
 
                 // Insert participants
@@ -58,13 +80,25 @@ export async function addDonation(donatedConversations: Conversation[], donorAli
                     const participantId = resolveParticipantId(participant);
                     await tx.insert(conversationParticipants).values({
                         participantId,
-                        conversationId: conversationId[0].id,
-                        participantPseudonym: participant
+                        conversationId,
+                        participantPseudonym: participant,
                     });
                 }
             }
+
+            return donationId;
         });
-    } catch (e) {
-        console.error("Failed to add donation", externalDonorId, donatedConversations, e);
+
+        return { success: true, donationId };
+    } catch (err) {
+        console.error('Error in addDonation:', err);
+
+        return {
+            success: false,
+            error: new DonationProcessingError(
+                DonationErrors.TransactionFailed,
+                { originalError: err }
+            ),
+        };
     }
 }
