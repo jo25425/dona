@@ -1,0 +1,1 @@
+ALTER TABLE "conversation_participants" ADD COLUMN "participant_pseudonym" text;

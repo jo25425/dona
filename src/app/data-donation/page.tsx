@@ -2,7 +2,6 @@
 
 import React, {useState} from "react";
 import {useTranslations} from 'next-intl';
-import { v4 as uuidv4 } from 'uuid';
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -25,16 +24,18 @@ type ConversationsBySource = Record<DataSourceValue, Conversation[]>;
 export default function DataDonationPage() {
     const a = useTranslations('actions');
     const t = useTranslations('donation');
-    useAliasConfig(); // Will allow donation logic to use translations for aliases in anonymization
+    const aliasConfig = useAliasConfig(); // Will allow donation logic to use translations for aliases in anonymization
 
     const [allDonatedConversationsBySource, setAllDonatedConversationsBySource] = useState<ConversationsBySource>({} as ConversationsBySource);
 
     // Callback to handle donated conversations changes from child components
     const handleDonatedConversationsChange = (dataSource: DataSourceValue, newConversations: Conversation[]) => {
+        console.log("newConversations:", newConversations);
         setAllDonatedConversationsBySource((prevConversations) => ({
             ...prevConversations,
             [dataSource]: newConversations, // Replace conversations for the given data source
         }));
+        console.log("allDonatedConversationsBySource:", allDonatedConversationsBySource);
     };
     const donationChangeWrapper = (dataSource: DataSourceValue) => {
         return (newConversations: Conversation[]) => handleDonatedConversationsChange(dataSource, newConversations);
@@ -44,13 +45,9 @@ export default function DataDonationPage() {
     const onDataDonationUpload = () => {
         const allConversations = Object.values(allDonatedConversationsBySource).flat();
         if (allConversations.length > 0) {
-            const newDonation = {
-                donorId: uuidv4(),
-                status: DonationStatus.Complete,
-                conversations: allConversations,
-            };
+            // TODO: Generate or get external user ID here at the latest
             // TODO: Return status and use it for feedback on the page
-            addDonation(newDonation)
+            addDonation(allConversations, aliasConfig.donorAlias);
         }
     };
 

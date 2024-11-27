@@ -1,5 +1,8 @@
 import maskName from "@services/parsing/shared/maskName";
 
+/**
+ * Class that generates a map from contact names (e.g. Jane Doe) to pseudonyms (e.g. Contact4)
+ */
 export class ContactPseudonyms {
     private namesToPseudonyms: Record<string, string> = {};
     private pseudonymsToNames: Record<string, string> = {};

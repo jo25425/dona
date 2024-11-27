@@ -25,3 +25,30 @@ export class DonationError extends Error {
         Object.setPrototypeOf(this, DonationError.prototype);
     }
 }
+
+/**
+ * Converts an error to a formatted error message using next-intl translations.
+ *
+ * @param t - The translation function from `useTranslations`.
+ * @param error - The error object to interpret.
+ * @param formatOptions - Optional dictionary for formatting variables.
+ * @returns The formatted error message or a fallback.
+ */
+export function getErrorMessage(
+    t: { (key: string, options?: Record<string, any>): string; has: (key: string) => boolean },
+    error: unknown,
+    formatOptions?: Record<string, any>
+): string {
+    if (error instanceof DonationError) {
+        const reasonKey = `errors.${error.reason}`;
+        const formattedKey = `${reasonKey}_format`;
+
+        if (t.has(formattedKey)) return t(formattedKey, formatOptions);
+
+        if (t.has(reasonKey)) return t(reasonKey);
+
+        return t('errors.UnknownError');
+    }
+
+    return t('errors.UnknownError');
+}

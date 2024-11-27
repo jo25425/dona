@@ -5,7 +5,7 @@ import {useTranslations} from "next-intl";
 import {AnonymizationResult, Conversation, DataSourceValue} from "@models/processed";
 import {anonymizeData} from "@/services/anonymization";
 import {calculateMinMaxDates, filterDataByRange, NullableRange, validateDateRange} from "@services/rangeFiltering";
-import {DonationError} from "@services/errors";
+import {DonationError, getErrorMessage} from "@services/errors";
 import Alert from "@mui/material/Alert";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -61,12 +61,11 @@ const MultiFileSelect: React.FC<MultiFileSelectProps> = ({ dataSourceValue, onDo
             setAnonymizationResult(result);
             setCalculatedRange([minDate, maxDate]);
             setFilteredConversations(result.anonymizedConversations);
+            console.log("anonymizationResult", result);
             onDonatedConversationsChange(result.anonymizedConversations); // Update data for parent
         } catch (err) {
-            const errorMessage = err instanceof DonationError
-                ? t(`errors.${err.reason}`) || t(`errors.${err.reason}_format`, { count: selectedFiles.length })
-                : t(`errors.UnknownError`);
-            setError(errorMessage);
+            const errorMessage = getErrorMessage(t, err, { count: selectedFiles.length });
+           setError(errorMessage);
         } finally {
             setIsLoading(false);
         }
@@ -81,6 +80,7 @@ const MultiFileSelect: React.FC<MultiFileSelectProps> = ({ dataSourceValue, onDo
         if (!error && anonymizationResult) {
             const filteredConversations = filterDataByRange(anonymizationResult.anonymizedConversations, newRange);
             setFilteredConversations(filteredConversations);
+            console.log("anonymizationResult", filteredConversations);
             onDonatedConversationsChange(filteredConversations); // Update parent with filtered data
         }
     };

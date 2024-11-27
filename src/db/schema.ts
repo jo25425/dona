@@ -26,7 +26,8 @@ export const conversations = p.pgTable("conversations", {
 export const conversationParticipants = p.pgTable("conversation_participants", {
     id: p.uuid("id").defaultRandom().primaryKey(),
     conversationId: p.uuid("conversation_id").notNull().references(() => conversations.id),
-    participantId: p.uuid("participant_id").defaultRandom().notNull()
+    participantId: p.uuid("participant_id").defaultRandom().notNull(),
+    participantPseudonym: p.text("participant_pseudonym")
 });
 
 export const messages = p.pgTable("messages", {
