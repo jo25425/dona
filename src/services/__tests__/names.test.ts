@@ -1,4 +1,4 @@
-import maskName from '../parsing/shared/maskName';
+import {maskName} from '../parsing/shared/names';
 import {describe, expect, it} from '@jest/globals';
 
 describe('maskName', () => {

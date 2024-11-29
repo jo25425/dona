@@ -1,4 +1,4 @@
-import maskName from "@services/parsing/shared/maskName";
+import {decode, maskName} from "@services/parsing/shared/names";
 
 /**
  * Class that generates a map from contact names (e.g. Jane Doe) to pseudonyms (e.g. Contact4)
@@ -70,13 +70,4 @@ export class ChatPseudonyms {
     getPseudonymMap(): Map<string, string[]> {
         return this.chatPseudonymToParticipants;
     }
-
 }
-
-const decode = (input: string): string => {
-    const charCodes = [...input].map((char) => char.charCodeAt(0));
-    if (charCodes.every((code) => code <= 127)) return input;
-
-    const decoder = new TextDecoder();
-    return decoder.decode(new Uint8Array(charCodes));
-};

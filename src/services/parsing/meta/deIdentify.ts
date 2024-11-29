@@ -32,8 +32,9 @@ export default async function deIdentify(
                     participantPseudonyms.add(senderName);
 
                     if (isVoiceMessage(messageData)) {
-                        const audioFile = audioEntries.find(
-                            (entry) => entry.filename === messageData.audio_files?.[0]?.uri
+                        const audioUri = messageData.audio_files?.[0]?.uri
+                        const audioFile = !audioUri ? undefined : audioEntries.find(
+                            (entry) => entry.filename.endsWith(audioUri)
                         );
                         audioMessages.push({
                             lengthSeconds: await calculateAudioLength(audioFile),

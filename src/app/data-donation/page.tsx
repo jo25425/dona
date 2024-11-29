@@ -30,12 +30,10 @@ export default function DataDonationPage() {
 
     // Callback to handle donated conversations changes from child components
     const handleDonatedConversationsChange = (dataSource: DataSourceValue, newConversations: Conversation[]) => {
-        console.log("newConversations:", newConversations);
         setAllDonatedConversationsBySource((prevConversations) => ({
             ...prevConversations,
             [dataSource]: newConversations, // Replace conversations for the given data source
         }));
-        console.log("allDonatedConversationsBySource:", allDonatedConversationsBySource);
     };
     const donationChangeWrapper = (dataSource: DataSourceValue) => {
         return (newConversations: Conversation[]) => handleDonatedConversationsChange(dataSource, newConversations);

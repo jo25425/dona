@@ -61,7 +61,6 @@ const MultiFileSelect: React.FC<MultiFileSelectProps> = ({ dataSourceValue, onDo
             setAnonymizationResult(result);
             setCalculatedRange([minDate, maxDate]);
             setFilteredConversations(result.anonymizedConversations);
-            console.log("anonymizationResult", result);
             onDonatedConversationsChange(result.anonymizedConversations); // Update data for parent
         } catch (err) {
             const errorMessage = getErrorMessage(t, err, { count: selectedFiles.length });
@@ -80,7 +79,6 @@ const MultiFileSelect: React.FC<MultiFileSelectProps> = ({ dataSourceValue, onDo
         if (!error && anonymizationResult) {
             const filteredConversations = filterDataByRange(anonymizationResult.anonymizedConversations, newRange);
             setFilteredConversations(filteredConversations);
-            console.log("anonymizationResult", filteredConversations);
             onDonatedConversationsChange(filteredConversations); // Update parent with filtered data
         }
     };

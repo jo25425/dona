@@ -1,5 +1,4 @@
-import {BlobReader, BlobWriter, Entry, TextWriter, ZipReader} from "@zip.js/zip.js";
-
+import { BlobReader, BlobWriter, Entry, TextWriter, ZipReader } from "@zip.js/zip.js";
 
 // Custom type for entries with getData
 export interface ValidEntry extends Entry {
@@ -9,6 +8,12 @@ export interface ValidEntry extends Entry {
 // Type guard to check for valid entries
 const isValidEntry = (entry: Entry): entry is ValidEntry =>
     typeof entry.getData === "function";
+
+// Check if entry should be excluded (e.g., system files or folders)
+const isExcludedEntry = (entry: Entry): boolean =>
+    entry.filename.startsWith("__MACOSX/") ||
+    entry.filename.endsWith(".DS_Store") ||
+    entry.filename.trim() === "";
 
 // Check that entry name matches the pattern provided
 const isMatchingEntry = (entry: Entry, contentPattern: string): boolean =>
@@ -25,7 +30,12 @@ async function extractTxtFilesFromZip(file: File): Promise<File[]> {
     const txtFiles: File[] = [];
 
     for (const entry of entries) {
-        if (isValidEntry(entry) && entry.filename.endsWith(".txt")) {
+        // Exclude system files and ensure entry is a valid .txt file
+        if (
+            isValidEntry(entry) &&
+            !isExcludedEntry(entry) &&
+            entry.filename.endsWith(".txt")
+        ) {
             const content = await getEntryText(entry);
             txtFiles.push(new File([content], entry.filename));
         }
@@ -43,9 +53,11 @@ async function extractEntriesFromZips(files: File[]): Promise<ValidEntry[]> {
         allEntries.push(...await zipReader.getEntries());
         await zipReader.close();
     }
-    return allEntries.filter(isValidEntry);
+
+    // Filter valid entries and exclude unwanted ones
+    return allEntries.filter(
+        entry => isValidEntry(entry) && !isExcludedEntry(entry)
+    ) as ValidEntry[];
 }
 
-
-
-export {extractTxtFilesFromZip, extractEntriesFromZips, getEntryText, isMatchingEntry};
+export { extractTxtFilesFromZip, extractEntriesFromZips, getEntryText, isMatchingEntry };

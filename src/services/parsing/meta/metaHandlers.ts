@@ -7,6 +7,7 @@ import {
     ValidEntry
 } from "@services/parsing/shared/zipExtraction";
 import {AnonymizationResult, DataSourceValue} from "@models/processed";
+import {decode} from "@services/parsing/shared/names";
 
 interface ParsedMessage {
     sender_name: string;
@@ -44,7 +45,7 @@ const extractDonorNameFromFacebookProfile = (profileText: string): string => {
 
     const profileKey = Object.keys(profileJson).find(key => /profile/.test(key));
     if (profileKey && profileJson[profileKey]?.name?.full_name) {
-        return profileJson[profileKey].name.full_name;
+        return decode(profileJson[profileKey].name.full_name);
     }
 
     throw new DonationValidationError(DonationErrors.NoDonorNameFound);
@@ -64,7 +65,7 @@ const extractDonorNameFromInstagramProfile = (profileText: string): string => {
     const profileJson: ProfileInfo = JSON.parse(profileText);
 
     const name = profileJson?.profile_user?.[0]?.string_map_data?.Name?.value;
-    if (name) return name;
+    if (name) return decode(name);
 
     throw new DonationValidationError(DonationErrors.NoDonorNameFound);
 }
@@ -122,5 +123,5 @@ const getConversationsFromEntries = async (messageEntries: ValidEntry[]): Promis
             jsonContents.set(jsonContent.thread_path, jsonContent);
         }
     });
-    return Object.values(jsonContents);
+    return Array.from(jsonContents.values());
 }

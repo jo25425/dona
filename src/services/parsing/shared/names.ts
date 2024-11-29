@@ -10,7 +10,7 @@
  * maskName("  Dr. Jane Smith  ");
  * // Returns: "D** J*** S****"
  */
-export default function maskName(name: string): string {
+export const maskName = (name: string): string => {
     if (!name.trim()) {
         return "";
     }
@@ -19,5 +19,15 @@ export default function maskName(name: string): string {
         .split(/\s+/)
         .map(word => word[0] + "*".repeat(word.length - 1))
         .join(" ");
-}
+};
+
+export const decode = (input: string): string => {
+    const charCodes = [...input].map((char) => char.charCodeAt(0));
+    if (charCodes.every((code) => code <= 127)) return input;
+
+    const decoder = new TextDecoder();
+    return decoder.decode(new Uint8Array(charCodes));
+};
+
+
 
