@@ -1,4 +1,5 @@
 import * as p from "drizzle-orm/pg-core";
+import {relations} from "drizzle-orm";
 
 export const donationStatus = p.pgEnum("donation_status", ["notstarted", "pending", "complete", "deleted"]);
 
@@ -19,12 +20,14 @@ export const conversations = p.pgTable("conversations", {
     isGroupConversation: p.boolean("is_group_conversation").default(false).notNull(),
     dataSourceId: p.integer("data_source_id").notNull().references(() => dataSources.id),
     donationId: p.uuid("donation_id").notNull().references(() => donations.id),
+    conversationPseudonym: p.varchar("conversation_pseudonym", { length: 10 }).notNull(),
 });
 
 export const conversationParticipants = p.pgTable("conversation_participants", {
     id: p.uuid("id").defaultRandom().primaryKey(),
     conversationId: p.uuid("conversation_id").notNull().references(() => conversations.id),
-    participantId: p.uuid("participant_id").defaultRandom().notNull()
+    participantId: p.uuid("participant_id").defaultRandom().notNull(),
+    participantPseudonym: p.text("participant_pseudonym")
 });
 
 export const messages = p.pgTable("messages", {
@@ -42,3 +45,46 @@ export const messagesAudio = p.pgTable("messages_audio", {
     lengthSeconds: p.integer("length_seconds"),
     conversationId: p.uuid("conversation_id").notNull().references(() => conversations.id)
 });
+
+export const donationsRelations = relations(donations, ({many}) => ({
+    conversations: many(conversations)
+}));
+
+export const dataSourcesRelations = relations(dataSources, ({ many }) => ({
+    conversations: many(conversations)
+}));
+
+export const conversationsRelations = relations(conversations, ({ one, many }) => ({
+    donation: one(donations, {
+        fields: [conversations.donationId],
+        references: [donations.id]
+    }),
+    dataSource: one(dataSources, {
+        fields: [conversations.dataSourceId],
+        references: [dataSources.id],
+    }),
+    participants: many(conversationParticipants),
+    messages: many(messages),
+    messagesAudio: many(messagesAudio),
+}));
+
+export const conversationParticipantsRelations = relations(conversationParticipants, ({ one }) => ({
+    conversation: one(conversations, {
+        fields: [conversationParticipants.conversationId],
+        references: [conversations.id]
+    })
+}));
+
+export const messagesRelations = relations(messages, ({ one }) => ({
+    conversation: one(conversations, {
+        fields: [messages.conversationId],
+        references: [conversations.id]
+    })
+}));
+
+export const messagesAudioRelations = relations(messagesAudio, ({ one }) => ({
+    conversation: one(conversations, {
+        fields: [messagesAudio.conversationId],
+        references: [conversations.id]
+    })
+}));

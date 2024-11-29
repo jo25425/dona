@@ -1,38 +1,51 @@
 "use client";
 
+import React, {useState} from "react";
 import {useTranslations} from 'next-intl';
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import Box from '@mui/material/Box';
 import Button from "@mui/material/Button";
 import Container from '@mui/material/Container';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
-import React, {useState} from "react";
+import {Conversation, DataSourceValue, DonationStatus} from "@models/processed";
+import {addDonation} from './actions';
+import {useAliasConfig} from "@services/parsing/shared/aliasConfig";
 import MultiFileSelect from '@components/MultiFileSelect';
-import { addDonation } from './actions';
 
-export default function DataDonation() {
+type ConversationsBySource = Record<DataSourceValue, Conversation[]>;
+
+export default function DataDonationPage() {
     const a = useTranslations('actions');
     const t = useTranslations('donation');
+    const aliasConfig = useAliasConfig(); // Will allow donation logic to use translations for aliases in anonymization
 
-    // State to hold the donated data from all multiselect elements
-    const [allDonatedData, setAllDonatedData] = useState<String[]>([]);
+    const [allDonatedConversationsBySource, setAllDonatedConversationsBySource] = useState<ConversationsBySource>({} as ConversationsBySource);
 
-    // Callback to handle donated data changes from child components
-    const handleDonatedDataChange = (newDonatedData: String[]) => {
-        setAllDonatedData((prevDonatedData) => [...prevDonatedData, ...newDonatedData]); // Add new files to the existing list
+    // Callback to handle donated conversations changes from child components
+    const handleDonatedConversationsChange = (dataSource: DataSourceValue, newConversations: Conversation[]) => {
+        setAllDonatedConversationsBySource((prevConversations) => ({
+            ...prevConversations,
+            [dataSource]: newConversations, // Replace conversations for the given data source
+        }));
+    };
+    const donationChangeWrapper = (dataSource: DataSourceValue) => {
+        return (newConversations: Conversation[]) => handleDonatedConversationsChange(dataSource, newConversations);
     };
 
     // On "Submit" click
     const onDataDonationUpload = () => {
-        if (allDonatedData.length > 0) {
-            // Do something
+        const allConversations = Object.values(allDonatedConversationsBySource).flat();
+        if (allConversations.length > 0) {
+            // TODO: Generate or get external user ID here at the latest
+            // TODO: Return status and use it for feedback on the page
+            addDonation(allConversations, aliasConfig.donorAlias);
         }
     };
 
@@ -65,11 +78,14 @@ export default function DataDonation() {
                         <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
                             <WhatsAppIcon sx={{mr: 1, mt: 0.5}}/>
                             <Typography variant="h6">
-                                {t("select-data.datasource.title-format", {datasource: "Whatsapp"})}
+                                {t("datasource-title_format", {datasource: "Whatsapp"})}
                             </Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <MultiFileSelect onDonatedDataChange={handleDonatedDataChange} />
+                            <MultiFileSelect
+                                dataSourceValue={DataSourceValue.WhatsApp}
+                                onDonatedConversationsChange={donationChangeWrapper(DataSourceValue.WhatsApp)}
+                            />
                         </AccordionDetails>
                     </Accordion>
                     {/* Facebook */}
@@ -77,11 +93,14 @@ export default function DataDonation() {
                         <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
                             <FacebookIcon sx={{mr: 1, mt: 0.5}}/>
                             <Typography variant="h6">
-                                {t("select-data.datasource.title-format", {datasource: "Facebook"})}
+                                {t("datasource-title_format", {datasource: "Facebook"})}
                             </Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <MultiFileSelect onDonatedDataChange={handleDonatedDataChange} />
+                            <MultiFileSelect
+                                dataSourceValue={DataSourceValue.Facebook}
+                                onDonatedConversationsChange={donationChangeWrapper(DataSourceValue.Facebook)}
+                            />
                         </AccordionDetails>
                     </Accordion>
                     {/* Instagram */}
@@ -89,11 +108,14 @@ export default function DataDonation() {
                         <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
                             <InstagramIcon sx={{mr: 1, mt: 0.5}}/>
                             <Typography variant="h6">
-                                {t("select-data.datasource.title-format", {datasource: "Instagram"})}
+                                {t("datasource-title_format", {datasource: "Instagram"})}
                             </Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <MultiFileSelect onDonatedDataChange={handleDonatedDataChange} />
+                            <MultiFileSelect
+                                dataSourceValue={DataSourceValue.Instagram}
+                                onDonatedConversationsChange={donationChangeWrapper(DataSourceValue.Instagram)}
+                            />
                         </AccordionDetails>
                     </Accordion>
                 </Box>

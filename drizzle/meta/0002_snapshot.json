@@ -1,6 +1,6 @@
 {
-  "id": "2c9dbf85-f949-4f67-9cef-c8bf78b5b675",
-  "prevId": "34ec2aa9-dea6-4e09-a409-308c0870e7c4",
+  "id": "05c81f83-bb0f-49cb-bcde-b2d742b198a8",
+  "prevId": "2c9dbf85-f949-4f67-9cef-c8bf78b5b675",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -27,6 +27,12 @@
           "primaryKey": false,
           "notNull": true,
           "default": "gen_random_uuid()"
+        },
+        "participant_pseudonym": {
+          "name": "participant_pseudonym",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
         }
       },
       "indexes": {},
@@ -34,15 +40,15 @@
         "conversation_participants_conversation_id_conversations_id_fk": {
           "name": "conversation_participants_conversation_id_conversations_id_fk",
           "tableFrom": "conversation_participants",
+          "tableTo": "conversations",
           "columnsFrom": [
             "conversation_id"
           ],
-          "tableTo": "conversations",
           "columnsTo": [
             "id"
           ],
-          "onUpdate": "no action",
-          "onDelete": "no action"
+          "onDelete": "no action",
+          "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {},
@@ -93,28 +99,28 @@
         "conversations_data_source_id_data_sources_id_fk": {
           "name": "conversations_data_source_id_data_sources_id_fk",
           "tableFrom": "conversations",
+          "tableTo": "data_sources",
           "columnsFrom": [
             "data_source_id"
           ],
-          "tableTo": "data_sources",
           "columnsTo": [
             "id"
           ],
-          "onUpdate": "no action",
-          "onDelete": "no action"
+          "onDelete": "no action",
+          "onUpdate": "no action"
         },
         "conversations_donation_id_donations_id_fk": {
           "name": "conversations_donation_id_donations_id_fk",
           "tableFrom": "conversations",
+          "tableTo": "donations",
           "columnsFrom": [
             "donation_id"
           ],
-          "tableTo": "donations",
           "columnsTo": [
             "id"
           ],
-          "onUpdate": "no action",
-          "onDelete": "no action"
+          "onDelete": "no action",
+          "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {},
@@ -133,15 +139,15 @@
           "primaryKey": true,
           "notNull": true,
           "identity": {
+            "type": "byDefault",
             "name": "data_sources_id_seq",
+            "schema": "public",
             "increment": "1",
+            "startWith": "1",
             "minValue": "1",
             "maxValue": "2147483647",
-            "startWith": "1",
             "cache": "1",
-            "cycle": false,
-            "schema": "public",
-            "type": "byDefault"
+            "cycle": false
           }
         },
         "name": {
@@ -196,10 +202,10 @@
       "uniqueConstraints": {
         "donations_external_donor_id_unique": {
           "name": "donations_external_donor_id_unique",
+          "nullsNotDistinct": false,
           "columns": [
             "external_donor_id"
-          ],
-          "nullsNotDistinct": false
+          ]
         }
       },
       "policies": {},
@@ -248,15 +254,15 @@
         "messages_conversation_id_conversations_id_fk": {
           "name": "messages_conversation_id_conversations_id_fk",
           "tableFrom": "messages",
+          "tableTo": "conversations",
           "columnsFrom": [
             "conversation_id"
           ],
-          "tableTo": "conversations",
           "columnsTo": [
             "id"
           ],
-          "onUpdate": "no action",
-          "onDelete": "no action"
+          "onDelete": "no action",
+          "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {},
@@ -307,15 +313,15 @@
         "messages_audio_conversation_id_conversations_id_fk": {
           "name": "messages_audio_conversation_id_conversations_id_fk",
           "tableFrom": "messages_audio",
+          "tableTo": "conversations",
           "columnsFrom": [
             "conversation_id"
           ],
-          "tableTo": "conversations",
           "columnsTo": [
             "id"
           ],
-          "onUpdate": "no action",
-          "onDelete": "no action"
+          "onDelete": "no action",
+          "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {},
@@ -338,10 +344,10 @@
     }
   },
   "schemas": {},
-  "views": {},
   "sequences": {},
   "roles": {},
   "policies": {},
+  "views": {},
   "_meta": {
     "columns": {},
     "schemas": {},

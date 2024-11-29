@@ -5,15 +5,22 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1730738680187,
-      "tag": "0000_dear_killmonger",
+      "when": 1732590301936,
+      "tag": "0000_complex_zaran",
       "breakpoints": true
     },
     {
       "idx": 1,
       "version": "7",
-      "when": 1730738710498,
+      "when": 1732590474584,
       "tag": "0001_seed-data-sources",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1732635476566,
+      "tag": "0002_add-participant-pseudonym",
       "breakpoints": true
     }
   ]

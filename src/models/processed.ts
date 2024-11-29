@@ -1,8 +1,8 @@
 type Participant = string;
-
 type ExternalDonorId = string;
+export type ChatMapping = Map<string, string[]>;
 
-enum DataSourceValue {
+export enum DataSourceValue {
     WhatsApp = "WhatsApp",
     Facebook = "Facebook",
     Instagram = "Instagram",
@@ -42,6 +42,7 @@ export interface Conversation {
     messages: Array<Message>,
     messagesAudio: Array<MessageAudio>,
     participants: Array<Participant>,
+    conversationPseudonym: string
 }
 
 export interface DataDonation {
@@ -51,3 +52,10 @@ export interface DataDonation {
     externalDonorId?: ExternalDonorId,
     conversations: Array<Conversation>,
 }
+
+export interface AnonymizationResult {
+    anonymizedConversations: Conversation[];
+    participantNamesToPseudonyms: Record<string, string>;
+    chatMappingToShow: ChatMapping;
+}
+
