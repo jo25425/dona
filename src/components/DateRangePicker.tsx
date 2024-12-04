@@ -3,11 +3,11 @@ import dayjs, { Dayjs } from 'dayjs';
 import {useTranslations} from "next-intl";
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import Typography from "@mui/material/Typography";
 import {NullableRange} from "@services/rangeFiltering";
-import Grid from "@mui/material/Grid2";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid2";
+import Typography from "@mui/material/Typography";
 
 interface DateRangePickerProps {
     calculatedRange: NullableRange;

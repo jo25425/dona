@@ -1,6 +1,7 @@
 "use client";
 
 import React, {useState} from "react";
+import { useRouter } from 'next/navigation';
 import {useTranslations} from 'next-intl';
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -14,14 +15,17 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
-import {Conversation, DataSourceValue, DonationStatus} from "@models/processed";
+import {Conversation, DataSourceValue} from "@models/processed";
 import {addDonation} from './actions';
 import {useAliasConfig} from "@services/parsing/shared/aliasConfig";
 import MultiFileSelect from '@components/MultiFileSelect';
+import {useDonation} from "@/context/DonationContext";
 
 type ConversationsBySource = Record<DataSourceValue, Conversation[]>;
 
 export default function DataDonationPage() {
+    const router = useRouter()
+    const { setDonationData } = useDonation();
     const a = useTranslations('actions');
     const t = useTranslations('donation');
     const aliasConfig = useAliasConfig(); // Will allow donation logic to use translations for aliases in anonymization
@@ -40,12 +44,23 @@ export default function DataDonationPage() {
     };
 
     // On "Submit" click
-    const onDataDonationUpload = () => {
+    const onDataDonationUpload = async () => {
+        // TODO: Loading indicator
+
         const allConversations = Object.values(allDonatedConversationsBySource).flat();
         if (allConversations.length > 0) {
             // TODO: Generate or get external user ID here at the latest
-            // TODO: Return status and use it for feedback on the page
-            addDonation(allConversations, aliasConfig.donorAlias);
+
+            const donationResult = await addDonation(allConversations, aliasConfig.donorAlias);
+            console.log("donationResult=", donationResult)
+            if (donationResult.success) {
+                // Set the donation data for use by the feedback page
+                setDonationData(allConversations);
+                // Redirect the user to the feedback page
+                router.push('/donation-feedback');
+            } else {
+                // TODO: Error in UI
+            }
         }
     };
 

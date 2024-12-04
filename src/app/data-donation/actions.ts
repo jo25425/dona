@@ -6,6 +6,8 @@ import {conversationParticipants, conversations, donations, messages} from "@/db
 import {NewConversation, NewMessage} from "@models/persisted";
 import {Conversation, DataSource, DonationStatus} from "@models/processed";
 import {DonationErrors, DonationProcessingError} from "@services/errors";
+import {DONATION_COMPLETE_FLAG} from "@/middleware";
+import {cookies} from "next/headers";
 
 
 function generateExternalDonorId(): string {
@@ -87,6 +89,13 @@ export async function addDonation(
             }
 
             return donationId;
+        });
+
+        // After a successful donation, set a cookie as a flag
+        (await cookies()).set(DONATION_COMPLETE_FLAG, 'true', {
+            httpOnly: true, // Prevent client-side access
+            secure: process.env.NODE_ENV === 'production', // Use secure flag in production
+            path: '/', // Accessible across the app
         });
 
         return { success: true, donationId };
