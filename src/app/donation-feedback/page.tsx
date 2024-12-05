@@ -22,7 +22,7 @@ export default function DonationFeedbackPage() {
         return <Typography variant="body1">No donation data available.</Typography>;
     }
 
-    const conversationsByDataSource: Map<string, Conversation[]> = Map.groupBy(donationData, ({ dataSource}) => dataSource);
+    const dataByDataSource: Map<string, Conversation[]> = Map.groupBy(donationData, ({ dataSource}) => dataSource);
     return (
         <Container maxWidth="md" sx={{flexGrow: 1, mt: 4}}>
             <Stack
@@ -31,7 +31,6 @@ export default function DonationFeedbackPage() {
                     flexDirection: 'column',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    // textAlign: 'center',
                     width: 'auto'
                 }}
             >
@@ -49,11 +48,11 @@ export default function DonationFeedbackPage() {
                     </Typography>
                 </Alert>
 
-                {conversationsByDataSource.entries().map(([source, conversations]) => (
+                {dataByDataSource.entries().map(([source, data]) => (
                     <DataSourceFeedbackSection
                         key={source}
                         dataSourceValue={source}
-                        conversations={conversations}
+                        conversations={data}
                     />
                 ))}
 

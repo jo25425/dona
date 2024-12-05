@@ -1,7 +1,14 @@
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
-export default function ChartContainer() {
+
+
+interface ChartContainerProps {
+    type: string;
+    data: any;
+}
+
+export default function ChartContainer({ type, data}: ChartContainerProps) {
     return (
         <Box
             sx={{
@@ -12,7 +19,7 @@ export default function ChartContainer() {
                 alignItems: 'center',
             }}
         >
-            <Typography variant="body2">Chart Placeholder</Typography>
+            <Typography variant="body2">Placeholder for {type} chat</Typography>
         </Box>
     );
 }
