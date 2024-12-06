@@ -1,13 +1,13 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-export const DONATION_COMPLETE_FLAG = 'donationComplete';
+export const DONATION_ID_COOKIE = 'completedDonationId';
 
 export function middleware(req: NextRequest) {
-    const isAuthorized = req.cookies.get(DONATION_COMPLETE_FLAG);
+    const donationId = req.cookies.get(DONATION_ID_COOKIE);
 
     // Redirect to the landing page if the user isn't authorized
-    if (!isAuthorized) {
+    if (donationId == undefined) {
         return NextResponse.redirect(new URL('/', req.url));
     }
 

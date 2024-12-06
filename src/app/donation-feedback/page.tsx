@@ -1,28 +1,45 @@
 "use client";
 
-import React from "react";
-import {useTranslations} from "next-intl";
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
-import DataSourceFeedbackSection from "@components/DataSourceFeedbackSection";
-import {useDonation} from "@/context/DonationContext";
-import {Conversation} from "@models/processed";
-import Alert from "@mui/material/Alert";
+import React, { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 import Button from "@mui/material/Button";
-import ConsentModal from "@components/ConsentModal";
+import Alert from "@mui/material/Alert";
+import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
+import { useDonation } from "@/context/DonationContext";
+import {fetchGraphDataByDonationId, getDonationId} from "./actions";
+import LoadingSpinner from "@components/LoadingSpinner";
+import DataSourceFeedbackSection from "@components/DataSourceFeedbackSection";
 
 export default function DonationFeedbackPage() {
-    const a = useTranslations('actions');
-    const t = useTranslations('feedback');
-    const { donationData } = useDonation();
+    const a = useTranslations("actions");
+    const t = useTranslations("feedback");
+    const { feedbackData, setDonationData } = useDonation();
+    const [isLoading, setIsLoading] = useState(!feedbackData);
 
-    if (!donationData) {
-        // TODO: Proper error
-        return <Typography variant="body1">No donation data available.</Typography>;
-    }
+    useEffect(() => {
+        const loadGraphData = async () => {
+            if (!feedbackData) {
+                try {
+                    const donationIdFromCookie = await getDonationId();
+                    console.log("donationIdFromCookie=", donationIdFromCookie)
+                    if (donationIdFromCookie) {
+                        const fetchedGraphData = await fetchGraphDataByDonationId(donationIdFromCookie);
+                        setDonationData(donationIdFromCookie, fetchedGraphData);
+                        console.log(fetchedGraphData);
+                    }
+                } catch (error) {
+                    console.error("Error fetching graph data:", error);
+                } finally {
+                    setIsLoading(false);
+                }
+            }
+        };
 
-    const dataByDataSource: Map<string, Conversation[]> = Map.groupBy(donationData, ({ dataSource}) => dataSource);
+        loadGraphData();
+    }, [feedbackData, setDonationData]);
+
     return (
         <Container maxWidth="md" sx={{flexGrow: 1, mt: 4}}>
             <Stack
@@ -35,31 +52,45 @@ export default function DonationFeedbackPage() {
                 }}
             >
                 <Typography variant="h4" sx={{my: 2}}>
-                    {t('thanks.title')}
+                    {t("title")}
                 </Typography>
 
-                <Alert severity="warning" sx={{ my: 2 }}>
-                    <Typography variant="body1">{t('importantMessage.title')}</Typography>
-                    <Typography variant="body2">
-                        {t.rich('importantMessage.disclaimer', {
-                            b: (txt) => <b>{txt}</b>,
-                            u: (txt) => <u>{txt}</u>
-                        })}
-                    </Typography>
-                </Alert>
+                {/* Loading indicator */}
+                {isLoading &&
+                    <LoadingSpinner message={t("graph.loading")}/>
+                }
 
-                {dataByDataSource.entries().map(([source, data]) => (
-                    <DataSourceFeedbackSection
-                        key={source}
-                        dataSourceValue={source}
-                        conversations={data}
-                    />
-                ))}
+                {/* Error fetching required data*/}
+                {!isLoading && !feedbackData && (
+                    <Alert severity="error" sx={{ mt: 2 }}>{t("genericError")}</Alert>
+                )}
 
-                <Typography variant="body1" gutterBottom>{t('title.pleaseContinue')}</Typography>
-                <Button variant="contained" href="/">
-                    {a('next')}
-                </Button>
+                {feedbackData && (
+                    <>
+                        <Alert severity="warning" sx={{ my: 2 }}>
+                            <Typography variant="body1">{t('importantMessage.title')}</Typography>
+                            <Typography variant="body2">
+                                {t.rich('importantMessage.disclaimer', {
+                                    b: (txt) => <b>{txt}</b>,
+                                    u: (txt) => <u>{txt}</u>
+                                })}
+                            </Typography>
+                        </Alert>
+
+                        {Object.entries(feedbackData).map(([source, data]) => (
+                            <DataSourceFeedbackSection
+                                key={source}
+                                dataSourceValue={source}
+                                graphData={data}
+                            />
+                        ))}
+
+                        <Typography variant="body1" sx={{my: 3}}>{t("thanks")}</Typography>
+                        <Button variant="contained" href="/">
+                            {a('next')}
+                        </Button>
+                    </>
+                )}
             </Stack>
         </Container>
     );

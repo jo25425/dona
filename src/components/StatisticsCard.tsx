@@ -7,10 +7,15 @@ import {BasicStatistics} from "@models/graphData";
 
 
 export default function StatisticsCard({ stats }: { stats: BasicStatistics }) {
-    const t = useTranslations("feedback");
+    const t = useTranslations("feedback.graph.statisticsCard");
 
     return (
         <Grid container spacing={2}>
+            <Grid size={12} sx={{textAlign: "center"}}>
+                <Typography variant="h6" >
+                    {t("title")}
+                </Typography>
+            </Grid>
             <Grid size={{xs: 12, md: 6}}>
                 <Box
                     sx={{
@@ -21,25 +26,25 @@ export default function StatisticsCard({ stats }: { stats: BasicStatistics }) {
                         bgcolor: "background.paper",
                     }}
                 >
-                    <Typography variant="h5" gutterBottom>
-                        {t("graph.total-messages")}
+                    <Typography variant="body2" fontWeight="fontWeightBold" gutterBottom>
+                        {t("total-messages")}
                     </Typography>
                     <Typography variant="body2">
-                        {t("graph.active-years-explanation_format", { years: stats.numberOfActiveYears })}
+                        {t("active-years-explanation_format", { years: stats.numberOfActiveYears })}
                     </Typography>
                     <Grid container spacing={2} sx={{ mt: 2 }}>
                         <Grid size={{xs: 6}}>
                             <Box sx={{ textAlign: "center", bgcolor: "#f5f5f5", p: 2, borderRadius: 1 }}>
                                 <Typography variant="h6">{stats.sentMessagesTotal}</Typography>
-                                <Typography variant="body2">{t("graph.messages").toUpperCase()}</Typography>
-                                <Typography variant="caption">{t("graph.sent")}</Typography>
+                                <Typography variant="body2">{t("messages").toUpperCase()}</Typography>
+                                <Typography variant="caption">{t("sent")}</Typography>
                             </Box>
                         </Grid>
                         <Grid size={{xs: 6}}>
                             <Box sx={{ textAlign: "center", bgcolor: "#e3f2fd", p: 2, borderRadius: 1 }}>
                                 <Typography variant="h6">{stats.receivedMessagesTotal}</Typography>
-                                <Typography variant="body2">{t("graph.messages").toUpperCase()}</Typography>
-                                <Typography variant="caption">{t("graph.received")}</Typography>
+                                <Typography variant="body2">{t("messages").toUpperCase()}</Typography>
+                                <Typography variant="caption">{t("received")}</Typography>
                             </Box>
                         </Grid>
                     </Grid>
@@ -55,25 +60,25 @@ export default function StatisticsCard({ stats }: { stats: BasicStatistics }) {
                         bgcolor: "background.paper",
                     }}
                 >
-                    <Typography variant="h5" gutterBottom>
-                        {t("graph.average-per-active-month")}
+                    <Typography variant="body2" fontWeight="fontWeightBold" gutterBottom>
+                        {t("average-per-active-month")}
                     </Typography>
                     <Typography variant="body2">
-                        {t("graph.active-months-explanation_format", { months: stats.numberOfActiveMonths })}
+                        {t("active-months-explanation_format", { months: stats.numberOfActiveMonths })}
                     </Typography>
                     <Grid container spacing={2} sx={{ mt: 2 }}>
                         <Grid size={{xs: 6}}>
                             <Box sx={{ textAlign: "center", bgcolor: "#f5f5f5", p: 2, borderRadius: 1 }}>
                                 <Typography variant="h6">{stats.sentPerActiveMonth}</Typography>
-                                <Typography variant="body2">{t("graph.messages").toUpperCase()}</Typography>
-                                <Typography variant="caption">{t("graph.sent")}</Typography>
+                                <Typography variant="body2">{t("messages").toUpperCase()}</Typography>
+                                <Typography variant="caption">{t("sent")}</Typography>
                             </Box>
                         </Grid>
                         <Grid size={{xs: 6}}>
                             <Box sx={{ textAlign: "center", bgcolor: "#e3f2fd", p: 2, borderRadius: 1 }}>
                                 <Typography variant="h6">{stats.receivedPerActiveMonth}</Typography>
-                                <Typography variant="body2">{t("graph.messages").toUpperCase()}</Typography>
-                                <Typography variant="caption">{t("graph.received")}</Typography>
+                                <Typography variant="body2">{t("messages").toUpperCase()}</Typography>
+                                <Typography variant="caption">{t("received")}</Typography>
                             </Box>
                         </Grid>
                     </Grid>

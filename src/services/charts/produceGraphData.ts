@@ -11,7 +11,7 @@ import {
 } from "@services/charts/timeAggregates";
 import produceBasicStatistics from "@services/charts/produceBasicStatistics";
 
-export function produceGraphData(donorId: string, allConversations: Conversation[]): Record<string, GraphData> {
+export default function produceGraphData(donorId: string, allConversations: Conversation[]): Record<string, GraphData> {
     return Object.fromEntries(
         Map.groupBy(allConversations, ({ dataSource}) => dataSource)
             .entries()

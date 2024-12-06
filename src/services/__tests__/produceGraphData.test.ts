@@ -1,4 +1,4 @@
-import { produceGraphData } from "@/services/charts/produceGraphData";
+import produceGraphData from "@services/charts/produceGraphData";
 import {beforeAll, describe, expect, it} from "@jest/globals";
 import {createConversation, getEpochSeconds} from "./testHelpers";
 import {GraphData} from "@models/graphData";

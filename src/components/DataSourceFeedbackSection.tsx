@@ -12,8 +12,9 @@ import {useTranslations} from "next-intl";
 import {Conversation, DataSourceValue} from "@models/processed";
 import Alert from "@mui/material/Alert";
 import StatisticsCard from "@components/StatisticsCard";
+import {GraphData} from "@models/graphData";
 
-export default function DataSourceFeedbackSection({ dataSourceValue, conversations }: { dataSourceValue: string, conversations: Conversation[] }) {
+export default function DataSourceFeedbackSection({ dataSourceValue, graphData }: { dataSourceValue: string, graphData: GraphData }) {
     const t = useTranslations('feedback');
     const [modalOpen, setModalOpen] = useState(false);
 
@@ -29,12 +30,19 @@ export default function DataSourceFeedbackSection({ dataSourceValue, conversatio
             </AccordionSummary>
             <AccordionDetails>
                 {showCustomDataSourceAlert.includes(dataSourceValue) && (
-                    <Alert severity="info" sx={{ mt: 2 }}>
+                    <Alert severity="info" sx={{ my: 2 }}>
                         {t(`${dataSourceValue.toLowerCase()}.info`)}
                     </Alert>
                 )}
-                {/*<StatisticsCard stats={computeStatistics(conversations)} />*/}
-                {/*<Grid container spacing={2}>*/}
+                {/* Overview */}
+                <StatisticsCard stats={graphData.basicStatistics} />
+                {/* Interaction Intensity */}
+                {/*<Grid container spacing={2} sx={{mt: 2}}>*/}
+                {/*    <Grid size={12} sx={{textAlign: "center"}}>*/}
+                {/*        <Typography variant="h6" >*/}
+                {/*            {t("sectionTitles.interactionIntensity")}*/}
+                {/*        </Typography>*/}
+                {/*    </Grid>*/}
                 {/*    <Grid size={{xs: 12, sm: 6}}>*/}
                 {/*        <ChartContainer*/}
                 {/*            type="PolarPlot"*/}

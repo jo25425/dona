@@ -19,6 +19,7 @@ import Typography from "@mui/material/Typography";
 import InsertDriveFile from "@mui/icons-material/InsertDriveFile";
 import AnonymizationPreview from "@components/AnonymizationPreview";
 import DateRangePicker from "@components/DateRangePicker";
+import LoadingSpinner from "@components/LoadingSpinner";
 
 interface MultiFileSelectProps {
     dataSourceValue: DataSourceValue;
@@ -109,12 +110,9 @@ const MultiFileSelect: React.FC<MultiFileSelectProps> = ({ dataSourceValue, onDo
             {FilesFeedbackSection(selectedFiles, error)}
 
             {/* Loading indicator */}
-            {isLoading && (
-                <Box sx={{ mt: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                    <CircularProgress />
-                    <Alert severity="info" sx={{ mt: 2 }}>{t('sendData.wait')}</Alert>
-                </Box>
-            )}
+            {isLoading &&
+                <LoadingSpinner message={t('sendData.wait')}/>
+            }
 
             {/* Display anonymized data */}
             {!error && !isLoading && anonymizationResult && filteredConversations && (

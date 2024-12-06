@@ -1,31 +1,37 @@
 "use client";
 
-import { createContext, useContext, useState, ReactNode } from 'react';
-import {Conversation} from "@models/processed";
+import React, { createContext, useContext, useState, ReactNode } from "react";
+import { GraphData } from "@models/graphData";
+import { DataSourceValue } from "@models/processed";
 
 interface DonationContextType {
-    donationData: Conversation[] | null;
-    setDonationData: (result: Conversation[] | null) => void;
+    donationId?: string;
+    feedbackData?: Record<DataSourceValue, GraphData>;
+    setDonationData: (donationId: string, graphDataRecord: Record<DataSourceValue, GraphData>) => void;
 }
 
 const DonationContext = createContext<DonationContextType | undefined>(undefined);
 
-// Provider component
-export const DonationProvider = ({ children }: { children: ReactNode }) => {
-    const [donationData, setDonationData] = useState<Conversation[] | null>(null);
+export function DonationProvider({ children }: { children: ReactNode }) {
+    const [donationId, setDonationId] = useState<string | undefined>();
+    const [feedbackData, setFeedbackData] = useState<Record<DataSourceValue, GraphData> | undefined>();
+
+    const setDonationData = (id: string, record: Record<DataSourceValue, GraphData>) => {
+        setDonationId(id);
+        setFeedbackData(record);
+    };
 
     return (
-        <DonationContext.Provider value={{ donationData, setDonationData }}>
+        <DonationContext.Provider value={{ donationId, feedbackData, setDonationData }}>
             {children}
         </DonationContext.Provider>
     );
-};
+}
 
-// Hook to use the context
-export const useDonation = () => {
+export function useDonation() {
     const context = useContext(DonationContext);
     if (!context) {
-        throw new Error('useDonation must be used within a DonationProvider');
+        throw new Error("useDonation must be used within a DonationProvider");
     }
     return context;
-};
+}

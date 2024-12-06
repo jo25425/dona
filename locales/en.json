@@ -324,8 +324,7 @@
       "NotEnoughMonthsInRange": "To donate your data, please select a period of at least 6 months within the period of your donation.",
       "UnknownError": "There is an error somewhere. Please check your data donation.",
 
-      "no-alias": "Please enter your username. You can find it in your WhatsApp profile.",
-      "something-went-wrong": "Something went wrong! Please go back to the start and repeat the process."
+      "no-alias": "Please enter your username. You can find it in your WhatsApp profile."
     }
   },
   "data-protection": {
@@ -411,29 +410,91 @@
     }
   },
   "feedback": {
-    "thanks": {
-      "title": "Thank you for the donation of your social media data!"
-    },
+    "title": "Thank you for the donation of your social media data!",
+    "loading": "Loading graph...",
+    "genericError": "Something went wrong! Please go back to the start and repeat the process.",
     "landscapeMode": "Please hold your device <b>sideways</b> to view this page properly.",
     "importantMessage": {
       "title": "Important Note:",
       "disclaimer": "The graphs and visualizations displayed <b>do <u>not</u> allow any direct conclusions</b> to be drawn about the quality of your social relationships. Your chats are analyzed and visualized regarding amount and timing only."
     },
+    "selectedDataMessage": "The potentially high number of {source} contacts could lead to a cluttered visualization. Therefore, in the following, only visualizations for your 1-10 selected {source} chats are shown.",
     "reminder": "Don't forget to register for the voucher raffle at the bottom of the page.",
     "startLabel": "Start",
     "pauseLabel": "Pause",
+    "sourceTitle": "Feedback on your {source} Messages",
     "graph": {
-      "title": "Feedback on your {source} Messages",
-      "total-messages": "Total messages",
-      "average-per-active-month": "Average messages per active month",
-      "active-years-explanation_format": "In total, there are %s years in which you participated in conversation (i.e. you sent or received at least one message during the year)",
-      "active-months-explanation_format": "In total, there are %s months in which you participated in conversation (i.e. you sent or received at least one message during the month)",
-      "messages": "Messages",
+      "statisticsCard": {
+        "title": "Overview of all Activity",
+        "total-messages": "Total messages",
+        "average-per-active-month": "Average messages per active month",
+        "active-years-explanation_format": "In total, there are {years} years in which you participated in conversation (i.e. you sent or received at least one message during the year)",
+        "active-months-explanation_format": "In total, there are {months} months in which you participated in conversation (i.e. you sent or received at least one message during the month)",
+        "messages": "Messages",
+        "sent": "Sent",
+        "received": "Received"
+      },
+      "interactionIntensity": {
+        "title": "Interaction Intensity",
+        "animatedPolarPlot": {
+          "title": "Planet representation",
+          "description": "This visualization displays you as the yellow dot in the middle. The chats you donated are the white dots around you. The closer a dot is to you, the more words you have written in this chat. In the time-slider below you can see and select the month and year for which the data is shown. The smaller lighter white dots show the activity in the respective chats in other months. Click <button>HERE</button> to see an explanation with an example.",
+          "legend": {
+            "donor": "You",
+            "others": "Chat Intensity"
+          },
+          "example": {
+            "image": "images/charts/feedback_example_polarPlot_english.svg",
+            "text": "<p><b>(1)</b> Here the white solid dot is very close to the large yellow dot in the center. This means that in the month shown below, the communication in this chat was very intense compared to the previous months and the other chats. In this example, there are only a few transparent small dots on the trajectory. This is because the data only covers a few months.</p><p><b>(2)</b> Hardly any transparent history dots can be seen here, as they all lie on top of each other in roughly the same place. This is because the intensity has been very stable over the months in this chat.</p><p><b>(3)</b> In contrast to (2), many transparent points are visible here. So the intensity of this chat has changed a lot over the months. In the currently displayed month, the big intense white dot is further away than some other transparent small points: Accordingly, there were months before in which more words were exchanged in this chat. However, there have also been months when the intensity was lower.</p><p><b>(4)</b> Click this icon to download the graph.</p>"
+          }
+        },
+        "animatedHorizontalBarChart": {
+          "title": "Total sent words",
+          "description": "Here you can see the total amount of words you sent in your different chats adding up per month. In the time-slider below you can see and select the month and year for which the data is shown. Click <button>HERE</button> to see an explanation with an example.",
+          "legend": "Sent words",
+          "xAxis": "Number of sent words",
+          "example": {
+            "image": "images/charts/feedback_example_horizontalBarChart_english.svg",
+            "text": "<p><b>(1)</b> In this example, over the entire period the most words were sent in the chat with F9, F10: just over 140 thousand.</p><p><b>(2)</b> In contrast to (1), this example chat had the fewest sent words.</p><p><b>(3)</b> The year and month are displayed here. You can see how many words were sent in the chats per month. Try out the time slider!</p><p><b>(4)</b> Click this icon to download the graph.</p>"
+          }
+        },
+        "moreAbout": "More about your Interaction Intensity"
+      },
+      "dailyActivityTimes": {
+        "title": "Daily Activity Times",
+        "dailyActivityHoursPlot": {
+          "description": "In this plot, you can see in which hours of the day you were active for the whole time span of the data you donated. If an hour (square in the plot) has a darker color, you sent more words in that hour than in your average hour. If the color is lighter, then you sent fewer words than in the average case. If you want to look closer at a specific time span you can zoom in by clicking on the graph and holding while you move your mouse to the left or the right to produce the time window you want to zoom into. Click <button>HERE</button> to see an explanation with an example.",
+          "yAxis": "Time",
+          "moreThanAverage": "More than your average",
+          "average": "Your average",
+          "lessThanAverage": "Less than your average",
+          "example": {
+            "image": "images/charts/feedback_example_dailyActivityHoursPlot_english.svg",
+            "text": "<p><b>(1)</b> In this example, a change in the activity hours can be observed in this area. In the period at <b>(2)</b> you can see that no messages were sent between approximately 8:00 AM and 12:00 PM. Then in the period at <b>(3)</b>, this area of no messages has shifted to the hours between about 2:00 AM and 6:00 AM. This could be due to moving to a different time zone or a change in sleep schedule.</p><p><b>(4)</b> For example, more dark squares can be observed here. Therefore, an above-average number of messages were sent in this period.</p><p><b>(5)</b> Click this icon to download the graph.</p>"
+          }
+        },
+        "moreAbout": "More about your Daily Activity Times"
+      },
+      "responseTimes": {
+        "title": "Response Times",
+        "responseTimeBarChart": {
+          "description": "Here you can see how fast you reply to your contacts and vice versa. You see the percentages of all your responses and the replies from your contacts that took place in the specified time. Responses are messages sent directly after a message from someone else. You can see what percentage of your responses you sent or received quicker than after 1 minute, after 1-2 minutes, 3-5 minutes, 6-15 minutes, 16-30 minutes, 31-60 minutes, and slower than 60 minutes. The bar for > 60 minutes includes longer breaks in the conversation. Click <button>HERE</button> to see an explanation with an example.",
+          "legend": {
+            "donor": "Your Response Times",
+            "friends": "Contacts Response Times"
+          },
+          "yAxis": "Percentage of all responses",
+          "xAxis": "Time until response",
+          "example": {
+            "image": "images/charts/feedback_example_responseTimeBarChart_english.svg",
+            "text": "<p><b>(1)</b> In this example you can see that more than 40% of all replies were sent and received in under a minute. Just under 30% of all replies were sent in 1-2 minutes and just under 30% of all replies were received in 1-2 minutes. I.e. a total of around 70% of all sent replies were sent in less than two minutes and around 70% of all received replies were received in less than two minutes.</p><p><b>(2)</b> Click this icon to download the graph.</p>"
+          }
+        },
+        "moreAbout": "More about your Response Times"
+      },
       "messages-over-time": "%s messages over time",
       "time": "Time",
       "number-of-messages": "Number of messages",
-      "sent": "Sent",
-      "received": "Received",
       "response-times": "%s response times",
       "response-time": "Response time",
       "median-response-time": "Median response time",
@@ -447,28 +508,6 @@
       "resetView": "Reset view",
       "example": {
         "title": "This is an <b>example</b> created from example data - <u>not</u> from your data."
-      },
-      "animatedPolarPlot": {
-        "title": "Planet representation",
-        "description": "This visualization displays you as the yellow dot in the middle. The chats you donated are the white dots around you. The closer a dot is to you, the more words you have written in this chat. In the time-slider below you can see and select the month and year for which the data is shown. The smaller lighter white dots show the activity in the respective chats in other months. Click <a style=\"font-weight:bold\" href=\"#polarPlotExplanation\" data-toggle=\"modal\" data-target=\"#polarPlotExplanation\">HERE</a> to see an explanation with an example.",
-        "legend": {
-          "donor": "You",
-          "others": "Chat Intensity"
-        },
-        "example": {
-          "image": "images/feedback_example_polarPlot_english.svg",
-          "text": "<p><b>(1)</b> Here the white solid dot is very close to the large yellow dot in the center. This means that in the month shown below, the communication in this chat was very intense compared to the previous months and the other chats. In this example, there are only a few transparent small dots on the trajectory. This is because the data only covers a few months.</p><p><b>(2)</b> Hardly any transparent history dots can be seen here, as they all lie on top of each other in roughly the same place. This is because the intensity has been very stable over the months in this chat.</p><p><b>(3)</b> In contrast to (2), many transparent points are visible here. So the intensity of this chat has changed a lot over the months. In the currently displayed month, the big intense white dot is further away than some other transparent small points: Accordingly, there were months before in which more words were exchanged in this chat. However, there have also been months when the intensity was lower.</p><p><b>(4)</b> Click this icon to download the graph.</p>"
-        }
-      },
-      "animatedHorizontalBarChart": {
-        "title": "Total sent words",
-        "description": "Here you can see the total amount of words you sent in your different chats adding up per month. In the time-slider below you can see and select the month and year for which the data is shown. Click <a style=\"font-weight:bold\" href=\"#animatedHorizontalBarChartExplanation\" data-toggle=\"modal\" data-target=\"#animatedHorizontalBarChartExplanation\">HERE</a> to see an explanation with an example.",
-        "legend": "Sent words",
-        "xAxis": "Number of sent words",
-        "example": {
-          "image": "images/feedback_example_horizontalBarChart_english.svg",
-          "text": "<p><b>(1)</b> In this example, over the entire period the most words were sent in the chat with F9, F10: just over 140 thousand.</p><p><b>(2)</b> In contrast to (1), this example chat had the fewest sent words.</p><p><b>(3)</b> The year and month are displayed here. You can see how many words were sent in the chats per month. Try out the time slider!</p><p><b>(4)</b> Click this icon to download the graph.</p>"
-        }
       },
       "horizontalBarChartOverall": {
         "description": "This graph shows the total number of words you received and sent across all your donated chats.",
@@ -511,17 +550,6 @@
         },
         "yAxis": "Number of messages"
       },
-      "dailyActivityHoursPlot": {
-        "description": "In this plot, you can see in which hours of the day you were active for the whole time span of the data you donated. If an hour (square in the plot) has a darker color, you sent more words in that hour than in your average hour. If the color is lighter, then you sent fewer words than in the average case. If you want to look closer at a specific time span you can zoom in by clicking on the graph and holding while you move your mouse to the left or the right to produce the time window you want to zoom into. Click <a style=\"font-weight:bold\" href=\"#dailyActivityHoursPlotExplanation\" data-toggle=\"modal\" data-target=\"#dailyActivityHoursPlotExplanation\">HERE</a> to see an explanation with an example.",
-        "yAxis": "Time",
-        "moreThanAverage": "More than your average",
-        "average": "Your average",
-        "lessThanAverage": "Less than your average",
-        "example": {
-          "image": "images/feedback_example_dailyActivityHoursPlot_english.svg",
-          "text": "<p><b>(1)</b> In this example, a change in the activity hours can be observed in this area. In the period at <b>(2)</b> you can see that no messages were sent between approximately 8:00 AM and 12:00 PM. Then in the period at <b>(3)</b>, this area of no messages has shifted to the hours between about 2:00 AM and 6:00 AM. This could be due to moving to a different time zone or a change in sleep schedule.</p><p><b>(4)</b> For example, more dark squares can be observed here. Therefore, an above-average number of messages were sent in this period.</p><p><b>(5)</b> Click this icon to download the graph.</p>"
-        }
-      },
       "dayPartsOverall": {
         "description": "In this graph, you can see how the words you sent and received are distributed over different parts of the day. You see  averaged values over the entire period of your data donation.",
         "legend": {
@@ -544,19 +572,6 @@
         "yAxis": "Percentage of all words",
         "xAxis": "Four parts of the day"
       },
-      "responseTimeBarChart": {
-        "description": "Here you can see how fast you reply to your contacts and vice versa. You see the percentages of all your responses and the replies from your contacts that took place in the specified time. Responses are messages sent directly after a message from someone else. You can see what percentage of your responses you sent or received quicker than after 1 minute, after 1-2 minutes, 3-5 minutes, 6-15 minutes, 16-30 minutes, 31-60 minutes, and slower than 60 minutes. The bar for > 60 minutes includes longer breaks in the conversation. Click <a style=\"font-weight:bold\" href=\"#responseTimeBarChartExplanation\" data-toggle=\"modal\" data-target=\"#responseTimeBarChartExplanation\">HERE</a> to see an explanation with an example.",
-        "legend": {
-          "donor": "Your Response Times",
-          "friends": "Contacts Response Times"
-        },
-        "yAxis": "Percentage of all responses",
-        "xAxis": "Time until response",
-        "example": {
-          "image": "images/feedback_example_responseTimeBarChart_english.svg",
-          "text": "<p><b>(1)</b> In this example you can see that more than 40% of all replies were sent and received in under a minute. Just under 30% of all replies were sent in 1-2 minutes and just under 30% of all replies were received in 1-2 minutes. I.e. a total of around 70% of all sent replies were sent in less than two minutes and around 70% of all received replies were received in less than two minutes.</p><p><b>(2)</b> Click this icon to download the graph.</p>"
-        }
-      },
       "responseTimeBarChartMonthly": {
         "description": "Here you see <u>per month</u> your response times. So, the figure shows the percentage of responses (i.e. a message that you sent after a message from a contact) that took place in the specified amount of time. You can see what percentage of your responses you sent quicker than after 1 minute, after 1-2 minutes, 3-5 minutes, 6-15 minutes, 16-30 minutes, 31-60 minutes, and slower than 60 minutes. The bar for > 60 minutes includes longer breaks in the conversation.",
         "legend": {
@@ -574,37 +589,13 @@
           "image": "images/feedback_example_breaksInConv_english.svg",
           "text": "<p class=\"text-left\"><b>(1)</b> In this example, in the on the top left selected chat, the longest periods without contact in this first period were mostly under 5 days. For example, in January 2019 (the first month), the length of the longest period without a message is less than 5 days. I.e. in that month, there was no time in the chat when not a single message was written for more than 5 days.</p><p class=\"text-left\"><b>(2)</b> In contrast to (1), the lengths of the conversation pauses are already significantly longer in this area. In some months the longest period without a message is about 10 days. In two months in this time period, there was no activity in this chat for almost 20 days straight.</p><p class=\"text-left\"><b>(3)</b> A dot is visible here, showing that there was not a single message in the selected chat for the whole of July 2021.</p><p class=\"text-left\"><b>(4)</b> Click this icon to download the graph.</p>"
         }
-      },
-      "loading": "Loading graph..."
-    },
-    "title": {
-      "statisticsCard": "Overview of all Activity",
-      "interactionIntensity": "Interaction Intensity",
-      "dailyActivityTimes": "Daily Activity Times",
-      "responseTimes": "Response Times",
-      "pleaseContinue": "We hope you had exciting insights. Thanks a lot!"
-    },
-    "facebook": {
-      "info": "The potentially high number of Facebook contacts could lead to a cluttered visualization. Therefore, in the following, only visualizations for your 1-10 selected Facebook chats are shown."
-    },
-    "instagram": {
-      "info": "The potentially high number of Instagram contacts could lead to a cluttered visualization. Therefore, in the following, only visualizations for your 1-10 selected Instagram chats are shown."
-    },
-    "nextButton": "Next",
-    "finishButton": "Finish",
-    "toRaffleButton": "Sign up for raffle",
-    "moreAbout": {
-      "interactionIntensity": {
-        "title": "More about your Interaction Intensity"
-      },
-      "dailyActivityTimes": {
-        "title": "More about your Daily Activity Times"
-      },
-      "responseTimes": {
-        "title": "More about your Response Times"
       }
     },
+    "thanks": "We hope you had exciting insights. Thanks a lot!",
     "buttons": {
+      "nextButton": "Next",
+      "finishButton": "Finish",
+      "toRaffleButton": "Sign up for raffle",
       "complete-survey": {
         "caption": "Complete questionnaires"
       }

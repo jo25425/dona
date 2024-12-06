@@ -45,14 +45,6 @@ export interface Conversation {
     conversationPseudonym: string
 }
 
-export interface DataDonation {
-    id?: string,
-    donorId: string,
-    status?: DonationStatus,
-    externalDonorId?: ExternalDonorId,
-    conversations: Array<Conversation>,
-}
-
 export interface AnonymizationResult {
     anonymizedConversations: Conversation[];
     participantNamesToPseudonyms: Record<string, string>;
