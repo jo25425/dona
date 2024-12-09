@@ -2,13 +2,13 @@ import { useTranslations } from 'next-intl';
 
 export class AliasConfig {
     systemAlias: string;
-    friendAlias: string;
+    contactAlias: string;
     donorAlias: string;
     chatAlias: string;
 
-    constructor(systemAlias: string, friendAlias: string, donorAlias: string, chatAlias: string) {
+    constructor(systemAlias: string, contactAlias: string, donorAlias: string, chatAlias: string) {
         this.systemAlias = systemAlias;
-        this.friendAlias = friendAlias;
+        this.contactAlias = contactAlias;
         this.donorAlias = donorAlias;
         this.chatAlias = chatAlias;
     }

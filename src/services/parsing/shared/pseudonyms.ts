@@ -7,11 +7,11 @@ export class ContactPseudonyms {
     private namesToPseudonyms: Record<string, string> = {};
     private pseudonymsToNames: Record<string, string> = {};
     private counter: number = 1;
-    private readonly friendAlias: string;
+    private readonly contactAlias: string;
     private readonly systemAlias?: string;
 
-    constructor(friendAlias: string, systemAlias?: string) {
-        this.friendAlias = friendAlias;
+    constructor(contactAlias: string, systemAlias?: string) {
+        this.contactAlias = contactAlias;
         this.systemAlias = systemAlias;
     }
 
@@ -20,7 +20,7 @@ export class ContactPseudonyms {
         if (!this.namesToPseudonyms[decodedName]) {
             const pseudonym = (this.systemAlias && name === this.systemAlias)
                 ? this.systemAlias!
-                : `${this.friendAlias}${this.counter++}`;
+                : `${this.contactAlias}${this.counter++}`;
             this.namesToPseudonyms[decodedName] = pseudonym;
             this.pseudonymsToNames[pseudonym] = decodedName;
         }

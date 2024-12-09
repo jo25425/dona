@@ -11,11 +11,6 @@ export default function StatisticsCard({ stats }: { stats: BasicStatistics }) {
 
     return (
         <Grid container spacing={2}>
-            <Grid size={12} sx={{textAlign: "center"}}>
-                <Typography variant="h6" >
-                    {t("title")}
-                </Typography>
-            </Grid>
             <Grid size={{xs: 12, md: 6}}>
                 <Box
                     sx={{

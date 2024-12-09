@@ -8,7 +8,7 @@ const SYSTEM_MESSAGE = "Messages to this chat and calls are now secured with end
 
 export default async function deIdentify(parsedFiles: ParsedMessage[][], donorName: string): Promise<AnonymizationResult> {
     const aliasConfig = getAliasConfig();
-    const contactPseudonyms = new ContactPseudonyms(aliasConfig.friendAlias, aliasConfig.systemAlias);
+    const contactPseudonyms = new ContactPseudonyms(aliasConfig.contactAlias, aliasConfig.systemAlias);
     const chatPseudonyms = new ChatPseudonyms(aliasConfig.donorAlias, aliasConfig.chatAlias, DataSourceValue.WhatsApp);
     chatPseudonyms.setDonorName(donorName);
 

@@ -15,9 +15,10 @@ export default async function deIdentify(
     dataSourceValue: DataSourceValue
 ): Promise<AnonymizationResult> {
     const aliasConfig = getAliasConfig();
-    const contactPseudonyms = new ContactPseudonyms(aliasConfig.friendAlias);
+    const contactPseudonyms = new ContactPseudonyms(aliasConfig.contactAlias);
     const chatPseudonyms = new ChatPseudonyms(aliasConfig.donorAlias, aliasConfig.chatAlias, dataSourceValue);
     chatPseudonyms.setDonorName(donorName);
+    contactPseudonyms.setPseudonym(donorName, aliasConfig.donorAlias);
 
     const deIdentifiedConversations: Conversation[] = await Promise.all(
         parsedConversations.map(async (jsonContent): Promise<Conversation | null> => {

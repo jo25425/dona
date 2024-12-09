@@ -23,11 +23,9 @@ export default function DonationFeedbackPage() {
             if (!feedbackData) {
                 try {
                     const donationIdFromCookie = await getDonationId();
-                    console.log("donationIdFromCookie=", donationIdFromCookie)
                     if (donationIdFromCookie) {
                         const fetchedGraphData = await fetchGraphDataByDonationId(donationIdFromCookie);
                         setDonationData(donationIdFromCookie, fetchedGraphData);
-                        console.log(fetchedGraphData);
                     }
                 } catch (error) {
                     console.error("Error fetching graph data:", error);
@@ -57,7 +55,7 @@ export default function DonationFeedbackPage() {
 
                 {/* Loading indicator */}
                 {isLoading &&
-                    <LoadingSpinner message={t("graph.loading")}/>
+                    <LoadingSpinner message={t("loading")}/>
                 }
 
                 {/* Error fetching required data*/}

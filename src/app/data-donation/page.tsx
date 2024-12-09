@@ -52,7 +52,6 @@ export default function DataDonationPage() {
             // TODO: Generate or get external user ID here at the latest
 
             const result = await addDonation(allConversations, aliasConfig.donorAlias);
-            console.log("result=", result)
             if (result.success && result.donationId && result.graphDataRecord) {
                 // Set the donation data for use by the feedback page
                 setDonationData(result.donationId, result.graphDataRecord);

@@ -19,7 +19,7 @@ export default function ChartContainer({ type, data}: ChartContainerProps) {
                 alignItems: 'center',
             }}
         >
-            <Typography variant="body2">Placeholder for {type} chat</Typography>
+            <Typography variant="body2">Placeholder for {type} chart</Typography>
         </Box>
     );
 }

@@ -92,7 +92,7 @@ export async function addDonation(
             }
 
             // Compute Graph Data
-            const graphDataRecord = produceGraphData(donorId, donatedConversations);
+            const graphDataRecord = produceGraphData(donorAlias, donatedConversations);
 
             // Store Graph Data
             await tx.insert(graphData).values({
