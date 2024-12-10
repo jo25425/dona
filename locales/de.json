@@ -422,10 +422,18 @@
     },
     "selectedDataMessage": "Die möglicherweise hohe Anzahl an {source}-Kontakten kann zu einer unübersichtlichen Darstellung führen. Daher werden im Folgenden nur Visualisierungen für Ihre 1-10 ausgewählten {source}-Chats angezeigt.",
     "reminder": "Vergessen Sie nicht, sich unten auf dieser Seite für die Gutscheinverlosung anzumelden.",
-    "startLabel": "Start",
-    "pauseLabel": "Pause",
     "sourceTitle": "Feedback zu Ihren {source} Nachrichten",
     "graph": {
+      "labels": {
+        "startLabel": "Start",
+        "pauseLabel": "Pause",
+        "resetView": "Ansicht zurücksetzen",
+        "you": "Sie",
+        "friends": "Kontakte",
+        "yearMonth": "Jahr-Monat:",
+        "chatWith": "Chat mit:",
+        "time": "Zeit"
+      },
       "statisticsCard": {
         "title": "Überblick über die gesamte Aktivität",
         "total-messages": "Gesamtzahl an Nachrichten",
@@ -483,7 +491,7 @@
           "description": "Hier können Sie sehen, wie schnell Sie Ihren Kontakten antworten und umgekehrt. Sie sehen jeweils wie groß der Anteil aller Ihrer Antworten und der Antworten Ihrer Kontakte ist, die in der angegebenen Zeit erfolgt sind. Antworten sind Nachrichten, die direkt nach einer Nachricht von jemand anderem gesendet wurden. Sie können sehen, wie viel Prozent Ihrer Antworten Sie schneller als nach 1 Minute, nach 1–2 Minuten, 3–5 Minuten, 6–15 Minuten, 16–30 Minuten, 31–60 Minuten und langsamer als 60 Minuten gesendet bzw. empfangen haben. Der Balken für > 60 Minuten beinhaltet auch längere Gesprächspausen. Klicken Sie <button>HIER</button>, um eine Erklärung mit einem Beispiel zu sehen.",
           "legend": {
             "donor": "Ihre Antwortzeiten",
-            "friends": "Antwortzeiten Ihrer Kontakte"
+            "contacts": "Antwortzeiten Ihrer Kontakte"
           },
           "yAxis": "Prozentualer Anteil aller Antwortnachrichten",
           "xAxis": "Dauer der Antwort",
@@ -495,19 +503,13 @@
         "moreAbout": "Mehr über Ihre Antwortzeiten"
       },
       "messages-over-time": "%s Nachrichten über die Zeit",
-      "time": "Zeit",
       "number-of-messages": "Anzahl der Nachrichten",
       "response-times": "%s Antwortszeiten",
       "response-time": "Antwortszeit",
       "median-response-time": "Mediane Antwortszeit",
       "overview": "Übersicht",
       "detail": "Detail",
-      "you": "Sie",
-      "friends": "Kontakte",
-      "yearMonth": "Jahr-Monat:",
-      "chatWith": "Chat mit:",
       "overallData": "Alle Chats",
-      "resetView": "Ansicht zurücksetzen",
       "example": {
         "title": "Dies ist ein <b>Beispiel</b> mit Beispieldaten - <u>nicht</u> mit Ihren Daten."
       },

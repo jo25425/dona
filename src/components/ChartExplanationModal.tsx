@@ -16,16 +16,22 @@ const ChartExplanationModal = ({ open, onClose, title, contentHtml, imageSrc }: 
     return (
         <Modal open={open} onClose={onClose}>
             <Box
+                className={"dona-modal"}
                 sx={{
                     position: "absolute",
-                    top: "50%",
-                    left: "50%",
-                    transform: "translate(-50%, -50%)",
-                    bgcolor: "background.paper",
-                    boxShadow: 24,
-                    p: 4,
-                    maxWidth: 400,
-                    width: "80%",
+                    top: '2%',
+                    bottom: '2%',
+                    left: '50%',
+                    width: '90%',
+                    maxWidth: '900px',
+                    transform: 'translate(-50%, 0%)',
+                    overflow:'scroll',
+                    display:'block',
+                    bgcolor: 'background.paper',
+                    border: '1px solid dimgrey',
+                    borderRadius: 2,
+                    boxShadow: 30,
+                    p: 4
                 }}
             >
                 <Typography variant="h6" mb={2}>
@@ -44,7 +50,7 @@ const ChartExplanationModal = ({ open, onClose, title, contentHtml, imageSrc }: 
                     />
                 )}
                 <Button onClick={onClose} variant="contained" fullWidth>
-                    Close
+                    Close {/* TODO: Use translated label! */}
                 </Button>
             </Box>
         </Modal>

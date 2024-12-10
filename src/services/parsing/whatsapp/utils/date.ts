@@ -1,5 +1,3 @@
-import {groupArrayByValueAtIndex, indexAboveValue, isNegative} from './utils';
-
 export type NumericDate = [number, number, number];
 
 /**
@@ -36,14 +34,14 @@ function checkDecreasing(numericDates: NumericDate[]): boolean | null {
     const daysFirst = dates.slice(1).some((date, i) => {
       const [first1] = dates[i];
       const [first2] = date;
-      return isNegative(first2 - first1);
+      return first2 < first1;
     });
     if (daysFirst) return true;
 
     const daysSecond = dates.slice(1).some((date, i) => {
       const [, second1] = dates[i];
       const [, second2] = date;
-      return isNegative(second2 - second1);
+      return second2 < second1;
     });
     if (daysSecond) return false;
 
@@ -120,6 +118,29 @@ function normalizeDate(year: string, month: string, day: string): [string, strin
     month.padStart(2, '0'),
     day.padStart(2, '0'),
   ];
+}
+
+function indexAboveValue(index: number, value: number): (array: number[]) => boolean {
+  return (array: number[]) => array[index] > value;
+}
+
+/**
+ * Given an array of arrays and an index, groups the inner arrays by the value at the index provided.
+ * See test cases for a better understanding of this function.
+ */
+function groupArrayByValueAtIndex<T extends any[]>(
+    array: T[],
+    index: number
+): T[][] {
+  const map = new Map<string, T[]>();
+  array.forEach(item => {
+    const key = item[index].toString();
+    if (!map.has(key)) {
+      map.set(key, []);
+    }
+    map.get(key)!.push(item);
+  });
+  return Array.from(map.values());
 }
 
 export { daysBeforeMonths, normalizeDate };

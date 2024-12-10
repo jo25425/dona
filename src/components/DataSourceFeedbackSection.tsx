@@ -14,12 +14,15 @@ import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import ChartExplanationModal from "@components/ChartExplanationModal";
+import {createListOfConversations} from "@services/charts/preprocessing";
 
 export default function DataSourceFeedbackSection({ dataSourceValue, graphData }: { dataSourceValue: string, graphData: GraphData }) {
     const showCustomDataSourceAlert = [DataSourceValue.Facebook, DataSourceValue.Instagram] as string[];
 
     // Translation functions separate for clarity -> general and per section
     let t = useTranslations('feedback');
+    const labels = useTranslations("feedback.graph.labels");
+    const anon = useTranslations("donation.anonymisation");
     const ii = useTranslations('feedback.graph.interactionIntensity');
     const dat = useTranslations('feedback.graph.dailyActivityTimes');
     const rt = useTranslations('feedback.graph.responseTimes');
@@ -38,12 +41,26 @@ export default function DataSourceFeedbackSection({ dataSourceValue, graphData }
         setModalContent(null);
     };
 
+    const chatInitial = dataSourceValue[0].toUpperCase();
+    const chatWith: string = labels("chatWith");
+    const contactInitial: string = anon("friendInitial"); //TODO: Change to "contacts" everywhere..
+    const chatLabel: string = anon("chat");
+    const systemName: string = anon("system");
+    const listOfConversations = createListOfConversations(
+        graphData.participantsPerConversation,
+        chatLabel,
+        chatInitial,
+        chatWith,
+        contactInitial,
+        systemName
+    );
+
     const openModalSpan = (content: ReactNode, translator: any, plotName: string) => (
         <span
             style={{color: 'blue', textDecoration: 'underline', cursor: 'pointer'}}
             onClick={() =>
                 openModal(
-                    translator(`${plotName}.title`),
+                    translator(translator.has(`${plotName}.title`) ? `${plotName}.title`: "title"),
                     translator.raw(`${plotName}.example.text`),
                     translator(`${plotName}.example.image`)
                 )
@@ -87,6 +104,8 @@ export default function DataSourceFeedbackSection({ dataSourceValue, graphData }
                     <ChartContainer
                         type="animatedPolarPlot"
                         data={graphData}
+                        listOfConversations={listOfConversations}
+                        dataSourceValue={dataSourceValue}
                     />
                     <Box>
                         <Typography variant="body1" fontWeight="fontWeightBold">
@@ -101,6 +120,8 @@ export default function DataSourceFeedbackSection({ dataSourceValue, graphData }
                     <ChartContainer
                         type="animatedHorizontalBarChart"
                         data={graphData}
+                        listOfConversations={listOfConversations}
+                        dataSourceValue={dataSourceValue}
                     />
                     <Button>{ii('moreAbout')}</Button>
 
@@ -118,6 +139,8 @@ export default function DataSourceFeedbackSection({ dataSourceValue, graphData }
                     <ChartContainer
                         type="DailyActivityHoursPlot"
                         data={graphData}
+                        listOfConversations={listOfConversations}
+                        dataSourceValue={dataSourceValue}
                     />
                     <Button>{dat('moreAbout')}</Button>
 
@@ -135,6 +158,8 @@ export default function DataSourceFeedbackSection({ dataSourceValue, graphData }
                     <ChartContainer
                         type="responseTimeBarChart"
                         data={graphData}
+                        listOfConversations={listOfConversations}
+                        dataSourceValue={dataSourceValue}
                     />
                     <Button>{rt('moreAbout')}</Button>
 

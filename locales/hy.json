@@ -424,10 +424,18 @@
     },
     "selectedDataMessage": "{source}-ում կոնտակտների հնարավոր մեծ թվի պատճառով գրաֆիկներ տրամադրվում են մինչև 10 չատի համար։",
     "reminder": "Մի մոռացեք վերջում  վիճակահանությանը գրանցվել՝ սեղմելով էջի ներքևում գտնվող կոճակը։",
-    "startLabel": "Սկիզբ",
-    "pauseLabel": "Դադար",
     "sourceTitle": "Գրաֆիկներ Ձեր հաղորդագրությունների վերաբերյալ",
     "graph": {
+      "labels": {
+        "startLabel": "Սկիզբ",
+        "pauseLabel": "Դադար",
+        "resetView": "Թարմացնել",
+        "you": "Դուք",
+        "friends": "Ձեր կոնտակտները",
+        "yearMonth": "Տարի-ամիս",
+        "chatWith": "Չատ",
+        "time": "Ժամանակ"
+      },
       "statisticsCard": {
         "title": "Պատկերացում Ձեր ակտիվության մասին",
         "total-messages": "Հաղորդագրությունների քանակ",
@@ -485,7 +493,7 @@
           "description": "Այստեղ պատկերված է, թե ինչ արագությամբ եք Դուք կամ Ձեր կոնտակտները պատասխանում միմյանց հաղորդագրություններին։ Կարող եք տեսնել, թե Ձեր կամ Ձեր կոնտակտների պատասխանների քանի տոկոսն է ուղարկվում  1 րոպեից քիչ,  1-2 րոպե, 3-5 րոպե, 6-15 րոպե, 16-30 րոպե, 31-60 րոպե, կամ  60 րոպեից ավել ժամանակահատվածում։ 60 րոպեն գերազանցող հաղորդագրություններն արտահայտում են համեմատաբար երկար ընդհատումները։ Սեղմեք <button>այստեղ</button> բացատրական օրինակի համար։",
           "legend": {
             "donor": "Ձեր պատասխանների արագությունը",
-            "friends": "Կոնտակտների պատասխանների արագությունը"
+            "contacts": "Կոնտակտների պատասխանների արագությունը"
           },
           "yAxis": "Պատասխանների տոկոսը",
           "xAxis": "Պատասխանի արագություն",
@@ -496,21 +504,14 @@
         },
         "moreAbout": "Ավելին Ձեր պատասխանների արագության մասին"
       },
-
       "messages-over-time": "%s հաղորդագրություն",
-      "time": "Ժամանակ",
       "number-of-messages": "Հաղորդագրությունների քանակ",
       "response-times": "%s պատասխանի արագություն",
       "response-time": "Պատասխանի արագություն",
       "median-response-time": "Պատասխանի արագության միջինը (մեդիան) արժեքը",
       "overview": "Ընդհանուր պատկեր",
       "detail": "Մանրամասներ",
-      "you": "Դուք",
-      "friends": "Ձեր կոնտակտները",
-      "yearMonth": "Տարի-ամիս",
-      "chatWith": "Չատ",
       "overallData": "Բոլոր չատերը",
-      "resetView": "Թարմացնել",
       "example": {
         "title": "Սա  <b> բացատրական օրինակ </b> է, որը <u>հիմնված չէ Ձեր տվյալների վրա </u> ."
       },
@@ -595,7 +596,6 @@
           "text": "<p class=\"text-left\"><b>(1)</b> In this example, in the on the top left selected chat, the longest periods without contact in this first period were mostly under 5 days. For example, in January 2019 (the first month), the length of the longest period without a message is less than 5 days. I.e. in that month, there was no time in the chat when not a single message was written for more than 5 days.</p><p class=\"text-left\"><b>(2)</b> In contrast to (1), the lengths of the conversation pauses are already significantly longer in this area. In some months the longest period without a message is about 10 days. In two months in this time period, there was no activity in this chat for almost 20 days straight.</p><p class=\"text-left\"><b>(3)</b> A dot is visible here, showing that there was not a single message in the selected chat for the whole of July 2021.</p><p class=\"text-left\"><b>(4)</b> Click this icon to download the graph.</p>"
         }
       }
-
     },
     "thanks": "Հուսով ենք հետաքրքիր էր։ Շնորհակալություն։",
     "buttons": {

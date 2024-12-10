@@ -29,9 +29,9 @@ export async function addDonation(
     externalDonorId?: string
 ): Promise<AddDonationResult> {
     const donorId = uuidv4();
-    const dataSourceOptions: DataSource[] = await db.query.dataSources.findMany() as DataSource[];
 
     try {
+        const dataSourceOptions: DataSource[] = await db.query.dataSources.findMany() as DataSource[];
         const transactionResult = await db.transaction(async (tx) => {
             const insertedDonation = await tx.insert(donations).values({
                 donorId,

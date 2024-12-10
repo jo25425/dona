@@ -28,7 +28,9 @@
       "@services/*": ["./src/services/*"],
       "@/*": ["./src/*"]
     },
-    "target": "ESNext"
+    "target": "ESNext",
+    "typeRoots": ["node_modules/@types"],
+    "types": ["d3"]
   },
   "include": [
     "next-env.d.ts",
