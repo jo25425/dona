@@ -88,9 +88,38 @@ __relations:__
 
 ## Maintenance
 
-In order to upgrade the project and its dependencies so it features the latest 
-security and performance updates, you can run the following
-```bash
-pnpm self-update
-pnpm update
-```
+The following guidelines and commands allow to upgrade the project and its dependencies, so that it features the latest 
+security and performance updates:
+
+1. **Keep `pnpm` up-to-date**:
+   ```bash
+   pnpm self update
+   ```
+2. **Update dependencies within the allowed version range**:
+
+   This range is determined upon first installation for each dependency. Updating this way shouldn't cause any breaking changes.
+   ```bash
+   pnpm update
+   ```
+   
+3. **Check for further outdated dependencies**:
+
+   ⚠️ This will indicate dependencies that are outdated; they might have new major or minor versions available and should be updated
+    **one at a time** in order to avoid introducing multiple breaking changes in the codebase at once.
+   ```bash
+   pnpm outdated
+   ```
+   Now each outdated dependency can be updated to either a specific version or the latest version with these commands:
+    ```bash
+    pnpm update <package-name>@2.3.0  // Specific version
+    pnpm update <package-name> --latest  // Latest
+    ```
+
+4. **Verify Compatibility**:
+
+   After each update, check that the project works as expected and resolve any issues:
+   ```bash
+   pnpm why <package-name>
+   ```
+
+🚨 After dependency updates, always execute tests and run the application to ensure all dependencies function correctly.
