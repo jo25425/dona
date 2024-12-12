@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import Plot from "react-plotly.js";
-import { preparePolarChartData } from "./polarChartpreprocessing";
-import { GraphData, SentReceivedPoint } from "@models/graphData";
+import React, {useEffect, useState} from "react";
 import {useTranslations} from "next-intl";
+import {preparePolarChartData} from "./polarChartpreprocessing";
+import {SentReceivedPoint} from "@models/graphData";
+import PlotlyWrapper from "@components/charts/PlotlyWrapper";
 
 const BACKGROUND_IMAGE = "images/charts/FeedbackBackgroundForPolarPlot.svg";
 
@@ -168,16 +168,14 @@ const AnimatedPolarPlot: React.FC<AnimatedPolarPlotProps> = ({ dataMonthlyPerCon
         preprocessAndSetData();
     }, [dataMonthlyPerConversation, listOfConversations, dataSourceType, labels]);
 
-    return layout ? (
-        <Plot
+    return (
+        <PlotlyWrapper
             data={plotData}
             layout={layout}
             frames={frames}
             config={{ responsive: true }}
             style={{ width: "100%", height: "100%" }}
         />
-    ) : (
-        <div>Loading...</div> // TODO Use translated string
     );
 };
 

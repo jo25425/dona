@@ -1,14 +1,32 @@
-import React from "react";
-import Plot from "react-plotly.js";
+import React, {useEffect, useState} from "react";
 import _ from "lodash";
 import {useTranslations} from "next-intl";
 import {AnswerTimePoint} from "@models/graphData";
-import Plotly, {Data, ModeBarDefaultButtons} from "plotly.js";
+import {Config, Data, ModeBarDefaultButtons} from "plotly.js";
 import {getDownloadButtons} from "@components/charts/buttonConfig";
+import PlotlyWrapper from "@components/charts/PlotlyWrapper";
 
 type BarMode = "overlay" | "stack" | "group" | "relative" | undefined;
 type HoverMode = false | "x" | "y" | "closest" | "x unified" | "y unified" | undefined;
 type OrientationMode = "v" | "h" | undefined;
+
+const FIRST = "< 1 min";
+const SECOND = "1-2 min";
+const THIRD = "3-5 min";
+const FOURTH = "6-15 min";
+const FIFTH = "16-30 min";
+const SIXTH = "31-60 min";
+const SEVENTH = "> 60 min";
+
+const ranges = [
+    { max: 60000, label: FIRST },
+    { max: 120000, label: SECOND },
+    { max: 300000, label: THIRD },
+    { max: 900000, label: FOURTH },
+    { max: 1800000, label: FIFTH },
+    { max: 3600000, label: SIXTH },
+    { max: Infinity, label: SEVENTH },
+];
 
 interface ResponseTimeBarChartProps {
     responseTimes: AnswerTimePoint[];
@@ -21,30 +39,12 @@ const ResponseTimesBarChart: React.FC<ResponseTimeBarChartProps> = ({
 }) => {
     const labels = useTranslations("feedback.graph.responseTimes.responseTimeBarChart");
 
-    const FIRST = "< 1 min";
-    const SECOND = "1-2 min";
-    const THIRD = "3-5 min";
-    const FOURTH = "6-15 min";
-    const FIFTH = "16-30 min";
-    const SIXTH = "31-60 min";
-    const SEVENTH = "> 60 min";
-
-    const ranges = [
-        { max: 60000, label: FIRST },
-        { max: 120000, label: SECOND },
-        { max: 300000, label: THIRD },
-        { max: 900000, label: FOURTH },
-        { max: 1800000, label: FIFTH },
-        { max: 3600000, label: SIXTH },
-        { max: Infinity, label: SEVENTH },
-    ];
-
     // Categorize response times
     const categorizeResponseTime = (timeInMs: number) => {
         return ranges.findIndex((range) => timeInMs <= range.max);
     };
 
-    // Group response times by donor/friends
+    // Group response times by donor/contacts
     const groupedByIsDonor = _.groupBy(responseTimes, (responseTime) => responseTime.isFromDonor);
 
     const countByRange = (group: { responseTimeMs: number }[]) => {
@@ -56,17 +56,16 @@ const ResponseTimesBarChart: React.FC<ResponseTimeBarChartProps> = ({
     };
 
     const donorCounts = countByRange(groupedByIsDonor.true || []);
-    const friendCounts = countByRange(groupedByIsDonor.false || []);
+    const contactCounts = countByRange(groupedByIsDonor.false || []);
 
     const donorTotal = donorCounts.reduce((a, b) => a + b, 0);
-    const friendTotal = friendCounts.reduce((a, b) => a + b, 0);
+    const contactTotal = contactCounts.reduce((a, b) => a + b, 0);
 
     const donorPercentages = donorCounts.map((count) => (donorTotal > 0 ? count / donorTotal : 0));
-    const friendPercentages = friendCounts.map((count) => (friendTotal > 0 ? count / friendTotal : 0));
+    const contactPercentages = contactCounts.map((count) => (contactTotal > 0 ? count / contactTotal : 0));
 
-    const maxPercentage = Math.max(...donorPercentages, ...friendPercentages);
+    const maxPercentage = Math.max(...donorPercentages, ...contactPercentages);
 
-    // Plot data
     const data: Data[] = [
         {
             name: labels("legend.donor"),
@@ -82,7 +81,7 @@ const ResponseTimesBarChart: React.FC<ResponseTimeBarChartProps> = ({
                 {
                     name: labels("legend.contacts"),
                     x: ranges.map((range) => range.label),
-                    y: friendPercentages,
+                    y: contactPercentages,
                     type: "bar",
                     marker: { color: "#FF8800" },
                     width: Array(ranges.length).fill(0.5),
@@ -111,7 +110,7 @@ const ResponseTimesBarChart: React.FC<ResponseTimeBarChartProps> = ({
         margin: {l: 50, r: 20, t: 10, b: 50},
     };
 
-    const config: Partial<Plotly.Config> = {
+    const [config, setConfig] = useState<Partial<Config>>({
         responsive: true,
         displaylogo: false,
         modeBarButtonsToRemove: [
@@ -127,11 +126,25 @@ const ResponseTimesBarChart: React.FC<ResponseTimeBarChartProps> = ({
             "autoScale2d",
             "resetScale2d",
             "toImage"
-        ] as ModeBarDefaultButtons[],
-        modeBarButtonsToAdd: getDownloadButtons("response_times_barchart")
-    };
+        ] as ModeBarDefaultButtons[]
+    });
 
-    return <Plot data={data} layout={layout} config={config} />;
+    useEffect(() => {
+        getDownloadButtons("response_times_barchart").then((buttons) => {
+            setConfig((prevConfig) => ({
+                ...prevConfig,
+                modeBarButtonsToAdd: buttons,
+            }));
+        });
+    }, []);
+
+    return (
+        <PlotlyWrapper
+            data={data}
+            layout={layout}
+            config={config}
+        />
+    );
 };
 
 export default ResponseTimesBarChart;

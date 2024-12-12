@@ -274,7 +274,7 @@
       "pseudonyms": "Pseudonyme",
       "contacts": "Kontakte",
       "onlySeven": "Dies sind nur die Kontakte Ihrer 7 Chats, in denen insgesamt die meisten Wörter gesendet wurden. <b>Unten können Sie auch andere Chats auswählen. </b>",
-      "moreFriends": "und {0} weitere.",
+      "moreContacts": "und {0} weitere.",
       "onlyYouInConv": "Nur Sie befinden sich in diesem Chat. Es könnte z.B. sein, dass die andere Person/en den Chat verlassen haben."
     },
     "sendData": {
@@ -289,9 +289,9 @@
     "error": "Es ist ein Fehler aufgetreten:",
     "anonymisation": {
       "donor": "Spender",
-      "friend": "Kontakt",
+      "contact": "Kontakt",
       "chat": "Chat",
-      "friendInitial": "K",
+      "contactInitial": "K",
       "chatInitialW": "W",
       "chatInitialF": "F",
       "chatInitialI": "I",
@@ -429,7 +429,7 @@
         "pauseLabel": "Pause",
         "resetView": "Ansicht zurücksetzen",
         "you": "Sie",
-        "friends": "Kontakte",
+        "contacts": "Kontakte",
         "yearMonth": "Jahr-Monat:",
         "chatWith": "Chat mit:",
         "time": "Zeit"
@@ -580,7 +580,7 @@
         "description": "Hier sehen Sie <u>pro Monat</u> Ihre Antwortzeiten. Die Grafik zeigt den Prozentsatz aller Antworten (d.h. eine Nachricht, die Sie nach einer Nachricht von einem Kontakt gesendet haben), die in der angegebenen Zeit erfolgt sind. Sie können sehen, wie viel Prozent Ihrer Antworten Sie schneller als nach 1 Minute, nach 1–2 Minuten, 3–5 Minuten, 6–15 Minuten, 16–30 Minuten, 31–60 Minuten und langsamer als 60 Minuten gesendet haben. Der Balken für > 60 Minuten beinhaltet auch längere Gesprächspausen.",
         "legend": {
           "donor": "Ihre Antwortzeiten",
-          "friends": "Antwortzeiten Ihrer Kontakte"
+          "contacts": "Antwortzeiten Ihrer Kontakte"
         },
         "yAxis": "Prozentualer Anteil aller Antwortnachrichten",
         "xAxis": "Dauer der Antwort"

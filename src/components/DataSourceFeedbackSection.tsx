@@ -43,7 +43,7 @@ export default function DataSourceFeedbackSection({ dataSourceValue, graphData }
 
     const chatInitial = dataSourceValue[0].toUpperCase();
     const chatWith: string = labels("chatWith");
-    const contactInitial: string = anon("friendInitial"); //TODO: Change to "contacts" everywhere..
+    const contactInitial: string = anon("contactInitial");
     const chatLabel: string = anon("chat");
     const systemName: string = anon("system");
     const listOfConversations = createListOfConversations(

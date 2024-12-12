@@ -274,7 +274,7 @@
       "pseudonyms": "Pseudonyms",
       "contacts": "Contacts",
       "onlySeven": "These are just the contacts of your 7 chats in which overall the most words were sent. <b> Below you can also select different chats. </b>",
-      "moreFriends": "and {0} others.",
+      "moreContacts": "and {0} others.",
       "onlyYouInConv": "You are the only member in this chat. This could be because the other people have left the chat."
     },
     "sendData": {
@@ -290,9 +290,9 @@
     "error": "An error occurred:",
     "anonymisation": {
       "donor": "Donor",
-      "friend": "Contact",
+      "contact": "Contact",
       "chat": "Chat",
-      "friendInitial": "C",
+      "contactInitial": "C",
       "system": "System",
       "chooseUsername": "Please choose your username. Your username will not be saved and we will not know it.",
       "loading": {
@@ -427,7 +427,7 @@
         "pauseLabel": "Pause",
         "resetView": "Reset view",
         "you": "You",
-        "friends": "Contacts",
+        "contacts": "Contacts",
         "yearMonth": "Year-Month:",
         "chatWith": "Chat with:",
         "time": "Time"
@@ -578,7 +578,7 @@
         "description": "Here you see <u>per month</u> your response times. So, the figure shows the percentage of responses (i.e. a message that you sent after a message from a contact) that took place in the specified amount of time. You can see what percentage of your responses you sent quicker than after 1 minute, after 1-2 minutes, 3-5 minutes, 6-15 minutes, 16-30 minutes, 31-60 minutes, and slower than 60 minutes. The bar for > 60 minutes includes longer breaks in the conversation.",
         "legend": {
           "donor": "Your Response Times",
-          "friends": "Contacts Response Times"
+          "contacts": "Contacts Response Times"
         },
         "yAxis": "Percentage of all responses",
         "xAxis": "Time until response"

@@ -28,19 +28,3 @@
 /*  }*/
 /*}*/
 
-.dona-modal {
-    position: absolute;
-    top: 2%;
-    bottom: 2%;
-    left: 50%;
-    width: 90%;
-    max-width: 900px;
-    transform: translate(-50%, 0%);
-    overflow:scroll;
-    display:block;
-    background-color: background.paper;
-    border: 1px solid dimgrey;
-    border-radius: 2px;
-    box-shadow: 30;
-    padding: 4px;
-}

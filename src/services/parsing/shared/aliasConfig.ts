@@ -19,7 +19,7 @@ let aliasConfig: AliasConfig | null = null;
 export function useAliasConfig(): AliasConfig {
     const t = useTranslations("donation.anonymisation");
     if (!aliasConfig) {
-        aliasConfig = new AliasConfig(t('system'), t('friend'), t('donor'), t('chat'));
+        aliasConfig = new AliasConfig(t('system'), t('contact'), t('donor'), t('chat'));
     }
     return aliasConfig;
 }
