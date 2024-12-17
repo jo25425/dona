@@ -4,6 +4,7 @@ import Typography from "@mui/material/Typography";
 import { GraphData } from "@models/graphData";
 import AnimatedPolarPlot from "@components/charts/AnimatedPolarPlot";
 import ResponseTimesBarChart from "@components/charts/ResponseTimesBarChart";
+import AnimatedHorizontalBarChart from "@components/charts/AnimatedHorizontalBarChart";
 
 
 interface ChartContainerProps {
@@ -31,12 +32,19 @@ export default function ChartContainer({ type, data, listOfConversations, dataSo
                         isOnlyOneOrLessConv={listOfConversations.length <= 1}
                     />
                 );
-            // case "anotherChartType":
-            //     return <AnotherChartComponent data={data} dataSourceValue={dataSourceValue} />;
+            case "anotherChartType":
+            case "animatedHorizontalBarChart":
+                return (
+                    <AnimatedHorizontalBarChart
+                        dataMonthlyPerConversation={data.monthlySentReceivedPerConversation}
+                        listOfConversations={listOfConversations}
+                    />
+                );
             default:
                 return (
                     <Box
                         sx={{
+                            width: '100%',
                             border: '1px dashed grey',
                             height: 150,
                             display: 'flex',

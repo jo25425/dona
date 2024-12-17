@@ -7,7 +7,7 @@ import {BasicStatistics} from "@models/graphData";
 
 
 export default function StatisticsCard({ stats }: { stats: BasicStatistics }) {
-    const t = useTranslations("feedback.graph.statisticsCard");
+    const t = useTranslations("feedback.statisticsCard");
 
     return (
         <Grid container spacing={2}>

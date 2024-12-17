@@ -37,7 +37,7 @@ const ResponseTimesBarChart: React.FC<ResponseTimeBarChartProps> = ({
    responseTimes,
    isOnlyOneOrLessConv,
 }) => {
-    const labels = useTranslations("feedback.graph.responseTimes.responseTimeBarChart");
+    const labels = useTranslations("feedback.responseTimes.responseTimeBarChart");
 
     // Categorize response times
     const categorizeResponseTime = (timeInMs: number) => {

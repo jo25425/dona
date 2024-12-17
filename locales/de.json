@@ -423,85 +423,85 @@
     "selectedDataMessage": "Die möglicherweise hohe Anzahl an {source}-Kontakten kann zu einer unübersichtlichen Darstellung führen. Daher werden im Folgenden nur Visualisierungen für Ihre 1-10 ausgewählten {source}-Chats angezeigt.",
     "reminder": "Vergessen Sie nicht, sich unten auf dieser Seite für die Gutscheinverlosung anzumelden.",
     "sourceTitle": "Feedback zu Ihren {source} Nachrichten",
+    "chartLabels": {
+      "start": "Start",
+      "pause": "Pause",
+      "resetView": "Ansicht zurücksetzen",
+      "you": "Sie",
+      "contacts": "Kontakte",
+      "yearMonth": "Jahr-Monat:",
+      "chatWith": "Chat mit:",
+      "time": "Zeit"
+    },
+    "statisticsCard": {
+      "title": "Überblick über die gesamte Aktivität",
+      "total-messages": "Gesamtzahl an Nachrichten",
+      "average-per-active-month": "Durchschnitt pro aktiver Monat",
+      "active-years-explanation_format": "Insgesamt haben Sie in {years} Jahren an Unterhaltungen teilgenommen (d.h. mindestens eine Nachricht innerhalb des Jahres gesendet oder erhalten)",
+      "active-months-explanation_format": "Insgesamt haben Sie in {months} Monaten an Unterhaltungen teilgenommen (d.h. mindestens eine Nachricht innerhalb des Monats gesendet oder erhalten)",
+      "messages": "Nachrichten",
+      "sent": "Gesendet",
+      "received": "Erhalten"
+    },
+    "interactionIntensity": {
+      "title": "Interaktionsintensität",
+      "animatedPolarPlot": {
+        "title": "Planetendarstellung",
+        "description": "In dieser Visualisierung werden Sie als der gelbe Punkt in der Mitte angezeigt. Die von Ihnen gespendeten Chats sind die weißen Punkte um Sie herum. Je mehr Wörter in einem Chat geschrieben haben, desto näher bei Ihnen (gelber Punkt) ist der entsprechende weiße Punkt. Im Zeitschieber unten können den Monat und das Jahr, für welche aktuell die Daten angezeigt werden, sehen und selbst auswählen. Die kleineren helleren weißen Punkte zeigen die Aktivität in den jeweiligen Chats in anderen Monaten. Klicken Sie <button>HIER</button>, um eine Erklärung mit einem Beispiel zu sehen.",
+        "legend": {
+          "donor": "Sie",
+          "others": "Chat Intensität"
+        },
+        "example": {
+          "image": "images/charts/feedback_example_polarPlot_german.svg",
+          "text": "<p><b>(1)</b> Hier ist der weiße voll ausgefüllte Punkt sehr nah an dem gelben Punkt in der Mitte. Das bedeutet, dass in dem unten angezeigten Monat die Kommunikation in diesem Chat im Vergleich zu den vorherigen Monaten und den anderen Chats sehr intensiv war. Die hellen Punkte stehen für die Aktivität in den vorherigen Monaten. Es gibt in diesem Beispiel nur wenige helle kleine Punkte auf der Laufbahn. Das liegt daran, dass die Daten nur wenige Monate umfassen.</p><p><b>(2)</b> Hier sind kaum durchsichtige Verlaufspunkte zu sehen, da diese alle übereinander an ungefähr der gleichen Stelle liegen. Das liegt daran, dass die Intensität über die Monate in diesem Chat sehr stabil war.</p><p><b>(3)</b> Im Kontrast zu (2) sind hier viele durchsichtige Punkte sichtbar. Die Intensität dieses Chats hat sich also über die Monate viel geändert. Im aktuell angezeigten Monat liegt der größere kräftig weiße Punkt weiter entfernt als einige andere hellere Punkte: Dementsprechend gab es in der Zeit davor Monate, in denen mehr Wörter in diesem Chat ausgetauscht wurden. Allerdings gab es auch schon Monate, in denen die Intensität niedriger war.</p><p><b>(4)</b> Klicken Sie auf dieses Symbol, um den Graphen herunterzuladen.</p>"
+        }
+      },
+      "animatedHorizontalBarChart": {
+        "title": "Insgesamt gesendete Wörter",
+        "description": "Hier können Sie die Gesamtanzahl der Wörter sehen, die Sie in Ihren verschiedenen Chats pro Monat gesendet haben. Im Zeitschieber unten können Sie den Monat und das Jahr sehen und selbst auswählen. Klicken Sie <button>HIER</button>, um eine Erklärung mit einem Beispiel zu sehen.",
+        "legend": "Gesendete Wörter",
+        "xAxis": "Anzahl gesendeter Wörter",
+        "example": {
+          "image": "images/charts/feedback_example_horizontalBarChart_german.svg",
+          "text": "<p><b>(1)</b> In diesem Beispiel gab es über den gesamten Zeitraum in diesem Chat mit F9, F10 insgesamt am meisten gesendete Wörter: knapp über 140 Tausend.</p><p><b>(2)</b> Im Kontrast zu (1) gab es in diesem Beispielchat am wenigsten gesendete Wörter.</p><p><b>(3)</b> Hier wird das Jahr und der Monat angezeigt. Pro Monat können Sie beobachten, wie viele Wörter gesendet wurden. Probieren Sie den Zeitschieber aus! </p><p><b>(4)</b> Klicken Sie auf dieses Symbol, um den Graphen herunterzuladen.</p>"
+        }
+      },
+      "moreAbout": "Mehr über Ihre Interaktionsintensität"
+    },
+    "dailyActivityTimes": {
+      "title": "Tägliche Aktivitätszeiten",
+      "dailyActivityHoursPlot": {
+        "description": "In diesem Diagramm können Sie sehen, zu welchen Stunden des Tages Sie während der gesamten Zeitspanne der von Ihnen gespendeten Daten aktiv waren. Wenn Sie in einer Stunde mehr Wörter als üblicherweise gesendet haben, hat diese Stunde (Viereck im Diagramm) eine dunklere Farbe. Wenn die Farbe heller ist, dann haben Sie weniger Wörter als üblicherweise gesendet. Wenn Sie sich einen bestimmten Zeitraum genauer ansehen möchten, können Sie hineinzoomen, indem Sie auf das Diagramm klicken und halten, während Sie die Maus nach links oder rechts bewegen, um das Zeitfenster zu erzeugen, in das Sie hineinzoomen möchten. Klicken Sie <button>HIER</button>, um eine Erklärung mit einem Beispiel zu sehen.",
+        "yAxis": "Uhrzeit",
+        "moreThanAverage": "Mehr als <br> Ihr Durchschnitt",
+        "average": "Ihr Durchschnitt",
+        "lessThanAverage": "Weniger als <br> Ihr Durchschnitt",
+        "example": {
+          "image": "images/charts/feedback_example_dailyActivityHoursPlot_german.svg",
+          "text": "<p><b>(1)</b> In diesem Beispiel lässt sich in diesem Bereich eine Veränderung der Aktivitätszeiten beobachten. In dem Zeitraum bei <b>(2)</b> kann man sehen, dass keine Nachrichten ungefähr zwischen 8:00 Uhr und 12:00 Uhr gesendet wurden. Dann in dem Zeitraum bei <b>(3)</b> hat sich dieser Bereich ohne Nachrichten zu den Uhrzeiten ungefähr zwischen 2:00 Uhr und 6:00 Uhr verschoben. Das könnte zum Beispiel an einem Umzug in eine andere Zeitzone oder an einer Veränderung des Schlafrhythmus liegen.</p><p><b>(4)</b> Zum Beispiel hier lassen sich vermehrt dunkle Vierecke beobachten. In diesem Bereich wurden also überdurchschnittlich viele Nachrichten gesendet.</p><p><b>(5)</b> Klicken Sie auf dieses Symbol, um den Graphen herunterzuladen.</p>"
+        }
+      },
+      "moreAbout": "Mehr über Ihre Täglichen Aktivitätszeiten"
+    },
+    "responseTimes": {
+      "title": "Antwortzeiten",
+      "responseTimeBarChart": {
+        "description": "Hier können Sie sehen, wie schnell Sie Ihren Kontakten antworten und umgekehrt. Sie sehen jeweils wie groß der Anteil aller Ihrer Antworten und der Antworten Ihrer Kontakte ist, die in der angegebenen Zeit erfolgt sind. Antworten sind Nachrichten, die direkt nach einer Nachricht von jemand anderem gesendet wurden. Sie können sehen, wie viel Prozent Ihrer Antworten Sie schneller als nach 1 Minute, nach 1–2 Minuten, 3–5 Minuten, 6–15 Minuten, 16–30 Minuten, 31–60 Minuten und langsamer als 60 Minuten gesendet bzw. empfangen haben. Der Balken für > 60 Minuten beinhaltet auch längere Gesprächspausen. Klicken Sie <button>HIER</button>, um eine Erklärung mit einem Beispiel zu sehen.",
+        "legend": {
+          "donor": "Ihre Antwortzeiten",
+          "contacts": "Antwortzeiten Ihrer Kontakte"
+        },
+        "yAxis": "Prozentualer Anteil aller Antwortnachrichten",
+        "xAxis": "Dauer der Antwort",
+        "example": {
+          "image": "images/charts/feedback_example_responseTimeBarChart_german.svg",
+          "text": "<p><b>(1)</b> In diesem Beispiel können Sie sehen, dass mehr als 40% aller Antworten in unter einer Minute gesendet und empfangen wurden. Knapp unter 30% aller Antworten wurden in 1-2 Minuten gesendet und knapp 30% aller Antworten in 1-2 Minuten empfangen. Also wurden insgesamt rund 70 % aller gesendeten Antworten in weniger als zwei Minuten versendet und rund 70 % aller eingegangenen Antworten gingen in weniger als zwei Minuten ein.<p><b>(2)</b> Klicken Sie auf dieses Symbol, um den Graphen herunterzuladen.</p>"
+        }
+      },
+      "moreAbout": "Mehr über Ihre Antwortzeiten"
+    },
     "graph": {
-      "labels": {
-        "startLabel": "Start",
-        "pauseLabel": "Pause",
-        "resetView": "Ansicht zurücksetzen",
-        "you": "Sie",
-        "contacts": "Kontakte",
-        "yearMonth": "Jahr-Monat:",
-        "chatWith": "Chat mit:",
-        "time": "Zeit"
-      },
-      "statisticsCard": {
-        "title": "Überblick über die gesamte Aktivität",
-        "total-messages": "Gesamtzahl an Nachrichten",
-        "average-per-active-month": "Durchschnitt pro aktiver Monat",
-        "active-years-explanation_format": "Insgesamt haben Sie in {years} Jahren an Unterhaltungen teilgenommen (d.h. mindestens eine Nachricht innerhalb des Jahres gesendet oder erhalten)",
-        "active-months-explanation_format": "Insgesamt haben Sie in {months} Monaten an Unterhaltungen teilgenommen (d.h. mindestens eine Nachricht innerhalb des Monats gesendet oder erhalten)",
-        "messages": "Nachrichten",
-        "sent": "Gesendet",
-        "received": "Erhalten"
-      },
-      "interactionIntensity": {
-        "title": "Interaktionsintensität",
-        "animatedPolarPlot": {
-          "title": "Planetendarstellung",
-          "description": "In dieser Visualisierung werden Sie als der gelbe Punkt in der Mitte angezeigt. Die von Ihnen gespendeten Chats sind die weißen Punkte um Sie herum. Je mehr Wörter in einem Chat geschrieben haben, desto näher bei Ihnen (gelber Punkt) ist der entsprechende weiße Punkt. Im Zeitschieber unten können den Monat und das Jahr, für welche aktuell die Daten angezeigt werden, sehen und selbst auswählen. Die kleineren helleren weißen Punkte zeigen die Aktivität in den jeweiligen Chats in anderen Monaten. Klicken Sie <button>HIER</button>, um eine Erklärung mit einem Beispiel zu sehen.",
-          "legend": {
-            "donor": "Sie",
-            "others": "Chat Intensität"
-          },
-          "example": {
-            "image": "images/charts/feedback_example_polarPlot_german.svg",
-            "text": "<p><b>(1)</b> Hier ist der weiße voll ausgefüllte Punkt sehr nah an dem gelben Punkt in der Mitte. Das bedeutet, dass in dem unten angezeigten Monat die Kommunikation in diesem Chat im Vergleich zu den vorherigen Monaten und den anderen Chats sehr intensiv war. Die hellen Punkte stehen für die Aktivität in den vorherigen Monaten. Es gibt in diesem Beispiel nur wenige helle kleine Punkte auf der Laufbahn. Das liegt daran, dass die Daten nur wenige Monate umfassen.</p><p><b>(2)</b> Hier sind kaum durchsichtige Verlaufspunkte zu sehen, da diese alle übereinander an ungefähr der gleichen Stelle liegen. Das liegt daran, dass die Intensität über die Monate in diesem Chat sehr stabil war.</p><p><b>(3)</b> Im Kontrast zu (2) sind hier viele durchsichtige Punkte sichtbar. Die Intensität dieses Chats hat sich also über die Monate viel geändert. Im aktuell angezeigten Monat liegt der größere kräftig weiße Punkt weiter entfernt als einige andere hellere Punkte: Dementsprechend gab es in der Zeit davor Monate, in denen mehr Wörter in diesem Chat ausgetauscht wurden. Allerdings gab es auch schon Monate, in denen die Intensität niedriger war.</p><p><b>(4)</b> Klicken Sie auf dieses Symbol, um den Graphen herunterzuladen.</p>"
-          }
-        },
-        "animatedHorizontalBarChart": {
-          "title": "Insgesamt gesendete Wörter",
-          "description": "Hier können Sie die Gesamtanzahl der Wörter sehen, die Sie in Ihren verschiedenen Chats pro Monat gesendet haben. Im Zeitschieber unten können Sie den Monat und das Jahr sehen und selbst auswählen. Klicken Sie <button>HIER</button>, um eine Erklärung mit einem Beispiel zu sehen.",
-          "legend": "Gesendete Wörter",
-          "xAxis": "Anzahl gesendeter Wörter",
-          "example": {
-            "image": "images/charts/feedback_example_horizontalBarChart_german.svg",
-            "text": "<p><b>(1)</b> In diesem Beispiel gab es über den gesamten Zeitraum in diesem Chat mit F9, F10 insgesamt am meisten gesendete Wörter: knapp über 140 Tausend.</p><p><b>(2)</b> Im Kontrast zu (1) gab es in diesem Beispielchat am wenigsten gesendete Wörter.</p><p><b>(3)</b> Hier wird das Jahr und der Monat angezeigt. Pro Monat können Sie beobachten, wie viele Wörter gesendet wurden. Probieren Sie den Zeitschieber aus! </p><p><b>(4)</b> Klicken Sie auf dieses Symbol, um den Graphen herunterzuladen.</p>"
-          }
-        },
-        "moreAbout": "Mehr über Ihre Interaktionsintensität"
-      },
-      "dailyActivityTimes": {
-        "title": "Tägliche Aktivitätszeiten",
-        "dailyActivityHoursPlot": {
-          "description": "In diesem Diagramm können Sie sehen, zu welchen Stunden des Tages Sie während der gesamten Zeitspanne der von Ihnen gespendeten Daten aktiv waren. Wenn Sie in einer Stunde mehr Wörter als üblicherweise gesendet haben, hat diese Stunde (Viereck im Diagramm) eine dunklere Farbe. Wenn die Farbe heller ist, dann haben Sie weniger Wörter als üblicherweise gesendet. Wenn Sie sich einen bestimmten Zeitraum genauer ansehen möchten, können Sie hineinzoomen, indem Sie auf das Diagramm klicken und halten, während Sie die Maus nach links oder rechts bewegen, um das Zeitfenster zu erzeugen, in das Sie hineinzoomen möchten. Klicken Sie <button>HIER</button>, um eine Erklärung mit einem Beispiel zu sehen.",
-          "yAxis": "Uhrzeit",
-          "moreThanAverage": "Mehr als <br> Ihr Durchschnitt",
-          "average": "Ihr Durchschnitt",
-          "lessThanAverage": "Weniger als <br> Ihr Durchschnitt",
-          "example": {
-            "image": "images/charts/feedback_example_dailyActivityHoursPlot_german.svg",
-            "text": "<p><b>(1)</b> In diesem Beispiel lässt sich in diesem Bereich eine Veränderung der Aktivitätszeiten beobachten. In dem Zeitraum bei <b>(2)</b> kann man sehen, dass keine Nachrichten ungefähr zwischen 8:00 Uhr und 12:00 Uhr gesendet wurden. Dann in dem Zeitraum bei <b>(3)</b> hat sich dieser Bereich ohne Nachrichten zu den Uhrzeiten ungefähr zwischen 2:00 Uhr und 6:00 Uhr verschoben. Das könnte zum Beispiel an einem Umzug in eine andere Zeitzone oder an einer Veränderung des Schlafrhythmus liegen.</p><p><b>(4)</b> Zum Beispiel hier lassen sich vermehrt dunkle Vierecke beobachten. In diesem Bereich wurden also überdurchschnittlich viele Nachrichten gesendet.</p><p><b>(5)</b> Klicken Sie auf dieses Symbol, um den Graphen herunterzuladen.</p>"
-          }
-        },
-        "moreAbout": "Mehr über Ihre Täglichen Aktivitätszeiten"
-      },
-      "responseTimes": {
-        "title": "Antwortzeiten",
-        "responseTimeBarChart": {
-          "description": "Hier können Sie sehen, wie schnell Sie Ihren Kontakten antworten und umgekehrt. Sie sehen jeweils wie groß der Anteil aller Ihrer Antworten und der Antworten Ihrer Kontakte ist, die in der angegebenen Zeit erfolgt sind. Antworten sind Nachrichten, die direkt nach einer Nachricht von jemand anderem gesendet wurden. Sie können sehen, wie viel Prozent Ihrer Antworten Sie schneller als nach 1 Minute, nach 1–2 Minuten, 3–5 Minuten, 6–15 Minuten, 16–30 Minuten, 31–60 Minuten und langsamer als 60 Minuten gesendet bzw. empfangen haben. Der Balken für > 60 Minuten beinhaltet auch längere Gesprächspausen. Klicken Sie <button>HIER</button>, um eine Erklärung mit einem Beispiel zu sehen.",
-          "legend": {
-            "donor": "Ihre Antwortzeiten",
-            "contacts": "Antwortzeiten Ihrer Kontakte"
-          },
-          "yAxis": "Prozentualer Anteil aller Antwortnachrichten",
-          "xAxis": "Dauer der Antwort",
-          "example": {
-            "image": "images/charts/feedback_example_responseTimeBarChart_german.svg",
-            "text": "<p><b>(1)</b> In diesem Beispiel können Sie sehen, dass mehr als 40% aller Antworten in unter einer Minute gesendet und empfangen wurden. Knapp unter 30% aller Antworten wurden in 1-2 Minuten gesendet und knapp 30% aller Antworten in 1-2 Minuten empfangen. Also wurden insgesamt rund 70 % aller gesendeten Antworten in weniger als zwei Minuten versendet und rund 70 % aller eingegangenen Antworten gingen in weniger als zwei Minuten ein.<p><b>(2)</b> Klicken Sie auf dieses Symbol, um den Graphen herunterzuladen.</p>"
-          }
-        },
-        "moreAbout": "Mehr über Ihre Antwortzeiten"
-      },
       "messages-over-time": "%s Nachrichten über die Zeit",
       "number-of-messages": "Anzahl der Nachrichten",
       "response-times": "%s Antwortszeiten",

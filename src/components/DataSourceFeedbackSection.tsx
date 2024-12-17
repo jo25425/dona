@@ -21,11 +21,11 @@ export default function DataSourceFeedbackSection({ dataSourceValue, graphData }
 
     // Translation functions separate for clarity -> general and per section
     let t = useTranslations('feedback');
-    const labels = useTranslations("feedback.graph.labels");
+    const labels = useTranslations("feedback.chartLabels");
     const anon = useTranslations("donation.anonymisation");
-    const ii = useTranslations('feedback.graph.interactionIntensity');
-    const dat = useTranslations('feedback.graph.dailyActivityTimes');
-    const rt = useTranslations('feedback.graph.responseTimes');
+    const ii = useTranslations('feedback.interactionIntensity');
+    const dat = useTranslations('feedback.dailyActivityTimes');
+    const rt = useTranslations('feedback.responseTimes');
 
     // State
     const [modalContent, setModalContent] = useState<{ title: string; contentHtml: string; imageSrc?: string } | null>(null);
@@ -85,7 +85,7 @@ export default function DataSourceFeedbackSection({ dataSourceValue, graphData }
 
                     {/* Statistics card */}
                     <Typography variant="h6" >
-                        {t("graph.statisticsCard.title")}
+                        {t("statisticsCard.title")}
                     </Typography>
                     <StatisticsCard stats={graphData.basicStatistics} />
 

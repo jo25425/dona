@@ -13,7 +13,7 @@ interface AnimatedPolarPlotProps {
 }
 
 const AnimatedPolarPlot: React.FC<AnimatedPolarPlotProps> = ({ dataMonthlyPerConversation, listOfConversations, dataSourceType }) => {
-    const labels = useTranslations("feedback.graph.labels");
+    const labels = useTranslations("feedback.chartLabels");
     const [plotData, setPlotData] = useState<any[]>([]);
     const [frames, setFrames] = useState<any[]>([]);
     const [layout, setLayout] = useState<any>(null);
@@ -144,7 +144,7 @@ const AnimatedPolarPlot: React.FC<AnimatedPolarPlotProps> = ({ dataMonthlyPerCon
                                         frame: {duration: 300, redraw: true}
                                     }
                                 ],
-                                label: labels("startLabel")
+                                label: labels("start")
                             },
                             {
                                 method: 'animate',
@@ -153,7 +153,7 @@ const AnimatedPolarPlot: React.FC<AnimatedPolarPlotProps> = ({ dataMonthlyPerCon
                                     transition: {duration: 0},
                                     frame: {duration: 0, redraw: true}
                                 }],
-                                label: labels("pauseLabel")
+                                label: labels("pause")
                             }
                         ]
                     }
