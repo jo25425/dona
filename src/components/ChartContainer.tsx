@@ -2,9 +2,9 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { GraphData } from "@models/graphData";
-import AnimatedPolarPlot from "@components/charts/AnimatedPolarPlot";
 import ResponseTimesBarChart from "@components/charts/ResponseTimesBarChart";
 import AnimatedHorizontalBarChart from "@components/charts/AnimatedHorizontalBarChart";
+import AnimatedPolarChart from "@components/charts/AnimatedPolarChart";
 
 
 interface ChartContainerProps {
@@ -19,9 +19,8 @@ export default function ChartContainer({ type, data, listOfConversations, dataSo
         switch (type) {
             case "animatedPolarPlot":
                 return (
-                    <AnimatedPolarPlot
+                    <AnimatedPolarChart
                         dataMonthlyPerConversation={data.monthlySentReceivedPerConversation}
-                        dataSourceType={dataSourceValue}
                         listOfConversations={listOfConversations}
                     />
                 );

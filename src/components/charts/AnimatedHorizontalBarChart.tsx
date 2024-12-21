@@ -6,6 +6,7 @@ import SliderWithButtons from "./SliderWithButtons";
 import {SentReceivedPoint} from "@models/graphData";
 import {useTranslations} from "next-intl";
 import {DownloadButtons} from "@components/charts/DonwloadButtons";
+import {prepareCountsOverTimeData} from "@components/charts/animationPreprocessing";
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
@@ -13,35 +14,6 @@ interface AnimatedHorizontalBarChartProps {
     dataMonthlyPerConversation: SentReceivedPoint[][];
     listOfConversations: string[];
 }
-
-const preprocessData = (dataMonthlyPerConversation: SentReceivedPoint[][], listOfConversations: string[]) => {
-    const counts: Record<string, number[]> = {};
-    const monthsSet = new Set<string>();
-    let globalMax = 0;
-
-    dataMonthlyPerConversation.forEach((conversationData, convIdx) => {
-        let cumulativeSum = 0;
-        conversationData.forEach((dataPoint) => {
-            const monthKey = `${dataPoint.year}-${dataPoint.month.toString().padStart(2, "0")}`;
-            monthsSet.add(monthKey);
-
-            if (!counts[monthKey]) counts[monthKey] = Array(listOfConversations.length).fill(0);
-            cumulativeSum += dataPoint.sentCount || 0;
-            counts[monthKey][convIdx] = cumulativeSum;
-
-            if (cumulativeSum > globalMax) globalMax = cumulativeSum;
-        });
-    });
-
-    const sortedMonths = Array.from(monthsSet).sort();
-    let lastValues = Array(listOfConversations.length).fill(0);
-    sortedMonths.forEach((monthKey) => {
-        if (!counts[monthKey]) counts[monthKey] = [...lastValues];
-        lastValues = counts[monthKey];
-    });
-
-    return { counts, sortedMonths, globalMax };
-};
 
 const AnimatedHorizontalBarChart: React.FC<AnimatedHorizontalBarChartProps> = ({
                                                                                    dataMonthlyPerConversation,
@@ -57,7 +29,7 @@ const AnimatedHorizontalBarChart: React.FC<AnimatedHorizontalBarChartProps> = ({
     const [currentFrame, setCurrentFrame] = useState<number>(0);
 
     useEffect(() => {
-        const { counts, sortedMonths, globalMax } = preprocessData(dataMonthlyPerConversation, listOfConversations);
+        const { counts, sortedMonths, globalMax } = prepareCountsOverTimeData(dataMonthlyPerConversation, listOfConversations);
         setCumulativeCounts(counts);
         setLabels(sortedMonths);
         setGlobalMax(globalMax);
@@ -117,8 +89,6 @@ const AnimatedHorizontalBarChart: React.FC<AnimatedHorizontalBarChartProps> = ({
                 value={currentFrame}
                 marks={labels.map((label, index) => ({ value: index, label }))}
                 setCurrentFrame={setCurrentFrame}
-                // onChange={(value) => setCurrentFrame(value)}
-                // onStart={handleStartAnimation}
             />
         </Box>
     );
