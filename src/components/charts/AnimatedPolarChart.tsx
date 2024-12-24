@@ -8,7 +8,6 @@ import { prepareCountsOverTimeData } from "@components/charts/animationPreproces
 import { DownloadButtons } from "@components/charts/DonwloadButtons";
 import { useTranslations } from "next-intl";
 
-// Register Chart.js components
 ChartJS.register(RadialLinearScale, Tooltip, Legend, LineElement, PointElement);
 
 const Z_SCORE_LIMIT = 1.96;
@@ -23,6 +22,9 @@ const AnimatedPolarChart: React.FC<AnimatedPolarChartProps> = ({
                                                                    dataMonthlyPerConversation,
                                                                    listOfConversations,
                                                                }) => {
+    const CHART_NAME = "intensity-interaction-polar";
+    const container_name = `chart-wrapper-${CHART_NAME}`;
+
     const labelTexts = useTranslations("feedback.chartLabels");
     const chartTexts = useTranslations("feedback.interactionIntensity.animatedPolarPlot");
 
@@ -89,7 +91,7 @@ const AnimatedPolarChart: React.FC<AnimatedPolarChartProps> = ({
     return (
         <Box p={2}>
             <Box
-                id="chart-wrapper"
+                id={container_name}
                 position="relative"
             >
                 <Box
@@ -97,14 +99,14 @@ const AnimatedPolarChart: React.FC<AnimatedPolarChartProps> = ({
                     display="flex"
                     justifyContent="space-between"
                     alignItems="center"
-                    sx={{zIndex: 1, ml: 1, mb: -4}}
+                    sx={{zIndex: 1, ml: 1, mb: -4, color: "#ccc"}}
                 >
                     <Typography variant="body2" align="right" sx={{color: "#ccc"}}>
                         <b>{labelTexts("yearMonth")}</b> {labels[currentFrame]}
                     </Typography>
                     <DownloadButtons
-                        chartId="chart-wrapper"
-                        fileNamePrefix="intensity-interaction-polar"
+                        chartId={container_name}
+                        fileNamePrefix={CHART_NAME}
                         currentLabel={labels[currentFrame]}
                     />
                 </Box>

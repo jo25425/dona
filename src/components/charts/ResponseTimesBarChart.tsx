@@ -1,14 +1,11 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
+import { Bar } from "react-chartjs-2";
+import { Box, Typography } from "@mui/material";
+import { useTranslations } from "next-intl";
 import _ from "lodash";
-import {useTranslations} from "next-intl";
-import {AnswerTimePoint} from "@models/graphData";
-import {Config, Data, ModeBarDefaultButtons} from "plotly.js";
-import {getDownloadButtons} from "@components/charts/buttonConfig";
-import PlotlyWrapper from "@components/charts/PlotlyWrapper";
-
-type BarMode = "overlay" | "stack" | "group" | "relative" | undefined;
-type HoverMode = false | "x" | "y" | "closest" | "x unified" | "y unified" | undefined;
-type OrientationMode = "v" | "h" | undefined;
+import { AnswerTimePoint } from "@models/graphData";
+import {DownloadButtons} from "@components/charts/DonwloadButtons";
+import {ChartDataset} from "chart.js";
 
 const FIRST = "< 1 min";
 const SECOND = "1-2 min";
@@ -28,16 +25,19 @@ const ranges = [
     { max: Infinity, label: SEVENTH },
 ];
 
-interface ResponseTimeBarChartProps {
+interface ResponseTimesBarChartProps {
     responseTimes: AnswerTimePoint[];
     isOnlyOneOrLessConv: boolean;
 }
 
-const ResponseTimesBarChart: React.FC<ResponseTimeBarChartProps> = ({
-   responseTimes,
-   isOnlyOneOrLessConv,
-}) => {
-    const labels = useTranslations("feedback.responseTimes.responseTimeBarChart");
+const ResponseTimesBarChart: React.FC<ResponseTimesBarChartProps> = ({
+                                                                         responseTimes,
+                                                                         isOnlyOneOrLessConv,
+                                                                     }) => {
+    const CHART_NAME = "response-times-barchart";
+    const container_name = `chart-wrapper-${CHART_NAME}`;
+
+    const chartTexts = useTranslations("feedback.responseTimes.responseTimeBarChart");
 
     // Categorize response times
     const categorizeResponseTime = (timeInMs: number) => {
@@ -61,89 +61,66 @@ const ResponseTimesBarChart: React.FC<ResponseTimeBarChartProps> = ({
     const donorTotal = donorCounts.reduce((a, b) => a + b, 0);
     const contactTotal = contactCounts.reduce((a, b) => a + b, 0);
 
-    const donorPercentages = donorCounts.map((count) => (donorTotal > 0 ? count / donorTotal : 0));
-    const contactPercentages = contactCounts.map((count) => (contactTotal > 0 ? count / contactTotal : 0));
+    const donorPercentages = donorCounts.map((count) => (donorTotal > 0 ? (count / donorTotal) * 100 : 0));
+    const contactPercentages = contactCounts.map((count) => (contactTotal > 0 ? (count / contactTotal) * 100 : 0));
 
-    const maxPercentage = Math.max(...donorPercentages, ...contactPercentages);
-
-    const data: Data[] = [
-        {
-            name: labels("legend.donor"),
-            x: ranges.map((range) => range.label),
-            y: donorPercentages,
-            type: "bar",
-            marker: { color: "#60BDFF" },
-            width: Array(ranges.length).fill(0.8),
-        },
-        ...(isOnlyOneOrLessConv
-            ? []
-            : [
-                {
-                    name: labels("legend.contacts"),
-                    x: ranges.map((range) => range.label),
-                    y: contactPercentages,
-                    type: "bar",
-                    marker: { color: "#FF8800" },
-                    width: Array(ranges.length).fill(0.5),
-                } as Data,
-            ]),
-    ];
-
-    const layout = {
-        xaxis: {
-            title: labels("xAxis"),
-            fixedrange: true,
-            tickfont: { size: 12 }
-        },
-        yaxis: {
-            title: labels("yAxis"),
-            range: [0, maxPercentage],
-            tickformat: ".0%",
-            hoverformat: ".2%",
-            fixedrange: true,
-            tickfont: { size: 12 },
-        },
-        barmode: "overlay" as BarMode,
-        legend: { x: -0, y: 1.2, orientation: "h" as OrientationMode }, // Horizontal legend to save space
-        hovermode: "x" as HoverMode,
-        autosize: true,
-        margin: {l: 50, r: 20, t: 10, b: 50},
+    const data = {
+        labels: ranges.map((range) => range.label),
+        datasets: [
+            {
+                label: chartTexts("legend.donor"),
+                data: donorPercentages,
+                backgroundColor: "rgba(31, 119, 180, 0.6)",
+                borderColor: "#1f77b4",
+                borderWidth: 1,
+                barPercentage: 0.8
+            },
+            !isOnlyOneOrLessConv && {
+                label: chartTexts("legend.contacts"),
+                data: contactPercentages,
+                backgroundColor: "rgba(255, 136, 0, 0.6)",
+                borderColor: "#FF8800",
+                borderWidth: 1,
+                barPercentage: 0.5
+            },
+        ].filter(Boolean) as ChartDataset<"bar", number[]>[],
     };
 
-    const [config, setConfig] = useState<Partial<Config>>({
+    const options = {
         responsive: true,
-        displaylogo: false,
-        modeBarButtonsToRemove: [
-            "zoomIn2d",
-            "zoomOut2d",
-            "pan2d",
-            "zoom2d",
-            "select2d",
-            "lasso2d",
-            "hoverClosestCartesian",
-            "hoverCompareCartesian",
-            "toggleSpikelines",
-            "autoScale2d",
-            "resetScale2d",
-            "toImage"
-        ] as ModeBarDefaultButtons[]
-    });
-
-    useEffect(() => {
-        getDownloadButtons("response_times_barchart").then((buttons) => {
-            setConfig((prevConfig) => ({
-                ...prevConfig,
-                modeBarButtonsToAdd: buttons,
-            }));
-        });
-    }, []);
+        plugins: {
+            legend: { position: "top" as const },
+            tooltip: {
+                callbacks: { label: (context: any) => `${context.raw?.toFixed(2)}%` },
+            },
+        },
+        scales: {
+            x: {
+                title: { display: true, text: chartTexts("xAxis") },
+                grid: { drawOnChartArea: false },
+                stacked: true
+            },
+            y: {
+                title: { display: true, text: chartTexts("yAxis") },
+                ticks: { callback: (value: number | string) => `${value}%` },
+            },
+        }
+    };
 
     return (
-        <PlotlyWrapper
-            data={data}
-            layout={layout}
-            config={config}
-        />
+        <Box p={2} pt={0} id={container_name} position="relative">
+
+            <Box display="flex" justifyContent="right" alignItems="center" mb={-2}>
+                <DownloadButtons
+                    chartId={container_name}
+                    fileNamePrefix={CHART_NAME}
+                />
+            </Box>
+
+            <Box sx={{width: "100%", height: 400}}>
+                <Bar data={data} options={options} />
+            </Box>
+        </Box>
     );
 };
 

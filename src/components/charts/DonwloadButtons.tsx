@@ -6,7 +6,7 @@ import { toPng, toSvg } from "html-to-image";
 interface DownloadButtonsProps {
     chartId: string;
     fileNamePrefix: string;
-    currentLabel: string;
+    currentLabel?: string;
 }
 
 export const DownloadButtons: React.FC<DownloadButtonsProps> = ({
@@ -25,7 +25,7 @@ export const DownloadButtons: React.FC<DownloadButtonsProps> = ({
 
             const link = document.createElement("a");
             link.href = dataUrl;
-            link.download = `${fileNamePrefix}-${currentLabel}.${format}`;
+            link.download = currentLabel? `${fileNamePrefix}-${currentLabel}.${format}` : `${fileNamePrefix}.${format}`;
             link.click();
         } catch (error) {
             console.error("Error exporting chart:", error);

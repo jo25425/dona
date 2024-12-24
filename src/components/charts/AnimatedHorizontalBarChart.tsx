@@ -19,6 +19,9 @@ const AnimatedHorizontalBarChart: React.FC<AnimatedHorizontalBarChartProps> = ({
                                                                                    dataMonthlyPerConversation,
                                                                                    listOfConversations,
                                                                                }) => {
+    const CHART_NAME = "intensity-interaction-hbarchart";
+    const container_name = `chart-wrapper-${CHART_NAME}`;
+
     const labelTexts = useTranslations("feedback.chartLabels");
     const chartTexts = useTranslations("feedback.interactionIntensity.animatedHorizontalBarChart");
 
@@ -43,7 +46,7 @@ const AnimatedHorizontalBarChart: React.FC<AnimatedHorizontalBarChartProps> = ({
                 {
                     label: chartTexts("legend"),
                     data: cumulativeCounts[monthKey] || [],
-                    backgroundColor: "#60BDFF",
+                    backgroundColor: "#1f77b4",
                     barThickness: 20,
                 },
             ],
@@ -52,15 +55,15 @@ const AnimatedHorizontalBarChart: React.FC<AnimatedHorizontalBarChartProps> = ({
 
     return (
         <Box>
-            <Box id="chart-wrapper" position="relative" px={2} py={2}>
+            <Box id={container_name} position="relative" px={2} py={2}>
 
                 <Box display="flex" justifyContent="space-between" alignItems="center" mb={-2}>
                     <Typography variant="body2" align="right" mt={1} mb={-1}>
                         <b>{labelTexts("yearMonth")}</b> {labels[currentFrame]}
                     </Typography>
                     <DownloadButtons
-                        chartId="chart-wrapper"
-                        fileNamePrefix="intensity-interaction-hbar"
+                        chartId={container_name}
+                        fileNamePrefix={CHART_NAME}
                         currentLabel={labels[currentFrame]}
                     />
                 </Box>
