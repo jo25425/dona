@@ -1,12 +1,13 @@
 import React, {useEffect, useRef, useState} from "react";
 import {Bar} from "react-chartjs-2";
 import {BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, Tooltip} from "chart.js";
-import {Box, Typography} from "@mui/material";
-import SliderWithButtons from "./SliderWithButtons";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import SliderWithButtons from "@components/charts/SliderWithButtons";
 import {SentReceivedPoint} from "@models/graphData";
 import {useTranslations} from "next-intl";
 import {DownloadButtons} from "@components/charts/DonwloadButtons";
-import {prepareCountsOverTimeData} from "@components/charts/animationPreprocessing";
+import {prepareCountsOverTimeData} from "@services/charts/animations";
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 

@@ -1,11 +1,11 @@
 import React from "react";
 import { Bar } from "react-chartjs-2";
-import { Box, Typography } from "@mui/material";
+import Box from "@mui/material/Box";
 import { useTranslations } from "next-intl";
 import _ from "lodash";
 import { AnswerTimePoint } from "@models/graphData";
-import {DownloadButtons} from "@components/charts/DonwloadButtons";
-import {ChartDataset} from "chart.js";
+import { DownloadButtons } from "@components/charts/DonwloadButtons";
+import { ChartDataset } from "chart.js";
 
 const FIRST = "< 1 min";
 const SECOND = "1-2 min";
@@ -39,12 +39,10 @@ const ResponseTimesBarChart: React.FC<ResponseTimesBarChartProps> = ({
 
     const chartTexts = useTranslations("feedback.responseTimes.responseTimeBarChart");
 
-    // Categorize response times
     const categorizeResponseTime = (timeInMs: number) => {
         return ranges.findIndex((range) => timeInMs <= range.max);
     };
 
-    // Group response times by donor/contacts
     const groupedByIsDonor = _.groupBy(responseTimes, (responseTime) => responseTime.isFromDonor);
 
     const countByRange = (group: { responseTimeMs: number }[]) => {
@@ -64,26 +62,34 @@ const ResponseTimesBarChart: React.FC<ResponseTimesBarChartProps> = ({
     const donorPercentages = donorCounts.map((count) => (donorTotal > 0 ? (count / donorTotal) * 100 : 0));
     const contactPercentages = contactCounts.map((count) => (contactTotal > 0 ? (count / contactTotal) * 100 : 0));
 
+    const datasets: ChartDataset<"bar", number[]>[] = [
+        {
+            label: chartTexts("legend.donor"),
+            data: donorPercentages,
+            backgroundColor: "rgba(31, 119, 180, 0.75)",
+            borderColor: "#1f77b4",
+            borderWidth: 1,
+            barPercentage: 0.8,
+        },
+        !isOnlyOneOrLessConv && {
+            label: chartTexts("legend.contacts"),
+            data: contactPercentages,
+            backgroundColor: "rgba(255, 136, 0, 0.75)",
+            borderColor: "#FF8800",
+            borderWidth: 1,
+            barPercentage: 0.5,
+        },
+    ].filter(Boolean) as ChartDataset<"bar", number[]>[];
+
+    const sortedDatasets = datasets.sort((a, b) => {
+        const aTotal = _.sum(a.data);
+        const bTotal = _.sum(b.data);
+        return aTotal - bTotal; // Ensure shorter datasets render on top
+    });
+
     const data = {
         labels: ranges.map((range) => range.label),
-        datasets: [
-            {
-                label: chartTexts("legend.donor"),
-                data: donorPercentages,
-                backgroundColor: "rgba(31, 119, 180, 0.6)",
-                borderColor: "#1f77b4",
-                borderWidth: 1,
-                barPercentage: 0.8
-            },
-            !isOnlyOneOrLessConv && {
-                label: chartTexts("legend.contacts"),
-                data: contactPercentages,
-                backgroundColor: "rgba(255, 136, 0, 0.6)",
-                borderColor: "#FF8800",
-                borderWidth: 1,
-                barPercentage: 0.5
-            },
-        ].filter(Boolean) as ChartDataset<"bar", number[]>[],
+        datasets: sortedDatasets,
     };
 
     const options = {
@@ -98,26 +104,21 @@ const ResponseTimesBarChart: React.FC<ResponseTimesBarChartProps> = ({
             x: {
                 title: { display: true, text: chartTexts("xAxis") },
                 grid: { drawOnChartArea: false },
-                stacked: true
+                stacked: true,
             },
             y: {
                 title: { display: true, text: chartTexts("yAxis") },
                 ticks: { callback: (value: number | string) => `${value}%` },
             },
-        }
+        },
     };
 
     return (
         <Box p={2} pt={0} id={container_name} position="relative">
-
             <Box display="flex" justifyContent="right" alignItems="center" mb={-2}>
-                <DownloadButtons
-                    chartId={container_name}
-                    fileNamePrefix={CHART_NAME}
-                />
+                <DownloadButtons chartId={container_name} fileNamePrefix={CHART_NAME} />
             </Box>
-
-            <Box sx={{width: "100%", height: 400}}>
+            <Box sx={{ width: "100%", height: 400 }}>
                 <Bar data={data} options={options} />
             </Box>
         </Box>

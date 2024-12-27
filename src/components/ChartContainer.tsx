@@ -5,6 +5,7 @@ import { GraphData } from "@models/graphData";
 import ResponseTimesBarChart from "@components/charts/ResponseTimesBarChart";
 import AnimatedHorizontalBarChart from "@components/charts/AnimatedHorizontalBarChart";
 import AnimatedPolarChart from "@components/charts/AnimatedPolarChart";
+import DailyActivityChart from "@components/charts/DailyActivityChart";
 
 
 interface ChartContainerProps {
@@ -31,7 +32,13 @@ export default function ChartContainer({ type, data, listOfConversations, dataSo
                         isOnlyOneOrLessConv={listOfConversations.length <= 1}
                     />
                 );
-            case "anotherChartType":
+            case "DailyActivityHoursPlot":
+                return (
+                    <DailyActivityChart
+                        dataSent={data.dailySentHoursPerConversation}
+                        listOfConversations={listOfConversations}
+                    />
+                );
             case "animatedHorizontalBarChart":
                 return (
                     <AnimatedHorizontalBarChart

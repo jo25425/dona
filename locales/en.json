@@ -497,7 +497,8 @@
       "contacts": "Contacts",
       "yearMonth": "Year-Month:",
       "chatWith": "Chat with:",
-      "time": "Time"
+      "time": "Time",
+      "overallData": "All chats"
     },
     "graph": {
       "messages-over-time": "%s messages over time",
@@ -507,7 +508,6 @@
       "median-response-time": "Median response time",
       "overview": "Overview",
       "detail": "Detail",
-      "overallData": "All chats",
       "example": {
         "title": "This is an <b>example</b> created from example data - <u>not</u> from your data."
       },

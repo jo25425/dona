@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { Chart as ChartJS, RadialLinearScale, Tooltip, Legend, LineElement, PointElement } from "chart.js";
-import { Radar } from "react-chartjs-2";
-import { Box, Typography } from "@mui/material";
+import React, {useEffect, useState} from "react";
+import {Chart as ChartJS, Legend, LineElement, PointElement, RadialLinearScale, Tooltip} from "chart.js";
+import {Radar} from "react-chartjs-2";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 import SliderWithButtons from "./SliderWithButtons";
-import { SentReceivedPoint } from "@models/graphData";
-import { prepareCountsOverTimeData } from "@components/charts/animationPreprocessing";
-import { DownloadButtons } from "@components/charts/DonwloadButtons";
-import { useTranslations } from "next-intl";
+import {SentReceivedPoint} from "@models/graphData";
+import {prepareCountsOverTimeData} from "@services/charts/animations";
+import {DownloadButtons} from "@components/charts/DonwloadButtons";
+import {useTranslations} from "next-intl";
+import {calculateZScores} from "@services/charts/zScores";
 
 ChartJS.register(RadialLinearScale, Tooltip, Legend, LineElement, PointElement);
 
@@ -41,19 +43,10 @@ const AnimatedPolarChart: React.FC<AnimatedPolarChartProps> = ({
         );
 
         const totals = Object.values(counts).flat();
-        const mean = totals.reduce((a, b) => a + b, 0) / totals.length;
-        const stdDeviation = Math.sqrt(
-            totals.reduce((sum, value) => sum + Math.pow(value - mean, 2), 0) / totals.length
-        );
-
         const zScoreFrames: Record<string, number[]> = {};
+        const zScores = calculateZScores(totals, Z_SCORE_LIMIT);
         sortedMonths.forEach((month) => {
-            zScoreFrames[month] = counts[month].map((value) => {
-                let zScore = (value - mean) / stdDeviation;
-                if (zScore > Z_SCORE_LIMIT) zScore = Z_SCORE_LIMIT;
-                if (zScore < -Z_SCORE_LIMIT) zScore = -Z_SCORE_LIMIT;
-                return zScore;
-            });
+            zScoreFrames[month] = counts[month].map((_, idx) => zScores[idx]);
         });
 
         setLabels(sortedMonths);

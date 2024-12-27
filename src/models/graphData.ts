@@ -52,10 +52,3 @@ export interface GraphData {
     basicStatistics: BasicStatistics;
     participantsPerConversation: string[][];
 }
-
-export type SortablePoint =
-    | SentReceivedPoint
-    | DailySentReceivedPoint
-    | DailyHourPoint;
-
-export type WithZScore<T> = T & { zScore: number };

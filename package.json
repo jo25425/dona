@@ -20,6 +20,7 @@
     "@zip.js/zip.js": "^2.7.54",
     "buffer": "^6.0.3",
     "chart.js": "^4.4.7",
+    "chartjs-adapter-date-fns": "^3.0.0",
     "clsx": "^2.1.1",
     "d3": "^7.9.0",
     "dayjs": "^1.11.13",
