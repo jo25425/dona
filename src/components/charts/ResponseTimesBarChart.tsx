@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import { useTranslations } from "next-intl";
 import _ from "lodash";
 import { AnswerTimePoint } from "@models/graphData";
-import { DownloadButtons } from "@components/charts/DonwloadButtons";
+import DownloadButtons from "@components/charts/DownloadButtons";
 import { ChartDataset } from "chart.js";
 
 const FIRST = "< 1 min";

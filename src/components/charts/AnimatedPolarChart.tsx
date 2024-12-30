@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import SliderWithButtons from "./SliderWithButtons";
 import {SentReceivedPoint} from "@models/graphData";
 import {prepareCountsOverTimeData} from "@services/charts/animations";
-import {DownloadButtons} from "@components/charts/DonwloadButtons";
+import DownloadButtons from "@components/charts/DownloadButtons";
 import {useTranslations} from "next-intl";
 import {calculateZScores} from "@services/charts/zScores";
 
@@ -34,7 +34,6 @@ const AnimatedPolarChart: React.FC<AnimatedPolarChartProps> = ({
     const [labels, setLabels] = useState<string[]>([]);
     const [frames, setFrames] = useState<Record<string, number[]>>({});
 
-    // Preprocess data to create frames and calculate z-scores
     useEffect(() => {
         const { counts, sortedMonths } = prepareCountsOverTimeData(
             dataMonthlyPerConversation,
@@ -42,18 +41,12 @@ const AnimatedPolarChart: React.FC<AnimatedPolarChartProps> = ({
             "both"
         );
 
-        const totals = Object.values(counts).flat();
-        const zScoreFrames: Record<string, number[]> = {};
-        const zScores = calculateZScores(totals, Z_SCORE_LIMIT);
-        sortedMonths.forEach((month) => {
-            zScoreFrames[month] = counts[month].map((_, idx) => zScores[idx]);
-        });
+        const zScoreFrames = calculateZScores(counts, Z_SCORE_LIMIT) as Record<string, number[]>;
 
         setLabels(sortedMonths);
         setFrames(zScoreFrames);
     }, [dataMonthlyPerConversation, listOfConversations]);
 
-    // Generate chart data for the current frame
     const generateChartData = (frameIndex: number) => {
         const monthKey = labels[frameIndex];
         const conversationData = frames[monthKey] || [];

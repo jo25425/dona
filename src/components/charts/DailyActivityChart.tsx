@@ -8,7 +8,7 @@ import ColorScale from "@components/charts/ColorScale";
 import {calculateZScores} from "@services/charts/zScores";
 import {adjustRange} from "@services/charts/preprocessing";
 import Typography from "@mui/material/Typography";
-import {DownloadButtons} from "@components/charts/DonwloadButtons";
+import DownloadButtons from "@components/charts/DownloadButtons";
 
 ChartJS.register(Title, Tooltip, Legend, LinearScale, PointElement, TimeScale);
 
@@ -50,8 +50,7 @@ const DailyActivityChart: React.FC<DailyActivityChartProps> = ({
             wordCount: point.wordCount,
         }));
 
-        const zScores = calculateZScores(allData.map((d) => d.wordCount), Z_SCORE_LIMIT);
-
+        const zScores = calculateZScores(allData.map((d) => d.wordCount), Z_SCORE_LIMIT) as number[];
         return allData.map((d, i) => ({
             ...d,
             z: zScores[i],
@@ -129,11 +128,11 @@ const DailyActivityChart: React.FC<DailyActivityChartProps> = ({
                 onChange={(e) => setSelectedConversation(e.target.value)}
                 size="small"
                 variant="outlined"
-                sx={{ position: "absolute", top: -10, left: 10, zIndex: 1 }}
+                sx={{ position: "absolute", top: -10, left: 10, zIndex: 1, fontSize: 12 }}
             >
-                <MenuItem value={ALL_CHATS}>{labelTexts("overallData")}</MenuItem>
+                <MenuItem value={ALL_CHATS} sx={{fontSize: 12}}>{labelTexts("overallData")}</MenuItem>
                 {listOfConversations.map((conversation) => (
-                    <MenuItem key={conversation} value={conversation}>
+                    <MenuItem sx={{fontSize: 12}} key={conversation} value={conversation}>
                         {conversation}
                     </MenuItem>
                 ))}

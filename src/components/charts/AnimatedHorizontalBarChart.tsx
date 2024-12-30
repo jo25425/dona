@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import SliderWithButtons from "@components/charts/SliderWithButtons";
 import {SentReceivedPoint} from "@models/graphData";
 import {useTranslations} from "next-intl";
-import {DownloadButtons} from "@components/charts/DonwloadButtons";
+import DownloadButtons from "@components/charts/DownloadButtons";
 import {prepareCountsOverTimeData} from "@services/charts/animations";
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);

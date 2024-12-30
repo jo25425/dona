@@ -3,6 +3,7 @@ import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import {useTranslations} from "next-intl";
 
 interface ChartExplanationModalProps {
     open: boolean;
@@ -13,6 +14,7 @@ interface ChartExplanationModalProps {
 }
 
 const ChartExplanationModal = ({ open, onClose, title, contentHtml, imageSrc }: ChartExplanationModalProps) => {
+    const actions = useTranslations("actions");
     return (
         <Modal open={open} onClose={onClose}>
             <Box
@@ -49,9 +51,11 @@ const ChartExplanationModal = ({ open, onClose, title, contentHtml, imageSrc }: 
                         sx={{ maxWidth: "100%", mb: 2 }}
                     />
                 )}
-                <Button onClick={onClose} variant="contained" fullWidth>
-                    Close {/* TODO: Use translated label! */}
-                </Button>
+                <Box display="flex" justifyContent="right">
+                    <Button onClick={onClose} variant="contained">
+                        {actions("close")}
+                    </Button>
+                </Box>
             </Box>
         </Modal>
     );

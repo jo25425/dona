@@ -1,35 +1,37 @@
-import React, {ReactNode, useState} from "react";
-import Accordion from '@mui/material/Accordion';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import Typography from '@mui/material/Typography';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import ChartContainer from "@components/ChartContainer";
-import {useTranslations} from "next-intl";
-import {DataSourceValue} from "@models/processed";
+import React, { ReactNode, useState } from "react";
+import { useTranslations } from "next-intl";
+import Accordion from "@mui/material/Accordion";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import AccordionSummary from "@mui/material/AccordionSummary";
 import Alert from "@mui/material/Alert";
-import StatisticsCard from "@components/StatisticsCard";
-import {GraphData} from "@models/graphData";
 import Box from "@mui/material/Box";
-import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import StatisticsCard from "@components/StatisticsCard";
+import ChartContainer from "@components/charts/ChartContainer";
 import ChartExplanationModal from "@components/ChartExplanationModal";
-import {createListOfConversations} from "@services/charts/preprocessing";
+import MoreChartsModal from "@components/MoreChartsModal";
+import { DataSourceValue } from "@models/processed";
+import { GraphData } from "@models/graphData";
+import { createListOfConversations } from "@services/charts/preprocessing";
 
-export default function DataSourceFeedbackSection({ dataSourceValue, graphData }: { dataSourceValue: string, graphData: GraphData }) {
+export default function DataSourceFeedbackSection({ dataSourceValue, graphData }: { dataSourceValue: string; graphData: GraphData }) {
     const showCustomDataSourceAlert = [DataSourceValue.Facebook, DataSourceValue.Instagram] as string[];
 
     // Translation functions separate for clarity -> general and per section
-    let t = useTranslations('feedback');
+    let t = useTranslations("feedback");
     const labels = useTranslations("feedback.chartLabels");
     const anon = useTranslations("donation.anonymisation");
-    const ii = useTranslations('feedback.interactionIntensity');
-    const dat = useTranslations('feedback.dailyActivityTimes');
-    const rt = useTranslations('feedback.responseTimes');
+    const ii = useTranslations("feedback.interactionIntensity");
+    const dat = useTranslations("feedback.dailyActivityTimes");
+    const rt = useTranslations("feedback.responseTimes");
 
     // State
     const [modalContent, setModalContent] = useState<{ title: string; contentHtml: string; imageSrc?: string } | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isResponseTimeModalOpen, setIsResponseTimeModalOpen] = useState(false);
 
     const openModal = (title: string, contentHtml: string, imageSrc?: string) => {
         setModalContent({ title, contentHtml, imageSrc });
@@ -40,6 +42,9 @@ export default function DataSourceFeedbackSection({ dataSourceValue, graphData }
         setIsModalOpen(false);
         setModalContent(null);
     };
+
+    const handleOpenResponseTimeModal = () => setIsResponseTimeModalOpen(true);
+    const handleCloseResponseTimeModal = () => setIsResponseTimeModalOpen(false);
 
     const chatInitial = dataSourceValue[0].toUpperCase();
     const chatWith: string = labels("chatWith");
@@ -57,36 +62,34 @@ export default function DataSourceFeedbackSection({ dataSourceValue, graphData }
 
     const openModalSpan = (content: ReactNode, translator: any, plotName: string) => (
         <span
-            style={{color: 'blue', textDecoration: 'underline', cursor: 'pointer'}}
+            style={{ color: "blue", textDecoration: "underline", cursor: "pointer" }}
             onClick={() =>
                 openModal(
-                    translator(translator.has(`${plotName}.title`) ? `${plotName}.title`: "title"),
+                    translator(translator.has(`${plotName}.title`) ? `${plotName}.title` : "title"),
                     translator.raw(`${plotName}.example.text`),
                     translator(`${plotName}.example.image`)
                 )
             }
         >
-            {content}
-        </span>
+      {content}
+    </span>
     );
 
     return (
         <Accordion>
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                <Typography variant="h5">{t("sourceTitle", {source: dataSourceValue})}</Typography>
+                <Typography variant="h5">{t("sourceTitle", { source: dataSourceValue })}</Typography>
             </AccordionSummary>
             <AccordionDetails>
-                <Stack direction="column" spacing={2} sx={{textAlign: "center", bgcolor: "background.paper"}}>
+                <Stack direction="column" spacing={2} sx={{ textAlign: "center", bgcolor: "background.paper" }}>
                     {showCustomDataSourceAlert.includes(dataSourceValue) && (
                         <Alert severity="info" sx={{ my: 2 }}>
-                            {t("selectedDataMessage", {source: dataSourceValue})}
+                            {t("selectedDataMessage", { source: dataSourceValue })}
                         </Alert>
                     )}
 
                     {/* Statistics card */}
-                    <Typography variant="h6" >
-                        {t("statisticsCard.title")}
-                    </Typography>
+                    <Typography variant="h6">{t("statisticsCard.title")}</Typography>
                     <StatisticsCard stats={graphData.basicStatistics} />
 
                     {/* Interaction Intensity */}
@@ -97,7 +100,7 @@ export default function DataSourceFeedbackSection({ dataSourceValue, graphData }
                         </Typography>
                         <Typography variant="body2">
                             {ii.rich("animatedPolarPlot.description", {
-                                button: (label) => openModalSpan(label, ii, "animatedPolarPlot")
+                                button: (label) => openModalSpan(label, ii, "animatedPolarPlot"),
                             })}
                         </Typography>
                     </Box>
@@ -109,11 +112,11 @@ export default function DataSourceFeedbackSection({ dataSourceValue, graphData }
                     />
                     <Box>
                         <Typography variant="body1" fontWeight="fontWeightBold">
-                        {ii("animatedHorizontalBarChart.title")}
+                            {ii("animatedHorizontalBarChart.title")}
                         </Typography>
                         <Typography variant="body2">
                             {ii.rich("animatedHorizontalBarChart.description", {
-                                button: (label) => openModalSpan(label, ii, "animatedHorizontalBarChart")
+                                button: (label) => openModalSpan(label, ii, "animatedHorizontalBarChart"),
                             })}
                         </Typography>
                     </Box>
@@ -123,35 +126,31 @@ export default function DataSourceFeedbackSection({ dataSourceValue, graphData }
                         listOfConversations={listOfConversations}
                         dataSourceValue={dataSourceValue}
                     />
-                    <Button>{ii('moreAbout')}</Button>
+                    <Button>{ii("moreAbout")}</Button>
 
                     {/* Daily Activity Times */}
-                    <Typography variant="h6" >
-                        {dat("title")}
-                    </Typography>
+                    <Typography variant="h6">{dat("title")}</Typography>
                     <Box>
                         <Typography variant="body2">
                             {dat.rich("dailyActivityHoursPlot.description", {
-                                button: (label) => openModalSpan(label, dat, "dailyActivityHoursPlot")
+                                button: (label) => openModalSpan(label, dat, "dailyActivityHoursPlot"),
                             })}
                         </Typography>
                     </Box>
                     <ChartContainer
-                        type="DailyActivityHoursPlot"
+                        type="dailyActivityHoursPlot"
                         data={graphData}
                         listOfConversations={listOfConversations}
                         dataSourceValue={dataSourceValue}
                     />
-                    <Button>{dat('moreAbout')}</Button>
+                    <Button>{dat("moreAbout")}</Button>
 
                     {/* Response Times */}
-                    <Typography variant="h6" >
-                        {rt("title")}
-                    </Typography>
+                    <Typography variant="h6">{rt("title")}</Typography>
                     <Box>
                         <Typography variant="body2">
                             {rt.rich("responseTimeBarChart.description", {
-                                button: (label) => openModalSpan(label, rt, "responseTimeBarChart")
+                                button: (label) => openModalSpan(label, rt, "responseTimeBarChart"),
                             })}
                         </Typography>
                     </Box>
@@ -161,19 +160,23 @@ export default function DataSourceFeedbackSection({ dataSourceValue, graphData }
                         listOfConversations={listOfConversations}
                         dataSourceValue={dataSourceValue}
                     />
-                    <Button>{rt('moreAbout')}</Button>
-
+                    <Button onClick={handleOpenResponseTimeModal}>{rt("moreAbout") || "More about"}</Button>
                 </Stack>
             </AccordionDetails>
-            {modalContent && (
-                <ChartExplanationModal
-                    open={isModalOpen}
-                    onClose={closeModal}
-                    title={modalContent.title}
-                    contentHtml={modalContent.contentHtml}
-                    imageSrc={modalContent.imageSrc}
-                />
-            )}
+            <ChartExplanationModal
+                open={isModalOpen}
+                onClose={closeModal}
+                title={modalContent?.title || ""}
+                contentHtml={modalContent?.contentHtml || ""}
+                imageSrc={modalContent?.imageSrc}
+            />
+            <MoreChartsModal
+                open={isResponseTimeModalOpen}
+                onClose={handleCloseResponseTimeModal}
+                graphData={graphData}
+                listOfConversations={listOfConversations}
+                chartType="animatedResponseTimeBarChart"
+            />
         </Accordion>
     );
 }

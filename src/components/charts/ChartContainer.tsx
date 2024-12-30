@@ -6,16 +6,17 @@ import ResponseTimesBarChart from "@components/charts/ResponseTimesBarChart";
 import AnimatedHorizontalBarChart from "@components/charts/AnimatedHorizontalBarChart";
 import AnimatedPolarChart from "@components/charts/AnimatedPolarChart";
 import DailyActivityChart from "@components/charts/DailyActivityChart";
+import AnimatedResponseTimesBarChart from "@components/charts/AnimatedResponseTimesBarChart";
 
 
 interface ChartContainerProps {
     type: string;
     data: GraphData;
     listOfConversations: string[];
-    dataSourceValue: string;
+    dataSourceValue?: string;
 }
 
-export default function ChartContainer({ type, data, listOfConversations, dataSourceValue }: ChartContainerProps) {
+export default function ChartContainer({ type, data, listOfConversations }: ChartContainerProps) {
     const renderChart = () => {
         switch (type) {
             case "animatedPolarPlot":
@@ -32,7 +33,13 @@ export default function ChartContainer({ type, data, listOfConversations, dataSo
                         isOnlyOneOrLessConv={listOfConversations.length <= 1}
                     />
                 );
-            case "DailyActivityHoursPlot":
+            case "animatedResponseTimeBarChart":
+                return (
+                    <AnimatedResponseTimesBarChart
+                        answerTimes={data.answerTimes}
+                    />
+                );
+            case "dailyActivityHoursPlot":
                 return (
                     <DailyActivityChart
                         dataSent={data.dailySentHoursPerConversation}

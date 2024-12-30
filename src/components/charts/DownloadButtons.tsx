@@ -11,7 +11,7 @@ interface DownloadButtonsProps {
     labelToShowId?: string;
 }
 
-export const DownloadButtons: React.FC<DownloadButtonsProps> = ({
+const DownloadButtons: React.FC<DownloadButtonsProps> = ({
     chartId,
     fileNamePrefix,
     currentLabel
@@ -44,9 +44,7 @@ export const DownloadButtons: React.FC<DownloadButtonsProps> = ({
     };
 
     return (
-        <Box
-
-            gap={1}
+        <Box gap={1}
             sx={{ opacity: 0.25, transition: "opacity 0.3s", "&:hover": { opacity: 1 } }}
         >
             <div className="download-buttons">
@@ -68,3 +66,5 @@ export const DownloadButtons: React.FC<DownloadButtonsProps> = ({
         </Box>
     );
 };
+
+export default DownloadButtons;

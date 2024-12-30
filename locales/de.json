@@ -500,7 +500,16 @@
           "text": "<p><b>(1)</b> In diesem Beispiel können Sie sehen, dass mehr als 40% aller Antworten in unter einer Minute gesendet und empfangen wurden. Knapp unter 30% aller Antworten wurden in 1-2 Minuten gesendet und knapp 30% aller Antworten in 1-2 Minuten empfangen. Also wurden insgesamt rund 70 % aller gesendeten Antworten in weniger als zwei Minuten versendet und rund 70 % aller eingegangenen Antworten gingen in weniger als zwei Minuten ein.<p><b>(2)</b> Klicken Sie auf dieses Symbol, um den Graphen herunterzuladen.</p>"
         }
       },
-      "moreAbout": "Mehr über Ihre Antwortzeiten"
+      "moreAbout": "Mehr über Ihre Antwortzeiten",
+      "responseTimeBarChartMonthly": {
+        "description": "Hier sehen Sie <b>pro Monat</b> Ihre Antwortzeiten. Die Grafik zeigt den Prozentsatz aller Antworten (d.h. eine Nachricht, die Sie nach einer Nachricht von einem Kontakt gesendet haben), die in der angegebenen Zeit erfolgt sind. Sie können sehen, wie viel Prozent Ihrer Antworten Sie schneller als nach 1 Minute, nach 1–2 Minuten, 3–5 Minuten, 6–15 Minuten, 16–30 Minuten, 31–60 Minuten und langsamer als 60 Minuten gesendet haben. Der Balken für > 60 Minuten beinhaltet auch längere Gesprächspausen.",
+        "legend": {
+          "donor": "Ihre Antwortzeiten",
+          "contacts": "Antwortzeiten Ihrer Kontakte"
+        },
+        "yAxis": "Prozentualer Anteil aller Antwortnachrichten",
+        "xAxis": "Dauer der Antwort"
+      }
     },
     "graph": {
       "messages-over-time": "%s Nachrichten über die Zeit",
@@ -575,15 +584,6 @@
         },
         "yAxis": "Prozentualer Anteil aller Wörter",
         "xAxis": "Vier Teile des Tages"
-      },
-      "responseTimeBarChartMonthly": {
-        "description": "Hier sehen Sie <u>pro Monat</u> Ihre Antwortzeiten. Die Grafik zeigt den Prozentsatz aller Antworten (d.h. eine Nachricht, die Sie nach einer Nachricht von einem Kontakt gesendet haben), die in der angegebenen Zeit erfolgt sind. Sie können sehen, wie viel Prozent Ihrer Antworten Sie schneller als nach 1 Minute, nach 1–2 Minuten, 3–5 Minuten, 6–15 Minuten, 16–30 Minuten, 31–60 Minuten und langsamer als 60 Minuten gesendet haben. Der Balken für > 60 Minuten beinhaltet auch längere Gesprächspausen.",
-        "legend": {
-          "donor": "Ihre Antwortzeiten",
-          "contacts": "Antwortzeiten Ihrer Kontakte"
-        },
-        "yAxis": "Prozentualer Anteil aller Antwortnachrichten",
-        "xAxis": "Dauer der Antwort"
       },
       "breaksInConv": {
         "description": "Dieser Graph zeigt für den ausgewählten Chat pro Monat die längste zusammenhängende Zeitperiode in Tagen, in der keine Nachricht in diesem Chat geschrieben wurde. Klicken Sie <a style=\"font-weight:bold\" href=\"#breaksInConvExplanationModal\" data-dismiss=\"modal\" data-toggle=\"modal\" data-target=\"#breaksInConvExplanationModal\">HIER</a>, um eine Erklärung mit einem Beispiel zu sehen.",
