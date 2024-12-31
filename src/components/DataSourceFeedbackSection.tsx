@@ -12,7 +12,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import StatisticsCard from "@components/StatisticsCard";
 import ChartContainer from "@components/charts/ChartContainer";
 import ChartExplanationModal from "@components/ChartExplanationModal";
-import MoreChartsModal from "@components/MoreChartsModal";
+import MoreChartsModal from "@components/charts/MoreChartsModal";
 import { DataSourceValue } from "@models/processed";
 import { GraphData } from "@models/graphData";
 import { createListOfConversations } from "@services/charts/preprocessing";
@@ -20,7 +20,6 @@ import { createListOfConversations } from "@services/charts/preprocessing";
 export default function DataSourceFeedbackSection({ dataSourceValue, graphData }: { dataSourceValue: string; graphData: GraphData }) {
     const showCustomDataSourceAlert = [DataSourceValue.Facebook, DataSourceValue.Instagram] as string[];
 
-    // Translation functions separate for clarity -> general and per section
     let t = useTranslations("feedback");
     const labels = useTranslations("feedback.chartLabels");
     const anon = useTranslations("donation.anonymisation");
@@ -28,51 +27,56 @@ export default function DataSourceFeedbackSection({ dataSourceValue, graphData }
     const dat = useTranslations("feedback.dailyActivityTimes");
     const rt = useTranslations("feedback.responseTimes");
 
-    // State
+    // State for ChartExplanationModal
     const [modalContent, setModalContent] = useState<{ title: string; contentHtml: string; imageSrc?: string } | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [isResponseTimeModalOpen, setIsResponseTimeModalOpen] = useState(false);
 
-    const openModal = (title: string, contentHtml: string, imageSrc?: string) => {
+    // State for MoreChartsModal
+    const [isSectionModalOpen, setIsSectionModalOpen] = useState(false);
+    const [currentSection, setCurrentSection] = useState<"responseTimes" | "dailyActivityTimes" | "interactionIntensity" | null>(null);
+
+    // Handlers for ChartExplanationModal
+    const openExplanationModal = (title: string, contentHtml: string, imageSrc?: string) => {
         setModalContent({ title, contentHtml, imageSrc });
         setIsModalOpen(true);
     };
-
-    const closeModal = () => {
+    const closeExplanationModal = () => {
         setIsModalOpen(false);
         setModalContent(null);
     };
 
-    const handleOpenResponseTimeModal = () => setIsResponseTimeModalOpen(true);
-    const handleCloseResponseTimeModal = () => setIsResponseTimeModalOpen(false);
+    // Handlers for MoreChartsModal
+    const openSectionModal = (section: "responseTimes" | "dailyActivityTimes" | "interactionIntensity") => {
+        setCurrentSection(section);
+        setIsSectionModalOpen(true);
+    };
+    const closeSectionModal = () => {
+        setIsSectionModalOpen(false);
+        setCurrentSection(null);
+    };
 
-    const chatInitial = dataSourceValue[0].toUpperCase();
-    const chatWith: string = labels("chatWith");
-    const contactInitial: string = anon("contactInitial");
-    const chatLabel: string = anon("chat");
-    const systemName: string = anon("system");
     const listOfConversations = createListOfConversations(
         graphData.participantsPerConversation,
-        chatLabel,
-        chatInitial,
-        chatWith,
-        contactInitial,
-        systemName
+        anon("chat"),
+        dataSourceValue[0].toUpperCase(),
+        labels("chatWith"),
+        anon("contactInitial"),
+        anon("system")
     );
 
-    const openModalSpan = (content: ReactNode, translator: any, plotName: string) => (
+    const openModalSpan = (content: ReactNode, translator: any, chartName: string) => (
         <span
             style={{ color: "blue", textDecoration: "underline", cursor: "pointer" }}
             onClick={() =>
-                openModal(
-                    translator(translator.has(`${plotName}.title`) ? `${plotName}.title` : "title"),
-                    translator.raw(`${plotName}.example.text`),
-                    translator(`${plotName}.example.image`)
+                openExplanationModal(
+                    translator(translator.has(`${chartName}.title`) ? `${chartName}.title` : "title"),
+                    translator.raw(`${chartName}.example.text`),
+                    translator(`${chartName}.example.image`)
                 )
             }
         >
-      {content}
-    </span>
+            {content}
+        </span>
     );
 
     return (
@@ -96,16 +100,16 @@ export default function DataSourceFeedbackSection({ dataSourceValue, graphData }
                     <Typography variant="h6">{ii("title")}</Typography>
                     <Box>
                         <Typography variant="body1" fontWeight="fontWeightBold">
-                            {ii("animatedPolarPlot.title")}
+                            {ii("animatedPolarChart.title")}
                         </Typography>
                         <Typography variant="body2">
-                            {ii.rich("animatedPolarPlot.description", {
-                                button: (label) => openModalSpan(label, ii, "animatedPolarPlot"),
+                            {ii.rich("animatedPolarChart.description", {
+                                button: (label) => openModalSpan(label, ii, "animatedPolarChart"),
                             })}
                         </Typography>
                     </Box>
                     <ChartContainer
-                        type="animatedPolarPlot"
+                        type="animatedPolarChart"
                         data={graphData}
                         listOfConversations={listOfConversations}
                         dataSourceValue={dataSourceValue}
@@ -126,24 +130,28 @@ export default function DataSourceFeedbackSection({ dataSourceValue, graphData }
                         listOfConversations={listOfConversations}
                         dataSourceValue={dataSourceValue}
                     />
-                    <Button>{ii("moreAbout")}</Button>
+                    <Button onClick={() => openSectionModal("interactionIntensity")}>
+                        {ii("moreAbout")}
+                    </Button>
 
                     {/* Daily Activity Times */}
                     <Typography variant="h6">{dat("title")}</Typography>
                     <Box>
                         <Typography variant="body2">
-                            {dat.rich("dailyActivityHoursPlot.description", {
-                                button: (label) => openModalSpan(label, dat, "dailyActivityHoursPlot"),
+                            {dat.rich("dailyActivityHoursChart.description", {
+                                button: (label) => openModalSpan(label, dat, "dailyActivityHoursChart"),
                             })}
                         </Typography>
                     </Box>
                     <ChartContainer
-                        type="dailyActivityHoursPlot"
+                        type="dailyActivityHoursChart"
                         data={graphData}
                         listOfConversations={listOfConversations}
                         dataSourceValue={dataSourceValue}
                     />
-                    <Button>{dat("moreAbout")}</Button>
+                    <Button onClick={() => openSectionModal("dailyActivityTimes")}>
+                        {dat("moreAbout")}
+                    </Button>
 
                     {/* Response Times */}
                     <Typography variant="h6">{rt("title")}</Typography>
@@ -160,23 +168,31 @@ export default function DataSourceFeedbackSection({ dataSourceValue, graphData }
                         listOfConversations={listOfConversations}
                         dataSourceValue={dataSourceValue}
                     />
-                    <Button onClick={handleOpenResponseTimeModal}>{rt("moreAbout") || "More about"}</Button>
+                    <Button onClick={() => openSectionModal("responseTimes")}>
+                        {rt("moreAbout")}
+                    </Button>
                 </Stack>
             </AccordionDetails>
+
+            {/* ChartExplanationModal */}
             <ChartExplanationModal
                 open={isModalOpen}
-                onClose={closeModal}
+                onClose={closeExplanationModal}
                 title={modalContent?.title || ""}
                 contentHtml={modalContent?.contentHtml || ""}
                 imageSrc={modalContent?.imageSrc}
             />
-            <MoreChartsModal
-                open={isResponseTimeModalOpen}
-                onClose={handleCloseResponseTimeModal}
-                graphData={graphData}
-                listOfConversations={listOfConversations}
-                chartType="animatedResponseTimeBarChart"
-            />
+
+            {/* MoreChartsModal */}
+            {currentSection && (
+                <MoreChartsModal
+                    open={isSectionModalOpen}
+                    onClose={closeSectionModal}
+                    graphData={graphData}
+                    listOfConversations={listOfConversations}
+                    section={currentSection}
+                />
+            )}
         </Accordion>
     );
 }

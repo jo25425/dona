@@ -7,6 +7,7 @@ import AnimatedHorizontalBarChart from "@components/charts/AnimatedHorizontalBar
 import AnimatedPolarChart from "@components/charts/AnimatedPolarChart";
 import DailyActivityChart from "@components/charts/DailyActivityChart";
 import AnimatedResponseTimesBarChart from "@components/charts/AnimatedResponseTimesBarChart";
+import DayPartsActivityOverallChart from "@components/charts/DayPartsActivityOverallChart";
 
 
 interface ChartContainerProps {
@@ -19,7 +20,7 @@ interface ChartContainerProps {
 export default function ChartContainer({ type, data, listOfConversations }: ChartContainerProps) {
     const renderChart = () => {
         switch (type) {
-            case "animatedPolarPlot":
+            case "animatedPolarChart":
                 return (
                     <AnimatedPolarChart
                         dataMonthlyPerConversation={data.monthlySentReceivedPerConversation}
@@ -39,11 +40,18 @@ export default function ChartContainer({ type, data, listOfConversations }: Char
                         answerTimes={data.answerTimes}
                     />
                 );
-            case "dailyActivityHoursPlot":
+            case "dailyActivityHoursChart":
                 return (
                     <DailyActivityChart
                         dataSent={data.dailySentHoursPerConversation}
                         listOfConversations={listOfConversations}
+                    />
+                );
+            case "dayPartsActivityOverallChart":
+                return (
+                    <DayPartsActivityOverallChart
+                        dailySentHoursPerConversation={data.dailySentHoursPerConversation}
+                        dailyReceivedHoursPerConversation={data.dailyReceivedHoursPerConversation}
                     />
                 );
             case "animatedHorizontalBarChart":

@@ -446,7 +446,7 @@
     },
     "interactionIntensity": {
       "title": "Interaktionsintensität",
-      "animatedPolarPlot": {
+      "animatedPolarChart": {
         "title": "Planetendarstellung",
         "description": "In dieser Visualisierung werden Sie als der gelbe Punkt in der Mitte angezeigt. Die von Ihnen gespendeten Chats sind die weißen Punkte um Sie herum. Je mehr Wörter in einem Chat geschrieben haben, desto näher bei Ihnen (gelber Punkt) ist der entsprechende weiße Punkt. Im Zeitschieber unten können den Monat und das Jahr, für welche aktuell die Daten angezeigt werden, sehen und selbst auswählen. Die kleineren helleren weißen Punkte zeigen die Aktivität in den jeweiligen Chats in anderen Monaten. Klicken Sie <button>HIER</button>, um eine Erklärung mit einem Beispiel zu sehen.",
         "legend": {
@@ -472,7 +472,7 @@
     },
     "dailyActivityTimes": {
       "title": "Tägliche Aktivitätszeiten",
-      "dailyActivityHoursPlot": {
+      "dailyActivityHoursChart": {
         "description": "In diesem Diagramm können Sie sehen, zu welchen Stunden des Tages Sie während der gesamten Zeitspanne der von Ihnen gespendeten Daten aktiv waren. Wenn Sie in einer Stunde mehr Wörter als üblicherweise gesendet haben, hat diese Stunde (Viereck im Diagramm) eine dunklere Farbe. Wenn die Farbe heller ist, dann haben Sie weniger Wörter als üblicherweise gesendet. Wenn Sie sich einen bestimmten Zeitraum genauer ansehen möchten, können Sie hineinzoomen, indem Sie auf das Diagramm klicken und halten, während Sie die Maus nach links oder rechts bewegen, um das Zeitfenster zu erzeugen, in das Sie hineinzoomen möchten. Klicken Sie <button>HIER</button>, um eine Erklärung mit einem Beispiel zu sehen.",
         "yAxis": "Uhrzeit",
         "moreThanAverage": "Mehr als Ihr Durchschnitt",

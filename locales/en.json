@@ -433,7 +433,7 @@
     },
     "dailyActivityTimes": {
       "title": "Daily Activity Times",
-      "dailyActivityHoursPlot": {
+      "dailyActivityHoursChart": {
         "description": "In this plot, you can see in which hours of the day you were active for the whole time span of the data you donated. If an hour (square in the plot) has a darker color, you sent more words in that hour than in your average hour. If the color is lighter, then you sent fewer words than in the average case. If you want to look closer at a specific time span you can zoom in by clicking on the graph and holding while you move your mouse to the left or the right to produce the time window you want to zoom into. Click <button>HERE</button> to see an explanation with an example.",
         "yAxis": "Time",
         "moreThanAverage": "More than your average",
@@ -444,7 +444,29 @@
           "text": "<p><b>(1)</b> In this example, a change in the activity hours can be observed in this area. In the period at <b>(2)</b> you can see that no messages were sent between approximately 8:00 AM and 12:00 PM. Then in the period at <b>(3)</b>, this area of no messages has shifted to the hours between about 2:00 AM and 6:00 AM. This could be due to moving to a different time zone or a change in sleep schedule.</p><p><b>(4)</b> For example, more dark squares can be observed here. Therefore, an above-average number of messages were sent in this period.</p><p><b>(5)</b> Click this icon to download the graph.</p>"
         }
       },
-      "moreAbout": "More about your Daily Activity Times"
+      "moreAbout": "More about your Daily Activity Times",
+      "dayPartsOverall": {
+        "description": "In this graph, you can see how the words you sent and received are distributed over different parts of the day. You see  averaged values over the entire period of your data donation.",
+        "legend": {
+          "sent": "Sent words",
+          "received": "Received words"
+        },
+        "yAxis": "Percentage of all words",
+        "xAxis": "Four parts of the day",
+        "example": {
+          "image": "images/feedback_example_dayPartsPlot_english.svg",
+          "text": "<p class=\"text-left\"><b>(1)</b> In this example, between midnight and 6:00 AM and between 6:00 AM and noon less than 10% of all words were sent and received. In both of those parts of the day, a few more words were sent than received.</p><p class=\"text-left\"><b>(2)</b> On the other hand, between noon and 6:00 PM a little less than 40% of all words were sent and received.<br> Between 6:00 PM and midnight just under 45% of all words were sent and received. In both of those parts of the day, a few more words were received than sent.</p>"
+        }
+      },
+      "dayPartsMonthly": {
+        "description": "Contrary to the graph above, in this graph you can see how the words you sent are distributed over different parts of the day <u>per month</u>.",
+        "legend": {
+          "sent": "Sent words",
+          "received": "Received words"
+        },
+        "yAxis": "Percentage of all words",
+        "xAxis": "Four parts of the day"
+      }
     },
     "responseTimes": {
       "title": "Response Times",
@@ -474,7 +496,7 @@
     },
     "interactionIntensity": {
       "title": "Interaction Intensity",
-      "animatedPolarPlot": {
+      "animatedPolarChart": {
         "title": "Planet representation",
         "description": "This visualization displays you as the yellow dot in the middle. The chats you donated are the white dots around you. The closer a dot is to you, the more words you have written in this chat. In the time-slider below you can see and select the month and year for which the data is shown. The smaller lighter white dots show the activity in the respective chats in other months. Click <button>HERE</button> to see an explanation with an example.",
         "legend": {
@@ -496,7 +518,32 @@
           "text": "<p><b>(1)</b> In this example, over the entire period the most words were sent in the chat with F9, F10: just over 140 thousand.</p><p><b>(2)</b> In contrast to (1), this example chat had the fewest sent words.</p><p><b>(3)</b> The year and month are displayed here. You can see how many words were sent in the chats per month. Try out the time slider!</p><p><b>(4)</b> Click this icon to download the graph.</p>"
         }
       },
-      "moreAbout": "More about your Interaction Intensity"
+      "moreAbout": "More about your Interaction Intensity",
+      "horizontalBarChartOverall": {
+        "description": "This graph shows the total number of words you received and sent across all your donated chats.",
+        "legend": {
+          "sent": "Sent words",
+          "received": "Received words"
+        },
+        "xAxis": "Number of words",
+        "yAxis": {
+          "sent": "Sent",
+          "received": "Received"
+        }
+      },
+      "slidingWindowMean": {
+        "description": "Here you can see the average number of your sent and received words per day (more precisely, we calculate a so-called sliding window average with a window size of 30 days). At the top left you can also select your individual chats to see the graph of your sent words for the selected chat.<br/><br/><i>If there is no value for the <u>received words</u> in the overview for one or more days, then it has been hidden due to data protection reasons. Only aggregated information from which no direct conclusions can be drawn about your individual contacts is displayed.</i>",
+        "legend": {
+          "sent": "Sent words",
+          "received": "Received words",
+          "receivedNotShown": "Privacy: Received words are not displayed"
+        },
+        "yAxis": "Average number of words",
+        "example": {
+          "image": "images/feedback_example_slidingWindowMean_english.svg",
+          "text": "<p class=\"text-left\"><b>(1)</b> In this example, a significant increase in the number of sent and received words can be observed. In this period the sent words were more than the received words. </p><p class=\"text-left\"><b>(2)</b> Here you can see an even bigger increase in sent and received words. But in that period, across all chats, more words were received.</p>"
+        }
+      }
     },
     "chartLabels": {
       "start": "Start",
@@ -520,31 +567,6 @@
       "example": {
         "title": "This is an <b>example</b> created from example data - <u>not</u> from your data."
       },
-      "horizontalBarChartOverall": {
-        "description": "This graph shows the total number of words you received and sent across all your donated chats.",
-        "legend": {
-          "sent": "Sent words",
-          "received": "Received words"
-        },
-        "xAxis": "Number of words",
-        "yAxis": {
-          "sent": "Sent",
-          "received": "Received"
-        }
-      },
-      "slidingWindowMean": {
-        "description": "Here you can see the average number of your sent and received words per day (more precisely, we calculate a so-called sliding window average with a window size of 30 days). At the top left you can also select your individual chats to see the graph of your sent words for the selected chat.<br><br> <i> If there is no value for the <u>received words</u> in the overview for one or more days, then it has been hidden due to data protection reasons. Only aggregated information from which no direct conclusions can be drawn about your individual contacts is displayed.</i>",
-        "legend": {
-          "sent": "Sent words",
-          "received": "Received words",
-          "receivedNotShown": "Privacy: Received words are not displayed"
-        },
-        "yAxis": "Average number of words",
-        "example": {
-          "image": "images/feedback_example_slidingWindowMean_english.svg",
-          "text": "<p class=\"text-left\"><b>(1)</b> In this example, a significant increase in the number of sent and received words can be observed. In this period the sent words were more than the received words. </p><p class=\"text-left\"><b>(2)</b> Here you can see an even bigger increase in sent and received words. But in that period, across all chats, more words were received.</p>"
-        }
-      },
       "dailySentReceived": {
         "description": "This graph shows the exact word count of your sent and received messages per day.",
         "legend": {
@@ -560,28 +582,6 @@
           "received": "Received messages"
         },
         "yAxis": "Number of messages"
-      },
-      "dayPartsOverall": {
-        "description": "In this graph, you can see how the words you sent and received are distributed over different parts of the day. You see  averaged values over the entire period of your data donation.",
-        "legend": {
-          "sent": "Sent words",
-          "received": "Received words"
-        },
-        "yAxis": "Percentage of all words",
-        "xAxis": "Four parts of the day",
-        "example": {
-          "image": "images/feedback_example_dayPartsPlot_english.svg",
-          "text": "<p class=\"text-left\"><b>(1)</b> In this example, between midnight and 6:00 AM and between 6:00 AM and noon less than 10% of all words were sent and received. In both of those parts of the day, a few more words were sent than received.</p><p class=\"text-left\"><b>(2)</b> On the other hand, between noon and 6:00 PM a little less than 40% of all words were sent and received.<br> Between 6:00 PM and midnight just under 45% of all words were sent and received. In both of those parts of the day, a few more words were received than sent.</p>"
-        }
-      },
-      "dayPartsMonthly": {
-        "description": "Contrary to the graph above, in this graph you can see how the words you sent are distributed over different parts of the day <u>per month</u>.",
-        "legend": {
-          "sent": "Sent words",
-          "received": "Received words"
-        },
-        "yAxis": "Percentage of all words",
-        "xAxis": "Four parts of the day"
       },
       "breaksInConv": {
         "description": "This graph shows for the selected chat per month the longest consecutive period in days, in which no message was written in this chat. Click <a style=\"font-weight:bold\" href=\"#breaksInConvExplanationModal\" data-dismiss=\"modal\" data-toggle=\"modal\" data-target=\"#breaksInConvExplanationModal\">HERE</a> to see an explanation with an example.",

@@ -40,7 +40,7 @@ const DailyActivityChart: React.FC<DailyActivityChartProps> = ({
     const selection_label_name = `select-label-${CHART_NAME}`;
 
     const labelTexts = useTranslations("feedback.chartLabels");
-    const chartTexts = useTranslations("feedback.dailyActivityTimes.dailyActivityHoursPlot");
+    const chartTexts = useTranslations("feedback.dailyActivityTimes.dailyActivityHoursChart");
     const [selectedConversation, setSelectedConversation] = useState<string>(ALL_CHATS);
 
     const preprocessData = (data: DailyHourPoint[][]) => {

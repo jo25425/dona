@@ -63,33 +63,23 @@ const ResponseTimesBarChart: React.FC<ResponseTimesBarChartProps> = ({
     const contactPercentages = contactCounts.map((count) => (contactTotal > 0 ? (count / contactTotal) * 100 : 0));
 
     const datasets: ChartDataset<"bar", number[]>[] = [
-        {
-            label: chartTexts("legend.donor"),
-            data: donorPercentages,
-            backgroundColor: "rgba(31, 119, 180, 0.75)",
-            borderColor: "#1f77b4",
-            borderWidth: 1,
-            barPercentage: 0.8,
-        },
         !isOnlyOneOrLessConv && {
             label: chartTexts("legend.contacts"),
             data: contactPercentages,
-            backgroundColor: "rgba(255, 136, 0, 0.75)",
-            borderColor: "#FF8800",
-            borderWidth: 1,
+            backgroundColor: "#FF8800",
             barPercentage: 0.5,
+        },
+        {
+            label: chartTexts("legend.donor"),
+            data: donorPercentages,
+            backgroundColor: "#1f77b4",
+            barPercentage: 0.8,
         },
     ].filter(Boolean) as ChartDataset<"bar", number[]>[];
 
-    const sortedDatasets = datasets.sort((a, b) => {
-        const aTotal = _.sum(a.data);
-        const bTotal = _.sum(b.data);
-        return aTotal - bTotal; // Ensure shorter datasets render on top
-    });
-
     const data = {
         labels: ranges.map((range) => range.label),
-        datasets: sortedDatasets,
+        datasets: datasets
     };
 
     const options = {

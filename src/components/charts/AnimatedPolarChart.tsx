@@ -28,7 +28,7 @@ const AnimatedPolarChart: React.FC<AnimatedPolarChartProps> = ({
     const container_name = `chart-wrapper-${CHART_NAME}`;
 
     const labelTexts = useTranslations("feedback.chartLabels");
-    const chartTexts = useTranslations("feedback.interactionIntensity.animatedPolarPlot");
+    const chartTexts = useTranslations("feedback.interactionIntensity.animatedPolarChart");
 
     const [currentFrame, setCurrentFrame] = useState<number>(0);
     const [labels, setLabels] = useState<string[]>([]);

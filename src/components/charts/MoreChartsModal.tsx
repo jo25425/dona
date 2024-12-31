@@ -9,7 +9,7 @@ interface MoreChartsModalProps {
     onClose: () => void;
     graphData: GraphData;
     listOfConversations: string[];
-    chartType: string;
+    section: "responseTimes" | "dailyActivityTimes" | "interactionIntensity";
 }
 
 const modalStyle = {
@@ -34,10 +34,28 @@ const MoreChartsModal: React.FC<MoreChartsModalProps> = ({
                                                              onClose,
                                                              graphData,
                                                              listOfConversations,
-                                                             chartType,
+                                                             section,
                                                          }) => {
-    const t = useTranslations("feedback.responseTimes");
+    const t = useTranslations(`feedback.${section}`);
     const actions = useTranslations("actions");
+
+    const chartsData = (
+        section == "interactionIntensity" ?
+           [
+               {"descriptionKey": "horizontalBarChartOverall", "chartType": "animatedHorizontalBarChartOverall"},
+               {"descriptionKey": "slidingWindowMean", "chartType": "sentReceivedSlidingWindowMean"}
+           ]
+        : section == "dailyActivityTimes" ?
+            [
+                {"descriptionKey": "dayPartsOverall", "chartType": "dayPartsActivityOverallChart"},
+                {"descriptionKey": "dayPartsMonthly", "chartType": "animatedDayPartsActivityChart"}
+            ]
+        : section == "responseTimes" ?
+            [
+                {"descriptionKey": "responseTimeBarChartMonthly", "chartType": "animatedResponseTimeBarChart"}
+            ]
+        : []
+    );
 
     return (
         <Modal open={open} onClose={onClose}>
@@ -45,16 +63,20 @@ const MoreChartsModal: React.FC<MoreChartsModalProps> = ({
                 <Typography variant="h6" mb={2}>
                     {t("moreAbout")}
                 </Typography>
-                <Typography variant="body1" mb={3}>
-                    {t.rich("responseTimeBarChartMonthly.description",
-                        {b: (content) => <b>{content}</b>})}
-                </Typography>
-                <Box mb={4}>
-                    <ChartContainer
-                        type={chartType}
-                        data={graphData}
-                        listOfConversations={listOfConversations}
-                    />
+                <Box>
+                    {chartsData.map(({descriptionKey, chartType}, index) => (
+                        <Box key={index} mb={4}>
+                            <Typography
+                                variant="body1" mb={2}
+                                dangerouslySetInnerHTML={{ __html: t.raw(`${descriptionKey}.description`)}}
+                            />
+                            <ChartContainer
+                                type={chartType}
+                                data={graphData}
+                                listOfConversations={listOfConversations}
+                            />
+                        </Box>
+                    ))}
                 </Box>
                 <Box display="flex" justifyContent="right">
                     <Button onClick={onClose} variant="contained">
