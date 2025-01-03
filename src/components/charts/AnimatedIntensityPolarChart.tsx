@@ -15,12 +15,12 @@ ChartJS.register(RadialLinearScale, Tooltip, Legend, LineElement, PointElement);
 const Z_SCORE_LIMIT = 1.96;
 const BACKGROUND_IMAGE = "images/charts/FeedbackBackgroundForPolarPlot.svg";
 
-interface AnimatedPolarChartProps {
+interface AnimatedIntensityPolarChartProps {
     dataMonthlyPerConversation: SentReceivedPoint[][];
     listOfConversations: string[];
 }
 
-const AnimatedPolarChart: React.FC<AnimatedPolarChartProps> = ({
+const AnimatedIntensityPolarChart: React.FC<AnimatedIntensityPolarChartProps> = ({
                                                                    dataMonthlyPerConversation,
                                                                    listOfConversations,
                                                                }) => {
@@ -28,7 +28,7 @@ const AnimatedPolarChart: React.FC<AnimatedPolarChartProps> = ({
     const container_name = `chart-wrapper-${CHART_NAME}`;
 
     const labelTexts = useTranslations("feedback.chartLabels");
-    const chartTexts = useTranslations("feedback.interactionIntensity.animatedPolarChart");
+    const chartTexts = useTranslations("feedback.interactionIntensity.animatedIntensityPolarChart");
 
     const [currentFrame, setCurrentFrame] = useState<number>(0);
     const [labels, setLabels] = useState<string[]>([]);
@@ -38,7 +38,7 @@ const AnimatedPolarChart: React.FC<AnimatedPolarChartProps> = ({
         const { counts, sortedMonths } = prepareCountsOverTimeData(
             dataMonthlyPerConversation,
             listOfConversations,
-            "both"
+            "sent+received"
         );
 
         const zScoreFrames = calculateZScores(counts, Z_SCORE_LIMIT) as Record<string, number[]>;
@@ -75,11 +75,8 @@ const AnimatedPolarChart: React.FC<AnimatedPolarChartProps> = ({
     };
 
     return (
-        <Box p={2}>
-            <Box
-                id={container_name}
-                position="relative"
-            >
+        <Box>
+            <Box id={container_name} position="relative" p={2}>
                 <Box
                     position="relative"
                     display="flex"
@@ -98,27 +95,29 @@ const AnimatedPolarChart: React.FC<AnimatedPolarChartProps> = ({
                 </Box>
                 <Box
                     position="relative"
+                    flex="1"
+                    px={2}
+                    pb={3}
+                    pt={5}
                     sx={{
                         zIndex: 0,
                         backgroundImage: `url(${BACKGROUND_IMAGE})`,
                         backgroundSize: "cover",
                         backgroundPosition: "center",
-                        padding: 2,
-                        maxHeight: 500,
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
+                        width: "100%",
+                        height: "400px"
                     }}>
                     <Radar
                         data={generateChartData(currentFrame)}
                         options={{
                             responsive: true,
+                            maintainAspectRatio: false,
                             animation: { duration: 300 },
                             scales: {
                                 r: {
                                     reverse: true,
                                     beginAtZero: true,
-                                    min: -Z_SCORE_LIMIT,
+                                    min: -Z_SCORE_LIMIT * 0.5,
                                     max: Z_SCORE_LIMIT + Z_SCORE_LIMIT * 0.5,
                                     ticks: { count: 1, display: false},
                                     angleLines: { display: false },
@@ -134,7 +133,7 @@ const AnimatedPolarChart: React.FC<AnimatedPolarChartProps> = ({
                             },
                             plugins: {
                                 legend: {
-                                    position: "right",
+                                    position: "chartArea",
                                     align: "start",
                                     display: true,
                                     labels: {
@@ -158,4 +157,4 @@ const AnimatedPolarChart: React.FC<AnimatedPolarChartProps> = ({
     );
 };
 
-export default AnimatedPolarChart;
+export default AnimatedIntensityPolarChart;

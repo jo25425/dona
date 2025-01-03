@@ -1,6 +1,11 @@
 import {Conversation} from "@models/processed";
 import {AnswerTimePoint, DailyHourPoint, DailySentReceivedPoint, SentReceivedPoint} from "@models/graphData";
 
+type DatePoint = {
+    year: number;
+    month: number;
+    date: number;
+};
 
 const produceMonthlySentReceived = (
     donorId: string, conversations: Conversation[], toCount: "words" | "messages"
@@ -173,35 +178,32 @@ export const produceAnswerTimesPerConversation = (
         .filter((point): point is AnswerTimePoint => point !== null);
 }
 
+export const getEpochSeconds = (
+    year: number,
+    month: number,
+    date: number,
+    hour: number = 12,
+    minute: number = 30
+): number => {
+    return Math.floor(new Date(year, month - 1, date, hour, minute).getTime() / 1000);
+};
+
 /**
- * Generates a list of all days between the earliest and latest timestamps in the input data.
+ * Produces a complete list of dates between the given start and end date (inclusive).
  *
- * @param dailyWords - An array of DailySentReceivedPoint objects to determine the date range.
- * @returns An array of TimeFrameWithDaysInts objects, each representing a specific day within the date range.
+ * @param startDate - Start dte.
+ * @param endDate - End date.
+ * @returns A list of objects representing each date with year, month, and date.
  */
-export const createAllDaysList = (dailyWords: DailySentReceivedPoint[]): DailySentReceivedPoint[] => {
-    if (dailyWords.length === 0) return [];
+export function produceAllDays(startDate: Date, endDate: Date): { year: number; month: number; date: number }[] {
+    const allDays: { year: number; month: number; date: number }[] = [];
 
-    const startDate = new Date(dailyWords[0].epochSeconds * 1000);
-    const endDate = new Date(dailyWords[dailyWords.length - 1].epochSeconds * 1000);
-
-    const allDays: DailySentReceivedPoint[] = [];
     let currentDate = new Date(startDate);
-
     while (currentDate <= endDate) {
         allDays.push({
             year: currentDate.getFullYear(),
-            month: currentDate.getMonth() + 1,
+            month: currentDate.getMonth() + 1, // Months are zero-based in JS Date
             date: currentDate.getDate(),
-            sentCount: 0,
-            receivedCount: 0,
-            epochSeconds: new Date(
-                currentDate.getFullYear(),
-                currentDate.getMonth(),
-                currentDate.getDate(),
-                12,
-                30
-            ).getTime() / 1000,
         });
         currentDate.setDate(currentDate.getDate() + 1);
     }
@@ -209,49 +211,68 @@ export const createAllDaysList = (dailyWords: DailySentReceivedPoint[]): DailySe
     return allDays;
 }
 
+/**
+ * Computes a sliding window mean of sent and received counts over a list of complete dates.
+ * Means that are zero for both sent and received aren't included to avoid unnecessary data loads.
+ *
+ * @param dailyData - The input data containing daily sent and received counts.
+ * @param completeDays - The list of all days to be considered for the computation (produced by produceAllDays).
+ * @param windowSize - The size of the sliding window.
+ * @returns A list of DailySentReceivedPoint objects with computed sliding means, skipping zero means that aren't the very first or last.
+ */
 export function produceSlidingWindowMean(
     dailyData: DailySentReceivedPoint[],
-    allDays: DailySentReceivedPoint[],
-    windowSize: number = 15
+    completeDays: DatePoint[],
+    windowSize: number = 30
 ): DailySentReceivedPoint[] {
-    // Map daily data for quick lookup
     const dataMap = new Map<string, DailySentReceivedPoint>();
+
+    // Populate the map for quick lookups
     dailyData.forEach((day) => {
-        const key = `${day.year}-${day.month}-${day.date}`;
+        const key = `${day.year}-${String(day.month).padStart(2, "0")}-${String(day.date).padStart(2, "0")}`;
         dataMap.set(key, day);
     });
 
-    return allDays.map((currentDay, index) => {
-        const startIndex = Math.max(0, index - windowSize);
-        const endIndex = Math.min(allDays.length - 1, index + windowSize);
+    const halfWindow = Math.floor(windowSize / 2);
+    const allSlidingWindowMeans: DailySentReceivedPoint[] = completeDays.map(({ year, month, date }, index) => {
+        const epochSeconds = getEpochSeconds(year, month, date);
 
+        // Iterate over selected range, adding counts from daily data where available
         let sentSum = 0;
         let receivedSum = 0;
         let count = 0;
+        completeDays.slice(
+            Math.max(0, index - halfWindow),
+            Math.min(completeDays.length, index + halfWindow + 1)
+        ).forEach(({ year: y, month: m, date: d }) => {
+            const dayKey = `${y}-${String(m).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
+            const dayData = dataMap.get(dayKey);
 
-        // Iterate over the sliding window
-        for (let i = startIndex; i <= endIndex; i++) {
-            const windowDay = allDays[i];
-            const key = `${windowDay.year}-${windowDay.month}-${windowDay.date}`;
-            const data = dataMap.get(key);
-
-            if (data) {
-                sentSum += data.sentCount;
-                receivedSum += data.receivedCount;
-                count++;
+            if (dayData) {
+                sentSum += dayData.sentCount;
+                receivedSum += dayData.receivedCount;
             }
-        }
+            count++; // Include all days, even without data, as long as they're within the donation
+        });
 
-        // Calculate means
-        const meanSent = count > 0 ? Math.round(sentSum / count) : 0;
-        const meanReceived = count > 0 ? Math.round(receivedSum / count) : 0;
+        // Compute the means
+        const meanSent = count > 1 ? Math.round(sentSum / count) : 0;
+        const meanReceived = count > 1 ? Math.round(receivedSum / count) : 0;
 
         return {
-            ...currentDay,
+            year,
+            month,
+            date,
             sentCount: meanSent,
             receivedCount: meanReceived,
+            epochSeconds,
         };
     });
+
+    // Filter out days with 0 sent and received means, but keep the first and last day
+    return allSlidingWindowMeans.filter((day, index, array) => {
+        const isNonZero = day.sentCount !== 0 || day.receivedCount !== 0;
+        const isBoundary = index === 0 || index === array.length - 1;
+        return isNonZero || isBoundary;
+    });
 }
-
-

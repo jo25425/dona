@@ -25,12 +25,12 @@ const ranges = [
     { max: Infinity, label: SEVENTH },
 ];
 
-interface ResponseTimesBarChartProps {
+interface ResponseTimeBarChartProps {
     responseTimes: AnswerTimePoint[];
     isOnlyOneOrLessConv: boolean;
 }
 
-const ResponseTimesBarChart: React.FC<ResponseTimesBarChartProps> = ({
+const ResponseTimeBarChart: React.FC<ResponseTimeBarChartProps> = ({
                                                                          responseTimes,
                                                                          isOnlyOneOrLessConv,
                                                                      }) => {
@@ -115,4 +115,4 @@ const ResponseTimesBarChart: React.FC<ResponseTimesBarChartProps> = ({
     );
 };
 
-export default ResponseTimesBarChart;
+export default ResponseTimeBarChart;

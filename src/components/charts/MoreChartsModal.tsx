@@ -42,8 +42,8 @@ const MoreChartsModal: React.FC<MoreChartsModalProps> = ({
     const chartsData = (
         section == "interactionIntensity" ?
            [
-               {"descriptionKey": "horizontalBarChartOverall", "chartType": "animatedHorizontalBarChartOverall"},
-               {"descriptionKey": "slidingWindowMean", "chartType": "sentReceivedSlidingWindowMean"}
+               {"descriptionKey": "wordCountOverallBarChart", "chartType": "wordCountOverallBarChart"},
+               {"descriptionKey": "sentReceivedSlidingWindowMean", "chartType": "sentReceivedSlidingWindowMean"}
            ]
         : section == "dailyActivityTimes" ?
             [

@@ -1,8 +1,7 @@
 import {Conversation, DataSourceValue} from "@models/processed";
-import {GraphData} from "@models/graphData";
+import {DailySentReceivedPoint, GraphData} from "@models/graphData";
 import {
-    aggregateDailyWords,
-    createAllDaysList,
+    aggregateDailyWords, produceAllDays,
     produceAnswerTimesPerConversation,
     produceDailyWordsPerConversation, produceMonthlySentReceivedMessages,
     produceMonthlySentReceivedWords,
@@ -10,32 +9,47 @@ import {
     produceWordCountDailyHours
 } from "@services/charts/timeAggregates";
 import produceBasicStatistics from "@services/charts/produceBasicStatistics";
+import {calculateMinMaxDates} from "@services/rangeFiltering";
 
 export default function produceGraphData(donorId: string, allConversations: Conversation[]): Record<string, GraphData> {
     return Object.fromEntries(
-        Map.groupBy(allConversations, ({ dataSource}) => dataSource)
+        Map.groupBy(allConversations, ({ dataSource }) => dataSource)
             .entries()
             .map(([dataSourceValue, conversations]) => {
-                // Compute various data points
+                // Compute various data points for each conversation
+                const dailyWordsPerConversation = conversations.map((conversation) =>
+                    produceDailyWordsPerConversation(donorId, conversation)
+                );
+                const allDailyWords = aggregateDailyWords(dailyWordsPerConversation);
+
+                // Determine the global date range using calculateMinMaxDates
+                const { minDate, maxDate } = calculateMinMaxDates(conversations, true);
+                let slidingWindowMeanPerConversation: DailySentReceivedPoint[][] = [];
+                if (minDate && maxDate) {
+                    // Generate the complete list of all days within the global date range
+                    const completeDaysList = produceAllDays(minDate, maxDate);
+
+                    // Create sliding window mean using the complete days list
+                    slidingWindowMeanPerConversation = dailyWordsPerConversation.map((dailyWords) =>
+                        produceSlidingWindowMean(dailyWords, completeDaysList)
+                    );
+                }
+
+                // Compute other data points
                 const monthlySentReceivedPerConversation = conversations.map((conversation) =>
                     produceMonthlySentReceivedWords(donorId, [conversation])
                 );
-                const dailyWordsPerConversation = conversations.map(conversation =>
-                    produceDailyWordsPerConversation(donorId, conversation)
-                );
-                const dailyWords = aggregateDailyWords(dailyWordsPerConversation);
-
                 const dailySentHoursPerConversation = conversations.map((conversation) =>
                     produceWordCountDailyHours(donorId, conversation, true)
                 );
                 const dailyReceivedHoursPerConversation = conversations.map((conversation) =>
                     produceWordCountDailyHours(donorId, conversation, false)
                 );
-                const answerTimes = conversations.flatMap(conversation =>
+                const answerTimes = conversations.flatMap((conversation) =>
                     produceAnswerTimesPerConversation(donorId, conversation)
                 );
-                const participantsPerConversation = conversations.map(conversation =>
-                    conversation.participants.filter(participant => participant !== donorId)
+                const participantsPerConversation = conversations.map((conversation) =>
+                    conversation.participants.filter((participant) => participant !== donorId)
                 );
 
                 // General statistics
@@ -43,18 +57,12 @@ export default function produceGraphData(donorId: string, allConversations: Conv
                 const wordCounts = monthlySentReceivedPerConversation.flat();
                 const basicStatistics = produceBasicStatistics(messageCounts, wordCounts);
 
-                // Create sliding window mean
-                const allDays = createAllDaysList(dailyWords);
-                const slidingWindowMeanPerConversation = dailyWordsPerConversation.map((dailyWords) =>
-                    produceSlidingWindowMean(dailyWords, allDays)
-                );
-
-                // Return all graph data
+                // Return all graph data for the data source
                 return [
                     dataSourceValue,
                     {
                         monthlySentReceivedPerConversation,
-                        dailyWords,
+                        dailyWords: allDailyWords,
                         slidingWindowMeanPerConversation,
                         dailyWordsPerConversation,
                         dailySentHoursPerConversation,
@@ -62,7 +70,7 @@ export default function produceGraphData(donorId: string, allConversations: Conv
                         answerTimes,
                         basicStatistics,
                         participantsPerConversation,
-                    }
+                    },
                 ];
             })
     ) as Record<DataSourceValue, GraphData>;

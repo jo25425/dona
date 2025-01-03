@@ -496,7 +496,7 @@
     },
     "interactionIntensity": {
       "title": "Interaction Intensity",
-      "animatedPolarChart": {
+      "animatedIntensityPolarChart": {
         "title": "Planet representation",
         "description": "This visualization displays you as the yellow dot in the middle. The chats you donated are the white dots around you. The closer a dot is to you, the more words you have written in this chat. In the time-slider below you can see and select the month and year for which the data is shown. The smaller lighter white dots show the activity in the respective chats in other months. Click <button>HERE</button> to see an explanation with an example.",
         "legend": {
@@ -508,7 +508,7 @@
           "text": "<p><b>(1)</b> Here the white solid dot is very close to the large yellow dot in the center. This means that in the month shown below, the communication in this chat was very intense compared to the previous months and the other chats. In this example, there are only a few transparent small dots on the trajectory. This is because the data only covers a few months.</p><p><b>(2)</b> Hardly any transparent history dots can be seen here, as they all lie on top of each other in roughly the same place. This is because the intensity has been very stable over the months in this chat.</p><p><b>(3)</b> In contrast to (2), many transparent points are visible here. So the intensity of this chat has changed a lot over the months. In the currently displayed month, the big intense white dot is further away than some other transparent small points: Accordingly, there were months before in which more words were exchanged in this chat. However, there have also been months when the intensity was lower.</p><p><b>(4)</b> Click this icon to download the graph.</p>"
         }
       },
-      "animatedHorizontalBarChart": {
+      "animatedWordCountBarChart": {
         "title": "Total sent words",
         "description": "Here you can see the total amount of words you sent in your different chats adding up per month. In the time-slider below you can see and select the month and year for which the data is shown. Click <button>HERE</button> to see an explanation with an example.",
         "legend": "Sent words",
@@ -519,7 +519,7 @@
         }
       },
       "moreAbout": "More about your Interaction Intensity",
-      "horizontalBarChartOverall": {
+      "wordCountOverallBarChart": {
         "description": "This graph shows the total number of words you received and sent across all your donated chats.",
         "legend": {
           "sent": "Sent words",
@@ -531,7 +531,7 @@
           "received": "Received"
         }
       },
-      "slidingWindowMean": {
+      "sentReceivedSlidingWindowMean": {
         "description": "Here you can see the average number of your sent and received words per day (more precisely, we calculate a so-called sliding window average with a window size of 30 days). At the top left you can also select your individual chats to see the graph of your sent words for the selected chat.<br/><br/><i>If there is no value for the <u>received words</u> in the overview for one or more days, then it has been hidden due to data protection reasons. Only aggregated information from which no direct conclusions can be drawn about your individual contacts is displayed.</i>",
         "legend": {
           "sent": "Sent words",

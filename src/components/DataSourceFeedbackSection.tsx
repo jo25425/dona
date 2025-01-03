@@ -100,32 +100,32 @@ export default function DataSourceFeedbackSection({ dataSourceValue, graphData }
                     <Typography variant="h6">{ii("title")}</Typography>
                     <Box>
                         <Typography variant="body1" fontWeight="fontWeightBold">
-                            {ii("animatedPolarChart.title")}
+                            {ii("animatedIntensityPolarChart.title")}
                         </Typography>
                         <Typography variant="body2">
-                            {ii.rich("animatedPolarChart.description", {
-                                button: (label) => openModalSpan(label, ii, "animatedPolarChart"),
+                            {ii.rich("animatedIntensityPolarChart.description", {
+                                button: (label) => openModalSpan(label, ii, "animatedIntensityPolarChart"),
                             })}
                         </Typography>
                     </Box>
                     <ChartContainer
-                        type="animatedPolarChart"
+                        type="animatedIntensityPolarChart"
                         data={graphData}
                         listOfConversations={listOfConversations}
                         dataSourceValue={dataSourceValue}
                     />
                     <Box>
                         <Typography variant="body1" fontWeight="fontWeightBold">
-                            {ii("animatedHorizontalBarChart.title")}
+                            {ii("animatedWordCountBarChart.title")}
                         </Typography>
                         <Typography variant="body2">
-                            {ii.rich("animatedHorizontalBarChart.description", {
-                                button: (label) => openModalSpan(label, ii, "animatedHorizontalBarChart"),
+                            {ii.rich("animatedWordCountBarChart.description", {
+                                button: (label) => openModalSpan(label, ii, "animatedWordCountBarChart"),
                             })}
                         </Typography>
                     </Box>
                     <ChartContainer
-                        type="animatedHorizontalBarChart"
+                        type="animatedWordCountBarChart"
                         data={graphData}
                         listOfConversations={listOfConversations}
                         dataSourceValue={dataSourceValue}

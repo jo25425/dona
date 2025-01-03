@@ -446,7 +446,7 @@
     },
     "interactionIntensity": {
       "title": "Interaktionsintensität",
-      "animatedPolarChart": {
+      "animatedIntensityPolarChart": {
         "title": "Planetendarstellung",
         "description": "In dieser Visualisierung werden Sie als der gelbe Punkt in der Mitte angezeigt. Die von Ihnen gespendeten Chats sind die weißen Punkte um Sie herum. Je mehr Wörter in einem Chat geschrieben haben, desto näher bei Ihnen (gelber Punkt) ist der entsprechende weiße Punkt. Im Zeitschieber unten können den Monat und das Jahr, für welche aktuell die Daten angezeigt werden, sehen und selbst auswählen. Die kleineren helleren weißen Punkte zeigen die Aktivität in den jeweiligen Chats in anderen Monaten. Klicken Sie <button>HIER</button>, um eine Erklärung mit einem Beispiel zu sehen.",
         "legend": {
@@ -458,7 +458,7 @@
           "text": "<p><b>(1)</b> Hier ist der weiße voll ausgefüllte Punkt sehr nah an dem gelben Punkt in der Mitte. Das bedeutet, dass in dem unten angezeigten Monat die Kommunikation in diesem Chat im Vergleich zu den vorherigen Monaten und den anderen Chats sehr intensiv war. Die hellen Punkte stehen für die Aktivität in den vorherigen Monaten. Es gibt in diesem Beispiel nur wenige helle kleine Punkte auf der Laufbahn. Das liegt daran, dass die Daten nur wenige Monate umfassen.</p><p><b>(2)</b> Hier sind kaum durchsichtige Verlaufspunkte zu sehen, da diese alle übereinander an ungefähr der gleichen Stelle liegen. Das liegt daran, dass die Intensität über die Monate in diesem Chat sehr stabil war.</p><p><b>(3)</b> Im Kontrast zu (2) sind hier viele durchsichtige Punkte sichtbar. Die Intensität dieses Chats hat sich also über die Monate viel geändert. Im aktuell angezeigten Monat liegt der größere kräftig weiße Punkt weiter entfernt als einige andere hellere Punkte: Dementsprechend gab es in der Zeit davor Monate, in denen mehr Wörter in diesem Chat ausgetauscht wurden. Allerdings gab es auch schon Monate, in denen die Intensität niedriger war.</p><p><b>(4)</b> Klicken Sie auf dieses Symbol, um den Graphen herunterzuladen.</p>"
         }
       },
-      "animatedHorizontalBarChart": {
+      "animatedWordCountBarChart": {
         "title": "Insgesamt gesendete Wörter",
         "description": "Hier können Sie die Gesamtanzahl der Wörter sehen, die Sie in Ihren verschiedenen Chats pro Monat gesendet haben. Im Zeitschieber unten können Sie den Monat und das Jahr sehen und selbst auswählen. Klicken Sie <button>HIER</button>, um eine Erklärung mit einem Beispiel zu sehen.",
         "legend": "Gesendete Wörter",
@@ -468,7 +468,20 @@
           "text": "<p><b>(1)</b> In diesem Beispiel gab es über den gesamten Zeitraum in diesem Chat mit F9, F10 insgesamt am meisten gesendete Wörter: knapp über 140 Tausend.</p><p><b>(2)</b> Im Kontrast zu (1) gab es in diesem Beispielchat am wenigsten gesendete Wörter.</p><p><b>(3)</b> Hier wird das Jahr und der Monat angezeigt. Pro Monat können Sie beobachten, wie viele Wörter gesendet wurden. Probieren Sie den Zeitschieber aus! </p><p><b>(4)</b> Klicken Sie auf dieses Symbol, um den Graphen herunterzuladen.</p>"
         }
       },
-      "moreAbout": "Mehr über Ihre Interaktionsintensität"
+      "moreAbout": "Mehr über Ihre Interaktionsintensität",
+      "sentReceivedSlidingWindowMean": {
+        "description": "Hier können Sie pro Tag Ihre durchschnittliche gesendete und empfangene Wörteranzahl sehen (Genauer gesagt, berechnen wir einen “gleitenden Mittelwert” mit einer Fenstergröße von 30 Tagen). Oben links können Sie auch Ihre einzelnen Chats auswählen, um den Graphen für Ihre gesendeten Wörter für den ausgewählten Chat zu sehen. <br><br> <i> Falls es in der Gesamtübersicht für einen oder mehrere Tage keinen Wert für die <u>erhaltenen Wörter</u> gibt, dann wurde dieser aus Datenschutzgründen ausgeblendet. Es werden nur aggregierte Informationen aus denen sich keine direkten Rückschlüsse auf einzelne Kontakte ziehen lassen angezeigt.</i>",
+        "legend": {
+          "sent": "Gesendete Wörter",
+          "received": "Erhaltene Wörter",
+          "receivedNotShown": "Datenschutz: Erhaltene Wörter werden nicht angezeigt"
+        },
+        "yAxis": "Durchschnittliche Anzahl Wörter",
+        "example": {
+          "image": "images/feedback_example_slidingWindowMean_german.svg",
+          "text": "<p class=\"text-left\"><b>(1)</b> In diesem Beispiel lässt sich hier ein deutlicher Zuwachs gesendeter und empfangener Wörter beobachten. Dabei waren zu dieser Zeit die gesendeten Wörter mehr als die empfangenen Wörter.</p><p class=\"text-left\"><b>(2)</b> Hier ist ein noch größerer Zuwachs von gesendeten und empfangenen Wörtern zu sehen. In diesem Zeitraum wurden insgesamt über alle Chats verteilt, mehr Wörter empfangen als gesendet.</p>"
+        }
+      }
     },
     "dailyActivityTimes": {
       "title": "Tägliche Aktivitätszeiten",
@@ -532,19 +545,6 @@
         "yAxis": {
           "sent": "Gesendet",
           "received": "Erhalten"
-        }
-      },
-      "slidingWindowMean": {
-        "description": "Hier können Sie pro Tag Ihre durchschnittliche gesendete und empfangene Wörteranzahl sehen (Genauer gesagt, berechnen wir einen “gleitenden Mittelwert” mit einer Fenstergröße von 30 Tagen). Oben links können Sie auch Ihre einzelnen Chats auswählen, um den Graphen für Ihre gesendeten Wörter für den ausgewählten Chat zu sehen. <br><br> <i> Falls es in der Gesamtübersicht für einen oder mehrere Tage keinen Wert für die <u>erhaltenen Wörter</u> gibt, dann wurde dieser aus Datenschutzgründen ausgeblendet. Es werden nur aggregierte Informationen aus denen sich keine direkten Rückschlüsse auf einzelne Kontakte ziehen lassen angezeigt.</i>",
-        "legend": {
-          "sent": "Gesendete Wörter",
-          "received": "Erhaltene Wörter",
-          "receivedNotShown": "Datenschutz: Erhaltene Wörter werden nicht angezeigt"
-        },
-        "yAxis": "Durchschnittliche Anzahl Wörter",
-        "example": {
-          "image": "images/feedback_example_slidingWindowMean_german.svg",
-          "text": "<p class=\"text-left\"><b>(1)</b> In diesem Beispiel lässt sich hier ein deutlicher Zuwachs gesendeter und empfangener Wörter beobachten. Dabei waren zu dieser Zeit die gesendeten Wörter mehr als die empfangenen Wörter.</p><p class=\"text-left\"><b>(2)</b> Hier ist ein noch größerer Zuwachs von gesendeten und empfangenen Wörtern zu sehen. In diesem Zeitraum wurden insgesamt über alle Chats verteilt, mehr Wörter empfangen als gesendet.</p>"
         }
       },
       "dailySentReceived": {

@@ -9,22 +9,13 @@ import {calculateZScores} from "@services/charts/zScores";
 import {adjustRange} from "@services/charts/preprocessing";
 import Typography from "@mui/material/Typography";
 import DownloadButtons from "@components/charts/DownloadButtons";
+import {DailyHourPoint} from "@models/graphData";
 
 ChartJS.register(Title, Tooltip, Legend, LinearScale, PointElement, TimeScale);
 
 const ALL_CHATS = "ALL_CHATS";
 const Z_SCORE_LIMIT = 1.39;
 const backgroundColor = (a: number): string => `rgba(8, 48, 107, ${a})`;
-
-interface DailyHourPoint {
-    year: number;
-    month: number;
-    date: number;
-    hour: number;
-    minute: number;
-    wordCount: number;
-    epochSeconds: number;
-}
 
 interface DailyActivityChartProps {
     dataSent: DailyHourPoint[][];

@@ -1,5 +1,4 @@
-import {SentReceivedPoint} from "@models/graphData";
-type CountMode = "sent" | "received" | "both";
+type CountMode =  "sent" | "received" | "sent+received" | "word";
 
 interface CountsOverTimeData {
     counts: Record<string, number[]>;
@@ -10,18 +9,27 @@ interface CountsOverTimeData {
 /**
  * Prepares cumulative counts over time for conversations based on the provided mode.
  *
- * @param dataMonthlyPerConversation - Monthly sent/received data for each conversation.
+ * @param dataMonthlyPerConversation - Monthly sent/received/word data for each conversation.
  * @param listOfConversations - Array of conversation identifiers.
- * @param mode - Determines whether to count "sent", "received", or "both".
+ * @param mode - Determines whether to count "sent", "received", "sent+received", or "word" (fallback to "sent").
  * @returns An object containing counts per month, sorted month keys, and the global maximum count.
  */
+
+interface DataPoint {
+    year: number;
+    month: number;
+    wordCount?: number;
+    sentCount?: number;
+    receivedCount?: number;
+}
+
 export const prepareCountsOverTimeData = (
-    dataMonthlyPerConversation: SentReceivedPoint[][],
+    dataMonthlyPerConversation: DataPoint[][],
     listOfConversations: string[],
     mode: CountMode = "sent"
 ): CountsOverTimeData => {
-    if (!["sent", "received", "both"].includes(mode)) {
-        throw new Error(`Invalid mode: ${mode}. Expected 'sent', 'received', or 'both'.`);
+    if (!["sent", "received", "sent+received", "word"].includes(mode)) {
+        throw new Error(`Invalid mode: ${mode}. Expected 'sent', 'received', 'sent+received', or 'word'.`);
     }
 
     const counts: Record<string, number[]> = {};
@@ -35,11 +43,17 @@ export const prepareCountsOverTimeData = (
             monthsSet.add(monthKey);
 
             if (!counts[monthKey]) counts[monthKey] = Array(listOfConversations.length).fill(0);
-            cumulativeSum += (
-                mode == "sent" ? dataPoint.sentCount || 0 :
-                    mode == "received" ? dataPoint.receivedCount || 0 :
-                        (dataPoint.sentCount || 0) + (dataPoint.receivedCount || 0)
-            )
+
+            const value =
+                mode === "word"
+                    ? dataPoint.wordCount || 0
+                    : mode === "sent"
+                        ? dataPoint.sentCount || 0
+                        : mode === "received"
+                            ? dataPoint.receivedCount || 0
+                            : (dataPoint.sentCount || 0) + (dataPoint.receivedCount || 0);
+
+            cumulativeSum += value;
             counts[monthKey][convIdx] = cumulativeSum;
 
             if (cumulativeSum > globalMax) globalMax = cumulativeSum;

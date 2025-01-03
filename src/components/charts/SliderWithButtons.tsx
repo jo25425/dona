@@ -37,9 +37,9 @@ const SliderWithButtons: React.FC<SliderWithButtonsProps> = ({
     };
 
     return (
-        <Box display="flex" alignItems="center" px={4} mb={3}>
-            <Box display="flex" gap={2} mr={5}>
-                <Button variant="contained" color="primary" onClick={handleStartAnimation}>
+        <Box display="flex" alignItems="center" px={4}>
+            <Box display="flex" gap={2} mr={5} mt={-3}>
+                <Button variant="outlined" color="primary" onClick={handleStartAnimation}>
                     {labels("start")}
                 </Button>
                 <Button variant="outlined" onClick={handleReset}>

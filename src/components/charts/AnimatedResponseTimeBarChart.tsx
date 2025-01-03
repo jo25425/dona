@@ -14,7 +14,7 @@ interface AnimatedResponseTimeBarChartProps {
     answerTimes: GraphData["answerTimes"];
 }
 
-const AnimatedResponseTimesBarChart: React.FC<AnimatedResponseTimeBarChartProps> = ({
+const AnimatedResponseTimeBarChart: React.FC<AnimatedResponseTimeBarChartProps> = ({
                                                                                         answerTimes,
                                                                                     }) => {
     const CHART_NAME = "response-times-donor-animated";
@@ -84,7 +84,7 @@ const AnimatedResponseTimesBarChart: React.FC<AnimatedResponseTimeBarChartProps>
                     label: t("legend.donor"),
                     data: preparedData?.[monthKey] || [],
                     backgroundColor: "#1f77b4",
-                    barThickness: 20,
+                    barPercentage: 0.8,
                 },
             ],
         };
@@ -133,4 +133,4 @@ const AnimatedResponseTimesBarChart: React.FC<AnimatedResponseTimeBarChartProps>
     );
 };
 
-export default AnimatedResponseTimesBarChart;
+export default AnimatedResponseTimeBarChart;

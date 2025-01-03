@@ -11,12 +11,12 @@ import {prepareCountsOverTimeData} from "@services/charts/animations";
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
-interface AnimatedHorizontalBarChartProps {
+interface AnimatedWordCountBarChartProps {
     dataMonthlyPerConversation: SentReceivedPoint[][];
     listOfConversations: string[];
 }
 
-const AnimatedHorizontalBarChart: React.FC<AnimatedHorizontalBarChartProps> = ({
+const AnimatedWordCountBarChart: React.FC<AnimatedWordCountBarChartProps> = ({
                                                                                    dataMonthlyPerConversation,
                                                                                    listOfConversations,
                                                                                }) => {
@@ -24,7 +24,7 @@ const AnimatedHorizontalBarChart: React.FC<AnimatedHorizontalBarChartProps> = ({
     const container_name = `chart-wrapper-${CHART_NAME}`;
 
     const labelTexts = useTranslations("feedback.chartLabels");
-    const chartTexts = useTranslations("feedback.interactionIntensity.animatedHorizontalBarChart");
+    const chartTexts = useTranslations("feedback.interactionIntensity.animatedWordCountBarChart");
 
     const chartRef = useRef<any>(null);
     const [cumulativeCounts, setCumulativeCounts] = useState<Record<string, number[]>>({});
@@ -98,4 +98,4 @@ const AnimatedHorizontalBarChart: React.FC<AnimatedHorizontalBarChartProps> = ({
     );
 };
 
-export default AnimatedHorizontalBarChart;
+export default AnimatedWordCountBarChart;

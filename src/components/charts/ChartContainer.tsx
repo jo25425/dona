@@ -2,12 +2,16 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { GraphData } from "@models/graphData";
-import ResponseTimesBarChart from "@components/charts/ResponseTimesBarChart";
-import AnimatedHorizontalBarChart from "@components/charts/AnimatedHorizontalBarChart";
-import AnimatedPolarChart from "@components/charts/AnimatedPolarChart";
+import ResponseTimeBarChart from "@components/charts/ResponseTimeBarChart";
+import AnimatedWordCountBarChart from "@components/charts/AnimatedWordCountBarChart";
+import AnimatedIntensityPolarChart from "@components/charts/AnimatedIntensityPolarChart";
 import DailyActivityChart from "@components/charts/DailyActivityChart";
-import AnimatedResponseTimesBarChart from "@components/charts/AnimatedResponseTimesBarChart";
+import AnimatedResponseTimeBarChart from "@components/charts/AnimatedResponseTimeBarChart";
 import DayPartsActivityOverallChart from "@components/charts/DayPartsActivityOverallChart";
+import AnimatedDayPartsActivityChart from "@components/charts/AnimatedDayPartsActivityChart";
+import WordCountOverallBarChart from "@components/charts/WordCountOverallBarChart";
+import {graphData} from "@/db/schema";
+import SentReceivedSlidingWindowChart from "@components/charts/SentReceivedSlidingWindowChart";
 
 
 interface ChartContainerProps {
@@ -20,23 +24,44 @@ interface ChartContainerProps {
 export default function ChartContainer({ type, data, listOfConversations }: ChartContainerProps) {
     const renderChart = () => {
         switch (type) {
-            case "animatedPolarChart":
+            case "animatedIntensityPolarChart":
                 return (
-                    <AnimatedPolarChart
+                    <AnimatedIntensityPolarChart
                         dataMonthlyPerConversation={data.monthlySentReceivedPerConversation}
+                        listOfConversations={listOfConversations}
+                    />
+                );
+            case "animatedWordCountBarChart":
+                return (
+                    <AnimatedWordCountBarChart
+                        dataMonthlyPerConversation={data.monthlySentReceivedPerConversation}
+                        listOfConversations={listOfConversations}
+                    />
+                );
+            case "wordCountOverallBarChart":
+                return (
+                    <WordCountOverallBarChart
+                        sentWordsTotal={data.basicStatistics.sentWordsTotal}
+                        receivedWordsTotal={data.basicStatistics.receivedWordsTotal}
+                    />
+                );
+            case "sentReceivedSlidingWindowMean":
+                return (
+                    <SentReceivedSlidingWindowChart
+                        slidingWindowMeanPerConversation={data.slidingWindowMeanPerConversation}
                         listOfConversations={listOfConversations}
                     />
                 );
             case "responseTimeBarChart":
                 return (
-                    <ResponseTimesBarChart
+                    <ResponseTimeBarChart
                         responseTimes={data.answerTimes}
                         isOnlyOneOrLessConv={listOfConversations.length <= 1}
                     />
                 );
             case "animatedResponseTimeBarChart":
                 return (
-                    <AnimatedResponseTimesBarChart
+                    <AnimatedResponseTimeBarChart
                         answerTimes={data.answerTimes}
                     />
                 );
@@ -54,11 +79,10 @@ export default function ChartContainer({ type, data, listOfConversations }: Char
                         dailyReceivedHoursPerConversation={data.dailyReceivedHoursPerConversation}
                     />
                 );
-            case "animatedHorizontalBarChart":
+            case "animatedDayPartsActivityChart":
                 return (
-                    <AnimatedHorizontalBarChart
-                        dataMonthlyPerConversation={data.monthlySentReceivedPerConversation}
-                        listOfConversations={listOfConversations}
+                    <AnimatedDayPartsActivityChart
+                        dailySentHoursPerConversation={data.dailySentHoursPerConversation}
                     />
                 );
             default:
