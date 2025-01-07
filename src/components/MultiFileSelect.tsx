@@ -5,7 +5,7 @@ import {useTranslations} from "next-intl";
 import {AnonymizationResult, Conversation, DataSourceValue} from "@models/processed";
 import {anonymizeData} from "@/services/anonymization";
 import {calculateMinMaxDates, filterDataByRange, NullableRange, validateDateRange} from "@services/rangeFiltering";
-import {DonationValidationError, getErrorMessage} from "@services/errors";
+import {getErrorMessage} from "@services/errors";
 import Alert from "@mui/material/Alert";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -19,6 +19,7 @@ import Typography from "@mui/material/Typography";
 import InsertDriveFile from "@mui/icons-material/InsertDriveFile";
 import AnonymizationPreview from "@components/AnonymizationPreview";
 import DateRangePicker from "@components/DateRangePicker";
+import LoadingSpinner from "@components/LoadingSpinner";
 
 interface MultiFileSelectProps {
     dataSourceValue: DataSourceValue;
@@ -109,12 +110,9 @@ const MultiFileSelect: React.FC<MultiFileSelectProps> = ({ dataSourceValue, onDo
             {FilesFeedbackSection(selectedFiles, error)}
 
             {/* Loading indicator */}
-            {isLoading && (
-                <Box sx={{ mt: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                    <CircularProgress />
-                    <Alert severity="info" sx={{ mt: 2 }}>{t('sendData.wait')}</Alert>
-                </Box>
-            )}
+            {isLoading &&
+                <LoadingSpinner message={t('sendData.wait')}/>
+            }
 
             {/* Display anonymized data */}
             {!error && !isLoading && anonymizationResult && filteredConversations && (

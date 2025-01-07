@@ -2,13 +2,13 @@ import { useTranslations } from 'next-intl';
 
 export class AliasConfig {
     systemAlias: string;
-    friendAlias: string;
+    contactAlias: string;
     donorAlias: string;
     chatAlias: string;
 
-    constructor(systemAlias: string, friendAlias: string, donorAlias: string, chatAlias: string) {
+    constructor(systemAlias: string, contactAlias: string, donorAlias: string, chatAlias: string) {
         this.systemAlias = systemAlias;
-        this.friendAlias = friendAlias;
+        this.contactAlias = contactAlias;
         this.donorAlias = donorAlias;
         this.chatAlias = chatAlias;
     }
@@ -19,7 +19,7 @@ let aliasConfig: AliasConfig | null = null;
 export function useAliasConfig(): AliasConfig {
     const t = useTranslations("donation.anonymisation");
     if (!aliasConfig) {
-        aliasConfig = new AliasConfig(t('system'), t('friend'), t('donor'), t('chat'));
+        aliasConfig = new AliasConfig(t('system'), t('contact'), t('donor'), t('chat'));
     }
     return aliasConfig;
 }

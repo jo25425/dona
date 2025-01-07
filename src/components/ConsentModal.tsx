@@ -8,14 +8,15 @@ import Modal from '@mui/material/Modal';
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 
-
 const modal_style = {
     position: 'absolute' as 'absolute',
-    top: '50%',
+    top: '2%',
+    bottom: '2%',
     left: '50%',
-    transform: 'translate(-50%, -50%)',
+    width: '90%',
+    maxWidth: '900px',
+    transform: 'translate(-50%, 0%)',
     overflow:'scroll',
-    height:'96%',
     display:'block',
     bgcolor: 'background.paper',
     border: '1px solid dimgrey',

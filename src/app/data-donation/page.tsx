@@ -1,29 +1,33 @@
 "use client";
 
 import React, {useState} from "react";
-import {useTranslations} from 'next-intl';
-import Accordion from '@mui/material/Accordion';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import Box from '@mui/material/Box';
+import { useRouter } from 'next/navigation';
+import {useTranslations} from "next-intl";
+import Accordion from "@mui/material/Accordion";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Container from '@mui/material/Container';
-import FacebookIcon from '@mui/icons-material/Facebook';
-import InstagramIcon from '@mui/icons-material/Instagram';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
-import WhatsAppIcon from '@mui/icons-material/WhatsApp';
-import {Conversation, DataSourceValue, DonationStatus} from "@models/processed";
-import {addDonation} from './actions';
+import Container from "@mui/material/Container";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
+import WhatsAppIcon from "@mui/icons-material/WhatsApp";
+import {Conversation, DataSourceValue} from "@models/processed";
+import {addDonation} from "./actions";
 import {useAliasConfig} from "@services/parsing/shared/aliasConfig";
-import MultiFileSelect from '@components/MultiFileSelect';
+import MultiFileSelect from "@components/MultiFileSelect";
+import {useDonation} from "@/context/DonationContext";
 
 type ConversationsBySource = Record<DataSourceValue, Conversation[]>;
 
 export default function DataDonationPage() {
-    const a = useTranslations('actions');
-    const t = useTranslations('donation');
+    const router = useRouter()
+    const { setDonationData } = useDonation();
+    const a = useTranslations("actions");
+    const t = useTranslations("donation");
     const aliasConfig = useAliasConfig(); // Will allow donation logic to use translations for aliases in anonymization
 
     const [allDonatedConversationsBySource, setAllDonatedConversationsBySource] = useState<ConversationsBySource>({} as ConversationsBySource);
@@ -40,12 +44,22 @@ export default function DataDonationPage() {
     };
 
     // On "Submit" click
-    const onDataDonationUpload = () => {
+    const onDataDonationUpload = async () => {
+        // TODO: Loading indicator
+
         const allConversations = Object.values(allDonatedConversationsBySource).flat();
         if (allConversations.length > 0) {
             // TODO: Generate or get external user ID here at the latest
-            // TODO: Return status and use it for feedback on the page
-            addDonation(allConversations, aliasConfig.donorAlias);
+
+            const result = await addDonation(allConversations, aliasConfig.donorAlias);
+            if (result.success && result.donationId && result.graphDataRecord) {
+                // Set the donation data for use by the feedback page
+                setDonationData(result.donationId, result.graphDataRecord);
+                // Redirect the user to the feedback page
+                router.push('/donation-feedback');
+            } else {
+                // TODO: Error in UI
+            }
         }
     };
 

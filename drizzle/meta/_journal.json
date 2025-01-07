@@ -22,6 +22,27 @@
       "when": 1732635476566,
       "tag": "0002_add-participant-pseudonym",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1733418920307,
+      "tag": "0003_add-graph-data",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1733420129210,
+      "tag": "0004_add-graph-data-defaults",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1733420245014,
+      "tag": "0005_add-donations-created-at",
+      "breakpoints": true
     }
   ]
 }

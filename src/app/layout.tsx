@@ -5,9 +5,15 @@ import {Inter} from "next/font/google";
 import CssBaseline from "@mui/material/CssBaseline";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import { Buffer } from "buffer";
 import "./globals.css";
 import {Locale} from "@/config";
 import Box from "@mui/material/Box";
+import {DonationProvider} from "@/context/DonationContext";
+
+if (typeof window !== "undefined" && !window.Buffer) {
+    window.Buffer = Buffer;
+}
 
 const inter = Inter({subsets: ["latin"]});
 
@@ -29,18 +35,18 @@ export default async function RootLayout({
         <html lang={locale}>
         <body className={inter.className}>
         <NextIntlClientProvider messages={messages}>
-            {/*<AppRouterCacheProvider options={{ enableCssLayer: true }}>*/}
-            <Box sx={{
-                display: "flex",
-                flexDirection: "column",
-                minHeight: "100vh",
-            }}>
-                <CssBaseline />
-                <Header locale={locale} />
-                {children}
-                <Footer />
-            </Box>
-            {/*</AppRouterCacheProvider>*/}
+            <DonationProvider>
+                <Box sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    minHeight: "100vh",
+                }}>
+                    <CssBaseline />
+                    <Header locale={locale} />
+                    {children}
+                    <Footer />
+                </Box>
+            </DonationProvider>
         </NextIntlClientProvider>
         </body>
         </html>

@@ -7,7 +7,8 @@ export const donations = p.pgTable("donations", {
     id: p.uuid("id").defaultRandom().primaryKey(),
     externalDonorId: p.text("external_donor_id").notNull().unique(),
     donorId: p.uuid("donor_id"),
-    status: donationStatus("status").notNull(),        
+    status: donationStatus("status").notNull(),
+    createdAt: p.timestamp("created_at").defaultNow().notNull(),
 });
 
 export const dataSources = p.pgTable("data_sources", {
@@ -44,6 +45,13 @@ export const messagesAudio = p.pgTable("messages_audio", {
     dateTime: p.timestamp("datetime").notNull(),
     lengthSeconds: p.integer("length_seconds"),
     conversationId: p.uuid("conversation_id").notNull().references(() => conversations.id)
+});
+
+export const graphData = p.pgTable("graph_data", {
+    id: p.uuid("id").defaultRandom().primaryKey(),
+    donationId: p.uuid("donation_id").notNull().references(() => donations.id, { onDelete: "cascade" }),
+    data: p.jsonb("data").notNull(),
+    createdAt: p.timestamp("created_at").defaultNow().notNull(),
 });
 
 export const donationsRelations = relations(donations, ({many}) => ({
@@ -87,4 +95,11 @@ export const messagesAudioRelations = relations(messagesAudio, ({ one }) => ({
         fields: [messagesAudio.conversationId],
         references: [conversations.id]
     })
+}));
+
+export const graphDataRelations = relations(graphData, ({ one }) => ({
+    donation: one(donations, {
+        fields: [graphData.donationId],
+        references: [donations.id],
+    }),
 }));
