@@ -6,8 +6,6 @@ import {conversationParticipants, conversations, donations, graphData, messages}
 import {NewConversation, NewMessage} from "@models/persisted";
 import {Conversation, DataSource, DataSourceValue, DonationStatus} from "@models/processed";
 import {DonationErrors, DonationProcessingError} from "@services/errors";
-import {DONATION_ID_COOKIE} from "@/middleware";
-import {cookies} from "next/headers";
 import produceGraphData from "@services/charts/produceGraphData";
 import {GraphData} from "@models/graphData";
 
@@ -101,13 +99,6 @@ export async function addDonation(
             });
 
             return { donationId, graphDataRecord };
-        });
-
-        // After a successful donation, set a cookie as a flag
-        (await cookies()).set(DONATION_ID_COOKIE, transactionResult.donationId, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
-            path: "/",
         });
 
         return { success: true, donationId: transactionResult.donationId, graphDataRecord: transactionResult.graphDataRecord };

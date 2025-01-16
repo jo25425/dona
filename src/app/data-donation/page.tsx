@@ -25,7 +25,7 @@ type ConversationsBySource = Record<DataSourceValue, Conversation[]>;
 
 export default function DataDonationPage() {
     const router = useRouter()
-    const { setDonationData } = useDonation();
+    const { setDonationData, externalDonorId } = useDonation();
     const a = useTranslations("actions");
     const t = useTranslations("donation");
     const aliasConfig = useAliasConfig(); // Will allow donation logic to use translations for aliases in anonymization
@@ -49,9 +49,7 @@ export default function DataDonationPage() {
 
         const allConversations = Object.values(allDonatedConversationsBySource).flat();
         if (allConversations.length > 0) {
-            // TODO: Generate or get external user ID here at the latest
-
-            const result = await addDonation(allConversations, aliasConfig.donorAlias);
+            const result = await addDonation(allConversations, aliasConfig.donorAlias, externalDonorId);
             if (result.success && result.donationId && result.graphDataRecord) {
                 // Set the donation data for use by the feedback page
                 setDonationData(result.donationId, result.graphDataRecord);
