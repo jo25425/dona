@@ -1,11 +1,10 @@
 "use client";
 
-import React, { createContext, useContext, useState, ReactNode } from "react";
+import React, {createContext, useContext, useState, ReactNode, useEffect} from "react";
 import { GraphData } from "@models/graphData";
 import { DataSourceValue } from "@models/processed";
-import { v4 as uuidv4 } from "uuid";
 import Cookies from "js-cookie";
-import { DONATION_ID_COOKIE } from "@/middleware";
+import { DONATION_ID_COOKIE, EXTERNAL_DONOR_ID_COOKIE } from "@/middleware";
 
 interface DonationContextType {
     donationId?: string;
@@ -13,6 +12,7 @@ interface DonationContextType {
     externalDonorId?: string;
     setDonationData: (donationId: string, graphDataRecord: Record<DataSourceValue, GraphData>) => void;
     setExternalDonorId: (id: string) => void;
+    loadExternalDonorIdFromCookie: () => void;
 }
 
 const DonationContext = createContext<DonationContextType | undefined>(undefined);
@@ -36,12 +36,26 @@ export function DonationProvider({ children }: { children: ReactNode }) {
     };
 
     const setExternalDonorId = (id: string) => {
-        setExternalDonorIdState(id);
-        setCookie("externalDonorId", id);
+        setExternalDonorIdState(id);  // State update happens asynchronously
+        setCookie(EXTERNAL_DONOR_ID_COOKIE, id);
     };
 
+    const loadExternalDonorIdFromCookie = () => {
+        const storedId = Cookies.get(EXTERNAL_DONOR_ID_COOKIE);
+        if (storedId) {
+            setExternalDonorIdState(storedId);
+        }
+    };
+
+    useEffect(() => {
+        loadExternalDonorIdFromCookie();
+    }, []);
+
     return (
-        <DonationContext.Provider value={{ donationId, feedbackData, externalDonorId, setDonationData, setExternalDonorId }}>
+        <DonationContext.Provider value={{
+            donationId, feedbackData, externalDonorId,
+            setDonationData, setExternalDonorId, loadExternalDonorIdFromCookie
+        }}>
             {children}
         </DonationContext.Provider>
     );
