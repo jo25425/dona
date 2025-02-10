@@ -15,21 +15,30 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
+import CircularProgress from "@mui/material/CircularProgress";
+import Alert from "@mui/material/Alert";
 import {Conversation, DataSourceValue} from '@models/processed';
 import {addDonation} from './actions';
 import {useAliasConfig} from '@services/parsing/shared/aliasConfig';
 import MultiFileSelect from '@components/MultiFileSelect';
 import {useDonation} from '@/context/DonationContext';
 
+
 type ConversationsBySource = Record<DataSourceValue, Conversation[]>;
+
 
 export default function DataDonationPage() {
     const router = useRouter()
-    const { setDonationData, loadExternalDonorIdFromCookie, externalDonorId } = useDonation();
-    const actions = useTranslations('actions');
-    const t = useTranslations('donation');
-    const donorStrings = useTranslations('donor-id');
+    const actionsTr = useTranslations('actions');
+    const donationTr = useTranslations('donation');
+    const donorTr = useTranslations('donor-id');
     const aliasConfig = useAliasConfig(); // Will allow donation logic to use translations for aliases in anonymization
+
+    const { setDonationData, loadExternalDonorIdFromCookie, externalDonorId } = useDonation();
+    const [allDonatedConversationsBySource, setAllDonatedConversationsBySource] = useState<ConversationsBySource>({} as ConversationsBySource);
+    const [loading, setLoading] = useState(false);
+    const [validated, setValidated] = useState(false);
+    const [error, setError] = useState(false);
 
     useEffect(() => {
         if (!externalDonorId) {
@@ -37,33 +46,36 @@ export default function DataDonationPage() {
         }
     }, [externalDonorId]);
 
-    const [allDonatedConversationsBySource, setAllDonatedConversationsBySource] = useState<ConversationsBySource>({} as ConversationsBySource);
-
     // Callback to handle donated conversations changes from child components
     const handleDonatedConversationsChange = (dataSource: DataSourceValue, newConversations: Conversation[]) => {
         setAllDonatedConversationsBySource((prevConversations) => ({
             ...prevConversations,
             [dataSource]: newConversations, // Replace conversations for the given data source
         }));
+        setValidated(true);
     };
     const donationChangeWrapper = (dataSource: DataSourceValue) => {
         return (newConversations: Conversation[]) => handleDonatedConversationsChange(dataSource, newConversations);
     };
 
-    // On "Submit" click
     const onDataDonationUpload = async () => {
-        // TODO: Loading indicator
+        setLoading(true);
+        setError(false);
 
         const allConversations = Object.values(allDonatedConversationsBySource).flat();
         if (allConversations.length > 0) {
-            const result = await addDonation(allConversations, aliasConfig.donorAlias, externalDonorId);
-            if (result.success && result.donationId && result.graphDataRecord) {
-                // Set the donation data for use by the feedback page
-                setDonationData(result.donationId, result.graphDataRecord);
-                // Redirect the user to the feedback page
-                router.push('/donation-feedback');
-            } else {
-                // TODO: Error in UI
+            try {
+                const result = await addDonation(allConversations, aliasConfig.donorAlias, externalDonorId);
+                if (result.success && result.donationId && result.graphDataRecord) {
+                    setDonationData(result.donationId, result.graphDataRecord);
+                    router.push('/donation-feedback');
+                } else {
+                    setError(true);
+                }
+            } catch (err) {
+                setError(true);
+            } finally {
+                setLoading(false);
             }
         }
     };
@@ -81,27 +93,33 @@ export default function DataDonationPage() {
             >
                 <Box>
                     <Typography variant='h4' sx={{my: 2}}>
-                        {t('select-data.title')}
+                        {donationTr('select-data.title')}
                     </Typography>
                     <Typography variant='body1'>
-                        {donorStrings('your-id')}: {externalDonorId}
+                        {donorTr('your-id')}: {externalDonorId}
                     </Typography>
                     <br/>
-                    <Typography variant='body1'>
-                        {t('select-data.body1')}
-                    </Typography>
-                    <br/>
-                    <Typography variant='body1'>
-                        {t.rich('select-data.body2')}
-                    </Typography>
                 </Box>
+                {error && <Alert severity="error">{error}</Alert>}
+                {loading && <CircularProgress />}
+                {!error && !loading &&
+                    <Box>
+                        <Typography variant='body1'>
+                            {donationTr('select-data.body1')}
+                        </Typography>
+                        <br/>
+                        <Typography variant='body1'>
+                            {donationTr.rich('select-data.body2')}
+                        </Typography>
+                    </Box>
+                }
                 <Box sx={{my: 4, minWidth: '80%', textAlign: 'left'}}>
                     {/* WhatsApp */}
                     <Accordion sx={{my: 1}}>
                         <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
                             <WhatsAppIcon sx={{mr: 1, mt: 0.5}}/>
                             <Typography variant='h6'>
-                                {t('datasource-title_format', {datasource: 'Whatsapp'})}
+                                {donationTr('datasource-title_format', {datasource: 'Whatsapp'})}
                             </Typography>
                         </AccordionSummary>
                         <AccordionDetails>
@@ -116,7 +134,7 @@ export default function DataDonationPage() {
                         <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
                             <FacebookIcon sx={{mr: 1, mt: 0.5}}/>
                             <Typography variant='h6'>
-                                {t('datasource-title_format', {datasource: 'Facebook'})}
+                                {donationTr('datasource-title_format', {datasource: 'Facebook'})}
                             </Typography>
                         </AccordionSummary>
                         <AccordionDetails>
@@ -131,7 +149,7 @@ export default function DataDonationPage() {
                         <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
                             <InstagramIcon sx={{mr: 1, mt: 0.5}}/>
                             <Typography variant='h6'>
-                                {t('datasource-title_format', {datasource: 'Instagram'})}
+                                {donationTr('datasource-title_format', {datasource: 'Instagram'})}
                             </Typography>
                         </AccordionSummary>
                         <AccordionDetails>
@@ -145,10 +163,10 @@ export default function DataDonationPage() {
                 <Box>
                     <Stack spacing={2} direction='row' sx={{justifyContent: 'center'}}>
                         <Button variant='contained' href='/instructions'>
-                            {actions('previous')}
+                            {actionsTr('previous')}
                         </Button>
-                        <Button variant='contained' onClick={onDataDonationUpload} >
-                            {actions('submit')}
+                        <Button variant='contained' onClick={onDataDonationUpload} disabled={loading || !validated}>
+                            {actionsTr('submit')}
                         </Button>
                     </Stack>
                 </Box>
