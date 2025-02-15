@@ -5,7 +5,6 @@
 /.pnp
 .pnp.js
 .yarn/install-state.gz
-.env
 
 # testing
 /coverage
@@ -13,6 +12,7 @@
 # next.js
 /.next/
 /out/
+.swc
 
 # production
 /build
@@ -28,6 +28,7 @@ yarn-error.log*
 
 # local env files
 .env*.local
+.env
 
 # typescript
 *.tsbuildinfo
@@ -36,8 +37,6 @@ next-env.d.ts
 # IDE
 .idea
 
-# Data
-sample_data
-
 # Development
+sample_data
 screenshots

@@ -381,15 +381,11 @@
   "footer": {
     "project-number": "Project No.: 01IS20046"
   },
-
-  "donorIdInput": {
+  "donor-id": {
     "title": "ID-Input",
-    "body": "Please enter your ID to continue:",
-    "nextButton": "Continue"
-  },
-  "donorId": {
+    "enter": "Please enter your ID to continue:",
     "remember": "Please note your ID:",
-    "yourid": "Your ID:"
+    "your-id": "Your ID"
   },
   "donation-info": {
     "title": "How do I donate my data?",

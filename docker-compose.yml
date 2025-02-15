@@ -1,16 +1,44 @@
-name: dona-dev
+name: dona-prod
+version: "3.8"
 services:
   postgres:
     image: postgres:15
     restart: unless-stopped
     ports:
-      - "5432:5432"
+      - "15432:5432"
     volumes:
       - postgres-data:/var/lib/postgresql/data
     environment:
       - POSTGRES_DB=dona
       - POSTGRES_USER=$POSTGRES_USER
       - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+    env_file:
+      - .env
+
+  app:
+    build:
+      context: .
+      args:
+        - DONOR_ID_INPUT_METHOD
+        - DONOR_SURVEY_ENABLED
+        - FEEDBACK_SURVEY_ENABLED
+        - DONOR_SURVEY_LINK
+        - FEEDBACK_SURVEY_LINK
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_URL=postgres://$POSTGRES_USER:$POSTGRES_PASSWORD@postgres:5432/$POSTGRES_DB
+      - NODE_ENV=production
+      - DONOR_ID_INPUT_METHOD=$DONOR_ID_INPUT_METHOD
+      - DONOR_SURVEY_ENABLED=$DONOR_SURVEY_ENABLED
+      - FEEDBACK_SURVEY_ENABLED=$FEEDBACK_SURVEY_ENABLED
+      - DONOR_SURVEY_LINK=$DONOR_SURVEY_LINK
+      - FEEDBACK_SURVEY_LINK=$FEEDBACK_SURVEY_LINK
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+    entrypoint: ["sh", "-c", "pnpm drizzle-kit migrate && pnpm start"]
 
 volumes:
-  postgres-data: {}
+  postgres-data:

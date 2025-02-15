@@ -383,15 +383,11 @@
   "footer": {
     "project-number": "Kennzeichen: 01IS20046"
   },
-
-  "donorIdInput": {
+  "donor-id": {
     "title": "ID-Eingabe",
-    "body": "Bitte geben Sie Ihre ID ein, um fortzufahren:",
-    "nextButton": "Weiter"
-  },
-  "donorId": {
+    "enter": "Bitte geben Sie Ihre ID ein, um fortzufahren:",
     "remember": "Bitte notieren Sie sich Ihre ID:",
-    "yourid": "Ihre ID:"
+    "your-id": "Ihre ID"
   },
   "donation-info": {
     "title": "Wie spende ich meine Daten?",
