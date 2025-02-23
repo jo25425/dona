@@ -6,11 +6,12 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid2';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
+import {useRichTranslations} from "@/hooks/useRichTranslations";
 
 export default function HomePage() {
     const a = useTranslations('actions');
-    const t = useTranslations('landing');
-    const t_donation = useTranslations('donation-info');
+    const landing = useRichTranslations('landing');
+    const donation = useTranslations('donation-info');
 
     return (
         <Container maxWidth="md" sx={{flexGrow: 1}}>
@@ -25,13 +26,13 @@ export default function HomePage() {
             >
                 <Box sx={{my: 4}}>
                     <Typography variant="h4" >
-                        {t('what.title')}
+                        {landing.t('what.title')}
                     </Typography>
                     <Typography variant="body1">
-                        {t('what.body1')}
+                        {landing.t('what.body1')}
                     </Typography>
                     <Typography variant="body1">
-                        {t('what.body2')}
+                        {landing.t('what.body2')}
                     </Typography>
                 </Box>
                 <Box sx={{my: 4,
@@ -42,70 +43,68 @@ export default function HomePage() {
                      }}
                 >
                     <Typography variant="h4" textAlign="center">
-                        {t('why.title')}
+                        {landing.t('why.title')}
                     </Typography>
                     <Stack direction="row" spacing={2}>
                         <Box>
                             <Image
-                                src={t('why.col1.image-path')}
-                                alt={t('why.col1.title')}
+                                src={landing.t('why.col1.image-path')}
+                                alt={landing.t('why.col1.title')}
                                 height={170}
                                 width={310}
                                 loading="lazy"
                                 style={{margin: "1rem 0"}}
                             />
-                            <Typography variant="h6">{t('why.col1.title')}</Typography>
-                            <Typography>{t('why.col1.body')}</Typography>
+                            <Typography variant="h6">{landing.t('why.col1.title')}</Typography>
+                            <Typography>{landing.t('why.col1.body')}</Typography>
                         </Box>
                         <Box>
                             <Image
                                 src={"/images/stay-anonymous-illustration.jpg"}
-                                alt={t('why.col2.title')}
+                                alt={landing.t('why.col2.title')}
                                 height={170}
                                 width={310}
                                 loading="lazy"
                                 style={{width: "auto", margin: "1rem 0"}}
                             />
-                            <Typography variant="h6">{t('why.col2.title')}</Typography>
+                            <Typography variant="h6">{landing.t('why.col2.title')}</Typography>
                             <Typography>
-                                {t.rich('why.col2.body', {
-                                    link: (txt) => <a href="/learn-more">{txt}</a>
-                                })}
+                                {landing.rich('why.col2.body', {link: "learn-more"})}
                             </Typography>
                         </Box>
                         <Box>
                             <Image
                                 src={"/images/support-research-illustration.jpg"}
-                                alt={t('why.col3.title')}
+                                alt={landing.t('why.col3.title')}
                                 height={170}
                                 width={310}
                                 loading="lazy"
                                 style={{width: "auto", margin: "1rem 0"}}
                             />
-                            <Typography variant="h6">{t('why.col3.title')}</Typography>
-                            <Typography>{t('why.col3.body')}</Typography>
+                            <Typography variant="h6">{landing.t('why.col3.title')}</Typography>
+                            <Typography>{landing.t('why.col3.body')}</Typography>
                         </Box>
                     </Stack>
                 </Box>
                 <Box sx={{my: 4}}>
                     <Typography variant="h4" >
-                        {t('how-to-participate.title')}
+                        {landing.t('how-to-participate.title')}
                     </Typography>
                     <Typography variant="body1">
-                        {t('how-to-participate.body')}
+                        {landing.t('how-to-participate.body')}
                     </Typography>
                 </Box>
                 <Box sx={{my: 4}}>
                     <Typography variant="h4" >
-                        {t('how-to-cancel.title')}
+                        {landing.t('how-to-cancel.title')}
                     </Typography>
                     <Typography variant="body1">
-                        {t('how-to-cancel.body')}
+                        {landing.t('how-to-cancel.body')}
                     </Typography>
                 </Box>
                 <Box sx={{my: 4}}>
                     <Typography variant="h4" textAlign="center">
-                        {t_donation('title')}
+                        {donation('title')}
                     </Typography>
                     <Grid container spacing={2}
                           sx={{
@@ -115,8 +114,8 @@ export default function HomePage() {
                     >
                         <Grid size={6} sx={{textAlign: "left"}}>
                             <Image
-                                src={t_donation('data-request.image')}
-                                alt={t_donation('data-request.title')}
+                                src={donation('data-request.image')}
+                                alt={donation('data-request.title')}
                                 height={93}
                                 width={300}
                                 loading="lazy"
@@ -124,13 +123,13 @@ export default function HomePage() {
                             />
                         </Grid>
                         <Grid size={6}>
-                            <Typography fontWeight={'bold'}>{t_donation('data-request.title')}</Typography>
-                            <Typography>{t_donation('data-request.body')}</Typography>
+                            <Typography fontWeight={'bold'}>{donation('data-request.title')}</Typography>
+                            <Typography>{donation('data-request.body')}</Typography>
                         </Grid>
                         <Grid size={6} sx={{textAlign: "left"}}>
                             <Image
-                                src={t_donation('anonymisation.image')}
-                                alt={t_donation('anonymisation.title')}
+                                src={donation('anonymisation.image')}
+                                alt={donation('anonymisation.title')}
                                 height={70}
                                 width={140}
                                 loading="lazy"
@@ -138,13 +137,13 @@ export default function HomePage() {
                             />
                         </Grid>
                         <Grid size={6}>
-                            <Typography fontWeight={'bold'}>{t_donation('anonymisation.title')}</Typography>
-                            <Typography>{t_donation('anonymisation.body')}</Typography>
+                            <Typography fontWeight={'bold'}>{donation('anonymisation.title')}</Typography>
+                            <Typography>{donation('anonymisation.body')}</Typography>
                         </Grid>
                         <Grid size={6} sx={{textAlign: "left"}}>
                             <Image
-                                src={t_donation('storage.image')}
-                                alt={t_donation('storage.title')}
+                                src={donation('storage.image')}
+                                alt={donation('storage.title')}
                                 height={93}
                                 width={300}
                                 loading="lazy"
@@ -152,8 +151,8 @@ export default function HomePage() {
                             />
                         </Grid>
                         <Grid size={6}>
-                            <Typography fontWeight={'bold'}>{t_donation('storage.title')}</Typography>
-                            <Typography>{t_donation('storage.body')}</Typography>
+                            <Typography fontWeight={'bold'}>{donation('storage.title')}</Typography>
+                            <Typography>{donation('storage.body')}</Typography>
                         </Grid>
                     </Grid>
                 </Box>
@@ -161,7 +160,7 @@ export default function HomePage() {
                     <Typography variant="body2" sx={{
                         fontStyle: "italic",
                     }}>
-                        {t.rich('contact.body')}
+                        {landing.rich('contact.body')}
                     </Typography>
                 </Box>
                 <Box>

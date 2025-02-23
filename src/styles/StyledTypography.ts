@@ -2,10 +2,9 @@
 import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 
-// Unified SectionTitle with responsive margin (lighter, not bold)
-export const SectionTitle = styled(Typography)(({ theme }) => ({
+export const BlockTitle = styled(Typography)(({ theme }) => ({
     margin: theme.spacing(2, 0),
-    fontWeight: 500, // Less bold for better contrast
+    fontWeight: 500,
     fontSize: "1.25rem",
     [theme.breakpoints.up("md")]: {
         margin: theme.spacing(3, 0),
@@ -13,17 +12,33 @@ export const SectionTitle = styled(Typography)(({ theme }) => ({
     },
 }));
 
-// MainTitle for key sections (larger and bolder for contrast)
 export const MainTitle = styled(Typography)(({ theme }) => ({
     margin: theme.spacing(3, 0),
-    fontWeight: 800, // Stands out more
+    fontWeight: 800,
     fontSize: "1.5rem",
     [theme.breakpoints.up("md")]: {
         fontSize: "1.75rem",
     },
+    [`&.MuiTypography-h4`]: {
+        fontSize: theme.typography.h4.fontSize,
+        [theme.breakpoints.up("md")]: {
+            fontSize: `calc(${theme.typography.h4.fontSize} * 1.1)`, // Slightly larger on bigger screens
+        },
+    },
+    [`&.MuiTypography-h5`]: {
+        fontSize: theme.typography.h5.fontSize,
+        [theme.breakpoints.up("md")]: {
+            fontSize: `calc(${theme.typography.h5.fontSize} * 1.1)`,
+        },
+    },
+    [`&.MuiTypography-h6`]: {
+        fontSize: theme.typography.h6.fontSize,
+        [theme.breakpoints.up("md")]: {
+            fontSize: `calc(${theme.typography.h6.fontSize} * 1.1)`,
+        },
+    },
 }));
 
-// Styled component for contact details block
 export const ContactBlock = styled(Typography)(({ theme }) => ({
     margin: theme.spacing(1.5, 0),
     paddingLeft: theme.spacing(3),
@@ -32,11 +47,6 @@ export const ContactBlock = styled(Typography)(({ theme }) => ({
     [theme.breakpoints.up("md")]: {
         paddingLeft: theme.spacing(4),
     },
-}));
-
-// Styled component for body text with consistent spacing
-export const BodyText = styled(Typography)(({ theme }) => ({
-    marginBottom: theme.spacing(2),
 }));
 
 // Styled component for rich text translations (ensures spacing & prevents nesting issues)

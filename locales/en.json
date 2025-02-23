@@ -11,14 +11,15 @@
     "submit": "Submit"
   },
   "links": {
-    "learn-more": "Learn more",
+    "learn-more": "Learn More",
     "instructions": "Start",
-    "donation-info": "Donate data",
+    "donation-info": "Donate Data",
     "data-protection": "Data Protection",
     "imprint": "Imprint",
     "report-problem": "Report Problem"
   },
   "urls": {
+    "learn-more": "/learn-more",
     "uni-bielefeld": "https://www.uni-bielefeld.de",
     "dona-responsible-homepage": "https://www.uni-bielefeld.de/fakultaeten/technische-fakultaet/arbeitsgruppen/multimodal-behavior-processing/",
     "limesurvey": "https://limesurvey.org",

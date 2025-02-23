@@ -12,7 +12,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 
 export default function Footer() {
-    const l = useTranslations("links");
+    const links = useTranslations("links");
     const urls = useTranslations("urls");
     const projectNumber = useTranslations("footer")("project-number");
     const theme = useTheme();
@@ -39,13 +39,13 @@ export default function Footer() {
                     {/* Left: Buttons */}
                     <Stack direction="row" spacing={2} sx={{ flexWrap: "wrap", justifyContent: isMobile ? "center" : "flex-start" }}>
                         <Button variant="outlined" size={isMobile ? "small" : "medium"} sx={{ textTransform: "none", fontSize: isMobile ? "0.75rem" : "0.875rem" }} href={urls("report-problem")}>
-                            {l("report-problem")}
+                            {links("report-problem")}
                         </Button>
                         <Button variant="text" size={isMobile ? "small" : "medium"} sx={{ textTransform: "none", fontSize: isMobile ? "0.75rem" : "0.875rem" }} href="/data-protection">
-                            {l("data-protection")}
+                            {links("data-protection")}
                         </Button>
                         <Button variant="text" size={isMobile ? "small" : "medium"} sx={{ textTransform: "none", fontSize: isMobile ? "0.75rem" : "0.875rem" }} href="/imprint">
-                            {l("imprint")}
+                            {links("imprint")}
                         </Button>
                     </Stack>
 
@@ -53,7 +53,6 @@ export default function Footer() {
                     <Stack
                         direction="column"
                         alignItems="center"
-                        // spacing={0}
                         sx={{ mt: isMobile ? 2 : 0 }}
                     >
                         <Stack direction="row" spacing={2} alignItems="center" sx={{ flexWrap: "wrap", justifyContent: "center" }}>

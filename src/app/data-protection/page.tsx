@@ -1,9 +1,9 @@
 "use client";
 
-import { useRichTranslations } from "@/hooks/useRichTranslations";
+import {useRichTranslations} from "@/hooks/useRichTranslations";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
-import { SectionTitle, ContactBlock, MainTitle, BodyText } from "@/styles/StyledTypography";
+import {BlockTitle, ContactBlock, MainTitle} from "@/styles/StyledTypography";
 import Typography from "@mui/material/Typography";
 
 export default function DataProtection() {
@@ -14,29 +14,29 @@ export default function DataProtection() {
     return (
         <Container>
             <Box className="mobile-padding">
-                <Typography variant="h4">{protection.t("title")}</Typography>
+                <MainTitle variant="h4">{protection.t("title")}</MainTitle>
 
                 <MainTitle variant="h5">{protection.t("technical-details.title")}</MainTitle>
-                <BodyText>{protection.rich("technical-details.body1")}</BodyText>
-                <BodyText>{protection.rich("technical-details.body2")}</BodyText>
-                <BodyText>{protection.rich("technical-details.body3")}</BodyText>
-                <BodyText>{protection.rich("technical-details.body4")}</BodyText>
+                <Typography gutterBottom>{protection.rich("technical-details.body1")}</Typography>
+                <Typography gutterBottom>{protection.rich("technical-details.body2")}</Typography>
+                <Typography gutterBottom>{protection.rich("technical-details.body3")}</Typography>
+                <Typography gutterBottom>{protection.rich("technical-details.body4")}</Typography>
 
                 <MainTitle variant="h5">{protection.t("participation.title")}</MainTitle>
 
-                <SectionTitle variant="h5">{storage.t("title")}</SectionTitle>
-                <BodyText>{storage.rich("body1")}</BodyText>
-                <BodyText>{storage.rich("body2", { link: "limesurvey" })}</BodyText>
+                <BlockTitle variant="h5">{storage.t("title")}</BlockTitle>
+                <Typography gutterBottom>{storage.rich("body1")}</Typography>
+                <Typography gutterBottom>{storage.rich("body2", { link: "limesurvey" })}</Typography>
 
-                <SectionTitle variant="h5">{consent.t("voluntary.title")}</SectionTitle>
-                <BodyText>{consent.rich("voluntary.body")}</BodyText>
+                <BlockTitle variant="h5">{consent.t("voluntary.title")}</BlockTitle>
+                <Typography gutterBottom>{consent.rich("voluntary.body")}</Typography>
 
-                <SectionTitle variant="h5">{consent.t("data-protection.title")}</SectionTitle>
-                <BodyText>{consent.rich("data-protection.body")}</BodyText>
+                <BlockTitle variant="h5">{consent.t("data-protection.title")}</BlockTitle>
+                <Typography gutterBottom>{consent.rich("data-protection.body")}</Typography>
                 <ContactBlock>{consent.rich("data-protection.contact")}</ContactBlock>
 
-                <SectionTitle variant="h5">{protection.t("participation.usage.title")}</SectionTitle>
-                <BodyText>{protection.rich("participation.usage.body")}</BodyText>
+                <BlockTitle variant="h5">{protection.t("participation.usage.title")}</BlockTitle>
+                <Typography gutterBottom>{protection.rich("participation.usage.body")}</Typography>
             </Box>
         </Container>
     );
