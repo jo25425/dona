@@ -8,6 +8,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 
 export default function Footer() {
+    const urls = useTranslations("urls")
     const l = useTranslations("links")
     const project_number = useTranslations("footer")("project-number")
 
@@ -15,7 +16,7 @@ export default function Footer() {
         <Box sx={{flexShrink: 1, mt: 10}}>
             <Toolbar>
                 <Stack spacing={2} direction="row" sx={{flexGrow: 1}}>
-                    <Button variant="contained" href={l("report-problem-url")}>
+                    <Button variant="contained" href={urls("report-problem")}>
                         {l("report-problem")}
                     </Button>
                     <Button target="_blank" href="/data-protection">

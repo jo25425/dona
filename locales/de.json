@@ -16,8 +16,14 @@
     "donation-info": "Daten Spenden",
     "data-protection": "Datenschutz",
     "imprint": "Impressum",
-    "report-problem": "Problem melden",
-    "report-problem-url": "https://survey.mbp.tf.uni-bielefeld.de/index.php?r=survey/index&sid=486423&lang=de"
+    "report-problem": "Problem melden"
+
+  },
+  "urls": {
+    "uni-bielefeld": "https://www.uni-bielefeld.de",
+    "dona-responsible-homepage": "https://www.uni-bielefeld.de/fakultaeten/technische-fakultaet/arbeitsgruppen/multimodal-behavior-processing/",
+    "limesurvey-data-protection": "https://www.limesurvey.org/de/hilfe/faq/39-datenschutz%20und%20datenschutzpolitik",
+    "report-problem": "https://survey.mbp.tf.uni-bielefeld.de/index.php?r=survey/index&sid=486423&lang=de"
   },
   "landing": {
     "header": {
@@ -349,9 +355,8 @@
   "data-storage": {
     "title": "Erhobene Daten",
     "body1": "<em>Datenspende:</em> Bei der Datenspende Ihrer Social-Media-Daten erfassen wir ausschließlich Metadaten (e.g. Nachrichtenlänge, Nachrichtenzeitpunkt und Pseudonyme der UnterhaltungsteilnehmerInnen) und keine Inhalte (e.g. Nachrichtentext oder Name der UnterhaltungsteilnehmerInnen). Ihre Online-Interaktions-Daten werden bereits auf Ihrem Rechner anonymisiert. Wir sehen also niemals Ihre Nachrichten. Bevor wir Ihre anonymisierten Nachrichten speichern, können Sie diese begutachten. So können Sie sich davon überzeugen, dass diese ausreichend anonymisiert sind.",
-    "body2": "<em>Fragebögen:</em> Sie füllen zunächst Fragebögen zu Ihren demographischen Informationen aus. Danach können Sie die Datenspende durchführen und erhalten Feedback. Die Erhebung von Fragebogendaten findet ebenfalls komplett anonym auf der Plattform <link>LimeSurvey</link> statt.",
-    "url-limesurvey": "https://www.limesurvey.org/de/hilfe/faq/39-datenschutz%20und%20datenschutzpolitik"
-  },
+    "body2": "<em>Fragebögen:</em> Sie füllen zunächst Fragebögen zu Ihren demographischen Informationen aus. Danach können Sie die Datenspende durchführen und erhalten Feedback. Die Erhebung von Fragebogendaten findet ebenfalls komplett anonym auf der Plattform <link>LimeSurvey</link> statt."
+    },
   "imprint": {
     "title": "Impressum",
     "imprint": "<p>Universität Bielefeld<br></br>Universitätsstraße 25<br></br>D-33615 Bielefeld</p><p><i>National</i> (0521) 106-00<br></br><i>Internat.</i> +49 521 106-00</p><p><i>Telefax national</i> (0521) 106-5844<br></br><i>Telefax internat.</i> +49 521 106-5844</p><p>Vorwahl der Universität: 0521-106-...</p><p>E-Mail: <email>post@uni-bielefeld.de</email><br></br>Internet: <link>www.uni-bielefeld.de</link></p><p>Die Universität Bielefeld ist eine vom Land getragene, rechtsfähige Körperschaft des Öffentlichen Rechts. Sie wird durch den Rektor Prof. Dr. Ing. Gerhard Sagerer vertreten.</p>",

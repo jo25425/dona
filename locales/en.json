@@ -16,8 +16,14 @@
     "donation-info": "Donate data",
     "data-protection": "Data Protection",
     "imprint": "Imprint",
-    "report-problem": "Report Problem",
-    "report-problem-url": "https://survey.mbp.tf.uni-bielefeld.de/index.php?r=survey/index&sid=486423&lang=en"
+    "report-problem": "Report Problem"
+  },
+  "urls": {
+    "uni-bielefeld": "https://www.uni-bielefeld.de",
+    "dona-responsible-homepage": "https://www.uni-bielefeld.de/fakultaeten/technische-fakultaet/arbeitsgruppen/multimodal-behavior-processing/",
+    "limesurvey": "https://limesurvey.org",
+    "report-problem": "https://survey.mbp.tf.uni-bielefeld.de/index.php?r=survey/index&sid=486423&lang=en"
+
   },
   "landing": {
     "header": {

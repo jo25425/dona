@@ -6,15 +6,6 @@ export default getRequestConfig(async () => {
 
     return {
         locale,
-        messages: (await import(`@locales/${locale}.json`)).default,
-        defaultTranslationValues: {
-            br: (_) => <br/>,
-            p: (txt) => <p>{txt}</p>,
-            b: (content) => <b>{content}</b>,
-            i: (content) => <i>{content}</i>,
-            em: (content) => <em>{content}</em>,
-            strong: (content) => <strong>{content}</strong>,
-            email: (address) => <a href={"mailto:" + address}>{address}</a>
-        }
+        messages: (await import(`@locales/${locale}.json`)).default
     };
 });
