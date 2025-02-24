@@ -45,11 +45,13 @@
       },
       "col2": {
         "title": "Stay anonymous",
-        "body": "We will ask you to donate <strong><link>anonymized chat data</link></strong> (number of words for text messages, length in seconds for voice messages, message timestamp and pseudonyms of the chat participants). We will have no access to any names, message texts, voice message content or any other content."
+        "body": "We will ask you to donate <strong><link>anonymized chat data</link></strong> (number of words for text messages, length in seconds for voice messages, message timestamp and pseudonyms of the chat participants). We will have no access to any names, message texts, voice message content or any other content.",
+        "image-path": "/images/stay-anonymous-illustration.jpg"
       },
       "col3": {
         "title": "Support research",
-        "body": "The results of this study will contribute to the overall goal of better understanding the effects of social interactions on human well-being."
+        "body": "The results of this study will contribute to the overall goal of better understanding the effects of social interactions on human well-being.",
+        "image-path": "/images/support-research-illustration.jpg"
       }
     },
     "how-to-participate": {
@@ -59,6 +61,24 @@
     "how-to-cancel": {
       "title": "Can I drop out during the study?",
       "body": "First things first: participation is entirely voluntary. You can drop out at any point during the study. Please note that due to the anonymous nature of the data, we cannot identify and delete your data after participation."
+    },
+    "donation-info": {
+      "title": "How do I donate my data?",
+      "data-request": {
+        "image": "/images/landingDonationProcedure_1_English.png",
+        "title": "Data request: ",
+        "body": "You request your social media data from a platform of your choice (currently supported: Facebook, WhatsApp, and Instagram) and download it to your device."
+      },
+      "anonymisation": {
+        "image": "/images/landingDonationProcedure_2_English.png",
+        "title": "Anonymization: ",
+        "body": "We will remove all content from your data and limit it to metadata (e.g. length and timestamp of message). Your name, as well as the names of other participants, will get replaced by random pseudonyms (eg. \"James\" → \"anonymous13\"). You may examine the anonymization of your data before uploading it to our servers."
+      },
+      "storage": {
+        "image": "/images/landingDonationProcedure_3_English.png",
+        "title": "Storage: ",
+        "body": "Only anonymized and reduced data will be uploaded to one of our secure servers."
+      }
     },
     "contact": {
       "body": "The purpose of this website is to inform you about the background and process of this online study. If any questions or concerns arise during the process, please write to the principal investigator (Prof. Dr. Hanna Drimalla, AG Multimodal Behavior Processing, Technische Fakultät, Universität Bielefeld, <email>drimalla@techfak.uni-bielefeld.de</email>, Tel. +49 521 106-12043)"
@@ -393,24 +413,6 @@
     "enter": "Please enter your ID to continue:",
     "remember": "Please note your ID:",
     "your-id": "Your ID"
-  },
-  "donation-info": {
-    "title": "How do I donate my data?",
-    "data-request": {
-      "image": "/images/landingDonationProcedure_1_English.png",
-      "title": "Data request: ",
-      "body": "You request your social media data from a platform of your choice (currently supported: Facebook, WhatsApp, and Instagram) and download it to your device."
-    },
-    "anonymisation": {
-      "image": "/images/landingDonationProcedure_2_English.png",
-      "title": "Anonymization: ",
-      "body": "We will remove all content from your data and limit it to metadata (e.g. length and timestamp of message). Your name, as well as the names of other participants, will get replaced by random pseudonyms (eg. \"James\" &rarr; \"anonymous13\"). You may examine the anonymization of your data before uploading it to our servers."
-    },
-    "storage": {
-      "image": "/images/landingDonationProcedure_3_English.png",
-      "title": "Storage: ",
-      "body": "Only anonymized and reduced data will be uploaded to one of our secure servers."
-    }
   },
   "feedback": {
     "title": "Thank you for the donation of your social media data!",

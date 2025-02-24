@@ -14,7 +14,7 @@ export const BlockTitle = styled(Typography)(({ theme }) => ({
 
 export const MainTitle = styled(Typography)(({ theme }) => ({
     margin: theme.spacing(3, 0),
-    fontWeight: 800,
+    fontWeight: 500,
     fontSize: "1.5rem",
     [theme.breakpoints.up("md")]: {
         fontSize: "1.75rem",

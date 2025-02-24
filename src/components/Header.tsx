@@ -67,8 +67,8 @@ export default function Header({ locale }: { locale: Locale }) {
                     sx={{
                         opacity: fadeIn ? 1 : 0,
                         transition: "opacity 1s ease-in-out",
-                        backgroundColor: "rgba(0, 0, 0, 0.3)",
-                        borderRadius: theme.spacing(1),
+                        backgroundColor: "rgba(0, 0, 0, 0.6)",
+                        borderRadius: theme.spacing(2),
                         padding: theme.spacing(3),
                         maxWidth: isMobile ? '90%' : '700px',
                         textAlign: "center",

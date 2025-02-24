@@ -58,6 +58,24 @@
       "title": "Կամավոր մասնակցություն",
       "body": "Մասնակցությունը միանգամայն կամավոր է։ Այն ամեն պահին կարող եք դադարեցնել՝ առանց ինչ-որ պատճառ նշելու կամ բացասական հետևանքների։ Համաձայնությունը կարեղ եք չեղարկել մինչև տվյալները մեզ ուղարկելը։"
     },
+    "donation-info": {
+      "title": "Տվյալների տրամադրման կարգը",
+      "data-request": {
+        "image": "/images/landingDonationProcedure_1_Armenian.png",
+        "title": "Տվյալների ներբեռնում - ",
+        "body": "Տվյալները կարող եք ներբեռնել Ձեր ընտրած սոցհարթակից (Facebook և/կամ WhatsApp և/կամ Instagram)։"
+      },
+      "anonymisation": {
+        "image": "/images/landingDonationProcedure_2_Armenian.png",
+        "title": "Ապանույնականացում - ",
+        "body": "Հաղորդագրությունների բովանդակությունը հեռացվում է, և մեզ միայն  մետա-տվյալներ են հասնում։"
+      },
+      "storage": {
+        "image": "/images/landingDonationProcedure_3_Armenian.png",
+        "title": "Պահպանում - ",
+        "body": "Անանուն մետա-տվյալները պահպանվում են համալսարանի ապահով սերվերներում։"
+      }
+    },
     "contact": {
       "body": "Հարցերի դեպքում խնդրում ենք կապ հաստատել ծրագրի ղեկավար պրոֆ․ դր․ Հաննա Դրիմալլայի հետ (AG Multimodal Behavior Processing, Technische Fakultät, Universität Bielefeld, <email>drimalla@techfak.uni-bielefeld.de</email>, հեռ. +49 521 106-12043)"
     }
@@ -394,24 +412,6 @@
     "enter": "Please enter your ID to continue:",
     "remember": "Please note your ID:",
     "your-id": "Your ID"
-  },
-  "donation-info": {
-    "title": "Տվյալների տրամադրման կարգը",
-    "data-request": {
-      "image": "/images/landingDonationProcedure_1_Armenian.png",
-      "title": "Տվյալների ներբեռնում - ",
-      "body": "Տվյալները կարող եք ներբեռնել Ձեր ընտրած սոցհարթակից (Facebook և/կամ WhatsApp և/կամ Instagram)։"
-    },
-    "anonymisation": {
-      "image": "/images/landingDonationProcedure_2_Armenian.png",
-      "title": "Ապանույնականացում - ",
-      "body": "Հաղորդագրությունների բովանդակությունը հեռացվում է, և մեզ միայն  մետա-տվյալներ են հասնում։"
-    },
-    "storage": {
-      "image": "/images/landingDonationProcedure_3_Armenian.png",
-      "title": "Պահպանում - ",
-      "body": "Անանուն մետա-տվյալները պահպանվում են համալսարանի ապահով սերվերներում։"
-    }
   },
   "feedback": {
     "title": "Շնորհակալություն նվիրատվության համար",

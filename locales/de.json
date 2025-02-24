@@ -59,6 +59,24 @@
       "title": "Und wenn ich abbrechen möchte?",
       "body": "Das Wichtigste zuerst: Die Teilnahme ist völlig freiwillig. Sie können während der Studie jederzeit aussteigen. Bitte beachten Sie, dass wir aufgrund des Anonymität der Daten Ihre Daten nach Ihrer Teilnahme nicht identifizieren und löschen können."
     },
+    "donation-info": {
+      "title": "Wie spende ich meine Daten?",
+      "data-request": {
+        "image": "/images/landingDonationProcedure_1_German.png",
+        "title": "Datenanfrage: ",
+        "body": "Sie fordern Ihre Online-Nachrichten-Daten vom Online-Netzwerk (z.B. Facebook) an und laden diese auf Ihren Rechner."
+      },
+      "anonymisation": {
+        "image": "/images/landingDonationProcedure_2_German.png",
+        "title": "Anonymisierung: ",
+        "body": "Wir entfernen den Inhalt aus diesen Daten und reduzieren die Daten auf sogenannte Meta-Informationen (z.B. Länge und Zeitpunkt der Nachrichten). Ihr Name sowie die Namen aller Ihrer Kontakte werden durch zufällige Pseudonyme (z.B. „Tim“ → „anonymous13“) ersetzt. Sie können den Inhalt der anonymisierten Datei vor dem Upload begutachten."
+      },
+      "storage": {
+        "image": "/images/landingDonationProcedure_3_German.png",
+        "title": "Speicherung: ",
+        "body": "Nur diese anonymisierten und reduzierten Daten werden hochgeladen und von uns auf einem sicheren Server gespeichert."
+      }
+    },
     "contact": {
       "body": "Auf dieser Webseite erläutern wir Ihnen den Hintergrund und Ablauf der Online-Studie damit Sie entscheiden können, ob Sie teilnehmen möchten. Sollten Sie noch Fragen haben, so wenden Sie sich bitte an die Versuchsleiterin (Prof. Dr. Hanna Drimalla, AG Multimodal Behavior Processing, Technische Fakultät, Universität Bielefeld, <email>drimalla@techfak.uni-bielefeld.de</email>, Tel. +49 521 106-12043)."
     }
@@ -393,24 +411,6 @@
     "enter": "Bitte geben Sie Ihre ID ein, um fortzufahren:",
     "remember": "Bitte notieren Sie sich Ihre ID:",
     "your-id": "Ihre ID"
-  },
-  "donation-info": {
-    "title": "Wie spende ich meine Daten?",
-    "data-request": {
-      "image": "/images/landingDonationProcedure_1_German.png",
-      "title": "Datenanfrage: ",
-      "body": "Sie fordern Ihre Online-Nachrichten-Daten vom Online-Netzwerk (z.B. Facebook) an und laden diese auf Ihren Rechner."
-    },
-    "anonymisation": {
-      "image": "/images/landingDonationProcedure_2_German.png",
-      "title": "Anonymisierung: ",
-      "body": "Wir entfernen den Inhalt aus diesen Daten und reduzieren die Daten auf sogenannte Meta-Informationen (z.B. Länge und Zeitpunkt der Nachrichten). Ihr Name sowie die Namen aller Ihrer Kontakte werden durch zufällige Pseudonyme (z.B. „Tim“ &rarr;„anonymous13“) ersetzt. Sie können den Inhalt der anonymisierten Datei vor dem Upload begutachten."
-    },
-    "storage": {
-      "image": "/images/landingDonationProcedure_3_German.png",
-      "title": "Speicherung: ",
-      "body": "Nur diese anonymisierten und reduzierten Daten werden hochgeladen und von uns auf einem sicheren Server gespeichert."
-    }
   },
   "feedback": {
     "title": "Vielen Dank für die Spende Ihrer Social-Online-Daten!",
