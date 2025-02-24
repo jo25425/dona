@@ -10,7 +10,7 @@ import Button from "@mui/material/Button";
 import { MainTitle, BlockTitle, RichText } from "@/styles/StyledTypography";
 
 export default function HomePage() {
-    const a = useRichTranslations("actions");
+    const actions = useRichTranslations("actions");
     const landing = useRichTranslations("landing");
 
     return (
@@ -42,7 +42,7 @@ export default function HomePage() {
                                 </Box>
 
                                 <BlockTitle sx={{ mt: 2 }}>{landing.t(`why.${col}.title`)}</BlockTitle>
-                                <RichText>{landing.rich(`why.${col}.body`, { link: "learn-more" })}</RichText>
+                                <RichText>{landing.rich(`why.${col}.body`, { link: "learn-more"}, false)}</RichText>
                             </Grid>
                         ))}
                     </Grid>
@@ -64,7 +64,7 @@ export default function HomePage() {
                 <Box>
                     <MainTitle variant="h5">{landing.t("donation-info.title")}</MainTitle>
                     <Grid container spacing={3} justifyContent="center">
-                        {["data-request", "anonymisation", "storage"].map((section, index) => (
+                        {["data-request", "anonymisation", "storage"].map((section) => (
                             <Grid
                                 container
                                 key={section}
@@ -107,7 +107,7 @@ export default function HomePage() {
                 {/* Start Button */}
                 <Box>
                     <Button variant="contained" href="/instructions">
-                        {a.t("start")}
+                        {actions.t("start")}
                     </Button>
                 </Box>
             </Stack>

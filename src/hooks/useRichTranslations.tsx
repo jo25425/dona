@@ -7,8 +7,7 @@ export function useRichTranslations(namespace: string) {
 
     // Function to replace <link>...</link> with an <a> tag, using a URL key dynamically
     const linkHandler = (urlKey: string, newTab: boolean = true) => {
-        const url = globalTranslate(urlKey); // Fetch URL from global translation
-
+        const url = globalTranslate(urlKey);
         const LinkComponent = (text: ReactNode) => (
             <a
                 href={url}
@@ -18,21 +17,20 @@ export function useRichTranslations(namespace: string) {
                 {text}
             </a>
         );
-
-        Object.defineProperty(LinkComponent, "name", { value: `Link(${urlKey})` }); // Set display name
+        Object.defineProperty(LinkComponent, "name", { value: `Link(${urlKey})` });
         return LinkComponent;
     };
 
     return {
         [namespace]: {
             t: translate,
-            rich: (key: string, urlKeys?: Record<string, string>) =>
+            rich: (key: string, urlKeys?: Record<string, string>, newTab: boolean = true) =>
                 translate.rich(key, {
                     ...(urlKeys
                         ? Object.fromEntries(
                             Object.entries(urlKeys).map(([placeholder, urlKey]) => [
                                 placeholder,
-                                linkHandler(urlKey, true),
+                                linkHandler(urlKey, newTab),
                             ])
                         )
                         : {}),
