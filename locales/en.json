@@ -24,8 +24,20 @@
     "dona-responsible-homepage": "https://www.uni-bielefeld.de/fakultaeten/technische-fakultaet/arbeitsgruppen/multimodal-behavior-processing/",
     "limesurvey": "https://limesurvey.org",
     "limesurvey-data-use": "https://www.limesurvey.org/support/faq/39-data-protection-and-policy",
-    "report-problem": "https://survey.mbp.tf.uni-bielefeld.de/index.php?r=survey/index&sid=486423&lang=en"
-
+    "report-problem": "https://survey.mbp.tf.uni-bielefeld.de/index.php?r=survey/index&sid=486423&lang=en",
+    "facebook": {
+      "external-documentation": "https://www.facebook.com/help/contact/2032834846972583"
+    },
+    "instagram": {
+      "external-documentation": "https://help.instagram.com/181231772500920?cms_id=181231772500920"
+    },
+    "whatsapp": {
+      "ios-documentation": "https://faq.whatsapp.com/618575946635920/?cms_platform=iphone&helpref=platform_switcher",
+      "android-documentation": "https://faq.whatsapp.com/en/android/23756533"
+    },
+    "secure-delete": "https://safecomputing.umich.edu/protect-yourself/prepare-devices-disposal/securely-delete-files",
+    "delete-from-android": "https://wethegeek.com/best-file-data-shredder-apps-to-permanently-delete-data-from-android/",
+    "delete-from-ios": "https://appletoolbox.com/how-to-delete-files-permanently-from-the-files-app-on-iphone-and-ipad/"
   },
   "landing": {
     "header": {
@@ -110,7 +122,7 @@
   "instructions": {
     "about": {
       "title": "How do I request data from social media platforms?",
-      "body_html": "Before participating in the study, please request your data directly from Facebook and/or WhatsApp and/or Instagram. You can donate data from each of these platforms. If you only want to donate data from one platform, please select the platform that is more important to you. <b>Please take a close look at the corresponding instructions, as they contain important information for the further steps.</b>"
+      "body": "Before participating in the study, please request your data directly from Facebook and/or WhatsApp and/or Instagram. You can donate data from each of these platforms. If you only want to donate data from one platform, please select the platform that is more important to you. <b>Please take a close look at the corresponding instructions, as they contain important information for the further steps.</b>"
     },
     "datasource": {
       "title-format": "Instructions for getting {datasource} data"
@@ -118,7 +130,7 @@
     "headers": {
       "devices": "What type of device should I use?",
       "data-deletion": "How can I delete my data from my device?",
-      "overview": "Overview of the download & donation procedure:"
+      "overview": "Overview of the download & donation procedure"
     },
     "continue": {
       "buttons-header": "Do you have your data ready?",
@@ -127,26 +139,23 @@
     "haveData": "You need 5-7 WhatsApp chat files."
   },
   "whatsapp": {
-    "instructions": {
-      "devices": {
-        "body": "You need your smartphone, on which you use WhatsApp. Please make sure that you are storing the data on a device that no one but you has access to."
-      },
-      "p2": {
-        "title": "Which chats should I choose?",
-        "body": "From time to time most people discuss important matters with others and we need people we can rely on for help. They may be family, friends, or people who have really helped you - <strong>we are interested in the chats with the people you are most likely to talk to about really important things in your life.</strong><br></br><br></br><strong>Please select 5-7 chats with people with whom you discuss important things in your life (group chats are also possible).</strong>"
-      },
-      "data-deletion": {
-        "body": "We strongly recommend that you delete your original data (chat files) from your device and from your e-mail system (inbox and sent) after completing the donation. Note that simply deleting the files may not be enough to permanently remove the data from your device. Further information on the permanent deletion of files can be found <link>on the website of the University of Michigan</link>.",
-        "secure-delete-url": "https://safecomputing.umich.edu/protect-yourself/prepare-devices-disposal/securely-delete-files"
-      },
-      "video": {
-        "ios": "/images/whatsapp/whatsapp_eng_iOS.mp4",
-        "android": "/images/whatsapp/whatsapp_eng_android.mp4",
-        "ios-caption": "This is the chat export process on an iPhone.",
-        "android-caption": "This is the chat export process on an Android device. The process may vary on different devices."
-      }
+    "devices": {
+      "body": "You need your smartphone, on which you use WhatsApp. Please make sure that you are storing the data on a device that no one but you has access to."
     },
-    "overview": {
+    "selection": {
+      "title": "Which chats should I choose?",
+      "body": "From time to time most people discuss important matters with others and we need people we can rely on for help. They may be family, friends, or people who have really helped you - <strong>we are interested in the chats with the people you are most likely to talk to about really important things in your life.</strong><br></br><br></br><strong>Please select 5-7 chats with people with whom you discuss important things in your life (group chats are also possible).</strong>"
+    },
+    "data-deletion": {
+      "body": "We strongly recommend that you delete your original data (chat files) from your device and from your e-mail system (inbox and sent) after completing the donation. Note that simply deleting the files may not be enough to permanently remove the data from your device. Further information on the permanent deletion of files can be found <link>on the website of the University of Michigan</link>."
+    },
+    "video": {
+      "ios": "/images/whatsapp/whatsapp_eng_iOS.mp4",
+      "android": "/images/whatsapp/whatsapp_eng_android.mp4",
+      "ios-caption": "This is the chat export process on an iPhone.",
+      "android-caption": "This is the chat export process on an Android device. The process may vary on different devices."
+    },
+    "steps": {
       "1": "Open WhatsApp on your smartphone.",
       "2": "Think about which five chats are most relevant to you (e.g. close friend, partner).",
       "3": "Pick one of the selected chats and open it.",
@@ -156,30 +165,23 @@
       "7": "Download the chat file from the email to your computer.",
       "8": "Repeat the steps 3-7 for all chats."
     },
-    "external-documentation": "The official documentation on how to download your data can be found here for <ios_link>iOS</ios_link> or <android_link>Android</android_link>.",
-    "android-link": "https://faq.whatsapp.com/en/android/23756533",
-    "description_html": "<i>Note: The chat export function is not supported by all WhatsApp versions! <strong> Exporting and saving WhatsApp data does not work with the WhatsApp web version. Also, on different Android versions, you may not be able to store your data locally on your device.</i></strong> <br><br>From time to time, most people discuss important matters with other people, and we need people we can depend on for help. These can be family, friends, or people who have been really helpful to you – what we are interested in are the ones that you are most likely to talk about really important matters in your life. <br><br>Please choose <strong>5</strong> chats with people with whom you discuss important matters in your life (group chats are possible too). Please bear in mind that the chats can only be downloaded one after the other. Multiple selection of chats is currently not supported.",
+    "external-documentation": "The official documentation on how to download your data can be found here for <link_ios>iOS</link_ios> or <link_android>Android</link_android>.",
     "logo": "w-logo.svg"
   },
   "facebook": {
-    "instructions": {
-      "devices": {
-        "body": "Please make sure that you are storing the data on a device that no one but you has access to. Because the amount of data for Facebook data donations can be quite large, we recommend using a computer."
-      },
-      "p2": {
-        "title": "How long does the data export from Facebook take?",
-        "body": "The data is requested with just a few clicks on Facebook (see the instructions below). You will receive a notification from Facebook as soon as the data is available for download and can then start participating in the study."
-      },
-      "data-deletion": {
-        "body": "We strongly recommend that you delete your original data after completing the donation. Note that simply deleting the files may not be enough to permanently remove the data from your device. Further information on the permanent deletion of files can for example be found <link>on the website of the University of Michigan</link> or <link2>wethegeek.com</link2> and <link3>appletoolbox.com</link3>.",
-        "link-url": "https://safecomputing.umich.edu/protect-yourself/prepare-devices-disposal/securely-delete-files",
-        "link-url-2": "https://wethegeek.com/best-file-data-shredder-apps-to-permanently-delete-data-from-android",
-        "link-url-3": "https://appletoolbox.com/how-to-delete-files-permanently-from-the-files-app-on-iphone-and-ipad"
-      }
+    "devices": {
+      "body": "Please make sure that you are storing the data on a device that no one but you has access to. Because the amount of data for Facebook data donations can be quite large, we recommend using a computer."
     },
-    "description_html": "Make a request to Facebook to download your Facebook data. You will receive a notification from Facebook once the data is available for download and can then start participating in the study. <strong>We recommend using a computer if donating from Facebook as the data size may be relatively large.</strong>",
+    "duration": {
+      "title": "How long does the data export from Facebook take?",
+      "body": "The data is requested with just a few clicks on Facebook (see the instructions below). You will receive a notification from Facebook as soon as the data is available for download and can then start participating in the study."
+    },
+    "data-deletion": {
+      "body": "We strongly recommend that you delete your original data after completing the donation. Note that simply deleting the files may not be enough to permanently remove the data from your device. Further information on the permanent deletion of files can for example be found <link>on the website of the University of Michigan</link> or <link_android>wethegeek.com</link_android> and <link_ios>appletoolbox.com</link_ios>."
+    },
+    "description": "Make a request to Facebook to download your Facebook data. You will receive a notification from Facebook once the data is available for download and can then start participating in the study. <strong>We recommend using a computer if donating from Facebook as the data size may be relatively large.</strong>",
     "external-documentation": "The official documentation on how to download your data can be found <link>here</link>.",
-    "overview": {
+    "steps": {
       "1": "Open Facebook and log in.",
       "2": "In the top right corner, click on the “Your Profile” button and Select “Settings and privacy”.",
       "3": "Select “Settings”. Then select \"Your Facebook information\" in the navigation bar on the left.",
@@ -195,24 +197,19 @@
     "logo": "f-logo.svg"
   },
   "instagram": {
-    "instructions": {
-      "devices": {
-        "body": "Please make sure that you are storing the data on a device that no one but you has access to."
-      },
-      "p2": {
-        "title": "How long does the data export from Instagram take?",
-        "body": "The data is requested with just a few clicks on Instagram (see the instructions below). You will receive a notification from Instagram as soon as the data is available for download and can then start participating in the study."
-      },
-      "data-deletion": {
-        "body": "We strongly recommend that you delete your original data after completing the donation. Note that simply deleting the files may not be enough to permanently remove the data from your device. Further information on the permanent deletion of files can for example be found <link>on the website of the University of Michigan</link> or <link2>wethegeek.com</link2> and <link3>appletoolbox.com</link3>.",
-        "link-url": "https://safecomputing.umich.edu/protect-yourself/prepare-devices-disposal/securely-delete-files",
-        "link-url-2": "https://wethegeek.com/best-file-data-shredder-apps-to-permanently-delete-data-from-android/",
-        "link-url-3": "https://appletoolbox.com/how-to-delete-files-permanently-from-the-files-app-on-iphone-and-ipad/"
-      }
+    "devices": {
+      "body": "Please make sure that you are storing the data on a device that no one but you has access to."
     },
-    "description_html": "Make a request to Instagram to download your Instagram data. You will receive a notification from Instagram once the data is available for download and can then start participating in the study.",
+    "duration": {
+      "title": "How long does the data export from Instagram take?",
+      "body": "The data is requested with just a few clicks on Instagram (see the instructions below). You will receive a notification from Instagram as soon as the data is available for download and can then start participating in the study."
+    },
+    "data-deletion": {
+      "body": "We strongly recommend that you delete your original data after completing the donation. Note that simply deleting the files may not be enough to permanently remove the data from your device. Further information on the permanent deletion of files can for example be found <link>on the website of the University of Michigan</link> or <link_android>wethegeek.com</link_android> and <link_ios>appletoolbox.com</link_ios>."
+    },
+    "description": "Make a request to Instagram to download your Instagram data. You will receive a notification from Instagram once the data is available for download and can then start participating in the study.",
     "external-documentation": "The official documentation on how to download your data can be found <link>here</link>.",
-    "overview": {
+    "steps": {
       "1": "Open Instagram and log in.",
       "2": "In your profile click on the \"Menu\" button (three lines) and select \"Your activity\".",
       "3": "All the way on the bottom select “Download your information” and continue to the Accounts Center.",
@@ -374,8 +371,7 @@
   "data-storage": {
     "title": "Collected Data",
     "body1": "<em>Data Donation:</em> When donating your interaction data, we extract metadata (e.g. length and timestamp of message as well as pseudonyms of conversation participants) and no actual contents (e.g. message text or name of message sender). To ensure that, we anonymize your data client-side, meaning that your private data is anonymized locally and does not leave your device. This means that we will never see the content of your conversations. Before uploading, we will show you a preview of the data so that you can verify it is sufficiently anonymous.",
-    "body2": "<em>Questionnaires:</em> You first fill out questionnaires about your demographic information. You can then carry out the data donation and receive feedback. Questionnaire data is also collected completely anonymously using <link>LimeSurvey</link>.",
-    "url-limesurvey": "https://www.limesurvey.org/support/faq/39-data-protection-and-policy"
+    "body2": "<em>Questionnaires:</em> You first fill out questionnaires about your demographic information. You can then carry out the data donation and receive feedback. Questionnaire data is also collected completely anonymously using <link>LimeSurvey</link>."
   },
   "imprint": {
     "title": "Imprint",

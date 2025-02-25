@@ -61,8 +61,7 @@ export default function Footer() {
                                     src="images/BMBF_logo.svg"
                                     alt="Bundesministerium für Bildung und Forschung (BMBF) logo"
                                     width={90}
-                                    height={30}
-                                    style={{ maxWidth: "100%", height: "auto" }}
+                                    height={50}
                                 />
                             </Link>
                             <Link href="https://www.hpi.de" target="_blank">
@@ -70,8 +69,7 @@ export default function Footer() {
                                     src="images/HPI_logo.svg"
                                     alt="Hasso Plattner Institut (HPI) logo"
                                     width={90}
-                                    height={30}
-                                    style={{ maxWidth: "100%", height: "auto" }}
+                                    height={50}
                                 />
                             </Link>
                             <Link href="https://www.data4life.care/" target="_blank">
@@ -79,8 +77,7 @@ export default function Footer() {
                                     src="images/data4life-blueLogo.svg"
                                     alt="Data 4 Life logo"
                                     width={80}
-                                    height={30}
-                                    style={{ maxWidth: "100%", height: "auto" }}
+                                    height={50}
                                 />
                             </Link>
                         </Stack>

@@ -1,19 +1,30 @@
-import { useTranslations } from "next-intl";
-import { ReactNode } from "react";
+import {useTranslations} from "next-intl";
+import {JSX, ReactNode} from "react";
 
 export function useRichTranslations(namespace: string) {
     const translate = useTranslations(namespace);
     const globalTranslate = useTranslations("urls"); // Fetch URLs from the global "urls" namespace
 
+    // Helper function: Filters out missing URL keys and returns handlers for valid keys
+    const makeLinkHandlers = (urlKeys?: Record<string, string>, newTab: boolean = true) => {
+        if (!urlKeys) return {};
+
+        return Object.fromEntries(
+            Object.entries(urlKeys)
+                .map(([placeholder, urlKey]) => [placeholder, linkHandler(urlKey, newTab)])
+                .filter((entry) => entry !== null)
+        );
+    };
+
     // Function to replace <link>...</link> with an <a> tag, using a URL key dynamically
     const linkHandler = (urlKey: string, newTab: boolean = true) => {
+        if (!globalTranslate.has(urlKey)) {
+            return null;
+        }
+
         const url = globalTranslate(urlKey);
         const LinkComponent = (text: ReactNode) => (
-            <a
-                href={url}
-                target={newTab ? "_blank" : "_self"}
-                rel={newTab ? "noopener noreferrer" : undefined}
-            >
+            <a href={url} target={newTab ? "_blank" : "_self"} rel={newTab ? "noopener noreferrer" : undefined}>
                 {text}
             </a>
         );
@@ -26,14 +37,7 @@ export function useRichTranslations(namespace: string) {
             t: translate,
             rich: (key: string, urlKeys?: Record<string, string>, newTab: boolean = true) =>
                 translate.rich(key, {
-                    ...(urlKeys
-                        ? Object.fromEntries(
-                            Object.entries(urlKeys).map(([placeholder, urlKey]) => [
-                                placeholder,
-                                linkHandler(urlKey, newTab),
-                            ])
-                        )
-                        : {}),
+                    ...makeLinkHandlers(urlKeys, newTab),
                     br: () => <br />,
                     p: (txt) => <p>{txt}</p>,
                     b: (content) => <b>{content}</b>,

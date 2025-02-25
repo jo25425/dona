@@ -23,7 +23,20 @@
     "dona-responsible-homepage": "https://www.uni-bielefeld.de/fakultaeten/technische-fakultaet/arbeitsgruppen/multimodal-behavior-processing/",
     "limesurvey-data-protection": "https://www.limesurvey.org/support/faq/39-data-protection-and-policy",
     "limesurvey-data-use": "https://www.limesurvey.org/support/faq/39-data-protection-and-policy",
-    "report-problem": "https://survey.mbp.tf.uni-bielefeld.de/index.php?r=survey/index&sid=486423&lang=hy"
+    "report-problem": "https://survey.mbp.tf.uni-bielefeld.de/index.php?r=survey/index&sid=486423&lang=hy",
+    "facebook": {
+      "external-documentation": "https://www.facebook.com/help/contact/2032834846972583"
+    },
+    "instagram": {
+      "external-documentation": "https://help.instagram.com/181231772500920?cms_id=181231772500920"
+    },
+    "whatsapp": {
+      "ios-documentation": "https://faq.whatsapp.com/618575946635920/?cms_platform=iphone&helpref=platform_switcher",
+      "android-documentation": "https://faq.whatsapp.com/en/android/23756533"
+    },
+    "secure-delete": "https://safecomputing.umich.edu/protect-yourself/prepare-devices-disposal/securely-delete-files",
+    "delete-from-android": "https://wethegeek.com/best-file-data-shredder-apps-to-permanently-delete-data-from-android/",
+    "delete-from-ios": "https://appletoolbox.com/how-to-delete-files-permanently-from-the-files-app-on-iphone-and-ipad/"
   },
   "landing": {
     "header": {
@@ -106,7 +119,7 @@
   "instructions": {
     "about": {
       "title": "Ինչպե՞ս կարող եմ ներբեռնել տվյալներս",
-      "body_html": "Մասնակցելուց առաջ խնդրում ենք ներբեռնել Ձեր տվյալները Facebook, WhatsApp կամ Instagram հարթակներից։ Կարող եք տվյալներ նվիրաբերել միաժամանակ երկու հարթակից։ Եթե ընտրում եք հարթակներից միայն մեկը, խնդրում ենք ընտրել այն հարթակը, որն ավելի կարևոր է Ձեզ համար։  <b>Խնդրում ենք ուշադիր կարդալ ստորև տրամադրված հրահանգները, քանի որ դրանք կարևոր են հաջորդ քայլերի համար</b>"
+      "body": "Մասնակցելուց առաջ խնդրում ենք ներբեռնել Ձեր տվյալները Facebook, WhatsApp կամ Instagram հարթակներից։ Կարող եք տվյալներ նվիրաբերել միաժամանակ երկու հարթակից։ Եթե ընտրում եք հարթակներից միայն մեկը, խնդրում ենք ընտրել այն հարթակը, որն ավելի կարևոր է Ձեզ համար։  <b>Խնդրում ենք ուշադիր կարդալ ստորև տրամադրված հրահանգները, քանի որ դրանք կարևոր են հաջորդ քայլերի համար</b>"
     },
     "datasource": {
       "title-format": "Ներբեռնելու հրահանգներ {datasource} հարթակի համար"
@@ -122,28 +135,25 @@
     }
   },
   "whatsapp": {
-    "instructions": {
       "devices": {
-        "body": "Պետք է օգտագործել այն հեռախոսը, որով օգտվում եք WhatsApp-ից։ Ուշադրություն դարձրեք, որ օգտագործեք այնպիսի սարք, որին ուրիշները հասանելիություն չունեն։"
-      },
-      "p2": {
-        "title": "Ի՞նչ չատ ընտրել",
-        "body": "Մարդիկ հաճախ կարիք ունեն կարևոր թեմաներով կիսվելու այն մարդկանց հետ, որոնց վստահում են։  Խոսքը ընտանիքի, ընկերների կամ այլ մարդկանց մասին է, որոնք Ձեզ աջակցել են։ <strong>Ընտրեք հաղորդագրություններ այն մարդկանց հետ, որոնց հետ կարող եք խոսել Ձեր կյանքի կարևոր հարցերի մասին։</strong><br></br><br></br><strong>Ընտրեք 5-7 չատ այն մարդկանց հետ, որոնց հետ կարևոր թեմաներ եք քննարկում, կարող եք ընտրել նաև խմբային չատեր։ </strong>"
-      },
-      "data-deletion": {
-        "body": "Խորհուրդ ենք տալիս մասնակցությունից հետո ներբեռնած ֆայլերը  ջնջել Ձեր սարքից և էլ․փոստից։ Ուշադրություն դարձրեք, որ տվյալները վերջնականապես հեռացվեն սարքից, ոչ թե տեղափոխվեն զամբյուղ։ Ֆայլերը ջնջելու մասին լրացուցիչ ինֆորմացիա կարող եք ստանալ  <link>այստեղ</link>։",
-        "secure-delete-url": "https://safecomputing.umich.edu/protect-yourself/prepare-devices-disposal/securely-delete-files"
-      },
-      "video": {
-        "": "/images/whatsapp/whatsapp_am.mp4",
-        "ios ": "/images/whatsapp/whatsapp_eng_iOS.mp4",
-        "android ": "/images/whatsapp/whatsapp_eng_android.mp4",
-        "caption": "Սա Android համակարգով ստեղծված օրինակ է։ Այլ սարքերում քայլերը կարող են փոքր-ինչ տարբերվել, սակայն տրամաբանությունը նույնն է։",
-        "ios-caption": "Սա տեսանյութի համար օգտագործվել է iPhone։",
-        "android-caption": "Այս տեսանյութի համար օգտագործվել է Android սարք։ Կախված սարքից՝ քայլերը կարող են փոքր-ինչ տարբերվել։"
-      }
+      "body": "Պետք է օգտագործել այն հեռախոսը, որով օգտվում եք WhatsApp-ից։ Ուշադրություն դարձրեք, որ օգտագործեք այնպիսի սարք, որին ուրիշները հասանելիություն չունեն։"
     },
-    "overview": {
+    "selection": {
+      "title": "Ի՞նչ չատ ընտրել",
+      "body": "Մարդիկ հաճախ կարիք ունեն կարևոր թեմաներով կիսվելու այն մարդկանց հետ, որոնց վստահում են։  Խոսքը ընտանիքի, ընկերների կամ այլ մարդկանց մասին է, որոնք Ձեզ աջակցել են։ <strong>Ընտրեք հաղորդագրություններ այն մարդկանց հետ, որոնց հետ կարող եք խոսել Ձեր կյանքի կարևոր հարցերի մասին։</strong><br></br><br></br><strong>Ընտրեք 5-7 չատ այն մարդկանց հետ, որոնց հետ կարևոր թեմաներ եք քննարկում, կարող եք ընտրել նաև խմբային չատեր։ </strong>"
+    },
+    "data-deletion": {
+      "body": "Խորհուրդ ենք տալիս մասնակցությունից հետո ներբեռնած ֆայլերը  ջնջել Ձեր սարքից և էլ․փոստից։ Ուշադրություն դարձրեք, որ տվյալները վերջնականապես հեռացվեն սարքից, ոչ թե տեղափոխվեն զամբյուղ։ Ֆայլերը ջնջելու մասին լրացուցիչ ինֆորմացիա կարող եք ստանալ  <link>այստեղ</link>։"
+    },
+    "video": {
+      "": "/images/whatsapp/whatsapp_am.mp4",
+      "ios": "/images/whatsapp/whatsapp_eng_iOS.mp4",
+      "android": "/images/whatsapp/whatsapp_eng_android.mp4",
+      "caption": "Սա Android համակարգով ստեղծված օրինակ է։ Այլ սարքերում քայլերը կարող են փոքր-ինչ տարբերվել, սակայն տրամաբանությունը նույնն է։",
+      "ios-caption": "Սա տեսանյութի համար օգտագործվել է iPhone։",
+      "android-caption": "Այս տեսանյութի համար օգտագործվել է Android սարք։ Կախված սարքից՝ քայլերը կարող են փոքր-ինչ տարբերվել։"
+    },
+    "steps": {
       "1": "Հեռախոսով բացեք WhatsApp հավելվածը։",
       "2": "Ընտրեք Ձեզ համար առավել կարևոր չատերը (մոտ ընկերներ և այլն)։",
       "3": "Բացեք չատերից մեկը։",
@@ -153,30 +163,22 @@
       "7": "Ներբեռնեք ֆայլերը Ձեր համակարգիչ։",
       "8": "Կրկնեք 3-7 հրահանգները բոլոր չատերի համար։"
     },
-    "description_html": "<i>Note: The chat export function is not supported by all WhatsApp versions! <strong> Exporting and saving WhatsApp data does not work with the WhatsApp web version. Also, on different Android versions, you may not be able to store your data locally on your device.</i></strong> <br><br>From time to time, most people discuss important matters with other people, and we need people we can depend on for help. These can be family, friends, or people who have been really helpful to you – what we are interested in are the ones that you are most likely to talk about really important matters in your life. <br><br>Please choose <strong>5</strong> chats with people with whom you discuss important matters in your life (group chats are possible too). Please bear in mind that the chats can only be downloaded one after the other. Multiple selection of chats is currently not supported.",
-    "external-documentation": "Տվյալների ներբեռնման պաշտոնական հրահանգները կարող եք ստանալ այստեղ՝  <ios_link>iOS</ios_link> կամ <android_link>Android</android_link>։",
-    "android-link": "https://faq.whatsapp.com/en/android/23756533",
+    "external-documentation": "Տվյալների ներբեռնման պաշտոնական հրահանգները կարող եք ստանալ այստեղ՝  <link_ios>iOS</link_ios> կամ <link_android>Android</link_android>։",
     "logo": "w-logo.svg"
   },
   "facebook": {
-    "instructions": {
-      "devices": {
-        "body": "Ուշադրություն դարձրեք, որ օգտագործեք այնպիսի սարքեր, որոնց ուրիշները հասանելիություն չունեն։ Քանի որ Facebook-ից ներբեռնված ֆայլերը կարող են մեծ լինել, խորհուրդ ենք տալիս օգտագործել համակարգիչ։"
-      },
-      "p2": {
-        "title": "Ինչքա՞ն է տևում տվյալների ներբեռնումը Facebook-ից",
-        "body": "Տվյալների պահանջումը կատարվում է կայքի կարգավորումներում մի քանի տարբերակ ընտրելով (տես ստորև). Երբ տվյալները պատրաստ լինեն ներբեռնման համար,  Facebook-ից ծանուցում կստանաք։ Այդ ժամանակ կարող եք ներբեռնել տվյալները Ձեր համակարգիչ ու սկսել մասնակցությունը։"
-      },
-      "data-deletion": {
-        "body": "Խորհուրդ ենք տալիս մասնակցությունից հետո ներբեռնած ֆայլերը  ջնջել Ձեր սարքից կամ էլ․ հասցեից։ Ուշադրություն դարձրեք, որ տվյալները վերջնականապես հեռացվեն սարքից, ոչ թե տեղափոխվեն զամբյուղ։ Ֆայլերը ջնջելու մասին լրացուցիչ ինֆորմացիա կարող եք ստանալ <link>այստեղ</link> կամ <link2>wethegeek.com</link2> և <link3>appletoolbox.com</link3> կայքերում.",
-        "link-url": "https://safecomputing.umich.edu/protect-yourself/prepare-devices-disposal/securely-delete-files",
-        "link-url-2": "https://wethegeek.com/best-file-data-shredder-apps-to-permanently-delete-data-from-android",
-        "link-url-3": "https://appletoolbox.com/how-to-delete-files-permanently-from-the-files-app-on-iphone-and-ipad"
-      }
+    "devices": {
+      "body": "Ուշադրություն դարձրեք, որ օգտագործեք այնպիսի սարքեր, որոնց ուրիշները հասանելիություն չունեն։ Քանի որ Facebook-ից ներբեռնված ֆայլերը կարող են մեծ լինել, խորհուրդ ենք տալիս օգտագործել համակարգիչ։"
     },
-    "description_html": "Facebook-ին Ձեր տվյալները ներբեռնելու հայտ ուղարկեք։ Երբ տվյալները պատրաստ լինեն, կստանաք ծանուցում։ Տվյալները ներբեռնելուց հետո կարող եք սկսել մասնակցությունը։  <strong>Քանի որ Facebook-ից ներբեռնված ֆայլերը կարող են մեծ լինել, խորհուրդ ենք տալիս օգտագործել համակարգիչ։</strong>",
+    "duration": {
+      "title": "Ինչքա՞ն է տևում տվյալների ներբեռնումը Facebook-ից",
+      "body": "Տվյալների պահանջումը կատարվում է կայքի կարգավորումներում մի քանի տարբերակ ընտրելով (տես ստորև). Երբ տվյալները պատրաստ լինեն ներբեռնման համար,  Facebook-ից ծանուցում կստանաք։ Այդ ժամանակ կարող եք ներբեռնել տվյալները Ձեր համակարգիչ ու սկսել մասնակցությունը։"
+    },
+    "data-deletion": {
+      "body": "Խորհուրդ ենք տալիս մասնակցությունից հետո ներբեռնած ֆայլերը  ջնջել Ձեր սարքից կամ էլ․ հասցեից։ Ուշադրություն դարձրեք, որ տվյալները վերջնականապես հեռացվեն սարքից, ոչ թե տեղափոխվեն զամբյուղ։ Ֆայլերը ջնջելու մասին լրացուցիչ ինֆորմացիա կարող եք ստանալ <link>այստեղ</link> կամ <link_android>wethegeek.com</link_android> և <link_ios>appletoolbox.com</link_ios> կայքերում."
+    },
     "external-documentation": "Տվյալների ներբեռնման պաշտոնական հրահանգները կարող եք ստանալ <link>այստեղ</link>։",
-    "overview": {
+    "steps": {
       "1": "Մուտք գործեք Facebook-ի Ձեր հաշիվ։",
       "2": "Վերին ձախ մասում սեղմեք Ձեր նկարի վրա և ընտրեք «Կարգավորումներ և գաղտնիություն» տարբերակը։",
       "3": "Ընտրեք «Կարգավորումներ» տարբերակը, ապա՝ «Ձեր տվյալները»։",
@@ -192,24 +194,18 @@
     "logo": "f-logo.svg"
   },
   "instagram": {
-    "instructions": {
-      "devices": {
-        "body": "Ուշադրություն դարձրեք, որ օգտագործեք այնպիսի սարքեր, որոնց ուրիշները հասանելիություն չունեն։"
-      },
-      "p2": {
-        "title": "Ինչքա՞ն է տևում տվյալների ներբեռնումը  Instagram-ից",
-        "body": "Տվյալների պահանջումը կատարվում է կայքի կարգավորումներում մի քանի տարբերակ ընտրելով (տես ստորև): Երբ տվյալները պատրաստ լինեն ներբեռնման համար, Instagram-ից ծանուցում կստանաք։ Այդ ժամանակ կարող եք ներբեռնել տվյալները Ձեր համակարգիչ ու սկսել մասնակցությունը։"
-      },
-      "data-deletion": {
-        "body": "Խորհուրդ ենք տալիս մասնակցությունից հետո ներբեռնած ֆայլերը  ջնջել Ձեր սարքից կամ էլ․ հասցեից։ Ուշադրություն դարձրեք, որ տվյալները վերջնականապես հեռացվեն սարքից, ոչ թե տեղափոխվեն զամբյուղ։ Ֆայլերը ջնջելու մասին լրացուցիչ ինֆորմացիա կարող եք ստանալ <link>այստեղ</link> կամ <link2>wethegeek.com</link2> և <link3>appletoolbox.com</link3> կայքերում.",
-        "link-url": "https://safecomputing.umich.edu/protect-yourself/prepare-devices-disposal/securely-delete-files",
-        "link-url-2": "https://wethegeek.com/best-file-data-shredder-apps-to-permanently-delete-data-from-android/",
-        "link-url-3": "https://appletoolbox.com/how-to-delete-files-permanently-from-the-files-app-on-iphone-and-ipad/"
-      }
+    "devices": {
+      "body": "Ուշադրություն դարձրեք, որ օգտագործեք այնպիսի սարքեր, որոնց ուրիշները հասանելիություն չունեն։"
     },
-    "description_html": "Instagram-ին Ձեր տվյալները ներբեռնելու հայտ ուղարկեք։ Երբ տվյալները պատրաստ լինեն, կստանաք ծանուցում։ Տվյալները ներբեռնելուց հետո կարող եք սկսել մասնակցությունը։",
+    "duration": {
+      "title": "Ինչքա՞ն է տևում տվյալների ներբեռնումը  Instagram-ից",
+      "body": "Տվյալների պահանջումը կատարվում է կայքի կարգավորումներում մի քանի տարբերակ ընտրելով (տես ստորև): Երբ տվյալները պատրաստ լինեն ներբեռնման համար, Instagram-ից ծանուցում կստանաք։ Այդ ժամանակ կարող եք ներբեռնել տվյալները Ձեր համակարգիչ ու սկսել մասնակցությունը։"
+    },
+    "data-deletion": {
+      "body": "Խորհուրդ ենք տալիս մասնակցությունից հետո ներբեռնած ֆայլերը  ջնջել Ձեր սարքից կամ էլ․ հասցեից։ Ուշադրություն դարձրեք, որ տվյալները վերջնականապես հեռացվեն սարքից, ոչ թե տեղափոխվեն զամբյուղ։ Ֆայլերը ջնջելու մասին լրացուցիչ ինֆորմացիա կարող եք ստանալ <link>այստեղ</link> կամ <link_android>wethegeek.com</link_android> և <link_ios>appletoolbox.com</link_ios> կայքերում."
+    },
     "external-documentation": "Տվյալների ներբեռնման պաշտոնական հրահանգները կարող եք ստանալ <link>այստեղ</link>.",
-    "overview": {
+    "steps": {
       "1": "Մուտք գործեք Instagram-ի Ձեր հաշիվ։",
       "2": "Ձեր պրոֆիլում սեղմեք վերին աջ մասում գտնվող երեք գծերի վրա, ապա ընտրեք  \"Ваши действия/Your activity\":",
       "3": "Ամենաներքևում ընտրեք  “Скачать информацию/Download your information” տարբերակը։",

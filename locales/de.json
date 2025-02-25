@@ -17,14 +17,25 @@
     "data-protection": "Datenschutz",
     "imprint": "Impressum",
     "report-problem": "Problem Melden"
-
   },
   "urls": {
     "uni-bielefeld": "https://www.uni-bielefeld.de",
     "dona-responsible-homepage": "https://www.uni-bielefeld.de/fakultaeten/technische-fakultaet/arbeitsgruppen/multimodal-behavior-processing/",
     "limesurvey-data-protection": "https://www.limesurvey.org/de/hilfe/faq/39-datenschutz%20und%20datenschutzpolitik",
     "limesurvey-data-use": "https://www.limesurvey.org/de/hilfe/faq/39-datenschutz%20und%20datenschutzpolitik",
-    "report-problem": "https://survey.mbp.tf.uni-bielefeld.de/index.php?r=survey/index&sid=486423&lang=de"
+    "report-problem": "https://survey.mbp.tf.uni-bielefeld.de/index.php?r=survey/index&sid=486423&lang=de",
+    "facebook": {
+      "external-documentation": "https://www.facebook.com/help/contact/2032834846972583"
+    },
+    "instagram": {
+      "external-documentation": "https://help.instagram.com/181231772500920?cms_id=181231772500920"
+    },
+    "whatsapp": {
+      "ios-documentation": "https://faq.whatsapp.com/618575946635920/?cms_platform=iphone&helpref=platform_switcher",
+      "android-documentation": "https://faq.whatsapp.com/de/android/23756533"
+    },
+    "secure-delete": "https://www.bsi.bund.de/DE/Themen/Verbraucherinnen-und-Verbraucher/Informationen-und-Empfehlungen/Cyber-Sicherheitsempfehlungen/Daten-sichern-verschluesseln-und-loeschen/Daten-endgueltig-loeschen/daten-endgueltig-loeschen.html",
+    "datenschutz": "https://www.datenschutz.org/daten-loeschen/"
   },
   "landing": {
     "header": {
@@ -107,7 +118,7 @@
   "instructions": {
     "about": {
       "title": "Wie erhalte ich meine Daten?",
-      "body_html": "Bevor Sie an der Studie teilnehmen, fordern Sie bitte Ihre Daten direkt von Facebook und/oder WhatsApp und/oder Instagram an. Sie können Daten von jeder dieser Plattformen spenden. Falls Sie nur Daten von einer Plattform spenden möchten, wählen Sie bitte die Plattform, die für Sie wichtiger ist. <b>Bitte sehen Sie sich die entsprechenden Anleitungen genau an, da sie wichtige Informationen für die weiteren Schritte enthalten.</b>"
+      "body": "Bevor Sie an der Studie teilnehmen, fordern Sie bitte Ihre Daten direkt von Facebook und/oder WhatsApp und/oder Instagram an. Sie können Daten von jeder dieser Plattformen spenden. Falls Sie nur Daten von einer Plattform spenden möchten, wählen Sie bitte die Plattform, die für Sie wichtiger ist. <b>Bitte sehen Sie sich die entsprechenden Anleitungen genau an, da sie wichtige Informationen für die weiteren Schritte enthalten.</b>"
     },
     "datasource": {
       "title-format": "Anleitung zum Erhalten von {datasource}-Daten"
@@ -124,27 +135,23 @@
     "haveData": "Sie brauchen 5-7 WhatsApp-Chats (.txt-Dateien)."
   },
   "whatsapp": {
-    "instructions": {
-      "devices": {
-        "body": "Sie benötigen Ihr Smartphone, auf dem Sie WhatsApp nutzen. Bitte stellen Sie sicher, dass Sie die Daten auf einem Gerät speichern, auf das außer Ihnen niemand Zugriff hat."
-      },
-      "p2": {
-        "title": "Welche Chats soll ich auswählen?",
-        "body": "Von Zeit zu Zeit besprechen die meisten Menschen wichtige Angelegenheiten mit Anderen und wir brauchen Menschen, auf deren Hilfe wir uns verlassen können. Das können Familienangehörige, Freunde oder Menschen sein, die Ihnen wirklich geholfen haben - <strong>was uns interessiert, sind die Chats mit den Menschen, mit denen Sie am ehesten über wirklich wichtige Angelegenheiten in Ihrem Leben sprechen.</strong><br></br><br></br><strong>Bitte wählen Sie 5-7 Chats mit Menschen aus, mit denen Sie wichtige Dinge in Ihrem Leben besprechen (auch Gruppenchats sind möglich).</strong>"
-      },
-      "data-deletion": {
-        "body": "Wir empfehlen Ihnen ausdrücklich, Ihre Originaldaten (Chatdateien) nach Abschluss der Spende von Ihrem Gerät und aus Ihrem E-Mail-System (Posteingang und gesendete E-Mails) zu löschen. Beachten Sie, dass das einfache Löschen der Dateien möglicherweise nicht ausreicht, um die Daten dauerhaft von Ihrem Gerät zu entfernen. Weitere Informationen zum dauerhaften Löschen von Dateien finden Sie auf <link>der Seite des Bundesamt für Sicherheit in der Informationstechnik</link> und <link2>Datenschutz.org</link2>.",
-        "secure-delete-url": "https://www.bsi.bund.de/DE/Themen/Verbraucherinnen-und-Verbraucher/Informationen-und-Empfehlungen/Cyber-Sicherheitsempfehlungen/Daten-sichern-verschluesseln-und-loeschen/Daten-endgueltig-loeschen/daten-endgueltig-loeschen.html",
-        "datenschutz-url": "https://www.datenschutz.org/daten-loeschen/"
-      },
-      "video": {
-        "ios": "/images/whatsapp/whatsapp_ger_iOS.mp4",
-        "android": "/images/whatsapp/whatsapp_ger_android.mp4",
-        "ios-caption": "Dies ist der Chat Export-Prozess auf einem iPhone.",
-        "android-caption": "Dies ist der Chat Export-Prozess auf einem Android-Gerät. Der Prozess könnte auf verschiedenen Geräten leicht anders sein."
-      }
+    "devices": {
+      "body": "Sie benötigen Ihr Smartphone, auf dem Sie WhatsApp nutzen. Bitte stellen Sie sicher, dass Sie die Daten auf einem Gerät speichern, auf das außer Ihnen niemand Zugriff hat."
     },
-    "overview": {
+    "selection": {
+      "title": "Welche Chats soll ich auswählen?",
+      "body": "Von Zeit zu Zeit besprechen die meisten Menschen wichtige Angelegenheiten mit Anderen und wir brauchen Menschen, auf deren Hilfe wir uns verlassen können. Das können Familienangehörige, Freunde oder Menschen sein, die Ihnen wirklich geholfen haben - <strong>was uns interessiert, sind die Chats mit den Menschen, mit denen Sie am ehesten über wirklich wichtige Angelegenheiten in Ihrem Leben sprechen.</strong><br></br><br></br><strong>Bitte wählen Sie 5-7 Chats mit Menschen aus, mit denen Sie wichtige Dinge in Ihrem Leben besprechen (auch Gruppenchats sind möglich).</strong>"
+    },
+    "data-deletion": {
+      "body": "Wir empfehlen Ihnen ausdrücklich, Ihre Originaldaten (Chatdateien) nach Abschluss der Spende von Ihrem Gerät und aus Ihrem E-Mail-System (Posteingang und gesendete E-Mails) zu löschen. Beachten Sie, dass das einfache Löschen der Dateien möglicherweise nicht ausreicht, um die Daten dauerhaft von Ihrem Gerät zu entfernen. Weitere Informationen zum dauerhaften Löschen von Dateien finden Sie auf <link>der Seite des Bundesamt für Sicherheit in der Informationstechnik</link> und <link_datenschutz>Datenschutz.org</link_datenschutz>."
+    },
+    "video": {
+      "ios": "/images/whatsapp/whatsapp_ger_iOS.mp4",
+      "android": "/images/whatsapp/whatsapp_ger_android.mp4",
+      "ios-caption": "Dies ist der Chat Export-Prozess auf einem iPhone.",
+      "android-caption": "Dies ist der Chat Export-Prozess auf einem Android-Gerät. Der Prozess könnte auf verschiedenen Geräten leicht anders sein."
+    },
+    "steps": {
       "1": "Öffnen Sie WhatsApp auf Ihrem Smartphone.",
       "2": "Überlegen Sie, welche fünf Chats für Sie besonders wichtig sind (z.B. Partner/in, beste/r Freund/in o.ä.).",
       "3": "Wählen Sie einen der Chats aus und öffnen Sie diesen.",
@@ -154,29 +161,22 @@
       "7": "Laden Sie die Chatdatei aus der E-mail auf Ihrem Computer herunter.",
       "8": "Wiederholen Sie die Schritte 3-7 für alle Chats."
     },
-    "external-documentation": "Die offizielle Dokumentation zum Herunterladen Ihrer Daten können Sie für <ios_link>iOS</ios_link> und <android_link>Android</android_link> hier finden.",
-    "android-link": "https://faq.whatsapp.com/de/android/23756533",
-    "description_html": "<i>Hinweis: Die Chat-Exportfunktion wird nicht von allen WhatsApp-Versionen unterstützt! <strong>Das Exportieren und Speichern von WhatsApp-Daten funktioniert nicht mit der WhatsApp Web-Version. Außerdem kann es bei verschiedenen Android-Versionen sein, dass die Daten nicht lokal auf Ihrem Gerät gespeichert werden können.</i></strong> <br><br>Von Zeit zu Zeit besprechen die meisten Menschen wichtige Angelegenheiten mit anderen, und wir brauchen Menschen, auf deren Hilfe wir uns verlassen können. Das können Familienangehörige, Freunde oder Menschen sein, die Ihnen wirklich geholfen haben - was uns interessiert, sind diejenigen, mit denen Sie am ehesten über wirklich wichtige Angelegenheiten in Ihrem Leben sprechen. <br><br>Bitte wählen Sie <strong>5</strong> Chats mit Menschen aus, mit denen Sie wichtige Dinge in Ihrem Leben besprechen (auch Gruppenchats sind möglich). Bitte denken Sie daran, dass die Chats nur nacheinander heruntergeladen werden können. Eine Mehrfachauswahl von Chats wird derzeit nicht unterstützt.",
+    "external-documentation": "Die offizielle Dokumentation zum Herunterladen Ihrer Daten können Sie für <link_ios>iOS</link_ios> und <link_android>Android</link_android> hier finden.",
     "logo": "w-logo.svg"
   },
   "facebook": {
-    "instructions": {
-      "devices": {
-        "body": "Bitte beachten Sie, dass Sie die Daten auf einem Gerät speichern, auf das niemand außer Ihnen Zugriff hat. Da die Datenmenge bei Facebook-Datenspenden relativ groß sein kann, empfehlen wir, einen Computer zu verwenden."
-      },
-      "p2": {
-        "title": "Wie lange dauert der Datenexport von Facebook?",
-        "body": "Die Anforderung der Daten erfolgt durch wenige Klicks auf Facebook (siehe die Anleitung unten). Sie erhalten eine Benachrichtigung von Facebook, sobald die Daten zum Download bereitstehen, und können dann mit der Teilnahme an der Studie beginnen."
-      },
-      "data-deletion": {
-        "body": "Wir empfehlen Ihnen ausdrücklich, Ihre Originaldaten nach dem Abschluss der Spende wieder zu löschen.  Beachten Sie, dass ein einfaches Löschen der Dateien ggf. nicht ausreicht, um die Daten endgültig von Ihrem Gerät zu entfernen. Weitere Informationen zur endgültigen Löschung von Dateien finden Sie unter anderem <link>auf der Seite des Bundesamt für Sicherheit in der Informationstechnik</link> und <link2> Datenschutz.org</link2>.",
-        "link-url": "https://www.bsi.bund.de/DE/Themen/Verbraucherinnen-und-Verbraucher/Informationen-und-Empfehlungen/Cyber-Sicherheitsempfehlungen/Daten-sichern-verschluesseln-und-loeschen/Daten-endgueltig-loeschen/daten-endgueltig-loeschen.html",
-        "link-url-2": "https://www.datenschutz.org/daten-loeschen/"
-      }
+    "devices": {
+      "body": "Bitte beachten Sie, dass Sie die Daten auf einem Gerät speichern, auf das niemand außer Ihnen Zugriff hat. Da die Datenmenge bei Facebook-Datenspenden relativ groß sein kann, empfehlen wir, einen Computer zu verwenden."
     },
-    "description_html": "Bitte fordern Sie Ihre Nachrichtendaten von Facebook an. Sie erhalten eine Benachrichtigung von Facebook, sobald die Daten zum Download bereitstehen, und können dann mit der Teilnahme an der Studie beginnen. <strong>Wir empfehlen, einen Computer zu verwenden, wenn Sie von Facebook spenden, da die Datenmenge relativ groß sein kann.</strong>",
+    "duration": {
+      "title": "Wie lange dauert der Datenexport von Facebook?",
+      "body": "Die Anforderung der Daten erfolgt durch wenige Klicks auf Facebook (siehe die Anleitung unten). Sie erhalten eine Benachrichtigung von Facebook, sobald die Daten zum Download bereitstehen, und können dann mit der Teilnahme an der Studie beginnen."
+    },
+    "data-deletion": {
+      "body": "Wir empfehlen Ihnen ausdrücklich, Ihre Originaldaten nach dem Abschluss der Spende wieder zu löschen.  Beachten Sie, dass ein einfaches Löschen der Dateien ggf. nicht ausreicht, um die Daten endgültig von Ihrem Gerät zu entfernen. Weitere Informationen zur endgültigen Löschung von Dateien finden Sie unter anderem <link>auf der Seite des Bundesamt für Sicherheit in der Informationstechnik</link> und <link_datenschutz> Datenschutz.org</link_datenschutz>."
+    },
     "external-documentation": "Die offizielle Dokumentation zum Herunterladen Ihrer Daten können Sie <link>hier</link> finden.",
-    "overview": {
+    "steps": {
       "1": "Öffnen Sie Facebook und melden Sie sich an.",
       "2": "Klicken Sie in der oberen rechten Ecke auf die Schaltfläche \"Dein Profil\" und wählen Sie \"Einstellungen & Privatsphäre\".",
       "3": "Wählen Sie \"Einstellungen\". Klicken Sie dann auf der linken Seite auf \"Deine Facebook-Informationen\".",
@@ -192,24 +192,18 @@
     "logo": "f-logo.svg"
   },
   "instagram": {
-    "instructions": {
-      "devices": {
-        "body": "Bitte beachten Sie, dass Sie die Daten auf einem Gerät speichern, auf das niemand außer Ihnen Zugriff hat."
-      },
-      "p2": {
-        "title": "Wie lange dauert der Datenexport von Instagram?",
-        "body": "Die Anforderung der Daten erfolgt durch wenige Klicks auf Instagram (siehe die Anleitung unten). Sie erhalten eine Benachrichtigung von Instagram, sobald die Daten zum Download bereitstehen, und können dann mit der Teilnahme an der Studie beginnen."
-      },
-      "data-deletion": {
-        "title": "Wie kann ich meine Daten von meinem Gerät wieder löschen?",
-        "body": "Wir empfehlen Ihnen ausdrücklich, Ihre Originaldaten nach dem Abschluss der Spende wieder zu löschen.  Beachten Sie, dass ein einfaches Löschen der Dateien ggf. nicht ausreicht, um die Daten endgültig von Ihrem Gerät zu entfernen. Weitere Informationen zur endgültigen Löschung von Dateien finden Sie unter anderem <link>auf der Seite des Bundesamt für Sicherheit in der Informationstechnik</link> und <link2> Datenschutz.org</link2>.",
-        "link-url": "https://www.bsi.bund.de/DE/Themen/Verbraucherinnen-und-Verbraucher/Informationen-und-Empfehlungen/Cyber-Sicherheitsempfehlungen/Daten-sichern-verschluesseln-und-loeschen/Daten-endgueltig-loeschen/daten-endgueltig-loeschen.html",
-        "link-url-2": "https://www.datenschutz.org/daten-loeschen/"
-      }
+    "devices": {
+      "body": "Bitte beachten Sie, dass Sie die Daten auf einem Gerät speichern, auf das niemand außer Ihnen Zugriff hat."
     },
-    "description_html": "Bitte fordern Sie Ihre Nachrichtendaten von Instagram an. Sie erhalten eine Benachrichtigung von Instagram, sobald die Daten zum Download bereitstehen, und können dann mit der Teilnahme an der Studie beginnen.",
+    "duration": {
+      "title": "Wie lange dauert der Datenexport von Instagram?",
+      "body": "Die Anforderung der Daten erfolgt durch wenige Klicks auf Instagram (siehe die Anleitung unten). Sie erhalten eine Benachrichtigung von Instagram, sobald die Daten zum Download bereitstehen, und können dann mit der Teilnahme an der Studie beginnen."
+    },
+    "data-deletion": {
+      "body": "Wir empfehlen Ihnen ausdrücklich, Ihre Originaldaten nach dem Abschluss der Spende wieder zu löschen.  Beachten Sie, dass ein einfaches Löschen der Dateien ggf. nicht ausreicht, um die Daten endgültig von Ihrem Gerät zu entfernen. Weitere Informationen zur endgültigen Löschung von Dateien finden Sie unter anderem <link>auf der Seite des Bundesamt für Sicherheit in der Informationstechnik</link> und <link_datenschutz> Datenschutz.org</link_datenschutz>."
+    },
     "external-documentation": "Die offizielle Dokumentation zum Herunterladen Ihrer Daten können Sie <link>hier</link> finden.",
-    "overview": {
+    "steps": {
       "1": "Öffnen Sie Instagram und melden Sie sich an.",
       "2": "Klicken Sie in Ihrem Profil auf den \"Menü\"-Knopf (drei Striche) und wählen Sie \"Deine Aktivitäten\".",
       "3": "Klicken Sie ganz unten auf “Deine Informationen herunterladen” und gehen Sie weiter zur \"Kontenübersicht\".",

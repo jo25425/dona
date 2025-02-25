@@ -14,6 +14,7 @@ import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import {generateExternalDonorId, useDonation} from '@/context/DonationContext';
 import {IdInputMethod} from '@models/settings';
+import {useRichTranslations} from "@/hooks/useRichTranslations";
 
 const modal_style = {
     position: 'absolute' as 'absolute',
@@ -37,9 +38,10 @@ const isDonorSurveyEnabled = process.env.NEXT_PUBLIC_DONOR_SURVEY_ENABLED === 't
 const donorSurveyLink = process.env.NEXT_PUBLIC_DONOR_SURVEY_LINK;
 
 export default function Instructions() {
+    const urls = useTranslations('urls');
     const actions = useTranslations('actions');
     const consent = useTranslations('consent');
-    const storage = useTranslations('data-storage');
+    const storage = useRichTranslations('data-storage');
     const donor = useTranslations('donor-id')
     const { externalDonorId, setExternalDonorId } = useDonation();
     const locale = useLocale();
@@ -107,21 +109,15 @@ export default function Instructions() {
                         <Typography variant='body1'>
                             {consent.rich('benefit.body', {
                                 link: (txt) => <a target='_blank' href={consent('benefit.link-url')}>{txt}</a>
-                            })
-                            }
+                            })}
                         </Typography>
 
-                        <Typography variant='h5' sx={{my: 2}}>{storage('title')}</Typography>
+                        <Typography variant='h5' sx={{my: 2}}>{storage.t('title')}</Typography>
                         <Typography variant='body1'  sx={{my: 2}}>
-                            {storage.rich('body1', {
-                                em: (content) => <em>{content}</em>
-                            })}
+                            {storage.rich('body1')}
                         </Typography>
                         <Typography variant='body1' sx={{my: 2}}>
-                            {storage.rich('body2', {
-                                em: (content) => <em>{content}</em>,
-                                link: (txt) => <a target='_blank' href={storage('url-limesurvey')}>{txt}</a>
-                            })}
+                            {storage.rich('body2', { link: 'limesurvey-data-use'})}
                         </Typography>
 
                         <Typography variant='h5' sx={{my: 2}}>

@@ -80,8 +80,8 @@ export default function HomePage() {
                                             src={landing.t(`donation-info.${section}.image`)}
                                             alt={landing.t(`donation-info.${section}.title`)}
                                             width={260}
-                                            height={0}
-                                            style={{ width: "100%", height: "auto", objectFit: "contain" }}
+                                            height={80}
+                                            style={{ objectFit: "contain" }}
                                             loading="lazy"
                                         />
                                     </Box>
