@@ -37,7 +37,8 @@
     },
     "secure-delete": "https://safecomputing.umich.edu/protect-yourself/prepare-devices-disposal/securely-delete-files",
     "delete-from-android": "https://wethegeek.com/best-file-data-shredder-apps-to-permanently-delete-data-from-android/",
-    "delete-from-ios": "https://appletoolbox.com/how-to-delete-files-permanently-from-the-files-app-on-iphone-and-ipad/"
+    "delete-from-ios": "https://appletoolbox.com/how-to-delete-files-permanently-from-the-files-app-on-iphone-and-ipad/",
+    "cadooz-benefit": "https://www.cadooz.com/en/products/bestchoice-shopping-gift-card/"
   },
   "landing": {
     "header": {
@@ -238,8 +239,7 @@
     },
     "benefit": {
       "title": "Benefits and risks",
-      "body": "With your participation you enable us to identify and characterise new insights about social interactions between humans. You gain insights into your own personal messaging behavior. Furthermore, at the end of the study, you can participate in a raffle for a 50€ voucher (<link>Cadooz-Bestchoice</link>). This is an ongoing study, so a voucher is drawn every time a set of 100 participants is achieved (winning chance: 1/100). We only collect anonymized data. Before the donation of your data you have to download the messaging data locally on your own device. Since this data contains sensitive information we recommend to delete the local copy of your data after the end of the study. Please conduct the study alone and in a calm environment to ensure your privacy.",
-      "link-url": "https://www.cadooz.com/en/products/bestchoice-shopping-gift-card/"
+      "body": "With your participation you enable us to identify and characterise new insights about social interactions between humans. You gain insights into your own personal messaging behavior. Furthermore, at the end of the study, you can participate in a raffle for a 50€ voucher (<link>Cadooz-Bestchoice</link>). This is an ongoing study, so a voucher is drawn every time a set of 100 participants is achieved (winning chance: 1/100). We only collect anonymized data. Before the donation of your data you have to download the messaging data locally on your own device. Since this data contains sensitive information we recommend to delete the local copy of your data after the end of the study. Please conduct the study alone and in a calm environment to ensure your privacy."
     },
     "voluntary": {
       "title": "Voluntary Participation",

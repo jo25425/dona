@@ -21,7 +21,7 @@
   "urls": {
     "uni-bielefeld": "https://www.uni-bielefeld.de",
     "dona-responsible-homepage": "https://www.uni-bielefeld.de/fakultaeten/technische-fakultaet/arbeitsgruppen/multimodal-behavior-processing/",
-    "limesurvey-data-protection": "https://www.limesurvey.org/de/hilfe/faq/39-datenschutz%20und%20datenschutzpolitik",
+    "limesurvey": "https://www.limesurvey.org",
     "limesurvey-data-use": "https://www.limesurvey.org/de/hilfe/faq/39-datenschutz%20und%20datenschutzpolitik",
     "report-problem": "https://survey.mbp.tf.uni-bielefeld.de/index.php?r=survey/index&sid=486423&lang=de",
     "facebook": {
@@ -35,7 +35,8 @@
       "android-documentation": "https://faq.whatsapp.com/de/android/23756533"
     },
     "secure-delete": "https://www.bsi.bund.de/DE/Themen/Verbraucherinnen-und-Verbraucher/Informationen-und-Empfehlungen/Cyber-Sicherheitsempfehlungen/Daten-sichern-verschluesseln-und-loeschen/Daten-endgueltig-loeschen/daten-endgueltig-loeschen.html",
-    "datenschutz": "https://www.datenschutz.org/daten-loeschen/"
+    "datenschutz": "https://www.datenschutz.org/daten-loeschen/",
+    "cadooz-benefit": "https://www.cadooz.com/produkte/bestchoice-einkaufsgutschein-von-cadooz/"
   },
   "landing": {
     "header": {
@@ -232,8 +233,7 @@
     },
     "benefit": {
       "title": "Nutzen und Risiken",
-      "body": "Mit Ihrer Teilnahme helfen Sie dabei, neue Erkenntnisse über das soziale Interaktionsverhalten der Menschen zu identifizieren und charakterisieren. Sie erhalten zudem einen Einblick in Ihr eigenes Messaging-Verhalten. Außerdem können Sie am Ende der Studie an einer Verlosung eines 50€ Gutscheins (<link>Cadooz-Bestchoice</link>) teilnehmen. Dies ist eine fortlaufende Studie, daher wird je 100 TeilnehmerInnen ein Gutschein verlost (Gewinnchance: 1/100). Wir erheben nur anonymisierte Daten. Vor der Datenspende müssen Sie die Messaging-Daten auf Ihr Gerät herunterladen. Da es sich um sensible Daten handelt, empfehlen wir Ihnen ausdrücklich, die Original-Daten nach dem Abschluss der Spende von Ihrem Gerät zu löschen. Um Ihre Privatsphäre zu sichern, führen Sie die Studie in ungestörter Umgebung und allein durch.",
-      "link-url": "https://www.cadooz.com/produkte/bestchoice-einkaufsgutschein-von-cadooz/"
+      "body": "Mit Ihrer Teilnahme helfen Sie dabei, neue Erkenntnisse über das soziale Interaktionsverhalten der Menschen zu identifizieren und charakterisieren. Sie erhalten zudem einen Einblick in Ihr eigenes Messaging-Verhalten. Außerdem können Sie am Ende der Studie an einer Verlosung eines 50€ Gutscheins (<link>Cadooz-Bestchoice</link>) teilnehmen. Dies ist eine fortlaufende Studie, daher wird je 100 TeilnehmerInnen ein Gutschein verlost (Gewinnchance: 1/100). Wir erheben nur anonymisierte Daten. Vor der Datenspende müssen Sie die Messaging-Daten auf Ihr Gerät herunterladen. Da es sich um sensible Daten handelt, empfehlen wir Ihnen ausdrücklich, die Original-Daten nach dem Abschluss der Spende von Ihrem Gerät zu löschen. Um Ihre Privatsphäre zu sichern, führen Sie die Studie in ungestörter Umgebung und allein durch."
     },
     "voluntary": {
       "title": "Freiwilligkeit",

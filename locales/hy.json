@@ -21,7 +21,7 @@
   "urls": {
     "uni-bielefeld": "https://www.uni-bielefeld.de",
     "dona-responsible-homepage": "https://www.uni-bielefeld.de/fakultaeten/technische-fakultaet/arbeitsgruppen/multimodal-behavior-processing/",
-    "limesurvey-data-protection": "https://www.limesurvey.org/support/faq/39-data-protection-and-policy",
+    "limesurvey": "https://www.limesurvey.org",
     "limesurvey-data-use": "https://www.limesurvey.org/support/faq/39-data-protection-and-policy",
     "report-problem": "https://survey.mbp.tf.uni-bielefeld.de/index.php?r=survey/index&sid=486423&lang=hy",
     "facebook": {
@@ -36,7 +36,8 @@
     },
     "secure-delete": "https://safecomputing.umich.edu/protect-yourself/prepare-devices-disposal/securely-delete-files",
     "delete-from-android": "https://wethegeek.com/best-file-data-shredder-apps-to-permanently-delete-data-from-android/",
-    "delete-from-ios": "https://appletoolbox.com/how-to-delete-files-permanently-from-the-files-app-on-iphone-and-ipad/"
+    "delete-from-ios": "https://appletoolbox.com/how-to-delete-files-permanently-from-the-files-app-on-iphone-and-ipad/",
+    "cadooz-benefit": "https://www.cadooz.com/en/products/bestchoice-shopping-gift-card/"
   },
   "landing": {
     "header": {
@@ -234,8 +235,7 @@
     },
     "benefit": {
       "title": "Օգուտներ ու ռիսկեր",
-      "body": "Ձեր մասնակցությունը մեզ հնարավորություն կտա ավելի լավ հասկանալու ու բնորոշելու մարդկանց սոցիալական շփումները։ Դուք էլ կարող եք պատկերացում կազմել Ձեր առցանց հաղորդակցության մասին։ Վերջում հնարավորություն ունեք գրանցվելու վիճակահանության, որի ժամանակ կարող եք շահել 50€ արժողությամբ կտրոն առցանց գնումների համար (<link>Cadooz-Bestchoice</link>)։ Ուսումնասիրությունը շարունակական է, ամեն 100 մասնակցի հաշվով տրամադրվում է մեկ կտրոն  (հաղթելու շանսը՝ 1/100)։ Մենք հավաքում ենք միայն ապանույնականացված տվյալներ։ Մինչև տվյալների նվիրաբերումը,  անհրաժեշտ է սոցհարթակներից պահանջել տվյալները ու դրանք ներբեռնել Ձեր սարք։ Քանի որ այդ տվյալները պարունակում են Ձեր հաղորդագրությունները, խորհուրդ ենք տալիս ուսումնասիրության վերջում դրանք ջնջել Ձեր սարքից։ Խնդրում ենք մասնակցել մենակ ու հանգիստ միջավայրում՝ գաղտնիությունը ապահովելու համար։",
-      "link-url": "https://www.cadooz.com/en/products/bestchoice-shopping-gift-card/"
+      "body": "Ձեր մասնակցությունը մեզ հնարավորություն կտա ավելի լավ հասկանալու ու բնորոշելու մարդկանց սոցիալական շփումները։ Դուք էլ կարող եք պատկերացում կազմել Ձեր առցանց հաղորդակցության մասին։ Վերջում հնարավորություն ունեք գրանցվելու վիճակահանության, որի ժամանակ կարող եք շահել 50€ արժողությամբ կտրոն առցանց գնումների համար (<link>Cadooz-Bestchoice</link>)։ Ուսումնասիրությունը շարունակական է, ամեն 100 մասնակցի հաշվով տրամադրվում է մեկ կտրոն  (հաղթելու շանսը՝ 1/100)։ Մենք հավաքում ենք միայն ապանույնականացված տվյալներ։ Մինչև տվյալների նվիրաբերումը,  անհրաժեշտ է սոցհարթակներից պահանջել տվյալները ու դրանք ներբեռնել Ձեր սարք։ Քանի որ այդ տվյալները պարունակում են Ձեր հաղորդագրությունները, խորհուրդ ենք տալիս ուսումնասիրության վերջում դրանք ջնջել Ձեր սարքից։ Խնդրում ենք մասնակցել մենակ ու հանգիստ միջավայրում՝ գաղտնիությունը ապահովելու համար։"
     },
     "voluntary": {
       "title": "Կամավոր մասնակցություն",
