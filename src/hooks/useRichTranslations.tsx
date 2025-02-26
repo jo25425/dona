@@ -1,5 +1,5 @@
 import {useTranslations} from "next-intl";
-import {JSX, ReactNode} from "react";
+import {ReactNode} from "react";
 
 export function useRichTranslations(namespace: string) {
     const translate = useTranslations(namespace);

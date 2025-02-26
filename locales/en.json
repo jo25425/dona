@@ -346,6 +346,7 @@
       "NonsenseDateRange": "The selected period is not valid. Please check the correctness of the selected dates.",
       "NoMessagesInRange": "There are no messages in the selected period. Please select a longer and valid period.",
       "NotEnoughMonthsInRange": "To donate your data, please select a period of at least 6 months within the period of your donation.",
+      "TransactionFailed": "The donation data couldn't be saved. Check the connection and try again.",
       "UnknownError": "There is an error somewhere. Please check your data donation.",
 
       "no-alias": "Please enter your username. You can find it in your WhatsApp profile."

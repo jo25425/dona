@@ -1,4 +1,4 @@
-import { styled } from "@mui/material/styles";
+import {styled} from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 
 export const BlockTitle = styled(Typography)(({ theme }) => ({
@@ -19,6 +19,7 @@ export const MainTitle = styled(Typography)(({ theme }) => ({
         fontSize: "1.75rem",
     },
     [`&.MuiTypography-h4`]: {
+        marginTop: theme.spacing(1),
         fontSize: theme.typography.h4.fontSize,
         [theme.breakpoints.up("md")]: {
             fontSize: `calc(${theme.typography.h4.fontSize} * 1.1)`, // Slightly larger on bigger screens
@@ -51,7 +52,9 @@ export const ContactBlock = styled(Typography)(({ theme }) => ({
 // Styled component for rich text translations (ensures spacing & prevents nesting issues)
 export const RichText = styled("div")(({ theme }) => ({
     marginBottom: theme.spacing(2),
+    ...theme.typography.body1,
     "& p": {
+        ...theme.typography.body1,
         marginBottom: theme.spacing(1), // Ensures spacing between paragraphs
     },
 }));

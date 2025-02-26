@@ -342,6 +342,7 @@
       "NonsenseRange": "Der ausgewählte Zeitraum ist ungültig. Bitte überprüfen Sie die Richtigkeit der ausgewählten Daten.",
       "NotEnoughMonthsInRange": "Bitte wählen Sie zum Spenden Ihrer Daten einen Zeitraum von mindestens 6 Monaten innerhalb des Zeitraums Ihrer Spende aus.",
       "NoMessagesInRange": "In dem ausgewählten Zeitraum befinden sich keine Nachrichten. Bitte wählen Sie einen größeren und validen Zeitraum.",
+      "TransactionFailed": "Die Spendendaten konnten nicht gespeichert werden. Überprüfen Sie die Verbindung und versuchen Sie es erneut.",
       "UnknownError": "Es gibt einen Fehler. Bitte überprüfen Sie Ihre Datenspende.",
 
       "no-alias": "Ein Nutzername muss angegeben werden. Sie können ihn in Ihrem WhatsApp-Profil finden."

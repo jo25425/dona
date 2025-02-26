@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { useRichTranslations } from "@/hooks/useRichTranslations";
+import React, {useEffect, useState} from "react";
+import {useRouter} from "next/navigation";
+import {useRichTranslations} from "@/hooks/useRichTranslations";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -17,12 +17,14 @@ import Typography from "@mui/material/Typography";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import CircularProgress from "@mui/material/CircularProgress";
 import Alert from "@mui/material/Alert";
-import { Conversation, DataSourceValue } from "@models/processed";
-import { addDonation } from "./actions";
-import { useAliasConfig } from "@/services/parsing/shared/aliasConfig";
+import {Conversation, DataSourceValue} from "@models/processed";
+import {addDonation} from "./actions";
+import {useAliasConfig} from "@/services/parsing/shared/aliasConfig";
 import MultiFileSelect from "@/components/MultiFileSelect";
-import { useDonation } from "@/context/DonationContext";
-import { useTranslations } from "next-intl";
+import {useDonation} from "@/context/DonationContext";
+import {useTranslations} from "next-intl";
+import {MainTitle, RichText} from "@/styles/StyledTypography";
+import {getErrorMessage} from "@services/errors";
 
 type ConversationsBySource = Record<DataSourceValue, Conversation[]>;
 
@@ -36,7 +38,7 @@ export default function DataDonationPage() {
     const [allDonatedConversationsBySource, setAllDonatedConversationsBySource] = useState<ConversationsBySource>({} as ConversationsBySource);
     const [loading, setLoading] = useState(false);
     const [validated, setValidated] = useState(false);
-    const [error, setError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
     useEffect(() => {
         if (!externalDonorId) {
@@ -58,7 +60,7 @@ export default function DataDonationPage() {
 
     const onDataDonationUpload = async () => {
         setLoading(true);
-        setError(false);
+        setErrorMessage(null);
 
         const allConversations = Object.values(allDonatedConversationsBySource).flat();
         if (allConversations.length > 0) {
@@ -68,10 +70,12 @@ export default function DataDonationPage() {
                     setDonationData(result.donationId, result.graphDataRecord);
                     router.push("/donation-feedback");
                 } else {
-                    setError(true);
+                    setErrorMessage(getErrorMessage(donation.t, result.error));
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
                 }
             } catch (err) {
-                setError(true);
+                setErrorMessage(getErrorMessage(donation.t, err));
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             } finally {
                 setLoading(false);
             }
@@ -89,22 +93,16 @@ export default function DataDonationPage() {
                     textAlign: "center",
                 }}
             >
-                <Box>
-                    <Typography variant="h4" sx={{ my: 2 }}>
-                        {donation.t("select-data.title")}
-                    </Typography>
-                    <Typography variant="body1">
-                        {donorStrings.t("your-id")}: {externalDonorId}
-                    </Typography>
-                    <br />
-                </Box>
-                {error && <Alert severity="error">{error}</Alert>}
+                <MainTitle variant="h4">{donation.t("select-data.title")}</MainTitle>
+                <RichText>{donorStrings.t("your-id")}: {externalDonorId}</RichText>
+
+                {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
                 {loading && <CircularProgress />}
-                {!error && !loading && (
+
+                {!errorMessage && !loading && (
                     <Box>
-                        <Typography variant="body1">{donation.t("select-data.body1")}</Typography>
-                        <br />
-                        <Typography variant="body1">{donation.rich("select-data.body2")}</Typography>
+                        <RichText>{donation.t("select-data.body1")}</RichText>
+                        <RichText>{donation.rich("select-data.body2")}</RichText>
                     </Box>
                 )}
                 <Box sx={{ my: 4, minWidth: "80%", textAlign: "left" }}>
