@@ -8,31 +8,23 @@ import {calculateMinMaxDates, filterDataByRange, NullableRange, validateDateRang
 import {getErrorMessage} from "@services/errors";
 import Alert from "@mui/material/Alert";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import CircularProgress from "@mui/material/CircularProgress";
-import Divider from "@mui/material/Divider";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
 import Typography from "@mui/material/Typography";
-import InsertDriveFile from "@mui/icons-material/InsertDriveFile";
 import AnonymizationPreview from "@components/AnonymizationPreview";
 import DateRangePicker from "@components/DateRangePicker";
 import LoadingSpinner from "@components/LoadingSpinner";
+import {FileList, FileUploadButton} from "@components/DonationComponents";
+import styled from "@mui/material/styles/styled";
+
+export const UploadAlert = styled(Alert)(({ theme }) => ({
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2),
+    width: '100%',
+}));
 
 interface MultiFileSelectProps {
     dataSourceValue: DataSourceValue;
     onDonatedConversationsChange: (newDonatedConversations: Conversation[]) => void;
 }
-
-const listStyle = {
-    p: 0,
-    borderRadius: 1,
-    border: '1px solid',
-    borderColor: 'divider',
-    backgroundColor: 'background.paper',
-};
 
 const MultiFileSelect: React.FC<MultiFileSelectProps> = ({ dataSourceValue, onDonatedConversationsChange }) => {
     const t = useTranslations('donation');
@@ -65,7 +57,7 @@ const MultiFileSelect: React.FC<MultiFileSelectProps> = ({ dataSourceValue, onDo
             onDonatedConversationsChange(result.anonymizedConversations); // Update data for parent
         } catch (err) {
             const errorMessage = getErrorMessage(t, err, { count: selectedFiles.length });
-           setError(errorMessage);
+            setError(errorMessage);
         } finally {
             setIsLoading(false);
         }
@@ -86,44 +78,30 @@ const MultiFileSelect: React.FC<MultiFileSelectProps> = ({ dataSourceValue, onDo
 
     return (
         <Box>
-            <Typography variant="body1" sx={{mb: 1, fontWeight: "bold"}}>
+            <Typography sx={{fontWeight: "bold"}} gutterBottom>
                 {t('select-data.instruction')}
             </Typography>
-            <Button
-                variant="contained"
-                component="label"
-                sx={{ mb: 2 }}
-            >
-                {selectedFiles.length === 0
-                    ? t('select-data.choose')
-                    : t('select-data.browse')}
-                <input
-                    hidden
-                    type="file"
-                    accept=".txt,.zip"
-                    multiple
-                    onChange={handleFileSelection}
-                />
-            </Button>
+            <FileUploadButton onChange={handleFileSelection} loading={isLoading} />
 
             {/* Show selected files for feedback */}
-            {FilesFeedbackSection(selectedFiles, error)}
+            {selectedFiles.length > 0 && (
+                <Box sx={{ my: 3, width: '100%' }}>
+                    <FileList files={selectedFiles} />
+                    {error && <UploadAlert>{error}</UploadAlert>}
+                </Box>
+            )}
 
             {/* Loading indicator */}
-            {isLoading &&
-                <LoadingSpinner message={t('sendData.wait')}/>
-            }
+            {isLoading && <LoadingSpinner message={t('sendData.wait')}/>}
 
             {/* Display anonymized data */}
             {!error && !isLoading && anonymizationResult && filteredConversations && (
-                <Box sx={{mb: 2}}>
+                <Box sx={{my: 3}}>
                     <DateRangePicker
                         calculatedRange={calculatedRange}
                         setSelectedRange={handleDateRangeChange}
                     />
-                    {dateRangeError && (
-                        <Alert severity="error" sx={{ mt: 2 }}>{t(`errors.${dateRangeError}`)}</Alert>
-                    )}
+                    {dateRangeError && <UploadAlert>{t(`errors.${dateRangeError}`)}</UploadAlert>}
                     <AnonymizationPreview
                         dataSourceValue={dataSourceValue}
                         anonymizedConversations={filteredConversations}
@@ -133,42 +111,6 @@ const MultiFileSelect: React.FC<MultiFileSelectProps> = ({ dataSourceValue, onDo
             )}
         </Box>
     );
-};
-
-const FilesFeedbackSection= (
-    selectedFiles: File[], errorMessage: string | null
-) => {
-    return (
-        <Box>
-            {selectedFiles.length > 0 && (
-                <Box sx={{ my: 2 }}>
-                    <List sx={listStyle} aria-label="files chosen">
-                        {Array.from(selectedFiles).map((file: File, index: number) => (
-                            <Box key={index}>
-                                <ListItem key={index}>
-                                    <ListItemIcon>
-                                        <InsertDriveFile />
-                                    </ListItemIcon>
-                                    <ListItemText
-                                        primary={file.name}
-                                        secondary={`${(file.size / 1024).toFixed(2)} KB`}
-                                    />
-                                </ListItem>
-                                {index < selectedFiles.length - 1 && (
-                                    <Divider key={"divider-" + index} component="li" />
-                                )}
-                            </Box>
-                        ))}
-                    </List>
-                </Box>
-            )}
-
-            {/* Error message */}
-            {errorMessage && (
-                <Alert severity="error" sx={{ mt: 2 }}>{errorMessage}</Alert>
-            )}
-        </Box>
-    )
 };
 
 export default MultiFileSelect;

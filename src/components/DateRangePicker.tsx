@@ -47,7 +47,7 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({calculatedRange, setSe
 
     return (
         <Box>
-            <Typography variant="body1" sx={{mb: 1, fontWeight: "bold"}}>
+            <Typography sx={{fontWeight: "bold"}} gutterBottom>
                 {t('choose-period')}
             </Typography>
             <Grid container spacing={2} alignItems="center">
