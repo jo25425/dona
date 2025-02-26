@@ -8,7 +8,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import StatisticsCard from "@components/StatisticsCard";
 import ChartContainer from "@components/charts/ChartContainer";
 import ChartExplanationModal from "@components/ChartExplanationModal";
@@ -81,11 +81,15 @@ export default function DataSourceFeedbackSection({ dataSourceValue, graphData }
 
     return (
         <Accordion>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                <Typography variant="h5">{t("sourceTitle", { source: dataSourceValue })}</Typography>
+            <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
+                <Typography variant="h6">{t("sourceTitle", { source: dataSourceValue })}</Typography>
             </AccordionSummary>
             <AccordionDetails>
-                <Stack direction="column" spacing={2} sx={{ textAlign: "center", bgcolor: "background.paper" }}>
+                <Stack
+                    direction="column"
+                    spacing={2}
+                    sx={{ display: "flex", textAlign: "center", bgcolor: "background.paper" }}
+                >
                     {showCustomDataSourceAlert.includes(dataSourceValue) && (
                         <Alert severity="info" sx={{ my: 2 }}>
                             {t("selectedDataMessage", { source: dataSourceValue })}

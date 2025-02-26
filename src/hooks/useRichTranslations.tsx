@@ -40,6 +40,7 @@ export function useRichTranslations(namespace: string) {
                     ...makeLinkHandlers(urlKeys, newTab),
                     br: () => <br />,
                     p: (txt) => <p>{txt}</p>,
+                    u: (txt )=> <u>{txt}</u>,
                     b: (content) => <b>{content}</b>,
                     i: (content) => <i>{content}</i>,
                     em: (content) => <em>{content}</em>,

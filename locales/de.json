@@ -412,7 +412,7 @@
     "loading": "Graph wird geladen...",
     "genericError": "Etwas ist schief gelaufen! Bitte kehren Sie zum Start zurück und wiederholen Sie den Vorgang.",
     "landscapeMode": "Bitte halten Sie Ihr Gerät <b>quer</b>, um sich diese Seite anzugucken.",
-    "importantMessage": {
+    "important-message": {
       "title": "Wichtiger Hinweis:",
       "disclaimer": "Die angezeigten Graphen und Visualisierungen erlauben <b><u>keine</u> direkten Rückschlüsse</b> auf die Qualität Ihrer sozialen Beziehungen. Ihre Chats werden lediglich hinsichtlich Umfang, Menge und Zeiten ausgewertet und dargestellt."
     },
