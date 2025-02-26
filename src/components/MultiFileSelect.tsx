@@ -6,7 +6,7 @@ import {AnonymizationResult, Conversation, DataSourceValue} from "@models/proces
 import {anonymizeData} from "@/services/anonymization";
 import {calculateMinMaxDates, filterDataByRange, NullableRange, validateDateRange} from "@services/rangeFiltering";
 import {getErrorMessage} from "@services/errors";
-import Alert from "@mui/material/Alert";
+import Alert, {AlertProps} from "@mui/material/Alert";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import AnonymizationPreview from "@components/AnonymizationPreview";
@@ -15,7 +15,10 @@ import LoadingSpinner from "@components/LoadingSpinner";
 import {FileList, FileUploadButton} from "@components/DonationComponents";
 import styled from "@mui/material/styles/styled";
 
-export const UploadAlert = styled(Alert)(({ theme }) => ({
+
+const UploadAlert = styled((props: AlertProps) => (
+    <Alert severity="error" {...props} />
+))(({ theme }) => ({
     marginTop: theme.spacing(2),
     marginBottom: theme.spacing(2),
     width: '100%',
@@ -56,7 +59,7 @@ const MultiFileSelect: React.FC<MultiFileSelectProps> = ({ dataSourceValue, onDo
             setFilteredConversations(result.anonymizedConversations);
             onDonatedConversationsChange(result.anonymizedConversations); // Update data for parent
         } catch (err) {
-            const errorMessage = getErrorMessage(t, err, { count: selectedFiles.length });
+            const errorMessage = getErrorMessage(t, err as Error, { count: selectedFiles.length });
             setError(errorMessage);
         } finally {
             setIsLoading(false);
