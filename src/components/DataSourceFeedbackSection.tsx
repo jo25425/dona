@@ -84,7 +84,7 @@ export default function DataSourceFeedbackSection({ dataSourceValue, graphData }
             <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
                 <Typography variant="h6">{t("sourceTitle", { source: dataSourceValue })}</Typography>
             </AccordionSummary>
-            <AccordionDetails>
+            <AccordionDetails sx={{ width: "100%", overflowX: "hidden" }}>
                 <Stack
                     direction="column"
                     spacing={2}

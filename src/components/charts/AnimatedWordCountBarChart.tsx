@@ -55,12 +55,13 @@ const AnimatedWordCountBarChart: React.FC<AnimatedWordCountBarChartProps> = ({
     };
 
     return (
-        <Box>
-            <Box id={container_name} position="relative" px={2} py={2}>
+        <Box width="100%" maxWidth="900px" mx="auto">
+            <Box id={container_name} position="relative" px={{ xs: 1, sm: 2 }} py={2}>
 
-                <Box display="flex" justifyContent="space-between" alignItems="center" mb={-2}>
-                    <Typography variant="body2" align="right" mt={1} mb={-1}>
-                        <b>{labelTexts("yearMonth")}</b> {labels[currentFrame]}
+                {/* Year/Month Label + Download Buttons */}
+                <Box display="flex" justifyContent="space-between" alignItems="center" mb={1}>
+                    <Typography variant="body2" align="right" fontWeight="bold" mt={1} sx={{ fontSize: { xs: "0.8rem", sm: "1rem" } }}>
+                        {labelTexts("yearMonth")} {labels[currentFrame]}
                     </Typography>
                     <DownloadButtons
                         chartId={container_name}
@@ -69,31 +70,45 @@ const AnimatedWordCountBarChart: React.FC<AnimatedWordCountBarChartProps> = ({
                     />
                 </Box>
 
-                <Bar
-                    ref={chartRef}
-                    data={generateChartData(currentFrame)}
-                    options={{
-                        indexAxis: "y",
-                        responsive: true,
-                        animation: { duration: 300 },
-                        plugins: { legend: { display: false } },
-                        scales: {
-                            x: {
-                                title: { display: true, text: chartTexts("xAxis") },
-                                beginAtZero: true,
-                                max: globalMax,
+                {/* Bar Chart */}
+                <Box sx={{ width: "100%", height: { xs: 250, sm: 400 }, minHeight: 250 }}>
+                    <Bar
+                        ref={chartRef}
+                        data={generateChartData(currentFrame)}
+                        options={{
+                            indexAxis: "y",
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            animation: { duration: 300 },
+                            plugins: { legend: { display: false } },
+                            scales: {
+                                x: {
+                                    title: { display: true, text: chartTexts("xAxis") },
+                                    beginAtZero: true,
+                                    max: globalMax,
+                                    ticks: { font: { size: 12 }, padding: 5 },
+                                },
+                                y: {
+                                    grid: { drawOnChartArea: false },
+                                    ticks: {
+                                        font: { size: 12 },
+                                        padding: 0
+                                    }
+                                },
                             },
-                            y: { grid: { drawOnChartArea: false } },
-                        },
-                    }}
-                />
+                        }}
+                    />
+                </Box>
             </Box>
 
-            <SliderWithButtons
-                value={currentFrame}
-                marks={labels.map((label, index) => ({ value: index, label }))}
-                setCurrentFrame={setCurrentFrame}
-            />
+            {/* Slider Controls */}
+            <Box mt={{ xs: 1, sm: 2 }}>
+                <SliderWithButtons
+                    value={currentFrame}
+                    marks={labels.map((label, index) => ({ value: index, label }))}
+                    setCurrentFrame={setCurrentFrame}
+                />
+            </Box>
         </Box>
     );
 };

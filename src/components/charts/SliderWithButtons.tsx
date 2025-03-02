@@ -1,6 +1,7 @@
-import React, { useRef } from "react";
-import { Box, Button, Slider } from "@mui/material";
-import { useTranslations } from "next-intl";
+import React, {useRef} from "react";
+import {Box, Slider} from "@mui/material";
+import {useTranslations} from "next-intl";
+import {ChartControlButton} from "@/styles/StyledButtons";
 
 interface SliderWithButtonsProps {
     value: number;
@@ -37,16 +38,17 @@ const SliderWithButtons: React.FC<SliderWithButtonsProps> = ({
     };
 
     return (
-        <Box display="flex" alignItems="center" px={4}>
-            <Box display="flex" gap={2} mr={5} mt={-3}>
-                <Button variant="outlined" color="primary" onClick={handleStartAnimation}>
-                    {labels("start")}
-                </Button>
-                <Button variant="outlined" onClick={handleReset}>
-                    {labels("resetView")}
-                </Button>
-            </Box>
-            <Box flexGrow={1}>
+        <Box
+            display="flex"
+            flexDirection={{ xs: "column", sm: "row" }}
+            alignItems="center"
+            mx="auto"
+            width="95%"
+            gap={{ xs: 0, sm: 3 }}
+            mb={{ xs: 2, sm: 0 }}
+        >
+            {/* Slider up to 60% width */}
+            <Box flexGrow={1} width={{ xs: "100%", sm: "60%" }} minWidth="150px" px={2}>
                 <Slider
                     value={value}
                     onChange={(_, newValue) => setCurrentFrame(newValue as number)}
@@ -58,7 +60,18 @@ const SliderWithButtons: React.FC<SliderWithButtonsProps> = ({
                     valueLabelFormat={(value) => marks[value]?.label}
                 />
             </Box>
+
+            {/* Buttons, side by side */}
+            <Box display="flex" gap={1} flexDirection="row" alignItems="center">
+                <ChartControlButton variant="outlined" onClick={handleStartAnimation}>
+                    {labels("start")}
+                </ChartControlButton>
+                <ChartControlButton variant="outlined" onClick={handleReset}>
+                    {labels("resetView")}
+                </ChartControlButton>
+            </Box>
         </Box>
+
     );
 };
 

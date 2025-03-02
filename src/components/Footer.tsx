@@ -1,15 +1,15 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import {useTranslations} from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { useTheme } from "@mui/material/styles";
+import {useTheme} from "@mui/material/styles";
+import {FooterButton} from "@/styles/StyledButtons";
 
 export default function Footer() {
     const links = useTranslations("links");
@@ -38,15 +38,15 @@ export default function Footer() {
                 >
                     {/* Left: Buttons */}
                     <Stack direction="row" spacing={2} sx={{ flexWrap: "wrap", justifyContent: isMobile ? "center" : "flex-start" }}>
-                        <Button variant="outlined" size={isMobile ? "small" : "medium"} sx={{ textTransform: "none", fontSize: isMobile ? "0.75rem" : "0.875rem" }} href={urls("report-problem")}>
+                        <FooterButton variant="outlined" size={isMobile ? "small" : "medium"} href={urls("report-problem")}>
                             {links("report-problem")}
-                        </Button>
-                        <Button variant="text" size={isMobile ? "small" : "medium"} sx={{ textTransform: "none", fontSize: isMobile ? "0.75rem" : "0.875rem" }} href="/data-protection">
+                        </FooterButton>
+                        <FooterButton variant="text" size={isMobile ? "small" : "medium"} href="/data-protection">
                             {links("data-protection")}
-                        </Button>
-                        <Button variant="text" size={isMobile ? "small" : "medium"} sx={{ textTransform: "none", fontSize: isMobile ? "0.75rem" : "0.875rem" }} href="/imprint">
+                        </FooterButton>
+                        <FooterButton variant="text" size={isMobile ? "small" : "medium"} href="/imprint">
                             {links("imprint")}
-                        </Button>
+                        </FooterButton>
                     </Stack>
 
                     {/* Right: Icons + Project Number (below icons) */}
