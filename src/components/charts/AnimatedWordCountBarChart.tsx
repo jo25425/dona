@@ -8,7 +8,7 @@ import {SentReceivedPoint} from "@models/graphData";
 import {useTranslations} from "next-intl";
 import DownloadButtons from "@components/charts/DownloadButtons";
 import {prepareCountsOverTimeData} from "@services/charts/animations";
-import {CHART_COLORS, CHART_LAYOUT, COMMON_CHART_OPTIONS} from "@components/charts/chartConfig";
+import {CHART_BOX_PROPS, CHART_COLORS, CHART_LAYOUT, COMMON_CHART_OPTIONS} from "@components/charts/chartConfig";
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
@@ -60,7 +60,7 @@ const AnimatedWordCountBarChart: React.FC<AnimatedWordCountBarChartProps> = ({
     };
 
     return (
-        <Box width="100%" maxWidth="900px" mx="auto">
+        <Box sx={CHART_BOX_PROPS.main}>
             <Box id={container_name} position="relative" px={CHART_LAYOUT.paddingX} py={CHART_LAYOUT.paddingY}>
 
                 {/* Year/Month Label + Download Buttons */}

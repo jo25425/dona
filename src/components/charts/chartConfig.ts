@@ -8,15 +8,20 @@ export const CHART_COLORS = {
 const MOBILE_HEIGHT = 250;
 const DESKTOP_HEIGHT = 400;
 
+export const CHART_BOX_PROPS = {
+    main: {width: "100%", maxWidth: "900px", mx: "auto"},
+    drawingArea: {}
+};
+
 export const CHART_LAYOUT = {
     barThickness: 20,
+    maxWidth: "900px",
     mobileChartHeight: MOBILE_HEIGHT,
     desktopChartHeight: DESKTOP_HEIGHT,
     responsiveChartHeight: { xs: MOBILE_HEIGHT, sm: DESKTOP_HEIGHT },
     paddingX: { xs: 1, sm: 2 }, // Responsive padding
     paddingY: 2,
     labelFontSize: { xs: "0.8rem", sm: "1rem" },
-    mirrorLabelsOnMobile: true, // Moves y-axis labels inside on mobile
 };
 
 export const COMMON_CHART_OPTIONS = {

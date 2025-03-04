@@ -7,7 +7,7 @@ import {GraphData} from "@models/graphData";
 import {useTranslations} from "next-intl";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import {CHART_COLORS, CHART_LAYOUT, H_BARCHART_OPTIONS} from "@components/charts/chartConfig";
+import {CHART_BOX_PROPS, CHART_COLORS, CHART_LAYOUT, H_BARCHART_OPTIONS} from "@components/charts/chartConfig";
 
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
@@ -94,7 +94,7 @@ const AnimatedResponseTimeBarChart: React.FC<AnimatedResponseTimeBarChartProps> 
     };
 
     return (
-        <Box width="100%" maxWidth="900px" mx="auto">
+        <Box sx={CHART_BOX_PROPS.main}>
             <Box id={container_name} position="relative" px={CHART_LAYOUT.paddingX} py={CHART_LAYOUT.paddingY}>
 
                 <Box display="flex" justifyContent="space-between" alignItems="center" mb={1}>

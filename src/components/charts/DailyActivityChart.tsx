@@ -10,6 +10,9 @@ import {adjustRange} from "@services/charts/preprocessing";
 import Typography from "@mui/material/Typography";
 import DownloadButtons from "@components/charts/DownloadButtons";
 import {DailyHourPoint} from "@models/graphData";
+import {CHART_BOX_PROPS, CHART_LAYOUT, COMMON_CHART_OPTIONS} from "@components/charts/chartConfig";
+import {useTheme} from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 ChartJS.register(Title, Tooltip, Legend, LinearScale, PointElement, TimeScale);
 
@@ -26,9 +29,12 @@ const DailyActivityChart: React.FC<DailyActivityChartProps> = ({
                                                                    dataSent,
                                                                    listOfConversations,
                                                                }) => {
-    const CHART_NAME = "daily-activity-times";
+    const CHART_NAME = "daily-activity-times-scatter-plot";
     const container_name = `chart-wrapper-${CHART_NAME}`;
     const selection_label_name = `select-label-${CHART_NAME}`;
+
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
     const labelTexts = useTranslations("feedback.chartLabels");
     const chartTexts = useTranslations("feedback.dailyActivityTimes.dailyActivityHoursChart");
@@ -78,11 +84,7 @@ const DailyActivityChart: React.FC<DailyActivityChartProps> = ({
     };
 
     const options = {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-            legend: { display: false },
-        },
+        ...COMMON_CHART_OPTIONS,
         scales: {
             x: {
                 type: "time" as const,
@@ -91,9 +93,9 @@ const DailyActivityChart: React.FC<DailyActivityChartProps> = ({
                     displayFormats: { day: "dd-MM-yyyy" },
                 },
                 ticks: {
-                    maxTicksLimit: 12,
+                    maxTicksLimit: isMobile? 6 : 20,
                     minRotation: 30,
-                    includeBounds: true
+                    includeBounds: true,
                 },
                 min: xMin,
                 max: xMax,
@@ -113,52 +115,46 @@ const DailyActivityChart: React.FC<DailyActivityChartProps> = ({
     };
 
     return (
-        <Box sx={{ position: "relative" }}>
-            <Select
-                value={selectedConversation}
-                onChange={(e) => setSelectedConversation(e.target.value)}
-                size="small"
-                variant="outlined"
-                sx={{ position: "absolute", top: -10, left: 10, zIndex: 1, fontSize: 12 }}
-            >
-                <MenuItem value={ALL_CHATS} sx={{fontSize: 12}}>{labelTexts("overallData")}</MenuItem>
-                {listOfConversations.map((conversation) => (
-                    <MenuItem sx={{fontSize: 12}} key={conversation} value={conversation}>
-                        {conversation}
-                    </MenuItem>
-                ))}
-            </Select>
+        <Box sx={{ display: "flex", flexDirection: "row", gap: 2, alignItems: "center", width: "100%" }}>
+            <Box sx={{ flex: 1, position: "relative" }}>
+                <Select
+                    value={selectedConversation}
+                    onChange={(e) => setSelectedConversation(e.target.value)}
+                    size="small"
+                    variant="outlined"
+                    sx={{ mb: -2, pb: 0, fontSize: CHART_LAYOUT.labelFontSize }}
+                >
+                    <MenuItem value={ALL_CHATS} sx={{ fontSize: CHART_LAYOUT.labelFontSize }}>{labelTexts("overallData")}</MenuItem>
+                    {listOfConversations.map((conversation) => (
+                        <MenuItem sx={{ fontSize: CHART_LAYOUT.labelFontSize }} key={conversation} value={conversation}>
+                            {conversation}
+                        </MenuItem>
+                    ))}
+                </Select>
 
-            <Box id={container_name} p={2} pt={1}>
-
-                <Box display="flex" justifyContent="space-between" alignItems="center" mb={-2}>
-                    <Typography></Typography>
-                    <Typography id={selection_label_name} variant="body2" align="right">
-                        <b>{selectedConversation == ALL_CHATS ? labelTexts("overallData") : selectedConversation}</b>
-                    </Typography>
-                    <DownloadButtons
-                        chartId={container_name}
-                        fileNamePrefix={CHART_NAME}
-                        currentLabel={selectedConversation}
-                        labelToShowId={selection_label_name}
-                    />
-                </Box>
-
-                <Box sx={{ display: "flex", height: 500}}>
-                    <Box sx={{ flex: 1, height: "100%" }}>
-                        <Scatter data={data} options={options} />
+                <Box id={container_name} p={CHART_LAYOUT.paddingX} sx={{ mt: -2, pt: 0}}>
+                    <Box display="flex" justifyContent="space-between" alignItems="center" mb={1}>
+                        <Typography id={selection_label_name} variant="body2" align="right">
+                            <b>{selectedConversation === ALL_CHATS ? labelTexts("overallData") : selectedConversation}</b>
+                        </Typography>
+                        <DownloadButtons chartId={container_name} fileNamePrefix={CHART_NAME} currentLabel={selectedConversation} labelToShowId={selection_label_name} />
                     </Box>
-                    <ColorScale
-                        colors={[backgroundColor(1), "white"]}
-                        labels={[
-                            chartTexts("moreThanAverage"),
-                            chartTexts("average"),
-                            chartTexts("lessThanAverage"),
-                        ]}
-                    />
+
+                    <Box sx={{ display: "flex", flexDirection: "row", height: CHART_LAYOUT.responsiveChartHeight, ml: -1.5 }}>
+                        <Box sx={{ flex: 1, height: "100%" }}>
+                            <Scatter data={data} options={options} />
+                        </Box>
+                        <ColorScale
+                            colors={[backgroundColor(1), "white"]}
+                            labels={[
+                                chartTexts("moreThanAverage"),
+                                chartTexts("average"),
+                                chartTexts("lessThanAverage"),
+                            ]}
+                        />
+                    </Box>
                 </Box>
             </Box>
-
         </Box>
     );
 };
