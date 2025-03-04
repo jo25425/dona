@@ -45,6 +45,7 @@ const SliderWithButtons: React.FC<SliderWithButtonsProps> = ({
             mx="auto"
             width="95%"
             gap={{ xs: 0, sm: 3 }}
+            mt={-2}
             mb={{ xs: 2, sm: 0 }}
         >
             {/* Slider up to 60% width */}

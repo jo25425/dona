@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { Bar } from "react-chartjs-2";
-import { Chart as ChartJS, BarElement, CategoryScale, LinearScale, Tooltip, Legend } from "chart.js";
+import React, {useEffect, useRef, useState} from "react";
+import {Bar} from "react-chartjs-2";
+import {BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, Tooltip} from "chart.js";
 import SliderWithButtons from "@components/charts/SliderWithButtons";
 import DownloadButtons from "@components/charts/DownloadButtons";
-import { GraphData } from "@models/graphData";
-import { useTranslations } from "next-intl";
+import {GraphData} from "@models/graphData";
+import {useTranslations} from "next-intl";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import {CHART_COLORS, CHART_LAYOUT, H_BARCHART_OPTIONS} from "@components/charts/chartConfig";
+
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
@@ -17,12 +19,13 @@ interface AnimatedResponseTimeBarChartProps {
 const AnimatedResponseTimeBarChart: React.FC<AnimatedResponseTimeBarChartProps> = ({
                                                                                         answerTimes,
                                                                                     }) => {
-    const CHART_NAME = "response-times-donor-animated";
+    const CHART_NAME = "response-times-donor-barchart";
     const container_name = `chart-wrapper-${CHART_NAME}`;
 
     const labelTexts = useTranslations("feedback.chartLabels");
-    const t = useTranslations("feedback.responseTimes.responseTimeBarChartMonthly");
+    const chartTexts = useTranslations("feedback.responseTimes.responseTimeBarChartMonthly");
 
+    const chartRef = useRef<any>(null);
     const [currentFrame, setCurrentFrame] = useState<number>(0);
     const [preparedData, setPreparedData] = useState<Record<string, number[]> | null>(null);
     const [labels, setLabels] = useState<string[]>([]);
@@ -81,47 +84,50 @@ const AnimatedResponseTimeBarChart: React.FC<AnimatedResponseTimeBarChartProps> 
             labels: timeRanges.map(({ label }) => label),
             datasets: [
                 {
-                    label: t("legend.donor"),
+                    label: chartTexts("legend.donor"),
                     data: preparedData?.[monthKey] || [],
-                    backgroundColor: "#1f77b4",
-                    barPercentage: 0.8,
+                    backgroundColor: CHART_COLORS.primaryBar,
+                    barThickness: CHART_LAYOUT.barThickness,
                 },
             ],
         };
     };
 
     return (
-        <Box>
-            <Box id={container_name} position="relative" px={2} py={2}>
-                <Box display="flex" justifyContent="space-between" alignItems="center" mb={-2}>
-                    <Typography variant="body2" align="right" mt={1} mb={-1}>
-                        <b>{labelTexts("yearMonth")}</b> {labels[currentFrame] || "No Data"}
+        <Box width="100%" maxWidth="900px" mx="auto">
+            <Box id={container_name} position="relative" px={CHART_LAYOUT.paddingX} py={CHART_LAYOUT.paddingY}>
+
+                <Box display="flex" justifyContent="space-between" alignItems="center" mb={1}>
+                    <Typography variant="body2" align="right" fontWeight="bold" mt={1} sx={{ fontSize: CHART_LAYOUT.labelFontSize }}>
+                        {labelTexts("yearMonth")} {labels[currentFrame]}
                     </Typography>
-                    <DownloadButtons
-                        chartId={container_name}
-                        fileNamePrefix={CHART_NAME}
-                        currentLabel={labels[currentFrame]}
+                    <DownloadButtons chartId={container_name} fileNamePrefix={CHART_NAME} currentLabel={labels[currentFrame]} />
+                </Box>
+
+                <Box sx={{
+                    width: "100%",
+                    height: CHART_LAYOUT.responsiveChartHeight,
+                    minHeight: CHART_LAYOUT.mobileChartHeight,
+                    ml: -1
+                }}>
+                    <Bar
+                        ref={chartRef}
+                        data={generateChartData(currentFrame)}
+                        options={{
+                            ...H_BARCHART_OPTIONS,
+                            scales: {
+                                x: {
+                                    ...H_BARCHART_OPTIONS.scales.x,
+                                    title: { display: true, text: chartTexts("xAxis") },
+                                },
+                                y: {
+                                    ...H_BARCHART_OPTIONS.scales.y,
+                                    title: { display: true, text: chartTexts("yAxis") },
+                                },
+                            },
+                        }}
                     />
                 </Box>
-                <Bar
-                    data={generateChartData(currentFrame)}
-                    options={{
-                        responsive: true,
-                        plugins: { legend: { display: true } },
-                        scales: {
-                            x: {
-                                title: { display: true, text: t("xAxis") },
-                                grid: { drawOnChartArea: false }
-                            },
-                            y: {
-                                title: { display: true, text: t("yAxis") },
-                                ticks: { callback: (value: number | string) => `${value}%` },
-                                beginAtZero: true,
-                                max: 100,
-                            },
-                        },
-                    }}
-                />
             </Box>
 
             <SliderWithButtons

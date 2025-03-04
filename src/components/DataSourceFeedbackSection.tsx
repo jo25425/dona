@@ -11,7 +11,7 @@ import Typography from "@mui/material/Typography";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import StatisticsCard from "@components/StatisticsCard";
 import ChartContainer from "@components/charts/ChartContainer";
-import ChartExplanationModal from "@components/ChartExplanationModal";
+import ChartExplanationModal from "@components/charts/ChartExplanationModal";
 import MoreChartsModal from "@components/charts/MoreChartsModal";
 import {DataSourceValue} from "@models/processed";
 import {GraphData} from "@models/graphData";
