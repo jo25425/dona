@@ -10,7 +10,7 @@ import {adjustRange} from "@services/charts/preprocessing";
 import Typography from "@mui/material/Typography";
 import DownloadButtons from "@components/charts/DownloadButtons";
 import {DailyHourPoint} from "@models/graphData";
-import {CHART_BOX_PROPS, CHART_LAYOUT, COMMON_CHART_OPTIONS} from "@components/charts/chartConfig";
+import {CHART_LAYOUT, COMMON_CHART_OPTIONS} from "@components/charts/chartConfig";
 import {useTheme} from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 

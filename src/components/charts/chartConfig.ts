@@ -1,7 +1,6 @@
 export const CHART_COLORS = {
-    primaryBar: "#1f77b4",  // Blue (word count)
-    secondaryBar: "#ff7f0e", // Orange (response times)
-    // tertiaryBar: "#2ca02c", // Green (activity)
+    primaryBar: "#1f77b4",  // Blue
+    secondaryBar: "#ff7f0e", // Orange
     background: "#f5f5f5",
 };
 
@@ -24,49 +23,50 @@ export const CHART_LAYOUT = {
     labelFontSize: { xs: "0.8rem", sm: "1rem" },
 };
 
+const X_TICKS = { font: { size: 12 }, padding: 5 };
+const Y_TICKS = { font: { size: 12 }, padding: 0, offset: false };
+export const TOOLTIP  = {
+    callbacks: { label: (context: any) => `${context.raw?.toFixed(2)}%` },
+};
+export const TOP_LEGEND = {
+    position: "top" as const,
+    labels: {
+        font: { size: 11 }, padding: 10,
+        boxWidth: 14,
+    }
+};
+
 export const COMMON_CHART_OPTIONS = {
+    animation: { duration: 900 },
     responsive: true,
     maintainAspectRatio: false,
-    animation: { duration: 900 },
     plugins: { legend: { display: false } },
     scales: {
-        x: {
-            beginAtZero: true,
-            ticks: { font: { size: 12 }, padding: 5 },
-        },
-        y: {
-            ticks: { font: { size: 12 }, padding: 0, offset: false },
-        },
+        x: { ticks: X_TICKS, beginAtZero: true },
+        y: { ticks: Y_TICKS },
     },
 };
 
-export const H_BARCHART_OPTIONS = {
+export const BARCHART_OPTIONS = {
+    animation: { duration: 900 },
     responsive: true,
     maintainAspectRatio: false,
-    animation: { duration: 900 },
     plugins: {
         legend: { display: true },
-        tooltip: {
-            callbacks: { label: (context: any) => `${context.raw?.toFixed(2)}%` },
-        },
+        tooltip: TOOLTIP,
     },
     scales: {
         x: {
-            ticks: {
-                font: { size: 12 },
-                padding: 5
-            },
+            ticks: X_TICKS,
             grid: { drawOnChartArea: false },
         },
         y: {
             ticks: {
-                font: { size: 12 },
-                padding: 0,
-                offset: false,
+                ...Y_TICKS,
                 callback: (value: number | string) => `${value}%`
             },
             beginAtZero: true,
             max: 100,
         },
-    },
+    }
 };

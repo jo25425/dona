@@ -7,7 +7,7 @@ import {GraphData} from "@models/graphData";
 import {useTranslations} from "next-intl";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import {CHART_BOX_PROPS, CHART_COLORS, CHART_LAYOUT, H_BARCHART_OPTIONS} from "@components/charts/chartConfig";
+import {CHART_BOX_PROPS, CHART_COLORS, CHART_LAYOUT, BARCHART_OPTIONS} from "@components/charts/chartConfig";
 
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
@@ -114,14 +114,14 @@ const AnimatedResponseTimeBarChart: React.FC<AnimatedResponseTimeBarChartProps> 
                         ref={chartRef}
                         data={generateChartData(currentFrame)}
                         options={{
-                            ...H_BARCHART_OPTIONS,
+                            ...BARCHART_OPTIONS,
                             scales: {
                                 x: {
-                                    ...H_BARCHART_OPTIONS.scales.x,
+                                    ...BARCHART_OPTIONS.scales.x,
                                     title: { display: true, text: chartTexts("xAxis") },
                                 },
                                 y: {
-                                    ...H_BARCHART_OPTIONS.scales.y,
+                                    ...BARCHART_OPTIONS.scales.y,
                                     title: { display: true, text: chartTexts("yAxis") },
                                 },
                             },
