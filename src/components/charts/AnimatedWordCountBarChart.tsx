@@ -8,6 +8,7 @@ import {SentReceivedPoint} from "@models/graphData";
 import {useTranslations} from "next-intl";
 import DownloadButtons from "@components/charts/DownloadButtons";
 import {prepareCountsOverTimeData} from "@services/charts/animations";
+import {CHART_BOX_PROPS, CHART_COLORS, CHART_LAYOUT, COMMON_CHART_OPTIONS} from "@components/charts/chartConfig";
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
@@ -17,9 +18,9 @@ interface AnimatedWordCountBarChartProps {
 }
 
 const AnimatedWordCountBarChart: React.FC<AnimatedWordCountBarChartProps> = ({
-                                                                                   dataMonthlyPerConversation,
-                                                                                   listOfConversations,
-                                                                               }) => {
+    dataMonthlyPerConversation,
+    listOfConversations
+}) => {
     const CHART_NAME = "intensity-interaction-hbarchart";
     const container_name = `chart-wrapper-${CHART_NAME}`;
 
@@ -33,7 +34,11 @@ const AnimatedWordCountBarChart: React.FC<AnimatedWordCountBarChartProps> = ({
     const [currentFrame, setCurrentFrame] = useState<number>(0);
 
     useEffect(() => {
-        const { counts, sortedMonths, globalMax } = prepareCountsOverTimeData(dataMonthlyPerConversation, listOfConversations);
+        const {
+            counts,
+            sortedMonths,
+            globalMax
+        } = prepareCountsOverTimeData(dataMonthlyPerConversation, listOfConversations);
         setCumulativeCounts(counts);
         setLabels(sortedMonths);
         setGlobalMax(globalMax);
@@ -47,20 +52,22 @@ const AnimatedWordCountBarChart: React.FC<AnimatedWordCountBarChartProps> = ({
                 {
                     label: chartTexts("legend"),
                     data: cumulativeCounts[monthKey] || [],
-                    backgroundColor: "#1f77b4",
-                    barThickness: 20,
+                    backgroundColor: CHART_COLORS.primaryBar,
+                    barThickness: CHART_LAYOUT.barThickness,
                 },
             ],
         };
     };
 
     return (
-        <Box>
-            <Box id={container_name} position="relative" px={2} py={2}>
+        <Box sx={CHART_BOX_PROPS.main}>
+            <Box id={container_name} position="relative" px={CHART_LAYOUT.paddingX} py={CHART_LAYOUT.paddingY}>
 
-                <Box display="flex" justifyContent="space-between" alignItems="center" mb={-2}>
-                    <Typography variant="body2" align="right" mt={1} mb={-1}>
-                        <b>{labelTexts("yearMonth")}</b> {labels[currentFrame]}
+                {/* Year/Month Label + Download Buttons */}
+                <Box display="flex" justifyContent="space-between" alignItems="center" mb={1}>
+                    <Typography variant="body2" align="right" fontWeight="bold" mt={1}
+                                sx={{fontSize: CHART_LAYOUT.labelFontSize}}>
+                        {labelTexts("yearMonth")} {labels[currentFrame]}
                     </Typography>
                     <DownloadButtons
                         chartId={container_name}
@@ -69,29 +76,37 @@ const AnimatedWordCountBarChart: React.FC<AnimatedWordCountBarChartProps> = ({
                     />
                 </Box>
 
-                <Bar
-                    ref={chartRef}
-                    data={generateChartData(currentFrame)}
-                    options={{
-                        indexAxis: "y",
-                        responsive: true,
-                        animation: { duration: 300 },
-                        plugins: { legend: { display: false } },
-                        scales: {
-                            x: {
-                                title: { display: true, text: chartTexts("xAxis") },
-                                beginAtZero: true,
-                                max: globalMax,
+                {/* Bar Chart */}
+                <Box sx={{
+                    width: "100%",
+                    height: CHART_LAYOUT.responsiveChartHeight,
+                    minHeight: CHART_LAYOUT.mobileChartHeight
+                }}>
+                    <Bar
+                        ref={chartRef}
+                        data={generateChartData(currentFrame)}
+                        options={{
+                            ...COMMON_CHART_OPTIONS,
+                            indexAxis: "y",
+                            scales: {
+                                x: {
+                                    ...COMMON_CHART_OPTIONS.scales.x,
+                                    title: {display: true, text: chartTexts("xAxis")},
+                                    max: globalMax,
+                                },
+                                y: {
+                                    ...COMMON_CHART_OPTIONS.scales.y,
+                                    grid: {drawOnChartArea: false}
+                                }
                             },
-                            y: { grid: { drawOnChartArea: false } },
-                        },
-                    }}
-                />
+                        }}
+                    />
+                </Box>
             </Box>
 
             <SliderWithButtons
                 value={currentFrame}
-                marks={labels.map((label, index) => ({ value: index, label }))}
+                marks={labels.map((label, index) => ({value: index, label}))}
                 setCurrentFrame={setCurrentFrame}
             />
         </Box>

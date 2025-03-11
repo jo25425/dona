@@ -1,9 +1,10 @@
 import React from "react";
-import { Bar } from "react-chartjs-2";
+import {Bar} from "react-chartjs-2";
 import {useTranslations} from "next-intl";
-import { DailyHourPoint } from "@models/graphData";
+import {DailyHourPoint} from "@models/graphData";
 import Box from "@mui/material/Box";
 import DownloadButtons from "@components/charts/DownloadButtons";
+import {BARCHART_OPTIONS, CHART_COLORS, CHART_LAYOUT, TOOLTIP, TOP_LEGEND} from "@components/charts/chartConfig";
 
 interface DayPartsActivityOverallPlotProps {
     dailySentHoursPerConversation: DailyHourPoint[][];
@@ -17,7 +18,7 @@ const DayPartsActivityOverallChart: React.FC<DayPartsActivityOverallPlotProps> =
     const CHART_NAME = "dayparts-activity-overall-barchart";
     const container_name = `chart-wrapper-${CHART_NAME}`;
 
-    const t = useTranslations("feedback.dailyActivityTimes.dayPartsOverall");
+    const chartTexts = useTranslations("feedback.dailyActivityTimes.dayPartsOverall");
 
     const buckets = ["00:00-05:59", "06:00-11:59", "12:00-17:59", "18:00-23:59"];
     const sentCounts = [0, 0, 0, 0];
@@ -46,47 +47,45 @@ const DayPartsActivityOverallChart: React.FC<DayPartsActivityOverallPlotProps> =
         labels: buckets,
         datasets: [
             {
-                label: t("legend.received"),
+                label: chartTexts("legend.received"),
                 data: receivedCounts.map((count) => (totalReceived > 0 ? (count / totalReceived) * 100 : 0)),
-                backgroundColor: "#FF8800",
+                backgroundColor: CHART_COLORS.secondaryBar,
                 barPercentage: 0.5,
             },
             {
-                label: t("legend.sent"),
+                label: chartTexts("legend.sent"),
                 data: sentCounts.map((count) => (totalSent > 0 ? (count / totalSent) * 100 : 0)),
-                backgroundColor: "#1f77b4",
+                backgroundColor: CHART_COLORS.primaryBar,
                 barPercentage: 0.8,
             },
         ]
     };
 
     const options = {
-        responsive: true,
+        ...BARCHART_OPTIONS,
         plugins: {
-            legend: { position: "top" as const },
-            tooltip: {
-                callbacks: { label: (context: any) => `${context.raw?.toFixed(2)}%` },
-            },
+            legend: TOP_LEGEND,
+            tooltip: TOOLTIP,
         },
         scales: {
             x: {
-                title: { display: true, text: t("xAxis") },
-                grid: { drawOnChartArea: false },
+                ...BARCHART_OPTIONS.scales.x,
+                title: { display: true, text: chartTexts("xAxis") },
                 stacked: true,
             },
             y: {
-                title: { display: true, text: t("yAxis") },
-                ticks: { callback: (value: number | string) => `${value}%` },
+                ...BARCHART_OPTIONS.scales.y,
+                title: { display: true, text: chartTexts("yAxis") }
             },
         },
     };
 
     return (
-        <Box p={2} pt={0} id={container_name} position="relative">
-            <Box display="flex" justifyContent="right" alignItems="center" mb={-2}>
+        <Box id={container_name} position="relative" p={CHART_LAYOUT.paddingX}>
+            <Box display="flex" justifyContent="right" alignItems="center" mb={1}>
                 <DownloadButtons chartId={container_name} fileNamePrefix={CHART_NAME} />
             </Box>
-            <Box sx={{ width: "100%", height: 400 }}>
+            <Box sx={{ width: "100%", height: CHART_LAYOUT.responsiveChartHeight }}>
                 <Bar data={chartData} options={options} />
             </Box>
         </Box>

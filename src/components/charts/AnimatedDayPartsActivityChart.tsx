@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { Bar } from "react-chartjs-2";
-import { Chart as ChartJS, BarElement, CategoryScale, LinearScale, Tooltip, Legend } from "chart.js";
+import React, {useEffect, useState} from "react";
+import {Bar} from "react-chartjs-2";
+import {BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, Tooltip} from "chart.js";
 import SliderWithButtons from "@components/charts/SliderWithButtons";
 import DownloadButtons from "@components/charts/DownloadButtons";
-import { useTranslations } from "next-intl";
+import {useTranslations} from "next-intl";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { DailyHourPoint } from "@models/graphData";
+import {DailyHourPoint} from "@models/graphData";
+import {CHART_BOX_PROPS, CHART_COLORS, CHART_LAYOUT, BARCHART_OPTIONS} from "@components/charts/chartConfig";
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
@@ -17,10 +18,10 @@ interface AnimatedDayPartsActivityChartProps {
 const AnimatedDayPartsActivityChart: React.FC<AnimatedDayPartsActivityChartProps> = ({
                                                                                          dailySentHoursPerConversation,
                                                                                      }) => {
-    const CHART_NAME = "dayparts-activity-animated-barchart";
+    const CHART_NAME = "day-parts-activity-barchart";
     const container_name = `chart-wrapper-${CHART_NAME}`;
 
-    const t = useTranslations("feedback.dailyActivityTimes.dayPartsMonthly");
+    const chartTexts = useTranslations("feedback.dailyActivityTimes.dayPartsMonthly");
     const labelTexts = useTranslations("feedback.chartLabels");
 
     const buckets = ["00:00-05:59", "06:00-11:59", "12:00-17:59", "18:00-23:59"];
@@ -69,48 +70,49 @@ const AnimatedDayPartsActivityChart: React.FC<AnimatedDayPartsActivityChartProps
             labels: buckets,
             datasets: [
                 {
-                    label: t("legend.sent"),
+                    label: chartTexts("legend.sent"),
                     data: preparedData?.[monthKey] || [],
-                    backgroundColor: "#1f77b4",
-                    barPercentage: 0.8,
+                    backgroundColor: CHART_COLORS.primaryBar,
+                    barThickness: CHART_LAYOUT.barThickness,
                 },
             ],
         };
     };
 
     return (
-        <Box>
-            <Box id={container_name} position="relative" p={2}>
-                <Box display="flex" justifyContent="space-between" alignItems="center" mb={-2}>
-                    <Typography variant="body2" align="right" mt={1} mb={-1}>
-                        <b>{labelTexts("yearMonth")}</b> {labels[currentFrame]}
+        <Box sx={CHART_BOX_PROPS.main}>
+            <Box id={container_name} position="relative" px={CHART_LAYOUT.paddingX} py={CHART_LAYOUT.paddingY}>
+
+                <Box display="flex" justifyContent="space-between" alignItems="center" mb={1}>
+                    <Typography variant="body2" align="right" fontWeight="bold" mt={1} sx={{ fontSize: CHART_LAYOUT.labelFontSize }}>
+                        {labelTexts("yearMonth")} {labels[currentFrame]}
                     </Typography>
                     <DownloadButtons chartId={container_name} fileNamePrefix={CHART_NAME} currentLabel={labels[currentFrame]} />
                 </Box>
-                <Bar
-                    data={generateChartData(currentFrame)}
-                    options={{
-                        responsive: true,
-                        plugins: {
-                            legend: { display: true },
-                            tooltip: {
-                                callbacks: { label: (context: any) => `${context.raw?.toFixed(2)}%` },
+
+                <Box sx={{
+                    width: "100%",
+                    height: CHART_LAYOUT.responsiveChartHeight,
+                    minHeight: CHART_LAYOUT.mobileChartHeight,
+                    ml: -1
+                }}>
+                    <Bar
+                        data={generateChartData(currentFrame)}
+                        options={{
+                            ...BARCHART_OPTIONS,
+                            scales: {
+                                x: {
+                                    ...BARCHART_OPTIONS.scales.x,
+                                    title: { display: true, text: chartTexts("xAxis") },
+                                },
+                                y: {
+                                    ...BARCHART_OPTIONS.scales.y,
+                                    title: { display: true, text: chartTexts("yAxis") },
+                                },
                             },
-                        },
-                        scales: {
-                            x: {
-                                title: { display: true, text: t("xAxis") },
-                                grid: { drawOnChartArea: false },
-                            },
-                            y: {
-                                title: { display: true, text: t("yAxis") },
-                                ticks: { callback: (value: number | string) => `${value}%` },
-                                beginAtZero: true,
-                                max: 100,
-                            },
-                        },
-                    }}
-                />
+                        }}
+                    />
+                </Box>
             </Box>
 
             <SliderWithButtons

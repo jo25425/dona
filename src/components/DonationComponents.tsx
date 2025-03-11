@@ -1,0 +1,52 @@
+import React from 'react';
+import {useTranslations} from 'next-intl';
+import {Button, Divider, List, ListItem, ListItemIcon, ListItemText} from '@mui/material';
+import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
+
+export function FileUploadButton({ onChange, loading }: {
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    loading: boolean;
+}) {
+    const t = useTranslations('donation');
+
+    return (
+        <Button variant="contained" component="label" disabled={loading} sx={{ mb: 2 }}>
+            {t('select-data.browse')}
+            <input
+                type="file"
+                hidden
+                multiple
+                accept=".txt,.zip"
+                onChange={onChange}
+            />
+        </Button>
+    );
+}
+
+export function FileList({ files }: { files: File[] }) {
+    return (
+        <List sx={{ p: 0, borderRadius: 1, border: '1px solid', borderColor: 'divider', backgroundColor: 'background.paper' }}>
+            {files.map((file, index) => (
+                <React.Fragment key={file.name}>
+                    <ListItem sx={{ padding: "0.25rem 0.75rem" }}>
+                        <ListItemIcon sx={{ mr: "0.75rem", minWidth: "inherit" }}>
+                            <InsertDriveFileIcon />
+                        </ListItemIcon>
+                        <ListItemText
+                            primary={file.name}
+                            slotProps={{
+                                primary: {
+                                    style: {
+                                        overflowWrap: 'break-word',
+                                        wordBreak: 'break-word',
+                                    },
+                                },
+                            }}
+                        />
+                    </ListItem>
+                    {index < files.length - 1 && <Divider component="li" />}
+                </React.Fragment>
+            ))}
+        </List>
+    );
+}

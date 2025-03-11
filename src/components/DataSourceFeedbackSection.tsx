@@ -1,5 +1,5 @@
-import React, { ReactNode, useState } from "react";
-import { useTranslations } from "next-intl";
+import React, {ReactNode, useState} from "react";
+import {useTranslations} from "next-intl";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -8,14 +8,14 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import StatisticsCard from "@components/StatisticsCard";
 import ChartContainer from "@components/charts/ChartContainer";
-import ChartExplanationModal from "@components/ChartExplanationModal";
+import ChartExplanationModal from "@components/charts/ChartExplanationModal";
 import MoreChartsModal from "@components/charts/MoreChartsModal";
-import { DataSourceValue } from "@models/processed";
-import { GraphData } from "@models/graphData";
-import { createListOfConversations } from "@services/charts/preprocessing";
+import {DataSourceValue} from "@models/processed";
+import {GraphData} from "@models/graphData";
+import {createListOfConversations} from "@services/charts/preprocessing";
 
 export default function DataSourceFeedbackSection({ dataSourceValue, graphData }: { dataSourceValue: string; graphData: GraphData }) {
     const showCustomDataSourceAlert = [DataSourceValue.Facebook, DataSourceValue.Instagram] as string[];
@@ -81,11 +81,15 @@ export default function DataSourceFeedbackSection({ dataSourceValue, graphData }
 
     return (
         <Accordion>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                <Typography variant="h5">{t("sourceTitle", { source: dataSourceValue })}</Typography>
+            <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
+                <Typography variant="h6">{t("sourceTitle", { source: dataSourceValue })}</Typography>
             </AccordionSummary>
-            <AccordionDetails>
-                <Stack direction="column" spacing={2} sx={{ textAlign: "center", bgcolor: "background.paper" }}>
+            <AccordionDetails sx={{ width: "100%", overflowX: "hidden" }}>
+                <Stack
+                    direction="column"
+                    spacing={2}
+                    sx={{ display: "flex", textAlign: "center", bgcolor: "background.paper" }}
+                >
                     {showCustomDataSourceAlert.includes(dataSourceValue) && (
                         <Alert severity="info" sx={{ my: 2 }}>
                             {t("selectedDataMessage", { source: dataSourceValue })}

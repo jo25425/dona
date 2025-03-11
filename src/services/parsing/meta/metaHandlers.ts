@@ -48,7 +48,7 @@ const extractDonorNameFromFacebookProfile = (profileText: string): string => {
         return decode(profileJson[profileKey].name.full_name);
     }
 
-    throw new DonationValidationError(DonationErrors.NoDonorNameFound);
+    throw DonationValidationError(DonationErrors.NoDonorNameFound);
 }
 
 const extractDonorNameFromInstagramProfile = (profileText: string): string => {
@@ -67,7 +67,7 @@ const extractDonorNameFromInstagramProfile = (profileText: string): string => {
     const name = profileJson?.profile_user?.[0]?.string_map_data?.Name?.value;
     if (name) return decode(name);
 
-    throw new DonationValidationError(DonationErrors.NoDonorNameFound);
+    throw DonationValidationError(DonationErrors.NoDonorNameFound);
 }
 
 async function handleMetaZipFiles(
@@ -84,14 +84,14 @@ async function handleMetaZipFiles(
         isMatchingEntry(entry,profileInfoFilePattern)
     );
     if (!profileInfoEntry) {
-        throw new DonationValidationError(DonationErrors.NoProfile);
+        throw DonationValidationError(DonationErrors.NoProfile);
     }
     // Filter for message entries
     const messageEntries = allEntries.filter(entry =>
         isMatchingEntry(entry, "message.json") || isMatchingEntry(entry, "message_1.json")
     );
     if (messageEntries.length < 1) {
-        throw new DonationValidationError(DonationErrors.NoMessageEntries);
+        throw DonationValidationError(DonationErrors.NoMessageEntries);
     }
     // Select audio entries
     const audioEntries = allEntries.filter(entry => isMatchingEntry(entry, ".wav"));
@@ -107,7 +107,7 @@ async function handleMetaZipFiles(
         return deIdentify(parsedConversations, audioEntries, donorName, dataSourceValue);
 
     } catch (error) {
-        throw new DonationValidationError(DonationErrors.UnknownError);
+        throw DonationValidationError(DonationErrors.UnknownError);
     }
 }
 

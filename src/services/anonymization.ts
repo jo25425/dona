@@ -6,7 +6,7 @@ import {handleFacebookZipFiles, handleInstagramZipFiles} from "@services/parsing
 
 export async function anonymizeData(dataSourceValue: DataSourceValue, files: File[]): Promise<AnonymizationResult> {
     if (files.length == 0) {
-        throw new DonationValidationError(DonationErrors.NoFiles);
+        throw DonationValidationError(DonationErrors.NoFiles);
     }
 
     let resultPromise;

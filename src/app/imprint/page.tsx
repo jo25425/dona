@@ -1,48 +1,38 @@
-import {useTranslations} from 'next-intl';
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
+"use client";
 
+import {useRichTranslations} from "@/hooks/useRichTranslations";
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+import {MainTitle, RichText, BlockTitle} from "@/styles/StyledTypography";
 
-export default function LearnMore() {
-    const imprint = useTranslations('imprint');
+export default function Imprint() {
+    const imprint = useRichTranslations("imprint");
 
     return (
-        <Container maxWidth="md">
-            <Box>
-                <Typography variant="h4">
-                    {imprint('title')}
-                </Typography>
+        <Container>
+            <Box className="mobile-padding">
+                <MainTitle variant="h4">{imprint.t("title")}</MainTitle>
 
-                <Typography component="div" sx={{my: 1.5}}>
-                    {imprint.rich('imprint', {
-                        link: (txt) => <a target="_blank" href="https://www.uni-bielefeld.de">{txt}</a>
-                    })}
-                </Typography>
+                <RichText>{imprint.rich("imprint", {link: "uni-bielefeld"})}</RichText>
 
-                <Typography variant="h5" sx={{my: 2}}>{imprint('rsa.title')}</Typography>
-                <Typography component="div">{imprint.rich('rsa.body')}</Typography>
+                <BlockTitle variant="h5">{imprint.t("rsa.title")}</BlockTitle>
+                <RichText>{imprint.rich("rsa.body")}</RichText>
 
-                <Typography variant="h5" sx={{my: 2}}>{imprint('responsible-dona.title')}</Typography>
-                <Typography component="div">
-                    {imprint.rich('responsible-dona.body', {
-                        link: (txt) => <a target="_blank" href="https://www.uni-bielefeld.de/fakultaeten/technische-fakultaet/arbeitsgruppen/multimodal-behavior-processing/">{txt}</a>
-                    })}
-                </Typography>
+                <BlockTitle variant="h5">{imprint.t("responsible-dona.title")}</BlockTitle>
+                <RichText>{imprint.rich("responsible-dona.body", {link: "dona-responsible-homepage"})}</RichText>
 
-                <Typography variant="h5" sx={{my: 2}}>{imprint('responsible-central-website.title')}</Typography>
-                <Typography component="div">{imprint.rich('responsible-central-website.body')}</Typography>
+                <BlockTitle variant="h5">{imprint.t("responsible-central-website.title")}</BlockTitle>
+                <RichText>{imprint.rich("responsible-central-website.body")}</RichText>
 
-                <Typography variant="h5" sx={{my: 2}}>{imprint('liability-disclaimer.title')}</Typography>
-                <Typography component="div">{imprint.rich('liability-disclaimer.body')}</Typography>
+                <BlockTitle variant="h5">{imprint.t("liability-disclaimer.title")}</BlockTitle>
+                <RichText>{imprint.rich("liability-disclaimer.body")}</RichText>
 
-                <Typography variant="h5" sx={{my: 2}}>{imprint('copyright.title')}</Typography>
-                <Typography component="div">{imprint.rich('copyright.body')}</Typography>
+                <BlockTitle variant="h5">{imprint.t("copyright.title")}</BlockTitle>
+                <RichText>{imprint.rich("copyright.body")}</RichText>
 
-                <Typography variant="h5" sx={{my: 2}}>{imprint('photo-credits.title')}</Typography>
-                <Typography component="div">{imprint.rich('photo-credits.body')}</Typography>
+                <BlockTitle variant="h5">{imprint.t("photo-credits.title")}</BlockTitle>
+                <RichText>{imprint.rich("photo-credits.body")}</RichText>
             </Box>
         </Container>
     );
-
 }

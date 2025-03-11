@@ -1,24 +1,27 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
-import {useLocale, useTranslations} from 'next-intl';
-import Button from '@mui/material/Button';
-import Alert from '@mui/material/Alert';
-import Container from '@mui/material/Container';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
-import { useDonation } from '@/context/DonationContext';
-import {fetchGraphDataByDonationId, getDonationId} from './actions';
-import LoadingSpinner from '@components/LoadingSpinner';
-import DataSourceFeedbackSection from '@components/DataSourceFeedbackSection';
+import React, { useEffect, useState } from "react";
+import {useLocale, useTranslations} from "next-intl";
+import Button from "@mui/material/Button";
+import Alert from "@mui/material/Alert";
+import Container from "@mui/material/Container";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
+import { useDonation } from "@/context/DonationContext";
+import {fetchGraphDataByDonationId, getDonationId} from "./actions";
+import LoadingSpinner from "@components/LoadingSpinner";
+import DataSourceFeedbackSection from "@components/DataSourceFeedbackSection";
+import {MainTitle, RichText} from "@/styles/StyledTypography";
+import {useRichTranslations} from "@/hooks/useRichTranslations";
+import Box from "@mui/material/Box";
 
 
-const isFeedbackSurveyEnabled = process.env.NEXT_PUBLIC_FEEDBACK_SURVEY_ENABLED === 'true';
+const isFeedbackSurveyEnabled = process.env.NEXT_PUBLIC_FEEDBACK_SURVEY_ENABLED === "true";
 const feedbackSurveyLink = process.env.NEXT_PUBLIC_FEEDBACK_SURVEY_LINK;
 
 export default function DonationFeedbackPage() {
-    const a = useTranslations('actions');
-    const t = useTranslations('feedback');
+    const actions = useTranslations("actions");
+    const feedback = useRichTranslations("feedback");
     const { externalDonorId, feedbackData, setDonationData } = useDonation();
     const [isLoading, setIsLoading] = useState(!feedbackData);
     const locale = useLocale();
@@ -33,7 +36,7 @@ export default function DonationFeedbackPage() {
                         setDonationData(donationIdFromCookie, fetchedGraphData);
                     }
                 } catch (error) {
-                    console.error('Error fetching graph data:', error);
+                    console.error("Error fetching graph data:", error);
                 } finally {
                     setIsLoading(false);
                 }
@@ -46,57 +49,51 @@ export default function DonationFeedbackPage() {
     const handleContinue = () => {
         window.location.href = isFeedbackSurveyEnabled && feedbackSurveyLink
             ? `${feedbackSurveyLink}?UID=${externalDonorId}&lang=${locale}`
-            : '/';
+            : "/";
     };
 
     return (
-        <Container maxWidth='md' sx={{flexGrow: 1, mt: 4}}>
+        <Container maxWidth="md" sx={{flexGrow: 1}}>
             <Stack
+                spacing={3}
                 sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    width: 'auto'
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    textAlign: "center",
                 }}
             >
-                <Typography variant='h4' sx={{my: 2}}>
-                    {t('title')}
-                </Typography>
+                <MainTitle variant="h5">{feedback.t("title")}</MainTitle>
 
                 {/* Loading indicator */}
-                {isLoading &&
-                    <LoadingSpinner message={t('loading')}/>
-                }
+                {isLoading && <LoadingSpinner message={feedback.t("loading")}/>}
 
                 {/* Error fetching required data*/}
                 {!isLoading && !feedbackData && (
-                    <Alert severity='error' sx={{ mt: 2 }}>{t('genericError')}</Alert>
+                    <Alert severity="error" sx={{ mt: 2 }}>{feedback.t("genericError")}</Alert>
                 )}
 
                 {feedbackData && (
                     <>
-                        <Alert severity='warning' sx={{ my: 2 }}>
-                            <Typography variant='body1'>{t('importantMessage.title')}</Typography>
-                            <Typography variant='body2'>
-                                {t.rich('importantMessage.disclaimer', {
-                                    b: (txt) => <b>{txt}</b>,
-                                    u: (txt) => <u>{txt}</u>
-                                })}
-                            </Typography>
+                        <Alert severity="warning">
+                            <Typography variant="body1">{feedback.t("important-message.title")}</Typography>
+                            <Typography variant="body2">{feedback.rich("important-message.disclaimer")}</Typography>
                         </Alert>
 
-                        {Object.entries(feedbackData).map(([source, data]) => (
-                            <DataSourceFeedbackSection
-                                key={source}
-                                dataSourceValue={source}
-                                graphData={data}
-                            />
-                        ))}
+                        <Box sx={{width: "100%", textAlign: "left"}}>
+                            {Object.entries(feedbackData).map(([source, data]) => (
+                                <DataSourceFeedbackSection
+                                    key={source}
+                                    dataSourceValue={source}
+                                    graphData={data}
+                                />
+                            ))}
+                        </Box>
 
-                        <Typography variant='body1' sx={{my: 3}}>{t('thanks')}</Typography>
-                        <Button variant='contained' onClick={handleContinue}>
-                            {a('next')}
+                        <RichText sx={{py: 2}}>{feedback.t("thanks")}</RichText>
+                        <Button variant="contained" onClick={handleContinue}>
+                            {actions("next")}
                         </Button>
                     </>
                 )}

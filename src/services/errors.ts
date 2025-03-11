@@ -1,3 +1,11 @@
+export enum RangeErrors {
+    NonsenseRange = "NonsenseRange",
+    NotEnoughMonthsInRange = "NotEnoughMonthsInRange",
+    NoMessagesInRange = "NoMessagesInRange"
+}
+
+// errors.ts
+
 export enum DonationErrors {
     NoFiles = "NoFiles",
     SameFiles = "SameFiles",
@@ -10,38 +18,39 @@ export enum DonationErrors {
     UnknownError = "UnknownError"
 }
 
-export enum RangeErrors {
-    NonsenseRange = "NonsenseRange",
-    NotEnoughMonthsInRange = "NotEnoughMonthsInRange",
-    NoMessagesInRange = "NoMessagesInRange"
+export interface DonationError {
+    message: string;
+    reason: DonationErrors;
+    context?: Record<string, any>;
 }
 
-export class DonationError extends Error {
-    public readonly reason: DonationErrors;
-    public readonly context?: Record<string, any>;
+export interface DonationValidationError extends DonationError {}
+export interface DonationProcessingError extends DonationError {}
 
-    constructor(reason: DonationErrors, context?: Record<string, any>) {
-        super(reason);
-        this.name = 'DonationError';
-        this.reason = reason;
-        this.context = context;
-    }
+export interface SerializedDonationError {
+    message: string;
+    reason: DonationErrors;
+    context?: Record<string, any>;
 }
 
-export class DonationValidationError extends DonationError {
-    constructor(reason: DonationErrors, context?: Record<string, any>) {
-        super(reason, context);
-        this.name = 'DonationValidationError';
-    }
-}
+export const DonationValidationError = (
+    reason: DonationErrors,
+    context?: Record<string, any>
+): DonationValidationError => ({
+    message: reason,
+    reason,
+    context,
+});
 
-// Processing-specific error
-export class DonationProcessingError extends DonationError {
-    constructor(reason: DonationErrors, context?: Record<string, any>) {
-        super(reason, context);
-        this.name = 'DonationProcessingError';
-    }
-}
+export const DonationProcessingError = (
+    reason: DonationErrors,
+    context?: Record<string, any>
+): DonationProcessingError => ({
+    message: reason,
+    reason,
+    context,
+});
+
 
 /**
  * Converts an error to a formatted error message using next-intl translations.
@@ -56,15 +65,12 @@ export function getErrorMessage(
     error: unknown,
     formatOptions?: Record<string, any>
 ): string {
-    if (error instanceof DonationError) {
-        const reasonKey = `errors.${error.reason}`;
+    if (error && typeof error === 'object' && 'reason' in error) {
+        const reasonKey = `errors.${(error as DonationError).reason}`;
         const formattedKey = `${reasonKey}_format`;
 
         if (t.has(formattedKey)) return t(formattedKey, formatOptions);
-
         if (t.has(reasonKey)) return t(reasonKey);
-
-        return t('errors.UnknownError');
     }
 
     return t('errors.UnknownError');

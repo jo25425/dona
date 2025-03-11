@@ -7,13 +7,23 @@ import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
+import TableCell, { TableCellProps } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Typography from "@mui/material/Typography";
 import AnonymizationModal from "@components/AnonymizationModal";
 import CheckIcon from '@mui/icons-material/Check';
+import styled from "@mui/material/styles/styled";
+
+const ResponsiveTableCell = styled(TableCell)<TableCellProps>(({ theme }) => ({
+    paddingLeft: theme.spacing(1),
+    paddingRight: theme.spacing(1),
+    [theme.breakpoints.up("sm")]: {
+        paddingLeft: theme.spacing(2),
+        paddingRight: theme.spacing(2),
+    },
+}));
 
 interface AnonymizationPreviewProps {
     dataSourceValue: DataSourceValue;
@@ -42,8 +52,8 @@ const AnonymizationPreview: React.FC<AnonymizationPreviewProps> = (
                 <Table size="small" aria-label="pseudonyms table">
                     <TableHead>
                         <TableRow sx={{ "th": { fontWeight: "bold" } }}>
-                            <TableCell>{t('contacts-mapping.pseudonyms')}</TableCell>
-                            <TableCell>{t('contacts-mapping.contacts')}</TableCell>
+                            <ResponsiveTableCell>{t('contacts-mapping.pseudonyms')}</ResponsiveTableCell>
+                            <ResponsiveTableCell>{t('contacts-mapping.contacts')}</ResponsiveTableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -52,8 +62,8 @@ const AnonymizationPreview: React.FC<AnonymizationPreviewProps> = (
                                 key={chatPseudonym}
                                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                             >
-                                <TableCell component="th" scope="row">{chatPseudonym}</TableCell>
-                                <TableCell>{chatParticipants.join(", ")}</TableCell>
+                                <ResponsiveTableCell component="th" scope="row">{chatPseudonym}</ResponsiveTableCell>
+                                <ResponsiveTableCell>{chatParticipants.join(", ")}</ResponsiveTableCell>
                             </TableRow>
                         ))}
                     </TableBody>

@@ -5,9 +5,9 @@ import {v4 as uuidv4} from 'uuid';
 import {conversationParticipants, conversations, donations, graphData, messages} from "@/db/schema";
 import {NewConversation, NewMessage} from "@models/persisted";
 import {Conversation, DataSource, DataSourceValue, DonationStatus} from "@models/processed";
-import {DonationErrors, DonationProcessingError} from "@services/errors";
 import produceGraphData from "@services/charts/produceGraphData";
 import {GraphData} from "@models/graphData";
+import {DonationErrors, DonationProcessingError, SerializedDonationError} from "@services/errors";
 
 
 function generateExternalDonorId(): string {
@@ -18,7 +18,7 @@ interface AddDonationResult {
     success: boolean;
     donationId?: string;
     graphDataRecord?: Record<DataSourceValue, GraphData>
-    error?: Error;
+    error?: SerializedDonationError;
 }
 
 export async function addDonation(
@@ -107,10 +107,7 @@ export async function addDonation(
 
         return {
             success: false,
-            error: new DonationProcessingError(
-                DonationErrors.TransactionFailed,
-                { originalError: err }
-            ),
+            error: DonationProcessingError(DonationErrors.TransactionFailed, { originalError: err })
         };
     }
 }

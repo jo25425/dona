@@ -1,11 +1,12 @@
 import React from "react";
-import { Bar } from "react-chartjs-2";
+import {Bar} from "react-chartjs-2";
 import Box from "@mui/material/Box";
-import { useTranslations } from "next-intl";
+import {useTranslations} from "next-intl";
 import _ from "lodash";
-import { AnswerTimePoint } from "@models/graphData";
+import {AnswerTimePoint} from "@models/graphData";
 import DownloadButtons from "@components/charts/DownloadButtons";
-import { ChartDataset } from "chart.js";
+import {ChartDataset} from "chart.js";
+import {BARCHART_OPTIONS, CHART_COLORS, CHART_LAYOUT, TOOLTIP, TOP_LEGEND} from "@components/charts/chartConfig";
 
 const FIRST = "< 1 min";
 const SECOND = "1-2 min";
@@ -66,13 +67,13 @@ const ResponseTimeBarChart: React.FC<ResponseTimeBarChartProps> = ({
         !isOnlyOneOrLessConv && {
             label: chartTexts("legend.contacts"),
             data: contactPercentages,
-            backgroundColor: "#FF8800",
+            backgroundColor: CHART_COLORS.secondaryBar,
             barPercentage: 0.5,
         },
         {
             label: chartTexts("legend.donor"),
             data: donorPercentages,
-            backgroundColor: "#1f77b4",
+            backgroundColor: CHART_COLORS.primaryBar,
             barPercentage: 0.8,
         },
     ].filter(Boolean) as ChartDataset<"bar", number[]>[];
@@ -83,32 +84,30 @@ const ResponseTimeBarChart: React.FC<ResponseTimeBarChartProps> = ({
     };
 
     const options = {
-        responsive: true,
+        ...BARCHART_OPTIONS,
         plugins: {
-            legend: { position: "top" as const },
-            tooltip: {
-                callbacks: { label: (context: any) => `${context.raw?.toFixed(2)}%` },
-            },
+            legend: TOP_LEGEND,
+            tooltip: TOOLTIP,
         },
         scales: {
             x: {
+                ...BARCHART_OPTIONS.scales.x,
                 title: { display: true, text: chartTexts("xAxis") },
-                grid: { drawOnChartArea: false },
                 stacked: true,
             },
             y: {
-                title: { display: true, text: chartTexts("yAxis") },
-                ticks: { callback: (value: number | string) => `${value}%` },
+                ...BARCHART_OPTIONS.scales.y,
+                title: { display: true, text: chartTexts("yAxis") }
             },
         },
     };
 
     return (
-        <Box p={2} pt={0} id={container_name} position="relative">
-            <Box display="flex" justifyContent="right" alignItems="center" mb={-2}>
+        <Box id={container_name} position="relative" p={CHART_LAYOUT.paddingX}>
+            <Box display="flex" justifyContent="right" alignItems="center" mb={1}>
                 <DownloadButtons chartId={container_name} fileNamePrefix={CHART_NAME} />
             </Box>
-            <Box sx={{ width: "100%", height: 400 }}>
+            <Box sx={{ width: "100%", height: CHART_LAYOUT.responsiveChartHeight }}>
                 <Bar data={data} options={options} />
             </Box>
         </Box>

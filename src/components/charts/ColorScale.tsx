@@ -8,35 +8,45 @@ interface ColorScaleProps {
 
 const ColorScale: React.FC<ColorScaleProps> = ({ colors, labels }) => {
     return (
-        // NB: Percentages below are arbitrarily picked to account for the space taken by the labels below the charts
-        <Box my="auto" sx={{ height: "87.5%", width: "15%", display: "flex", flexDirection: "row" }}>
+        <Box
+            my="auto"
+            sx={{
+                height: "87.5%",
+                width: "15%",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                position: "relative",
+                minWidth: "20px"
+            }}
+        >
             <Box
                 sx={{
-                    width: "40%",
+                    width: "100%",
+                    maxWidth: "40px",
+                    height: "100%",
+                    my: "auto",
                     background: `linear-gradient(to bottom, ${colors.join(", ")})`,
-                    border: "1px",
-                    borderStyle: "solid",
-                    borderColor: "darkgrey"
-                }}
-            />
-            <Box
-                pl={3}
-                my={3}
-                sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    fontSize: "10px",
+                    position: "relative",
                 }}
             >
+                {/* Labels overlapping the color scale */}
                 {labels.map((label, index) => (
                     <Typography
                         key={index}
                         variant="caption"
-                        p={0}
-                        mx={-3}
-                        sx={{ lineHeight: 1, transform: "rotate(20deg)" }}
+                        sx={{
+                            lineHeight: 1,
+                            position: "absolute",
+                            top: `${((index / (labels.length - 1)) * 70) + 30/(labels.length - 1)}%`, // TODO Calculate
+                            left: "50%",
+                            transform: "translate(-50%, -50%)",
+                            backgroundColor: "rgba(255, 255, 255, 0.6)", // Light background for readability
+                            padding: "2px 4px",
+                            borderRadius: "4px",
+                            fontSize: "10px",
+                            textAlign: "center",
+                        }}
                     >
                         {label}
                     </Typography>

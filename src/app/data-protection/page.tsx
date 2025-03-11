@@ -1,55 +1,43 @@
-import {useTranslations} from 'next-intl';
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
+"use client";
 
+import {useRichTranslations} from "@/hooks/useRichTranslations";
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+import {BlockTitle, ContactBlock, MainTitle} from "@/styles/StyledTypography";
+import Typography from "@mui/material/Typography";
 
-export default function LearnMore() {
-    const protection = useTranslations('data-protection');
-    const storage = useTranslations('data-storage');
-    const consent = useTranslations('consent');
+export default function DataProtection() {
+    const protection = useRichTranslations("data-protection");
+    const storage = useRichTranslations("data-storage");
+    const consent = useRichTranslations("consent");
 
     return (
-        <Container maxWidth="md">
-            <Box>
-                <Typography variant="h4">
-                    {protection('title')}
-                </Typography>
+        <Container>
+            <Box className="mobile-padding">
+                <MainTitle variant="h4">{protection.t("title")}</MainTitle>
 
-                <Typography variant="h5" sx={{my: 2, fontWeight: 800}}>{protection('technical-details.title')}</Typography>
+                <MainTitle variant="h5">{protection.t("technical-details.title")}</MainTitle>
+                <Typography gutterBottom>{protection.rich("technical-details.body1")}</Typography>
+                <Typography gutterBottom>{protection.rich("technical-details.body2")}</Typography>
+                <Typography gutterBottom>{protection.rich("technical-details.body3")}</Typography>
+                <Typography gutterBottom>{protection.rich("technical-details.body4")}</Typography>
 
-                <Typography variant="body1"  sx={{my: 2}}>{protection('technical-details.body1')}</Typography>
-                <Typography variant="body1" sx={{my: 2}}>{protection('technical-details.body2')}</Typography>
-                <Typography variant="body1" sx={{my: 2}}>{protection('technical-details.body3')}</Typography>
-                <Typography variant="body1" sx={{my: 2}}>{protection('technical-details.body4')}</Typography>
+                <MainTitle variant="h5">{protection.t("participation.title")}</MainTitle>
 
-                <Typography variant="h5" sx={{my: 2, fontWeight: 800}}>{protection('participation.title')}</Typography>
+                <BlockTitle variant="h5">{storage.t("title")}</BlockTitle>
+                <Typography gutterBottom>{storage.rich("body1")}</Typography>
+                <Typography gutterBottom>{storage.rich("body2", { link: "limesurvey" })}</Typography>
 
-                <Typography variant="h5" sx={{my: 2}}>{storage('title')}</Typography>
-                <Typography variant="body1"  sx={{my: 2}}>{storage.rich('body1')}</Typography>
-                <Typography variant="body1" sx={{my: 2}}>
-                    {storage.rich('body2', {
-                        link: (txt) => <a target="_blank" href={storage('url-limesurvey')}>{txt}</a>
-                    })}
-                </Typography>
+                <BlockTitle variant="h5">{consent.t("voluntary.title")}</BlockTitle>
+                <Typography gutterBottom>{consent.rich("voluntary.body")}</Typography>
 
-                <Typography variant="h5" sx={{my: 2}}>{consent('voluntary.title')}</Typography>
-                <Typography variant="body1">{consent('voluntary.body')}</Typography>
+                <BlockTitle variant="h5">{consent.t("data-protection.title")}</BlockTitle>
+                <Typography gutterBottom>{consent.rich("data-protection.body")}</Typography>
+                <ContactBlock>{consent.rich("data-protection.contact")}</ContactBlock>
 
-                <Typography variant="h5" sx={{my: 2}}> {consent('data-protection.title')} </Typography>
-                <Typography variant="body1">{consent('data-protection.body')}</Typography>
-                <Typography variant="body1" sx={{my: 1.5, mx: 3}}>
-                    {consent.rich('data-protection.contact')}
-                </Typography>
-
-                <Typography variant="h5" sx={{my: 2}}>
-                    {protection('participation.usage.title')}
-                </Typography>
-                <Typography variant="body1">
-                    {protection('participation.usage.body')}
-                </Typography>
+                <BlockTitle variant="h5">{protection.t("participation.usage.title")}</BlockTitle>
+                <Typography gutterBottom>{protection.rich("participation.usage.body")}</Typography>
             </Box>
         </Container>
     );
-
 }

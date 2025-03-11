@@ -10,14 +10,14 @@ export default async function handleWhatsappTxtFiles(fileList: File[]): Promise<
     return new Promise((resolve, reject) => {
 
         if (files.length !== 0 && (files.length < 5 || files.length > 7)) {
-            reject(new DonationValidationError(DonationErrors.Not5to7Files));
+            reject(DonationValidationError(DonationErrors.Not5to7Files));
             return;
         }
 
         const fileSize = files[0].size;
         const allSameSize = files.every(file => file.size === fileSize);
         if (allSameSize) {
-            reject(new DonationValidationError(DonationErrors.SameFiles));
+            reject(DonationValidationError(DonationErrors.SameFiles));
             return;
         }
 
@@ -30,7 +30,7 @@ export default async function handleWhatsappTxtFiles(fileList: File[]): Promise<
         Promise.all(parsedFiles).then((parsed: ParsingResult[]) => {
             const hasInvalidData = parsed.some(({ texts, contacts }) => texts.length < 100 || contacts.length <= 1);
             if (hasInvalidData) {
-                reject(new DonationValidationError(DonationErrors.TooFewContactsOrMessages));
+                reject(DonationValidationError(DonationErrors.TooFewContactsOrMessages));
                 return;
             }
 

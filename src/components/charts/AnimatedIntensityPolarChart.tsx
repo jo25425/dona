@@ -76,7 +76,7 @@ const AnimatedIntensityPolarChart: React.FC<AnimatedIntensityPolarChartProps> = 
 
     return (
         <Box>
-            <Box id={container_name} position="relative" p={2}>
+            <Box id={container_name} position="relative" p={2} mb={1}>
                 <Box
                     position="relative"
                     display="flex"
