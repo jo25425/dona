@@ -12,6 +12,7 @@ import Button from "@mui/material/Button";
 import Image from "next/image";
 import Link from "next/link";
 import {DonationProvider} from "@/context/DonationContext";
+import React from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 

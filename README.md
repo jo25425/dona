@@ -100,7 +100,7 @@ security and performance updates:
 
 1. **Keep `pnpm` up-to-date**:
    ```bash
-   pnpm self update
+   pnpm self-update
    ```
 2. **Update dependencies within the allowed version range**:
 

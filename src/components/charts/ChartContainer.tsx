@@ -1,7 +1,7 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { GraphData } from "@models/graphData";
+import {GraphData} from "@models/graphData";
 import ResponseTimeBarChart from "@components/charts/ResponseTimeBarChart";
 import AnimatedWordCountBarChart from "@components/charts/AnimatedWordCountBarChart";
 import AnimatedIntensityPolarChart from "@components/charts/AnimatedIntensityPolarChart";
@@ -10,7 +10,6 @@ import AnimatedResponseTimeBarChart from "@components/charts/AnimatedResponseTim
 import DayPartsActivityOverallChart from "@components/charts/DayPartsActivityOverallChart";
 import AnimatedDayPartsActivityChart from "@components/charts/AnimatedDayPartsActivityChart";
 import WordCountOverallBarChart from "@components/charts/WordCountOverallBarChart";
-import {graphData} from "@/db/schema";
 import SentReceivedSlidingWindowChart from "@components/charts/SentReceivedSlidingWindowChart";
 
 

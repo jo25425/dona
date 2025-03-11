@@ -1,4 +1,4 @@
-import {BasicStatistics, DailySentReceivedPoint, SentReceivedPoint} from "@models/graphData";
+import {BasicStatistics, SentReceivedPoint} from "@models/graphData";
 
 const produceBasicStatistics = (messageCounts: SentReceivedPoint[], wordCounts: SentReceivedPoint[]): BasicStatistics => {
     const totalSentMessages = messageCounts.map((point) => point.sentCount).reduce((a, b) => a + b, 0);
