@@ -116,7 +116,7 @@ const DailyActivityChart: React.FC<DailyActivityChartProps> = ({
 
     return (
         <Box sx={{ display: "flex", flexDirection: "row", gap: 2, alignItems: "center", width: "100%" }}>
-            <Box sx={{ flex: 1, position: "relative" }}>
+            <Box sx={{ flex: 1, position: "relative", width: "100%" }}>
                 <Select
                     value={selectedConversation}
                     onChange={(e) => setSelectedConversation(e.target.value)}
@@ -140,8 +140,8 @@ const DailyActivityChart: React.FC<DailyActivityChartProps> = ({
                         <DownloadButtons chartId={container_name} fileNamePrefix={CHART_NAME} currentLabel={selectedConversation} labelToShowId={selection_label_name} />
                     </Box>
 
-                    <Box sx={{ display: "flex", flexDirection: "row", height: CHART_LAYOUT.responsiveChartHeight, ml: -1.5 }}>
-                        <Box sx={{ flex: 1, height: "100%" }}>
+                    <Box sx={{ display: "flex", flexDirection: "row", width: "100%", height: CHART_LAYOUT.responsiveChartHeight, ml: -1.5 }}>
+                        <Box sx={{ flex: 1, height: "100%", maxWidth: "100%" }}>
                             <Scatter data={data} options={options} />
                         </Box>
                         <ColorScale

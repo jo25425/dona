@@ -1,11 +1,15 @@
 export const CHART_COLORS = {
     primaryBar: "#1f77b4",  // Blue
     secondaryBar: "#ff7f0e", // Orange
+    primaryTransparent: "rgba(31, 119, 180, 0.2)",
+    secondaryTransparent: "rgba(255, 127, 14, 0.2)",
     background: "#f5f5f5",
 };
 
 const MOBILE_HEIGHT = 250;
 const DESKTOP_HEIGHT = 400;
+const X_TICKS = { font: { size: 12 }, padding: 5 };
+const Y_TICKS = { font: { size: 12 }, padding: 0, offset: false };
 
 export const CHART_BOX_PROPS = {
     main: {width: "100%", maxWidth: "900px", mx: "auto"},
@@ -14,20 +18,20 @@ export const CHART_BOX_PROPS = {
 
 export const CHART_LAYOUT = {
     barThickness: 20,
+    maxHBarThickness: 40,
     maxWidth: "900px",
     mobileChartHeight: MOBILE_HEIGHT,
     desktopChartHeight: DESKTOP_HEIGHT,
     responsiveChartHeight: { xs: MOBILE_HEIGHT, sm: DESKTOP_HEIGHT },
-    paddingX: { xs: 1, sm: 2 }, // Responsive padding
+    paddingX: { xs: 1, sm: 2 },
     paddingY: 2,
     labelFontSize: { xs: "0.8rem", sm: "1rem" },
 };
 
-const X_TICKS = { font: { size: 12 }, padding: 5 };
-const Y_TICKS = { font: { size: 12 }, padding: 0, offset: false };
 export const TOOLTIP  = {
     callbacks: { label: (context: any) => `${context.raw?.toFixed(2)}%` },
 };
+
 export const TOP_LEGEND = {
     position: "top" as const,
     labels: {

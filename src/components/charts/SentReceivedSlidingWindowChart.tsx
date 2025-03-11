@@ -16,6 +16,8 @@ import Box from "@mui/material/Box";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import { DailySentReceivedPoint } from "@models/graphData";
+import {CHART_COLORS, CHART_LAYOUT, COMMON_CHART_OPTIONS, TOP_LEGEND} from "@components/charts/chartConfig";
+import Typography from "@mui/material/Typography";
 
 ChartJS.register(LineElement, PointElement, CategoryScale, LinearScale, Tooltip, Legend, Filler);
 
@@ -87,16 +89,16 @@ const SentReceivedSlidingWindowChart: React.FC<SentReceivedSlidingWindowChartPro
                 {
                     label: chartTexts("legend.sent"),
                     data: sentData,
-                    borderColor: "#1f77b4",
-                    backgroundColor: "rgba(31, 119, 180, 0.2)",
+                    borderColor: CHART_COLORS.primaryBar,
+                    backgroundColor: CHART_COLORS.primaryTransparent,
                     fill: true,
                     pointRadius: 3,
                 },
                 {
                     label: chartTexts("legend.received"),
                     data: receivedData,
-                    borderColor: "#ff7f0e",
-                    backgroundColor: "rgba(255, 127, 14, 0.2)",
+                    borderColor: CHART_COLORS.secondaryBar,
+                    backgroundColor: CHART_COLORS.secondaryTransparent,
                     fill: true,
                     pointRadius: 3,
                 },
@@ -105,62 +107,65 @@ const SentReceivedSlidingWindowChart: React.FC<SentReceivedSlidingWindowChartPro
     };
 
     return (
-        <Box>
-            <Box id={container_name} position="relative" px={2} py={2}>
-                <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
-                    <Select
-                        value={selectedConversation}
-                        onChange={(e) => setSelectedConversation(e.target.value)}
-                        size="small"
-                        variant="outlined"
-                        sx={{ minWidth: 150 }}
-                    >
-                        <MenuItem value={ALL_CHATS} sx={{ fontSize: 12 }}>
-                            {labelTexts("overallData")}
-                        </MenuItem>
-                        {listOfConversations.map((conversation) => (
-                            <MenuItem sx={{ fontSize: 12 }} key={conversation} value={conversation}>
-                                {conversation}
-                            </MenuItem>
-                        ))}
-                    </Select>
-                    <DownloadButtons
-                        chartId={container_name}
-                        fileNamePrefix={CHART_NAME}
-                        currentLabel={selectedConversation}
-                        labelToShowId={selection_label_name}
-                    />
+
+    <Box sx={{ display: "flex", flexDirection: "row", gap: 2, alignItems: "center", width: "100%" }}>
+        <Box sx={{ flex: 1, position: "relative", width: "100%" }}>
+            <Select
+                value={selectedConversation}
+                onChange={(e) => setSelectedConversation(e.target.value)}
+                size="small"
+                variant="outlined"
+                sx={{ mb: -2, pb: 0, fontSize: CHART_LAYOUT.labelFontSize }}
+            >
+                <MenuItem value={ALL_CHATS} sx={{ fontSize: CHART_LAYOUT.labelFontSize }}>{labelTexts("overallData")}</MenuItem>
+                {listOfConversations.map((conversation) => (
+                    <MenuItem sx={{ fontSize: CHART_LAYOUT.labelFontSize }} key={conversation} value={conversation}>
+                        {conversation}
+                    </MenuItem>
+                ))}
+            </Select>
+            <Box id={container_name} p={CHART_LAYOUT.paddingX} sx={{ mt: -2, pt: 0}}>
+                <Box display="flex" justifyContent="space-between" alignItems="center" mb={1}>
+                    <Typography id={selection_label_name} variant="body2" align="right">
+                        <b>{selectedConversation === ALL_CHATS ? labelTexts("overallData") : selectedConversation}</b>
+                    </Typography>
+                    <DownloadButtons chartId={container_name} fileNamePrefix={CHART_NAME} currentLabel={selectedConversation} labelToShowId={selection_label_name} />
                 </Box>
-                <Line
-                    data={generateChartData()}
-                    options={{
-                        responsive: true,
-                        spanGaps: 1000 * 60 * 60 * 24 * 2, // Show gaps from 2 days in the data
-                        plugins: {
-                            legend: { display: true, position: "top" },
-                        },
-                        scales: {
-                            x: {
-                                type: "time",
-                                time: {
-                                    unit: "day",
-                                    tooltipFormat: "dd-MM-yyyy",
-                                    displayFormats: {
-                                        day: "dd-MM-yyyy",
+                <Box sx={{ width: "100%", minHeight: "250px" }}>
+                    <Line
+                        data={generateChartData()}
+                        options={{
+                            ...COMMON_CHART_OPTIONS,
+                            spanGaps: 1000 * 60 * 60 * 24 * 2, // Show gaps from 2 days in the data
+                            plugins: { "legend": TOP_LEGEND },
+                            scales: {
+                                x: {
+                                    type: "time",
+                                    time: {
+                                        unit: "day",
+                                        tooltipFormat: "dd-MM-yyyy",
+                                        displayFormats: {
+                                            day: "dd-MM-yyyy",
+                                        },
+                                    },
+                                    title: { display: false },
+                                    ticks: {
+                                        ...COMMON_CHART_OPTIONS.scales.x.ticks,
+                                        maxRotation: 45, minRotation: 45
                                     },
                                 },
-                                title: { display: false },
-                                ticks: { maxRotation: 45, minRotation: 45 },
+                                y: {
+                                    ...COMMON_CHART_OPTIONS.scales.y,
+                                    title: { display: true, text: chartTexts("yAxis") },
+                                    beginAtZero: true,
+                                },
                             },
-                            y: {
-                                title: { display: true, text: chartTexts("yAxis") },
-                                beginAtZero: true,
-                            },
-                        },
-                    }}
-                />
+                        }}
+                    />
+                </Box>
             </Box>
         </Box>
+    </Box>
     );
 };
 

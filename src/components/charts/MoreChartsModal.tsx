@@ -45,7 +45,7 @@ const MoreChartsModal: React.FC<MoreChartsModalProps> = ({
             <Typography variant="h6" mb={2}>
                 {t("moreAbout")}
             </Typography>
-            <Box>
+            <Box sx={{textAlign: "center"}}>
                 {chartsData.map(({descriptionKey, chartType}, index) => (
                     <Box key={index} mb={4}>
                         <Typography

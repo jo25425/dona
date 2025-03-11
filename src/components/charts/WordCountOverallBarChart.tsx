@@ -1,9 +1,10 @@
 import React from "react";
-import { Bar } from "react-chartjs-2";
-import { Chart as ChartJS, BarElement, CategoryScale, LinearScale, Tooltip, Legend } from "chart.js";
+import {Bar} from "react-chartjs-2";
+import {BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, Tooltip} from "chart.js";
 import DownloadButtons from "@components/charts/DownloadButtons";
-import { useTranslations } from "next-intl";
+import {useTranslations} from "next-intl";
 import Box from "@mui/material/Box";
+import {CHART_COLORS, CHART_LAYOUT, COMMON_CHART_OPTIONS} from "@components/charts/chartConfig";
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
@@ -18,43 +19,46 @@ const WordCountOverallBarChart: React.FC<WordCountOverallBarChartProps> = (
     const CHART_NAME = "word-count-overall-barchart";
     const container_name = `chart-wrapper-${CHART_NAME}`;
 
-    const t = useTranslations("feedback.interactionIntensity.wordCountOverallBarChart");
+    const chartTexts = useTranslations("feedback.interactionIntensity.wordCountOverallBarChart");
 
     const generateChartData = () => {
         return {
-            labels: [t("yAxis.sent"), t("yAxis.received")],
+            labels: [chartTexts("yAxis.sent"), chartTexts("yAxis.received")],
             datasets: [
                 {
                     data: [sentWordsTotal, receivedWordsTotal],
-                    backgroundColor: ["#1f77b4", "#FF8800"],
+                    backgroundColor: [CHART_COLORS.primaryBar, CHART_COLORS.secondaryBar],
+                    maxBarThickness: CHART_LAYOUT.maxHBarThickness
                 },
             ],
         };
     };
 
     return (
-        <Box>
-            <Box id={container_name} position="relative" px={2} py={2}>
+        <Box sx={{ width: "100%", maxWidth: CHART_LAYOUT.maxWidth, mx: "auto" }}>
+            <Box id={container_name} position="relative" p={CHART_LAYOUT.paddingX}>
                 <Box display="flex" justifyContent="right" alignItems="center" mb={-2}>
                     <DownloadButtons chartId={container_name} fileNamePrefix={CHART_NAME} />
                 </Box>
-                <Bar
-                    data={generateChartData()}
-                    options={{
-                        responsive: true,
-                        indexAxis: "y",
-                        plugins: {
-                            legend: { display: false },
-                        },
-                        scales: {
-                            x: {
-                                title: { display: true, text: t("xAxis") },
-                                beginAtZero: true,
+                <Box sx={{ width: "100%", minHeight: "250px" }}>
+                    <Bar
+                        data={generateChartData()}
+                        options={{
+                            ...COMMON_CHART_OPTIONS,
+                            indexAxis: "y",
+                            scales: {
+                                x: {
+                                    ...COMMON_CHART_OPTIONS.scales.x,
+                                    title: { display: true, text: chartTexts("xAxis") },
+                                },
+                                y: {
+                                    ...COMMON_CHART_OPTIONS.scales.y,
+                                    grid: { drawOnChartArea: false }
+                                },
                             },
-                            y: {grid: { drawOnChartArea: false } },
-                        },
-                    }}
-                />
+                        }}
+                    />
+                </Box>
             </Box>
         </Box>
     );
