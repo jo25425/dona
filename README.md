@@ -14,7 +14,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [
 
 ## Development
 
-#### postgres container:
+### Postgres container
 ```bash
 # start
 docker compose up # docker compose up -d to detach from commandline
@@ -26,6 +26,7 @@ docker compose down
 docker volume rm dona-dev_postgres-data
 ```
 
+#### App container
 Create a `.env` in the project root containing `DATABASE_URL=postgres://...`  
 Default username/password are `dona:password` 
 
@@ -36,12 +37,18 @@ pnpm dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+#### Tests
+```bash
+pnpm test
+```
+
+#### Misc
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and
 load Inter, a custom Google Font.
 
 ## Database
 
-#### next/drizzle
+### Using next/drizzle
 __installed packages:__
 1. drizzle-orm [docs](https://orm.drizzle.team/docs/overview)
 2. drizzle-kit: cli for setup, migrations etc [docs](https://orm.drizzle.team/docs/kit-overview)
@@ -64,7 +71,7 @@ To create a custom migration script, run
 pnpm drizzle-kit generate --custom --name=my-custom-migration
 ```
 
-#### schema
+### Schema
 __considerations:__
 - Set up schema according to [this](https://github.com/mbp-lab/dona/tree/main/conf/db/migration/default)
 - For `uuid` primary keys, default values are generated on insert by postgres. 

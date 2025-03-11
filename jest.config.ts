@@ -5,6 +5,7 @@
 
 import type {Config} from 'jest';
 import nextJest from 'next/jest';
+import "dotenv/config";
 
 const createJestConfig = nextJest({
   dir: './src'
@@ -13,7 +14,7 @@ const createJestConfig = nextJest({
 const config: Config = {
   // Indicates which provider should be used to instrument code for coverage
   coverageProvider: "v8",
-  setupFiles: ["<rootDir>/jest.setup.js"],
+  setupFiles: ["dotenv/config", "<rootDir>/jest.setup.js"],
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
@@ -24,7 +25,10 @@ const config: Config = {
   preset: "ts-jest",
   // The test environment that will be used for testing
   testEnvironment: "node",
-  injectGlobals: true
+  injectGlobals: true,
+  // Restrict Jest to only proper test files, not helpers
+  testMatch: ["**/__tests__/**/*.test.ts?(x)", "**/__tests__/**/*.spec.ts?(x)"]
+
 };
 
 export default createJestConfig(config);
