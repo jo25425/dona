@@ -1,16 +1,15 @@
 type Participant = string;
-type ExternalDonorId = string;
 export type ChatMapping = Map<string, string[]>;
 
 export enum DataSourceValue {
     WhatsApp = "WhatsApp",
     Facebook = "Facebook",
     Instagram = "Instagram",
+    IMessage = "IMessage"
 }
 
 export enum DonationStatus {
-    NotStarted = "notstarted",
-    Pending = "pending",
+    Pending = "pending",  //TODO: Post consent, pre donation
     Complete = "complete",
     Deleted = "deleted",
 }

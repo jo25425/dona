@@ -3,6 +3,7 @@ import handleWhatsappTxtFiles from "@services/parsing/whatsapp/whatsappHandler";
 import {extractTxtFilesFromZip} from "@services/parsing/shared/zipExtraction";
 import {DonationValidationError, DonationErrors} from "@services/errors";
 import {handleFacebookZipFiles, handleInstagramZipFiles} from "@services/parsing/meta/metaHandlers";
+import handleImessageDBFiles from "@services/parsing/imessage/imessageHandler";
 
 export async function anonymizeData(dataSourceValue: DataSourceValue, files: File[]): Promise<AnonymizationResult> {
     if (files.length == 0) {
@@ -32,6 +33,9 @@ export async function anonymizeData(dataSourceValue: DataSourceValue, files: Fil
             break;
         case DataSourceValue.Instagram:
             resultPromise = handleInstagramZipFiles(files);
+            break;
+        case DataSourceValue.IMessage:
+            resultPromise = handleImessageDBFiles(files);
             break;
     }
     return resultPromise;

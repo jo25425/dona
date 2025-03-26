@@ -1,0 +1,10 @@
+## iMessage Data Structure Insights
+
+- iMessage processes SMS as well as internet-transmitted iMessages. For that reason, the message table has a column `service` that is either `SMS` or `iMessage`.
+- Via the `message.handle_id`, messages can be matched to people. However, there is reason to believe that the same person is assigned different `handle_id` values based on whether the message is an iMessage or SMS. Also, for 1:1 chats, the `handle_id` is always that of the alter that sent or received the message - meaning that the ego/donor does not have a `handle_id` in these chats. However, in group chats, ego has the `handle_id 0`. For that reason, in order to fill the `sender_id`, the column `message.is_from_me` is required.
+- Similarly to the `handle_id`, the `chat_id` is also different for the same person when using SMS or iMessage. For that reason, the `group_id` is used to identify chats independent of the service. Note that the name might be misleading as it gives no hints about whether a chat is a group chat or a 1:1 chat.
+- To identify group chats, the `chat.room_name` can be used. It is `NULL` for individual chats and a string for group chats. Group chats can also be used with SMS.
+- Apple does not use UNIX time but Mac Epoch Time, which starts at 2021-01-01 00:00:00.
+- `message.error` is an int >0 if there was a problem and we discard those messages.
+- While the `attachment.mime_type` is interesting from a scientific perspective, for compatibility with other sources, I just saved it as `is_media` for now. If possible, I would like to have this as a separate column in the message table, but this is not urgently relevant. This is mutually exclusive with `is_audio`, which is a flag directly extracted from the `message` table.
+- For unknown reasons, some messages cannot be matched to chats (joining messages on the `chat_message_join` table leaves them unmatched), meaning that in the current query, the `group_id` will be empty (coalesced into ""). We discard such messages as well.
