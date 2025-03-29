@@ -1,13 +1,14 @@
 import initSqlJs from 'sql.js';
 import { AnonymizationResult, Conversation, DataSourceValue, Message, MessageAudio } from '@/models/processed';
 import { ContactPseudonyms, ChatPseudonyms } from '@/services/parsing/shared/pseudonyms';
+import {getAliasConfig} from "@services/parsing/shared/aliasConfig";
 
 export default async function handleImessageDBFiles(file: File): Promise<AnonymizationResult> {
     const SQL = await initSqlJs();
     const buffer = await file.arrayBuffer();
     const db = new SQL.Database(new Uint8Array(buffer));
-
-    const donorId = '87787c6a-e5b4-4943-bdbd-f6fa80c63ff1'; // Example donor ID
+    const aliasConfig = getAliasConfig();
+    let donorName = ''; // Example donor ID
 
     // Query to get messages
     const messages: any[] = [];
@@ -33,7 +34,7 @@ export default async function handleImessageDBFiles(file: File): Promise<Anonymi
         messages.push(row);
     }
     messagesStmt.free();
-    console.log("Messages:", messages.length);
+    // console.log("Messages:", messages.length);
 
     // Query to get group chat information
     const groupChats = new Set<string>();
@@ -50,15 +51,23 @@ export default async function handleImessageDBFiles(file: File): Promise<Anonymi
         }
     }
     groupInfoStmt.free();
-    console.log(groupChats);
+    // console.log(groupChats);
 
     const conversationsMap = new Map<string, Conversation>();
-    const contactPseudonyms = new ContactPseudonyms('Contact');
-    const chatPseudonyms = new ChatPseudonyms('Donor', 'Chat', 'iMessage');
+    const contactPseudonyms = new ContactPseudonyms(aliasConfig.contactAlias);
+    const chatPseudonyms = new ChatPseudonyms(aliasConfig.donorAlias, aliasConfig.chatAlias, DataSourceValue.IMessage);
 
     messages.forEach(row => {
         const timestamp = Number(row.date) / 1000000000 + 978307200;
-        const sender = row.is_from_me ? donorId : row.handle_id?.toString() || 'Unknown';
+        // TODO: Get sender name from handle_id
+        const sender: string = row.handle_id?.toString() || 'Unknown';
+
+         // Set donor ID once found
+        if (row.is_from_me && !donorName) {
+            donorName = sender;
+            chatPseudonyms.setDonorName(donorName);
+            contactPseudonyms.setPseudonym(donorName, aliasConfig.donorAlias)
+        }
         const conversationId = row.group_id?.toString() || 'Unknown';
         const isGroupConversation = groupChats.has(conversationId);
         const isAudioMessage = Number(row.is_audio_message ?? 0) > 0;

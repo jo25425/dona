@@ -35,6 +35,9 @@
       "ios-documentation": "https://faq.whatsapp.com/618575946635920/?cms_platform=iphone&helpref=platform_switcher",
       "android-documentation": "https://faq.whatsapp.com/en/android/23756533"
     },
+    "imessage": {
+      "external-documentation": "https://support.apple.com/en-us/HT201287"
+    },
     "secure-delete": "https://safecomputing.umich.edu/protect-yourself/prepare-devices-disposal/securely-delete-files",
     "delete-from-android": "https://wethegeek.com/best-file-data-shredder-apps-to-permanently-delete-data-from-android/",
     "delete-from-ios": "https://appletoolbox.com/how-to-delete-files-permanently-from-the-files-app-on-iphone-and-ipad/",
@@ -225,6 +228,30 @@
     },
     "video": "/images/instagram/instagram_eng.mp4",
     "logo": "i-logo.svg"
+  },
+  "imessage": {
+    "devices": {
+      "body": "To obtain your iMessage data, you will need access to an iPhone or a Mac. Ensure that you have the necessary permissions to access the data."
+    },
+    "duration": {
+      "title": "How long does the data export from iMessage take?",
+      "body": "The time it takes to export your data depends on the amount of data you have. Please be patient as the process may take some time."
+    },
+    "data-deletion": {
+      "body": "To delete your iMessage data, follow the instructions provided in the Messages app. Ensure that you have backed up any important data before deletion. Further information on the permanent deletion of files can be found <link>on the website of the University of Michigan</link>."
+    },
+    "description": "Make a request to export your iMessage data. You will need access to an iPhone or a Mac. Follow the steps below to export your data.",
+    "external-documentation": "For more detailed instructions, please refer to the official documentation <link>here</link>.",
+    "steps": {
+      "1": "Open the Messages app on your iPhone or Mac.",
+      "2": "Select the conversation you want to export.",
+      "3": "On an iPhone, tap and hold on a message, then tap 'More...' and select the messages you want to export. On a Mac, select the messages you want to export.",
+      "4": "Tap the 'Share' icon and choose 'Mail' or another method to send the messages to yourself.",
+      "5": "Repeat the steps for other conversations if needed.",
+      "6": "Download the exported messages from your email or other method to your computer."
+    },
+    "video": "/images/imessage/imessage_eng.mp4",
+    "logo": "imessage-logo.svg"
   },
   "consent": {
     "title": "Informed Consent",

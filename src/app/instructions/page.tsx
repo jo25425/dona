@@ -15,6 +15,7 @@ import DatasourceSpecificInstructions from "@components/DatasourceSpecificInstru
 import ConsentModal from "@/components/ConsentModal";
 import {useRichTranslations} from '@/hooks/useRichTranslations';
 import {DataSourceValue} from "@models/processed";
+import IMessageIcon from "@components/IMessageIcon";
 
 
 export default function Instructions() {
@@ -71,6 +72,18 @@ export default function Instructions() {
                         </AccordionSummary>
                         <AccordionDetails>
                             <DatasourceSpecificInstructions dataSource={DataSourceValue.Instagram} />
+                        </AccordionDetails>
+                    </Accordion>
+                    {/* iMessage */}
+                    <Accordion sx={{my: 1}}>
+                        <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
+                            <IMessageIcon sx={{mr: 1, mt: 0.5}}/>
+                            <Typography variant="h6">
+                                {instructions.t("datasource.title-format", {datasource: "iMessage"})}
+                            </Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <DatasourceSpecificInstructions dataSource={DataSourceValue.IMessage} />
                         </AccordionDetails>
                     </Accordion>
                 </Box>
