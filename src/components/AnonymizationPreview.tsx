@@ -46,7 +46,7 @@ const AnonymizationPreview: React.FC<AnonymizationPreviewProps> = (
                 {t("contacts-mapping.title")}
             </Typography>
             <Typography variant="body2">
-                {t(`contacts-mapping.subtitle.${dataSourceValue.toLowerCase()}`)}
+                {t("contacts-mapping.subtitle", {"dataSourceInitials":  dataSourceValue.slice(0, 2).toWellFormed()})}
             </Typography>
             <TableContainer component={Paper} sx={{ mt: 2 }}>
                 <Table size="small" aria-label="pseudonyms table">

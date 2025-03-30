@@ -25,6 +25,7 @@ import {useDonation} from "@/context/DonationContext";
 import {useTranslations} from "next-intl";
 import {MainTitle, RichText} from "@/styles/StyledTypography";
 import {getErrorMessage} from "@services/errors";
+import IMessageIcon from "@components/CustomIcon";
 
 type ConversationsBySource = Record<DataSourceValue, Conversation[]>;
 
@@ -106,14 +107,15 @@ export default function DataDonationPage() {
                     </Box>
                 )}
                 <Box sx={{ my: 4, minWidth: "80%", textAlign: "left" }}>
-                    {[DataSourceValue.WhatsApp, DataSourceValue.Facebook, DataSourceValue.Instagram].map((source) => (
+                    {[DataSourceValue.WhatsApp, DataSourceValue.Facebook, DataSourceValue.Instagram, DataSourceValue.IMessage].map((source) => (
                         <Accordion key={source} sx={{ my: 1 }}>
                             <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
                                 {source === DataSourceValue.WhatsApp && <WhatsAppIcon sx={{ mr: 1, mt: 0.5 }} />}
                                 {source === DataSourceValue.Facebook && <FacebookIcon sx={{ mr: 1, mt: 0.5 }} />}
                                 {source === DataSourceValue.Instagram && <InstagramIcon sx={{ mr: 1, mt: 0.5 }} />}
+                                {source === DataSourceValue.IMessage && <IMessageIcon sx={{ mr: 1, mt: 0.5 }} />}
                                 <Typography variant="h6">
-                                    {donation.t("datasource-title_format", { datasource: source })}
+                                    {donation.t("datasource-title_format", { datasource: source == DataSourceValue.IMessage ? "iMessage" : source })}
                                 </Typography>
                             </AccordionSummary>
                             <AccordionDetails>

@@ -12,7 +12,7 @@ const IMessageIcon = (props: SvgIconProps) => (
             <desc>Imessage Logo Streamline Icon: https://streamlinehq.com</desc>
             <path
                 strokeLinecap="round"
-                stroke-linejoin="round"
+                strokeLinejoin="round"
                 d="M12 20.5c5.799 0 10.5 -4.03 10.5 -9s-4.701 -9 -10.5 -9 -10.5 4.03 -10.5 9c0 3.13 1.865 5.888 4.694 7.5 0 1.412 -1.694 3 -1.694 3 1.211 0.136 3.87 -0.034 4.817 -1.797 0.856 0.194 1.756 0.297 2.683 0.297Z"
             />
         </svg>

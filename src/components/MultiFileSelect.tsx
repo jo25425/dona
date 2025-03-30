@@ -18,7 +18,7 @@ import styled from "@mui/material/styles/styled";
 
 const UploadAlert = styled((props: AlertProps) => (
     <Alert severity="error" {...props} />
-))(({ theme }) => ({
+))(({theme}) => ({
     marginTop: theme.spacing(2),
     marginBottom: theme.spacing(2),
     width: '100%',
@@ -29,8 +29,13 @@ interface MultiFileSelectProps {
     onDonatedConversationsChange: (newDonatedConversations: Conversation[]) => void;
 }
 
-const MultiFileSelect: React.FC<MultiFileSelectProps> = ({ dataSourceValue, onDonatedConversationsChange }) => {
+const MultiFileSelect: React.FC<MultiFileSelectProps> = ({dataSourceValue, onDonatedConversationsChange}) => {
     const t = useTranslations('donation');
+    const acceptedFileTypes = (
+        dataSourceValue == DataSourceValue.WhatsApp ? ".txt, .zip" :
+            dataSourceValue == DataSourceValue.IMessage ? ".db" :
+                ".zip"
+    );
 
     // States
     const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
@@ -53,13 +58,13 @@ const MultiFileSelect: React.FC<MultiFileSelectProps> = ({ dataSourceValue, onDo
 
         try {
             const result = await anonymizeData(dataSourceValue, files);
-            const { minDate, maxDate } = calculateMinMaxDates(result.anonymizedConversations);
+            const {minDate, maxDate} = calculateMinMaxDates(result.anonymizedConversations);
             setAnonymizationResult(result);
             setCalculatedRange([minDate, maxDate]);
             setFilteredConversations(result.anonymizedConversations);
             onDonatedConversationsChange(result.anonymizedConversations); // Update data for parent
         } catch (err) {
-            const errorMessage = getErrorMessage(t, err as Error, { count: selectedFiles.length });
+            const errorMessage = getErrorMessage(t, err as Error, {count: selectedFiles.length});
             setError(errorMessage);
         } finally {
             setIsLoading(false);
@@ -84,12 +89,16 @@ const MultiFileSelect: React.FC<MultiFileSelectProps> = ({ dataSourceValue, onDo
             <Typography sx={{fontWeight: "bold"}} gutterBottom>
                 {t('select-data.instruction')}
             </Typography>
-            <FileUploadButton onChange={handleFileSelection} loading={isLoading} />
+            <FileUploadButton
+                onChange={handleFileSelection}
+                loading={isLoading}
+                accept={acceptedFileTypes}
+            />
 
             {/* Show selected files for feedback */}
             {selectedFiles.length > 0 && (
-                <Box sx={{ my: 3, width: '100%' }}>
-                    <FileList files={selectedFiles} />
+                <Box sx={{my: 3, width: '100%'}}>
+                    <FileList files={selectedFiles}/>
                     {error && <UploadAlert>{error}</UploadAlert>}
                 </Box>
             )}

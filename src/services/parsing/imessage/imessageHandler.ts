@@ -1,68 +1,32 @@
-import initSqlJs from 'sql.js';
-import { AnonymizationResult, Conversation, DataSourceValue, Message, MessageAudio } from '@/models/processed';
-import { ContactPseudonyms, ChatPseudonyms } from '@/services/parsing/shared/pseudonyms';
-import {getAliasConfig} from "@services/parsing/shared/aliasConfig";
+import {Database} from 'sql.js';
 
-export default async function handleImessageDBFiles(file: File): Promise<AnonymizationResult> {
-    const SQL = await initSqlJs();
-    const buffer = await file.arrayBuffer();
-    const db = new SQL.Database(new Uint8Array(buffer));
+import {AnonymizationResult, Conversation, DataSourceValue, Message, MessageAudio} from '@/models/processed';
+import {ChatPseudonyms, ContactPseudonyms} from '@/services/parsing/shared/pseudonyms';
+import {getAliasConfig} from '@services/parsing/shared/aliasConfig';
+import {DonationErrors, DonationValidationError} from '@services/errors';
+
+export default async function handleImessageDBFiles(files: File[]): Promise<AnonymizationResult> {
+    if (files.length !== 1) {
+        throw DonationValidationError(DonationErrors.NotSingleDBFile);
+    }
+
+    // Get data from database
+    const db = await createDatabase(files[0]);  // Create a database using the file data
+    const messages: any[] = getMessages(db);
+    const groupChats: Set<string> = getGroupChats(db);
+    db.close();
+
     const aliasConfig = getAliasConfig();
-    let donorName = ''; // Example donor ID
-
-    // Query to get messages
-    const messages: any[] = [];
-    const messagesStmt = db.prepare(`
-        SELECT COALESCE(m.text, '') AS text,
-               m.date,
-               COALESCE(m.handle_id, 0) AS handle_id,
-               COALESCE(c.group_id, '') AS group_id,
-               COALESCE(c.room_name, '') AS room_name,
-               COALESCE(m.is_from_me, 0) AS is_from_me,
-               COALESCE(m.is_audio_message, 0) AS is_audio_message,
-               COALESCE(m.error, 0) AS error,
-               COALESCE(a.mime_type, '') AS mime_type
-        FROM message m
-                 LEFT JOIN chat_message_join cmj ON m.ROWID = cmj.message_id
-                 LEFT JOIN chat c ON cmj.chat_id = c.ROWID
-                 LEFT JOIN message_attachment_join maj ON maj.message_id = m.ROWID
-                 LEFT JOIN attachment a ON maj.attachment_id = a.ROWID
-        WHERE m.error = 0 AND c.group_id IS NOT NULL;
-    `);
-    while (messagesStmt.step()) {
-        const row = messagesStmt.getAsObject();
-        messages.push(row);
-    }
-    messagesStmt.free();
-    // console.log("Messages:", messages.length);
-
-    // Query to get group chat information
-    const groupChats = new Set<string>();
-    const groupInfoStmt = db.prepare(`
-        SELECT group_id, COUNT(DISTINCT COALESCE(room_name, '')) as rmc
-        FROM chat
-        GROUP BY group_id;
-    `);
-
-    while (groupInfoStmt.step()) {
-        const row = groupInfoStmt.getAsObject();
-        if (Number(row.rmc ?? 0) > 0) {
-            groupChats.add(String(row.group_id ?? ''));
-        }
-    }
-    groupInfoStmt.free();
-    // console.log(groupChats);
-
+    let donorName = '';
     const conversationsMap = new Map<string, Conversation>();
     const contactPseudonyms = new ContactPseudonyms(aliasConfig.contactAlias);
     const chatPseudonyms = new ChatPseudonyms(aliasConfig.donorAlias, aliasConfig.chatAlias, DataSourceValue.IMessage);
 
     messages.forEach(row => {
         const timestamp = Number(row.date) / 1000000000 + 978307200;
-        // TODO: Get sender name from handle_id
         const sender: string = row.handle_id?.toString() || 'Unknown';
 
-         // Set donor ID once found
+        // Set donor ID once found
         if (row.is_from_me && !donorName) {
             donorName = sender;
             chatPseudonyms.setDonorName(donorName);
@@ -74,6 +38,7 @@ export default async function handleImessageDBFiles(file: File): Promise<Anonymi
 
         const pseudonym = contactPseudonyms.getPseudonym(sender);
 
+        // Create a new conversation if it doesn't exist
         if (!conversationsMap.has(conversationId)) {
             conversationsMap.set(conversationId, {
                 id: conversationId,
@@ -86,6 +51,7 @@ export default async function handleImessageDBFiles(file: File): Promise<Anonymi
             });
         }
 
+        // Add message to the conversation
         const conversation = conversationsMap.get(conversationId);
         if (conversation) {
             if (!conversation.participants.includes(pseudonym)) {
@@ -115,11 +81,69 @@ export default async function handleImessageDBFiles(file: File): Promise<Anonymi
         conversation.conversationPseudonym = chatPseudonyms.getPseudonym(participants);
     });
 
-    db.close();
-
     return {
         anonymizedConversations: Array.from(conversationsMap.values()),
         participantNamesToPseudonyms: contactPseudonyms.getPseudonymMap(),
         chatMappingToShow: chatPseudonyms.getPseudonymMap()
     };
+}
+
+async function createDatabase(file: File): Promise<Database> {
+    const sqlPromise = import('sql.js/dist/sql-wasm.js');
+    const SQL = await sqlPromise;
+    const sqlWasm = await SQL.default({
+        locateFile: (file: string) => `/sql-wasm/${file}`
+    });
+
+    // Read the file as an ArrayBuffer
+    const fileBuffer = await file.arrayBuffer();
+    // Create a database using the file data
+    return new sqlWasm.Database(new Uint8Array(fileBuffer));
+}
+
+// Helper function to get messages from the database
+function getMessages(db: Database): any[] {
+    const messages: any[] = [];
+    const messagesStmt = db.prepare(`
+        SELECT COALESCE(m.text, '') AS text,
+               m.date,
+               COALESCE(m.handle_id, 0) AS handle_id,
+               COALESCE(c.group_id, '') AS group_id,
+               COALESCE(c.room_name, '') AS room_name,
+               COALESCE(m.is_from_me, 0) AS is_from_me,
+               COALESCE(m.is_audio_message, 0) AS is_audio_message,
+               COALESCE(m.error, 0) AS error,
+               COALESCE(a.mime_type, '') AS mime_type
+        FROM message m
+                 LEFT JOIN chat_message_join cmj ON m.ROWID = cmj.message_id
+                 LEFT JOIN chat c ON cmj.chat_id = c.ROWID
+                 LEFT JOIN message_attachment_join maj ON maj.message_id = m.ROWID
+                 LEFT JOIN attachment a ON maj.attachment_id = a.ROWID
+        WHERE m.error = 0 AND c.group_id IS NOT NULL;
+    `);
+    while (messagesStmt.step()) {
+        const row = messagesStmt.getAsObject();
+        messages.push(row);
+    }
+    messagesStmt.free();
+    return messages;
+}
+
+// Helper function to get chat information from the database
+function getGroupChats(db: Database): Set<string> {
+    const groupChats = new Set<string>();
+    const groupInfoStmt = db.prepare(`
+        SELECT group_id, COUNT(DISTINCT COALESCE(room_name, '')) as rmc
+        FROM chat
+        GROUP BY group_id;
+    `);
+
+    while (groupInfoStmt.step()) {
+        const row = groupInfoStmt.getAsObject();
+        if (Number(row.rmc ?? 0) > 0) {
+            groupChats.add(String(row.group_id ?? ''));
+        }
+    }
+    groupInfoStmt.free();
+    return groupChats;
 }

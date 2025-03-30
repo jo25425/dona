@@ -284,11 +284,7 @@
     },
     "contacts-mapping": {
       "title": "Decknamen Ihrer Kontakte:",
-      "subtitle": {
-        "facebook": "Wir haben Ihre Daten und Ihre Kontakte anonymisiert. Falls Sie in der anonymisierten Auswertung im nächsten Schritt rekonstruieren wollen, um welche Konversationen und Kontakte es sich jeweils handelt, notieren Sie sich die folgenden Zuordnungen von Kontakten (z.B. A**** B*****) und Chatnamen (z.B. “F4”). Ab jetzt sind dies die anonymisierten Decknamen für Ihre Chats. Die Zuordnung wird nicht gespeichert und geht verloren, sobald Sie diese Seite verlassen.",
-        "whatsapp": "Wir haben Ihre Daten und Ihre Kontakte anonymisiert. Falls Sie in der anonymisierten Auswertung im nächsten Schritt rekonstruieren wollen, um welche Konversationen und Kontakte es sich jeweils handelt, notieren Sie sich die folgenden Zuordnungen von Kontakten (z.B. A**** B*****) und Chatnamen (z.B. “W4” ). Ab jetzt sind dies die anonymisierten Decknamen für Ihre Chats. Die Zuordnung wird nicht gespeichert und geht verloren, sobald Sie diese Seite verlassen.",
-        "instagram": "Wir haben Ihre Daten und Ihre Kontakte anonymisiert. Falls Sie in der anonymisierten Auswertung im nächsten Schritt rekonstruieren wollen, um welche Konversationen und Kontakte es sich jeweils handelt, notieren Sie sich die folgenden Zuordnungen von Kontakten (z.B. A**** B*****) und Chatnamen (z.B. “I4”). Ab jetzt sind dies die anonymisierten Decknamen für Ihre Chats. Die Zuordnung wird nicht gespeichert und geht verloren, sobald Sie diese Seite verlassen."
-      },
+      "subtitle": "Wir haben Ihre Daten und Ihre Kontakte anonymisiert. Falls Sie in der anonymisierten Auswertung im nächsten Schritt rekonstruieren wollen, um welche Konversationen und Kontakte es sich jeweils handelt, notieren Sie sich die folgenden Zuordnungen von Kontakten (z.B. A**** B*****) und Chatnamen (z.B. \"{dataSourceInitials}4\"). Ab jetzt sind dies die anonymisierten Decknamen für Ihre Chats. Die Zuordnung wird nicht gespeichert und geht verloren, sobald Sie diese Seite verlassen.",
       "pseudonyms": "Pseudonyme",
       "contacts": "Kontakte",
       "onlySeven": "Dies sind nur die Kontakte Ihrer 7 Chats, in denen insgesamt die meisten Wörter gesendet wurden. <b>Unten können Sie auch andere Chats auswählen. </b>",

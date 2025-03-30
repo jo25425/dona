@@ -3,9 +3,10 @@ import {useTranslations} from 'next-intl';
 import {Button, Divider, List, ListItem, ListItemIcon, ListItemText} from '@mui/material';
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 
-export function FileUploadButton({ onChange, loading }: {
+export function FileUploadButton({ onChange, loading, accept }: {
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     loading: boolean;
+    accept: string;
 }) {
     const t = useTranslations('donation');
 
@@ -16,7 +17,7 @@ export function FileUploadButton({ onChange, loading }: {
                 type="file"
                 hidden
                 multiple
-                accept=".txt,.zip"
+                accept={accept}
                 onChange={onChange}
             />
         </Button>

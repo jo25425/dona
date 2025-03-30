@@ -10,6 +10,7 @@ export enum DonationErrors {
     NoFiles = "NoFiles",
     SameFiles = "SameFiles",
     Not5to7Files = "Not5to7Files",
+    NotSingleDBFile = "NotSingleDBFile",
     TooFewContactsOrMessages = "TooFewContactsOrMessages",
     NoProfile = "NoProfile",
     NoMessageEntries = "NoMessageEntries",

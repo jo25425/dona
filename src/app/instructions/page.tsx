@@ -15,7 +15,7 @@ import DatasourceSpecificInstructions from "@components/DatasourceSpecificInstru
 import ConsentModal from "@/components/ConsentModal";
 import {useRichTranslations} from '@/hooks/useRichTranslations';
 import {DataSourceValue} from "@models/processed";
-import IMessageIcon from "@components/IMessageIcon";
+import IMessageIcon from "@components/CustomIcon";
 
 
 export default function Instructions() {

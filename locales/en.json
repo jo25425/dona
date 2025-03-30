@@ -317,11 +317,7 @@
     },
     "contacts-mapping": {
       "title": "Aliases of your contacts:",
-      "subtitle": {
-        "facebook": "We have anonymized your data and your contacts. If, in the next step, you want to reconstruct which conversations and contacts are involved in the anonymized evaluation, make a note of the following assignments of contacts (e.g. A**** B*****) and chats (e.g. “F4\"). From now on, these are the anonymized names for your chats. The assignment is not saved and is lost as soon as you leave this page.",
-        "whatsapp": "We have anonymized your data and your contacts. If, in the next step, you want to reconstruct which conversations and contacts are involved in the anonymized evaluation, make a note of the following assignments of contacts (e.g. A**** B*****) and chats (e.g. “W4\"). From now on, these are the anonymized names for your chats. The assignment is not saved and is lost as soon as you leave this page.",
-        "instagram": "We have anonymized your data and your contacts. If, in the next step, you want to reconstruct which conversations and contacts are involved in the anonymized evaluation, make a note of the following assignments of contacts (e.g. A**** B*****) and chats (e.g. “I4\"). From now on, these are the anonymized names for your chats. The assignment is not saved and is lost as soon as you leave this page."
-      },
+      "subtitle": "We have anonymized your data and your contacts. If, in the next step, you want to reconstruct which conversations and contacts are involved in the anonymized evaluation, make a note of the following assignments of contacts (e.g. A**** B*****) and chats (e.g. \"{dataSourceInitials}4\"). From now on, these are the anonymized names for your chats. The assignment is not saved and is lost as soon as you leave this page.",
       "pseudonyms": "Pseudonyms",
       "contacts": "Contacts",
       "onlySeven": "These are just the contacts of your 7 chats in which overall the most words were sent. <b> Below you can also select different chats. </b>",
@@ -369,6 +365,7 @@
       "NoProfile": "The uploaded data does not include profile information.",
       "SameFiles": "You can only select files that differ. Please choose your 5-7 most important conversations.",
       "Not5to7Files_format": "Please choose your 5-7 most important conversations. You have selected {count}. Press and hold the ctrl/command key to select multiple files at the same time.",
+      "NotSingleFile": "Please choose a single .db file. You can only donate one file of this type at a time.",
       "TooFewContactsOrMessages": "All your chats should contain at least 100 messages and at least one contact (other than yourself).",
       "NonsenseDateRange": "The selected period is not valid. Please check the correctness of the selected dates.",
       "NoMessagesInRange": "There are no messages in the selected period. Please select a longer and valid period.",
