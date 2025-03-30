@@ -18,13 +18,18 @@ const nextConfig = {
         NEXT_PUBLIC_FEEDBACK_SURVEY_LINK: env.FEEDBACK_SURVEY_LINK
     },
     webpack: (config) => {
-        // This line is crucial - it ignores the fs module
+        // Ignores fs module so that sql.js can be used in the browser
         config.resolve.fallback = {
             ...config.resolve.fallback,
             fs: false,
             path: false,
             crypto: false
         };
+        // Allows loading svg from .svg file
+        config.module.rules.push({
+            test: /\.svg$/,
+            use: ['@svgr/webpack'],
+        });
         return config;
     },
 };

@@ -16,6 +16,7 @@
     "@mui/icons-material": "^6.4.8",
     "@mui/material": "^6.4.8",
     "@mui/x-date-pickers": "^7.28.0",
+    "@svgr/webpack": "^8.1.0",
     "@types/js-cookie": "^3.0.6",
     "@types/lodash": "^4.17.16",
     "@zip.js/zip.js": "^2.7.57",

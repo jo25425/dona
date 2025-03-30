@@ -58,7 +58,7 @@ export default function Footer() {
                         <Stack direction="row" spacing={2} alignItems="center" sx={{ flexWrap: "wrap", justifyContent: "center" }}>
                             <Link href="https://www.bmbf.de/" target="_blank">
                                 <Image
-                                    src="images/BMBF_logo.svg"
+                                    src="images/logos/BMBF_logo.svg"
                                     alt="Bundesministerium für Bildung und Forschung (BMBF) logo"
                                     width={90}
                                     height={50}
@@ -66,7 +66,7 @@ export default function Footer() {
                             </Link>
                             <Link href="https://www.hpi.de" target="_blank">
                                 <Image
-                                    src="images/HPI_logo.svg"
+                                    src="images/logos/HPI_logo.svg"
                                     alt="Hasso Plattner Institut (HPI) logo"
                                     width={90}
                                     height={50}
@@ -74,7 +74,7 @@ export default function Footer() {
                             </Link>
                             <Link href="https://www.data4life.care/" target="_blank">
                                 <Image
-                                    src="images/data4life-blueLogo.svg"
+                                    src="images/logos/data4life-blueLogo.svg"
                                     alt="Data 4 Life logo"
                                     width={80}
                                     height={50}

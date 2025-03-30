@@ -8,14 +8,11 @@ import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import FacebookIcon from '@mui/icons-material/Facebook';
-import InstagramIcon from '@mui/icons-material/Instagram';
-import WhatsappIcon from '@mui/icons-material/WhatsApp';
 import DatasourceSpecificInstructions from "@components/DatasourceSpecificInstructions";
 import ConsentModal from "@/components/ConsentModal";
 import {useRichTranslations} from '@/hooks/useRichTranslations';
 import {DataSourceValue} from "@models/processed";
-import IMessageIcon from "@components/CustomIcon";
+import {FacebookIcon, IMessageIcon, InstagramIcon, WhatsAppIcon} from "@components/CustomIcon";
 
 
 export default function Instructions() {
@@ -41,7 +38,7 @@ export default function Instructions() {
                     {/* WhatsApp */}
                     <Accordion sx={{my: 1}}>
                         <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
-                            <WhatsappIcon sx={{mr: 1, mt: 0.5}}/>
+                            <WhatsAppIcon sx={{mr: 1, mt: 0.5}}/>
                             <Typography variant="h6">
                                 {instructions.t("datasource.title-format", {datasource: "Whatsapp"})}
                             </Typography>

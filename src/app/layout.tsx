@@ -48,7 +48,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
                         }}
                     >
                         <Image
-                            src="/images/uni-bielefeld-logo.svg"
+                            src="/images/logos/uni-bielefeld-logo.svg"
                             alt="Universität Bielefeld"
                             width={150}
                             height={75}
