@@ -28,6 +28,7 @@ import {getErrorMessage} from "@services/errors";
 import IMessageIcon from "@components/CustomIcon";
 
 type ConversationsBySource = Record<DataSourceValue, Conversation[]>;
+type SelectedChatsBySource = Record<DataSourceValue, Set<string>>;
 
 export default function DataDonationPage() {
     const router = useRouter();
@@ -37,6 +38,7 @@ export default function DataDonationPage() {
     const aliasConfig = useAliasConfig();
     const { setDonationData, loadExternalDonorIdFromCookie, externalDonorId } = useDonation();
     const [allDonatedConversationsBySource, setAllDonatedConversationsBySource] = useState<ConversationsBySource>({} as ConversationsBySource);
+    const [selectedChatsBySource, setSelectedChatsBySource] = useState<SelectedChatsBySource>({} as SelectedChatsBySource);
     const [loading, setLoading] = useState(false);
     const [validated, setValidated] = useState(false);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -47,6 +49,10 @@ export default function DataDonationPage() {
         }
     }, [externalDonorId]);
 
+    useEffect(() => {
+        console.log("Selected chats are now:", selectedChatsBySource);
+    }, [selectedChatsBySource]);
+
     const handleDonatedConversationsChange = (dataSource: DataSourceValue, newConversations: Conversation[]) => {
         setAllDonatedConversationsBySource((prev) => ({
             ...prev,
@@ -55,8 +61,11 @@ export default function DataDonationPage() {
         setValidated(true);
     };
 
-    const donationChangeWrapper = (dataSource: DataSourceValue) => {
-        return (newConversations: Conversation[]) => handleDonatedConversationsChange(dataSource, newConversations);
+    const handleSelectedChatsChange = (dataSource: DataSourceValue, newSelectedChats: Set<string>) => {
+        setSelectedChatsBySource((prev) => ({
+            ...prev,
+            [dataSource]: newSelectedChats,
+        }));
     };
 
     const onDataDonationUpload = async () => {
@@ -121,7 +130,8 @@ export default function DataDonationPage() {
                             <AccordionDetails>
                                 <MultiFileSelect
                                     dataSourceValue={source}
-                                    onDonatedConversationsChange={donationChangeWrapper(source)}
+                                    onDonatedConversationsChange={(newConversations) => handleDonatedConversationsChange(source, newConversations)}
+                                    onSelectedChatsChange={(newSelectedChats) => handleSelectedChatsChange(source, newSelectedChats)}
                                 />
                             </AccordionDetails>
                         </Accordion>
@@ -142,3 +152,4 @@ export default function DataDonationPage() {
         </Container>
     );
 }
+

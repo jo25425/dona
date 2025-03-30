@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {useTranslations} from "next-intl";
 import {ChatMapping, Conversation, DataSourceValue} from "@models/processed";
 import Alert from "@mui/material/Alert";
@@ -15,6 +15,8 @@ import Typography from "@mui/material/Typography";
 import AnonymizationModal from "@components/AnonymizationModal";
 import CheckIcon from '@mui/icons-material/Check';
 import styled from "@mui/material/styles/styled";
+import Checkbox from "@mui/material/Checkbox";
+import {useAliasConfig} from "@services/parsing/shared/aliasConfig";
 
 const ResponsiveTableCell = styled(TableCell)<TableCellProps>(({ theme }) => ({
     paddingLeft: theme.spacing(1),
@@ -29,16 +31,30 @@ interface AnonymizationPreviewProps {
     dataSourceValue: DataSourceValue;
     anonymizedConversations: Conversation[];
     chatMappingToShow: ChatMapping;
+    onSelectedChatsChange: (selectedChats: Set<string>) => void;
 }
 
 const AnonymizationPreview: React.FC<AnonymizationPreviewProps> = (
-    {dataSourceValue, anonymizedConversations, chatMappingToShow}
+    {dataSourceValue, anonymizedConversations, chatMappingToShow, onSelectedChatsChange}
 ) => {
     const t = useTranslations("donation");
+    const aliasConfig = useAliasConfig();
     const [isModalOpen, setModalOpen] = React.useState(false);
+    const [selectedChats, setSelectedChats] = useState<Set<string>>(new Set(chatMappingToShow.keys())); // Initialize with all keys
 
     const handleOpenModal = () => setModalOpen(true);
     const handleCloseModal = () => setModalOpen(false);
+
+    const handleCheckboxChange = (chatPseudonym: string) => {
+        const newSelectedChats = new Set(selectedChats);
+        if (newSelectedChats.has(chatPseudonym)) {
+            newSelectedChats.delete(chatPseudonym);
+        } else {
+            newSelectedChats.add(chatPseudonym);
+        }
+        setSelectedChats(newSelectedChats);
+        onSelectedChatsChange(newSelectedChats);
+    };
 
     return (
         <Box sx={{ my: 1 }}>
@@ -52,6 +68,7 @@ const AnonymizationPreview: React.FC<AnonymizationPreviewProps> = (
                 <Table size="small" aria-label="pseudonyms table">
                     <TableHead>
                         <TableRow sx={{ "th": { fontWeight: "bold" } }}>
+                            <ResponsiveTableCell padding="checkbox" />
                             <ResponsiveTableCell>{t('contacts-mapping.pseudonyms')}</ResponsiveTableCell>
                             <ResponsiveTableCell>{t('contacts-mapping.contacts')}</ResponsiveTableCell>
                         </TableRow>
@@ -62,6 +79,14 @@ const AnonymizationPreview: React.FC<AnonymizationPreviewProps> = (
                                 key={chatPseudonym}
                                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                             >
+                                <ResponsiveTableCell padding="checkbox">
+                                    {chatPseudonym != aliasConfig.donorAlias && (
+                                        <Checkbox
+                                            checked={selectedChats.has(chatPseudonym)}
+                                            onChange={() => handleCheckboxChange(chatPseudonym)}
+                                        />
+                                    )}
+                                </ResponsiveTableCell>
                                 <ResponsiveTableCell component="th" scope="row">{chatPseudonym}</ResponsiveTableCell>
                                 <ResponsiveTableCell>{chatParticipants.join(", ")}</ResponsiveTableCell>
                             </TableRow>
@@ -95,3 +120,4 @@ const AnonymizationPreview: React.FC<AnonymizationPreviewProps> = (
 };
 
 export default AnonymizationPreview;
+
