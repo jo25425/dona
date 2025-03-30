@@ -52,7 +52,7 @@ const AnimatedIntensityPolarChart: React.FC<AnimatedIntensityPolarChartProps> = 
         const conversationData = frames[monthKey] || [];
 
         return {
-            labels: listOfConversations, // Angular positions
+            labels: listOfConversations,
             datasets: [
                 {
                     label: chartTexts("legend.others"),
@@ -62,9 +62,10 @@ const AnimatedIntensityPolarChart: React.FC<AnimatedIntensityPolarChartProps> = 
                     pointHoverRadius: 12,
                     borderWidth: 0,
                 },
+                // Donor data
                 {
                     label: chartTexts("legend.donor"),
-                    data: [Z_SCORE_LIMIT + Z_SCORE_LIMIT * 0.5], // Donor data
+                    data: [Z_SCORE_LIMIT + Z_SCORE_LIMIT * 0.5],
                     pointBackgroundColor: "#FFD700",
                     pointRadius: 15,
                     pointHoverRadius: 17,
@@ -91,6 +92,8 @@ const AnimatedIntensityPolarChart: React.FC<AnimatedIntensityPolarChartProps> = 
                         chartId={container_name}
                         fileNamePrefix={CHART_NAME}
                         currentLabel={labels[currentFrame]}
+                        color="#d5d5d5"
+                        labelsBelow={true}
                     />
                 </Box>
                 <Box

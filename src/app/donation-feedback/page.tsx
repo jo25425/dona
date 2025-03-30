@@ -76,7 +76,7 @@ export default function DonationFeedbackPage() {
 
                 {feedbackData && (
                     <>
-                        <Alert severity="warning">
+                        <Alert severity="info">
                             <Typography variant="body1">{feedback.t("important-message.title")}</Typography>
                             <Typography variant="body2">{feedback.rich("important-message.disclaimer")}</Typography>
                         </Alert>

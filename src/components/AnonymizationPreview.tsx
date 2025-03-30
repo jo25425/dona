@@ -42,6 +42,11 @@ const AnonymizationPreview: React.FC<AnonymizationPreviewProps> = (
     const [isModalOpen, setModalOpen] = React.useState(false);
     const [selectedChats, setSelectedChats] = useState<Set<string>>(new Set(chatMappingToShow.keys())); // Initialize with all keys
 
+    // Use function from parent to feedback changes to selected chats
+    useEffect(() => {
+        onSelectedChatsChange(selectedChats);
+    }, [selectedChats]);
+
     const handleOpenModal = () => setModalOpen(true);
     const handleCloseModal = () => setModalOpen(false);
 
@@ -53,7 +58,6 @@ const AnonymizationPreview: React.FC<AnonymizationPreviewProps> = (
             newSelectedChats.add(chatPseudonym);
         }
         setSelectedChats(newSelectedChats);
-        onSelectedChatsChange(newSelectedChats);
     };
 
     return (

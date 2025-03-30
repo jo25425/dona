@@ -46,10 +46,6 @@ export default function DataDonationPage() {
         }
     }, [externalDonorId]);
 
-    useEffect(() => {
-        console.log("Selected chats are now:", selectedChatsBySource);
-    }, [selectedChatsBySource]);
-
     const handleDonatedConversationsChange = (dataSource: DataSourceValue, newConversations: Conversation[]) => {
         setAllDonatedConversationsBySource((prev) => ({
             ...prev,
@@ -69,7 +65,11 @@ export default function DataDonationPage() {
         setLoading(true);
         setErrorMessage(null);
 
-        const allConversations = Object.values(allDonatedConversationsBySource).flat();
+        const allConversations = Object.entries(allDonatedConversationsBySource).flatMap(([dataSource, conversations]) => {
+            const selectedChats = selectedChatsBySource[dataSource as DataSourceValue] || new Set();
+            return conversations.filter(conversation => selectedChats.has(conversation.conversationPseudonym));
+        });
+
         if (allConversations.length > 0) {
             try {
                 const result = await addDonation(allConversations, aliasConfig.donorAlias, externalDonorId);
