@@ -36,7 +36,6 @@ export default function DataDonationPage() {
     const aliasConfig = useAliasConfig();
     const { setDonationData, loadExternalDonorIdFromCookie, externalDonorId } = useDonation();
     const [allDonatedConversationsBySource, setAllDonatedConversationsBySource] = useState<ConversationsBySource>({} as ConversationsBySource);
-    const [donationChatsBySource, setDonationChatsBySource] = useState<SelectedChatsBySource>({} as SelectedChatsBySource);
     const [feedbackChatsBySource, setFeedbackChatsBySource] = useState<SelectedChatsBySource>({} as SelectedChatsBySource);
     const [loading, setLoading] = useState(false);
     const [validated, setValidated] = useState(false);
@@ -56,13 +55,6 @@ export default function DataDonationPage() {
         setValidated(true);
     };
 
-    const handleDonationChatsChange = (dataSource: DataSourceValue, newDonationChats: Set<string>) => {
-        setDonationChatsBySource((prev) => ({
-            ...prev,
-            [dataSource]: newDonationChats,
-        }));
-    };
-
     const handleFeedbackChatsChange = (dataSource: DataSourceValue, newFeedbackChats: Set<string>) => {
         setFeedbackChatsBySource((prev) => ({
             ...prev,
@@ -75,10 +67,8 @@ export default function DataDonationPage() {
         setErrorMessage(null);
 
         const allConversations = Object.entries(allDonatedConversationsBySource).flatMap(([dataSource, conversations]) => {
-            const selectedChats = donationChatsBySource[dataSource as DataSourceValue] || new Set();
             const feedbackChats = feedbackChatsBySource[dataSource as DataSourceValue] || new Set();
             return conversations
-                .filter(conversation => selectedChats.has(conversation.conversationPseudonym))
                 .map(conversation => ({
                     ...conversation,
                     includeInFeedback: feedbackChats.has(conversation.conversationPseudonym)
@@ -144,7 +134,6 @@ export default function DataDonationPage() {
                                 <MultiFileSelect
                                     dataSourceValue={source}
                                     onDonatedConversationsChange={(newConversations) => handleDonatedConversationsChange(source, newConversations)}
-                                    onDonationChatsChange={(newDonationChats) => handleDonationChatsChange(source, newDonationChats)}
                                     onFeedbackChatsChange={(newFeedbackChats) => handleFeedbackChatsChange(source, newFeedbackChats)}
                                 />
                             </AccordionDetails>
@@ -166,4 +155,3 @@ export default function DataDonationPage() {
         </Container>
     );
 }
-

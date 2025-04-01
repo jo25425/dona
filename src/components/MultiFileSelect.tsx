@@ -27,11 +27,10 @@ const UploadAlert = styled((props: AlertProps) => (
 interface MultiFileSelectProps {
     dataSourceValue: DataSourceValue;
     onDonatedConversationsChange: (newDonatedConversations: Conversation[]) => void;
-    onDonationChatsChange: (newDonationChats: Set<string>) => void;
     onFeedbackChatsChange: (newFeedbackChats: Set<string>) => void;
 }
 
-const MultiFileSelect: React.FC<MultiFileSelectProps> = ({dataSourceValue, onDonatedConversationsChange, onDonationChatsChange, onFeedbackChatsChange}) => {
+const MultiFileSelect: React.FC<MultiFileSelectProps> = ({dataSourceValue, onDonatedConversationsChange, onFeedbackChatsChange}) => {
     const t = useTranslations('donation');
     const acceptedFileTypes = (
         dataSourceValue == DataSourceValue.WhatsApp ? ".txt, .zip" :
@@ -119,7 +118,6 @@ const MultiFileSelect: React.FC<MultiFileSelectProps> = ({dataSourceValue, onDon
                         dataSourceValue={dataSourceValue}
                         anonymizedConversations={filteredConversations}
                         chatMappingToShow={anonymizationResult.chatMappingToShow}
-                        onSelectedChatsChange={onDonationChatsChange}
                         onFeedbackChatsChange={onFeedbackChatsChange}
                     />
                 </Box>

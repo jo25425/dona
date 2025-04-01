@@ -326,7 +326,7 @@
       "moreContacts": "and {0} others.",
       "onlyYouInConv": "You are the only member in this chat. This could be because the other people have left the chat."
     },
-    "chat-selection": "You can select up to 10 chats to receive feedback for, but you <b>must</b> select at least 5, so that the feedback given to you cannot be considered the analysis of some specific personal data",
+    "chat-selection": "You can select up to {max_num} chats to receive feedback for, but you <b>must</b> select at least {min_num}, so that the feedback given to you cannot be considered the analysis of some specific personal data. The ones currently selected are the {default_num} with the highest word count in messages.",
     "sendData": {
       "wait": "Sending the data could take a few minutes. Please wait and keep this website open. Thanks!"
     },

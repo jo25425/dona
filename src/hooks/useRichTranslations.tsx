@@ -46,6 +46,7 @@ export function useRichTranslations(namespace: string) {
                     em: (content) => <em>{content}</em>,
                     strong: (content) => <strong>{content}</strong>,
                     email: (address) => <a href={"mailto:" + address}>{address}</a>,
+                    ...urlKeys // Ensure placeholders are included
                 }),
             link: linkHandler, // Standalone function for direct use
         },

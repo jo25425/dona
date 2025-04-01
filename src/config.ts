@@ -7,3 +7,10 @@ export const localeNames: Record<Locale, string> = {
     "hy": "Armenian"
 };
 export const defaultLocale: Locale = 'en';
+
+export const CONFIG = {
+    MIN_MESSAGES_PER_CHAT: 100,
+    MAX_FEEDBACK_CHATS: 10,
+    MIN_FEEDBACK_CHATS: 3,
+    DEFAULT_FEEDBACK_CHATS: 5,
+};
