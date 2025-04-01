@@ -11,9 +11,9 @@ export default async function handleImessageDBFiles(files: File[]): Promise<Anon
     }
 
     // Get data from database
-    const db = await createDatabase(files[0]);  // Create a database using the file data
+    const db = await createDatabase(files[0]);
     const messages: any[] = getMessages(db);
-    const groupChats: Set<string> = getGroupChats(db);
+    const groupChats: Map<string, string> = getGroupChats(db);
     db.close();
 
     const aliasConfig = getAliasConfig();
@@ -21,9 +21,13 @@ export default async function handleImessageDBFiles(files: File[]): Promise<Anon
     const conversationsMap = new Map<string, Conversation>();
     const contactPseudonyms = new ContactPseudonyms(aliasConfig.contactAlias);
     const chatPseudonyms = new ChatPseudonyms(aliasConfig.donorAlias, aliasConfig.chatAlias, DataSourceValue.IMessage);
+    const macEpochTime = new Date('2001-01-01T00:00:00Z').getTime();
+
 
     messages.forEach(row => {
-        const timestamp = Number(row.date) / 1000000000 + 978307200;
+        const timestampSinceMachEpoch = Number(row.date) / 1e6; // Convert nanoseconds to milliseconds
+        const timestamp = macEpochTime + timestampSinceMachEpoch;
+
         const sender: string = row.handle_id?.toString() || 'Unknown';
 
         // Set donor ID once found
@@ -35,6 +39,7 @@ export default async function handleImessageDBFiles(files: File[]): Promise<Anon
         const conversationId = row.group_id?.toString() || 'Unknown';
         const isGroupConversation = groupChats.has(conversationId);
         const isAudioMessage = Number(row.is_audio_message ?? 0) > 0;
+        const isMedia = row.mime_type !== ''; // Flag for media presence, yet to be used
 
         const pseudonym = contactPseudonyms.getPseudonym(sender);
 
@@ -60,7 +65,7 @@ export default async function handleImessageDBFiles(files: File[]): Promise<Anon
 
             if (isAudioMessage) {
                 conversation.messagesAudio.push({
-                    lengthSeconds: 0, // Placeholder, calculate if needed
+                    lengthSeconds: 0, // Not calculated for iMessage
                     timestamp,
                     sender: pseudonym
                 } as MessageAudio);
@@ -78,7 +83,8 @@ export default async function handleImessageDBFiles(files: File[]): Promise<Anon
     // Generate conversation pseudonyms based on all participants
     conversationsMap.forEach(conversation => {
         const participants = contactPseudonyms.getOriginalNames(conversation.participants);
-        conversation.conversationPseudonym = chatPseudonyms.getPseudonym(participants);
+        const groupName = groupChats.get(conversation.id!);
+        conversation.conversationPseudonym = chatPseudonyms.getPseudonym(groupName ? [groupName] : participants);
     });
 
     return {
@@ -130,19 +136,17 @@ function getMessages(db: Database): any[] {
 }
 
 // Helper function to get chat information from the database
-function getGroupChats(db: Database): Set<string> {
-    const groupChats = new Set<string>();
+function getGroupChats(db: Database): Map<string, string> {
+    const groupChats = new Map<string, string>();
     const groupInfoStmt = db.prepare(`
-        SELECT group_id, COUNT(DISTINCT COALESCE(room_name, '')) as rmc
+        SELECT group_id, display_name
         FROM chat
-        GROUP BY group_id;
+        WHERE group_id IS NOT NULL;
     `);
 
     while (groupInfoStmt.step()) {
         const row = groupInfoStmt.getAsObject();
-        if (Number(row.rmc ?? 0) > 0) {
-            groupChats.add(String(row.group_id ?? ''));
-        }
+        groupChats.set(String(row.group_id ?? ''), String(row.display_name ?? ''));
     }
     groupInfoStmt.free();
     return groupChats;

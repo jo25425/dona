@@ -12,8 +12,10 @@ import produceBasicStatistics from "@services/charts/produceBasicStatistics";
 import {calculateMinMaxDates} from "@services/rangeFiltering";
 
 export default function produceGraphData(donorId: string, allConversations: Conversation[]): Record<string, GraphData> {
+    const filteredConversations = allConversations.filter(conversation => conversation.includeInFeedback);
+
     return Object.fromEntries(
-        Map.groupBy(allConversations, ({ dataSource }) => dataSource)
+        Map.groupBy(filteredConversations, ({ dataSource }) => dataSource)
             .entries()
             .map(([dataSourceValue, conversations]) => {
                 // Compute various data points for each conversation

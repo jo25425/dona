@@ -9,12 +9,13 @@ namespace NewConversation {
         convo: Conversation,
         dataSourceOptions: DataSource[]
     ): NewConversation {
-        const {isGroupConversation, dataSource, conversationPseudonym} = convo;
+        const {isGroupConversation, dataSource, conversationPseudonym, includeInFeedback} = convo;
         return {
             donationId,
             dataSourceId: dataSourceOptions.find(({ name }) => name === dataSource)!.id,
             isGroupConversation: isGroupConversation || undefined,
-            conversationPseudonym: conversationPseudonym
+            conversationPseudonym: conversationPseudonym,
+            includeInFeedback: includeInFeedback ?? true
         };
     }
 }

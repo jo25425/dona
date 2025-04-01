@@ -57,7 +57,7 @@ function computeConversationStats(conversations: Conversation[]) {
 describe('handleImessageDBFiles', () => {
     it('should process the mock iMessage DB file correctly', async () => {
         const mockFile = await createMockFile();
-        const result = await handleImessageDBFiles(mockFile);
+        const result = await handleImessageDBFiles([mockFile]);
         console.log(result);
         // Add your assertions here based on the expected result
         expect(result).toBeDefined();
@@ -67,9 +67,9 @@ describe('handleImessageDBFiles', () => {
     });
 
     it('should process a real anonymised iMessage DB file correctly', async () => {
-        const filePath = path.resolve(__dirname, '../../../sample_data/chat.db');
+        const filePath = path.resolve(__dirname, '../../../test_data/chat.db');
         const file = await createFileFromPath(filePath, 'chat.db', 'application/x-sqlite3');
-        const result = await handleImessageDBFiles(file);
+        const result = await handleImessageDBFiles([file]);
         console.log(result);
         // Add your assertions here based on the expected result
         expect(result).toBeDefined();

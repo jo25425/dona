@@ -23,6 +23,7 @@ import {useTranslations} from "next-intl";
 import {MainTitle, RichText} from "@/styles/StyledTypography";
 import {getErrorMessage} from "@services/errors";
 import {FacebookIcon, IMessageIcon, InstagramIcon, WhatsAppIcon} from "@components/CustomIcon";
+import {conversations} from "@/db/schema";
 
 type ConversationsBySource = Record<DataSourceValue, Conversation[]>;
 type SelectedChatsBySource = Record<DataSourceValue, Set<string>>;
@@ -35,7 +36,8 @@ export default function DataDonationPage() {
     const aliasConfig = useAliasConfig();
     const { setDonationData, loadExternalDonorIdFromCookie, externalDonorId } = useDonation();
     const [allDonatedConversationsBySource, setAllDonatedConversationsBySource] = useState<ConversationsBySource>({} as ConversationsBySource);
-    const [selectedChatsBySource, setSelectedChatsBySource] = useState<SelectedChatsBySource>({} as SelectedChatsBySource);
+    const [donationChatsBySource, setDonationChatsBySource] = useState<SelectedChatsBySource>({} as SelectedChatsBySource);
+    const [feedbackChatsBySource, setFeedbackChatsBySource] = useState<SelectedChatsBySource>({} as SelectedChatsBySource);
     const [loading, setLoading] = useState(false);
     const [validated, setValidated] = useState(false);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -54,10 +56,17 @@ export default function DataDonationPage() {
         setValidated(true);
     };
 
-    const handleSelectedChatsChange = (dataSource: DataSourceValue, newSelectedChats: Set<string>) => {
-        setSelectedChatsBySource((prev) => ({
+    const handleDonationChatsChange = (dataSource: DataSourceValue, newDonationChats: Set<string>) => {
+        setDonationChatsBySource((prev) => ({
             ...prev,
-            [dataSource]: newSelectedChats,
+            [dataSource]: newDonationChats,
+        }));
+    };
+
+    const handleFeedbackChatsChange = (dataSource: DataSourceValue, newFeedbackChats: Set<string>) => {
+        setFeedbackChatsBySource((prev) => ({
+            ...prev,
+            [dataSource]: newFeedbackChats,
         }));
     };
 
@@ -66,9 +75,16 @@ export default function DataDonationPage() {
         setErrorMessage(null);
 
         const allConversations = Object.entries(allDonatedConversationsBySource).flatMap(([dataSource, conversations]) => {
-            const selectedChats = selectedChatsBySource[dataSource as DataSourceValue] || new Set();
-            return conversations.filter(conversation => selectedChats.has(conversation.conversationPseudonym));
+            const selectedChats = donationChatsBySource[dataSource as DataSourceValue] || new Set();
+            const feedbackChats = feedbackChatsBySource[dataSource as DataSourceValue] || new Set();
+            return conversations
+                .filter(conversation => selectedChats.has(conversation.conversationPseudonym))
+                .map(conversation => ({
+                    ...conversation,
+                    includeInFeedback: feedbackChats.has(conversation.conversationPseudonym)
+                }));
         });
+        console.log(allConversations);
 
         if (allConversations.length > 0) {
             try {
@@ -128,7 +144,8 @@ export default function DataDonationPage() {
                                 <MultiFileSelect
                                     dataSourceValue={source}
                                     onDonatedConversationsChange={(newConversations) => handleDonatedConversationsChange(source, newConversations)}
-                                    onSelectedChatsChange={(newSelectedChats) => handleSelectedChatsChange(source, newSelectedChats)}
+                                    onDonationChatsChange={(newDonationChats) => handleDonationChatsChange(source, newDonationChats)}
+                                    onFeedbackChatsChange={(newFeedbackChats) => handleFeedbackChatsChange(source, newFeedbackChats)}
                                 />
                             </AccordionDetails>
                         </Accordion>

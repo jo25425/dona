@@ -320,17 +320,19 @@
       "subtitle": "We have anonymized your data and your contacts. If, in the next step, you want to reconstruct which conversations and contacts are involved in the anonymized evaluation, make a note of the following assignments of contacts (e.g. A**** B*****) and chats (e.g. \"{dataSourceInitials}4\"). From now on, these are the anonymized names for your chats. The assignment is not saved and is lost as soon as you leave this page.",
       "pseudonyms": "Pseudonyms",
       "contacts": "Contacts",
+      "donate": "Donate",
+      "feedback": "Feedback",
       "onlySeven": "These are just the contacts of your 7 chats in which overall the most words were sent. <b> Below you can also select different chats. </b>",
       "moreContacts": "and {0} others.",
       "onlyYouInConv": "You are the only member in this chat. This could be because the other people have left the chat."
     },
+    "chat-selection": "You can select up to 10 chats to receive feedback for.",
     "sendData": {
       "wait": "Sending the data could take a few minutes. Please wait and keep this website open. Thanks!"
     },
     "alias-not-required": "Not required",
     "alias": "Username",
     "please-insert-alias": "Please enter your username to enable anonymization.",
-    "choose-files-here": "Select the files you would like to donate here:",
     "processing": "Your data is being extracted and anonymized...",
     "be-patient": "The data extraction process may take some time. Please be patient...",
     "successful": "Your data has been successfully anonymized.",
@@ -355,10 +357,6 @@
             "6": "Help us improve <a href=\"@messages(\"links.reportProblem\")\" target=\"_blank\">here</a>"
           }
         }
-      },
-      "chatSelection": {
-        "title": "You can select up to 10 chats to receive feedback for",
-        "clickHereToSelect": "Click here to choose different chats to receive feedback for"
       }
     },
     "errors": {

@@ -41,7 +41,8 @@ export interface Conversation {
     messages: Array<Message>,
     messagesAudio: Array<MessageAudio>,
     participants: Array<Participant>,
-    conversationPseudonym: string
+    conversationPseudonym: string,
+    includeInFeedback?: boolean
 }
 
 export interface AnonymizationResult {
