@@ -6,6 +6,7 @@ import {AnonymizationResult, Conversation, DataSourceValue} from "@models/proces
 import {anonymizeData} from "@/services/anonymization";
 import {calculateMinMaxDates, filterDataByRange, NullableRange, validateDateRange} from "@services/rangeFiltering";
 import {getErrorMessage} from "@services/errors";
+import {validateMinChatsForDonation, validateMinMessagesPerChat} from "@services/validation";
 import Alert, {AlertProps} from "@mui/material/Alert";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -14,6 +15,7 @@ import DateRangePicker from "@components/DateRangePicker";
 import LoadingSpinner from "@components/LoadingSpinner";
 import {FileList, FileUploadButton} from "@components/DonationComponents";
 import styled from "@mui/material/styles/styled";
+import {CONFIG} from "@/config";
 
 
 const UploadAlert = styled((props: AlertProps) => (
@@ -51,20 +53,22 @@ const MultiFileSelect: React.FC<MultiFileSelectProps> = ({dataSourceValue, onDon
     const handleFileSelection = async (event: ChangeEvent<HTMLInputElement>) => {
         setError(null);
         setDateRangeError(null);
-        setIsLoading(true);
 
         const files = event.target.files ? Array.from(event.target.files) : [];
         setSelectedFiles(files);
+        if (files.length === 0) return;
 
+        setIsLoading(true);
         try {
             const result = await anonymizeData(dataSourceValue, files);
             const {minDate, maxDate} = calculateMinMaxDates(result.anonymizedConversations);
+
             setAnonymizationResult(result);
             setCalculatedRange([minDate, maxDate]);
             setFilteredConversations(result.anonymizedConversations);
             onDonatedConversationsChange(result.anonymizedConversations); // Update data for parent
         } catch (err) {
-            const errorMessage = getErrorMessage(t, err as Error, {count: selectedFiles.length});
+            const errorMessage = getErrorMessage(t, err as Error, CONFIG);
             setError(errorMessage);
         } finally {
             setIsLoading(false);
@@ -79,6 +83,17 @@ const MultiFileSelect: React.FC<MultiFileSelectProps> = ({dataSourceValue, onDon
 
         if (!error && anonymizationResult) {
             const filteredConversations = filterDataByRange(anonymizationResult.anonymizedConversations, newRange);
+
+            // Validation
+            if (!validateMinChatsForDonation(filteredConversations)) {
+                setDateRangeError(t('errors.minChatsForDonation'));
+                return;
+            }
+            if (!validateMinMessagesPerChat(filteredConversations)) {
+                setDateRangeError(t('errors.minMessagesPerChat'));
+                return;
+            }
+
             setFilteredConversations(filteredConversations);
             onDonatedConversationsChange(filteredConversations); // Update parent with filtered data
         }
@@ -86,8 +101,11 @@ const MultiFileSelect: React.FC<MultiFileSelectProps> = ({dataSourceValue, onDon
 
     return (
         <Box>
-            <Typography sx={{fontWeight: "bold"}} gutterBottom>
+            <Typography sx={{fontWeight: "bold"}}>
                 {t('select-data.instruction')}
+            </Typography>
+            <Typography variant="body2" gutterBottom>
+                Only conversations with at least 100 messages and 2 contacts will be used.
             </Typography>
             <FileUploadButton
                 onChange={handleFileSelection}

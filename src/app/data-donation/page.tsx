@@ -23,7 +23,6 @@ import {useTranslations} from "next-intl";
 import {MainTitle, RichText} from "@/styles/StyledTypography";
 import {getErrorMessage} from "@services/errors";
 import {FacebookIcon, IMessageIcon, InstagramIcon, WhatsAppIcon} from "@components/CustomIcon";
-import {conversations} from "@/db/schema";
 
 type ConversationsBySource = Record<DataSourceValue, Conversation[]>;
 type SelectedChatsBySource = Record<DataSourceValue, Set<string>>;

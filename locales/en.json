@@ -361,10 +361,10 @@
     },
     "errors": {
       "NoProfile": "The uploaded data does not include profile information.",
-      "SameFiles": "You can only select files that differ. Please choose your 5-7 most important conversations.",
-      "Not5to7Files_format": "Please choose your 5-7 most important conversations. You have selected {count}. Press and hold the ctrl/command key to select multiple files at the same time.",
+      "SameFiles": "You can only select files that differ.",
       "NotSingleFile": "Please choose a single .db file. You can only donate one file of this type at a time.",
-      "TooFewContactsOrMessages": "All your chats should contain at least 100 messages and at least one contact (other than yourself).",
+      "TooFewChats_format": "There must be at least {MIN_CHATS_FOR_DONATION} chats.",
+      "TooFewContactsOrMessages_format": "There are less than {MIN_CHATS_FOR_DONATION} chats with at least {MIN_MESSAGES_PER_CHAT} messages and at least {MIN_CONTACTS_PER_CHAT} contacts (yourself included).",
       "NonsenseDateRange": "The selected period is not valid. Please check the correctness of the selected dates.",
       "NoMessagesInRange": "There are no messages in the selected period. Please select a longer and valid period.",
       "NotEnoughMonthsInRange": "To donate your data, please select a period of at least 6 months within the period of your donation.",

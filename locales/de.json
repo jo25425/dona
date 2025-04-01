@@ -335,8 +335,9 @@
     "errors": {
       "NoProfile": "Die Datei enthält keine Profildaten.",
       "SameFiles": "Sie können nur Dateien auswählen, die sich voneinander unterscheiden. Bitte wählen Sie Ihre 5-7 wichtigsten Unterhaltungen aus.",
-      "Not5to7Files_format": "Bitte wählen Sie Ihre 5-7 wichtigsten Unterhaltungen aus. Sie haben {count} ausgewählt. Drücken und halten Sie die Strg-/Befehlstaste, um mehrere Dateien gleichzeitig auszuwählen.",
-      "TooFewContactsOrMessages": "Alle Ihre Chats sollten mindestens 100 Nachrichten und mindestens einen Kontakt (der nicht Sie selbst sind) enthalten.",
+      "NotSingleFile": "Bitte wählen Sie eine einzelne .db-Datei aus. Sie können nur eine Datei dieses Typs auf einmal spenden.",
+      "TooFewChats_format": "Es müssen mindestens {MIN_CHATS_FOR_DONATION} Chats vorhanden sein.",
+      "TooFewContactsOrMessages_format": "Es gibt weniger als {MIN_CHATS_FOR_DONATION} Chats mit mindestens {MIN_MESSAGES_PER_CHAT} Nachrichten und mindestens {MIN_CONTACTS_PER_CHAT} Kontakten (Sie selbst eingeschlossen).",
       "NonsenseRange": "Der ausgewählte Zeitraum ist ungültig. Bitte überprüfen Sie die Richtigkeit der ausgewählten Daten.",
       "NotEnoughMonthsInRange": "Bitte wählen Sie zum Spenden Ihrer Daten einen Zeitraum von mindestens 6 Monaten innerhalb des Zeitraums Ihrer Spende aus.",
       "NoMessagesInRange": "In dem ausgewählten Zeitraum befinden sich keine Nachrichten. Bitte wählen Sie einen größeren und validen Zeitraum.",
