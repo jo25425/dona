@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from "react";
-import {useTranslations} from "next-intl";
 import {ChatMapping, Conversation, DataSourceValue} from "@models/processed";
 import Alert from "@mui/material/Alert";
 import Box from "@mui/material/Box";
@@ -17,6 +16,7 @@ import CheckIcon from '@mui/icons-material/Check';
 import styled from "@mui/material/styles/styled";
 import Checkbox from "@mui/material/Checkbox";
 import {useAliasConfig} from "@services/parsing/shared/aliasConfig";
+import {useRichTranslations} from "@/hooks/useRichTranslations";
 
 const ResponsiveTableCell = styled(TableCell)<TableCellProps>(({ theme }) => ({
     paddingLeft: theme.spacing(2),
@@ -43,11 +43,11 @@ interface AnonymizationPreviewProps {
 const AnonymizationPreview: React.FC<AnonymizationPreviewProps> = (
     {dataSourceValue, anonymizedConversations, chatMappingToShow, onSelectedChatsChange, onFeedbackChatsChange}
 ) => {
-    const t = useTranslations("donation");
+    const donation = useRichTranslations("donation");
     const aliasConfig = useAliasConfig();
     const [isModalOpen, setModalOpen] = React.useState(false);
-    const [donationChats, setDonationChats] = useState<Set<string>>(new Set(chatMappingToShow.keys())); // Initialize with all keys
-    const [feedbackChats, setFeedbackChats] = useState<Set<string>>(new Set(chatMappingToShow.keys())); // Initialize with all keys
+    const [donationChats, setDonationChats] = useState<Set<string>>(new Set(chatMappingToShow.keys())); // Initialize selected
+    const [feedbackChats, setFeedbackChats] = useState<Set<string>>(new Set()); // Initialize not selected
 
     // Use function from parent to feedback changes to selected chats
     useEffect(() => {
@@ -90,22 +90,22 @@ const AnonymizationPreview: React.FC<AnonymizationPreviewProps> = (
     return (
         <Box sx={{ my: 1 }}>
             <Typography variant="body1" sx={{ mb: 1, fontWeight: "bold" }}>
-                {t("contacts-mapping.title")}
+                {donation.t("contacts-mapping.title")}
             </Typography>
             <Typography variant="body2" gutterBottom>
-                {t("contacts-mapping.subtitle", {"dataSourceInitials":  dataSourceValue.slice(0, 2).toWellFormed()})}
+                {donation.t("contacts-mapping.subtitle", {"dataSourceInitials":  dataSourceValue.slice(0, 2).toWellFormed()})}
             </Typography>
             <Typography variant="body2">
-                {t("chat-selection")}
+                {donation.rich("chat-selection")}
             </Typography>
             <TableContainer component={Paper} sx={{ mt: 2 }}>
                 <Table size="small" aria-label="pseudonyms table">
                     <TableHead>
                         <TableRow sx={{ "th": { fontWeight: "bold" } }}>
-                            <ResponsiveTableCell className="small-header">{t("contacts-mapping.donate")}</ResponsiveTableCell>
-                            <ResponsiveTableCell className="small-header">{t("contacts-mapping.feedback")}</ResponsiveTableCell>
-                            <ResponsiveTableCell>{t('contacts-mapping.pseudonyms')}</ResponsiveTableCell>
-                            <ResponsiveTableCell>{t('contacts-mapping.contacts')}</ResponsiveTableCell>
+                            <ResponsiveTableCell className="small-header">{donation.t("contacts-mapping.donate")}</ResponsiveTableCell>
+                            <ResponsiveTableCell className="small-header">{donation.t("contacts-mapping.feedback")}</ResponsiveTableCell>
+                            <ResponsiveTableCell>{donation.t('contacts-mapping.pseudonyms')}</ResponsiveTableCell>
+                            <ResponsiveTableCell>{donation.t('contacts-mapping.contacts')}</ResponsiveTableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -146,10 +146,10 @@ const AnonymizationPreview: React.FC<AnonymizationPreviewProps> = (
                     alignItems: "center",
                 }}
             >
-                <Button onClick={handleOpenModal}>{t("preview-data.button")}</Button>
+                <Button onClick={handleOpenModal}>{donation.t("preview-data.button")}</Button>
             </Box>
             <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">
-                {t('successful')} {t('preview-data.body2')}
+                {donation.t('successful')} {donation.t('preview-data.body2')}
             </Alert>
 
             <AnonymizationModal

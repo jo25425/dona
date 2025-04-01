@@ -296,7 +296,7 @@
       "moreContacts": "und {0} weitere.",
       "onlyYouInConv": "Nur Sie befinden sich in diesem Chat. Es könnte z.B. sein, dass die andere Person/en den Chat verlassen haben."
     },
-    "chat-selection": "Sie können bis zu 10 Chats auswählen, für die Sie Feedback erhalten möchten",
+    "chat-selection": "Sie können bis zu 10 Chats auswählen, um Feedback zu erhalten, aber Sie <b>müssen</b> mindestens 5 auswählen, damit das Ihnen gegebene Feedback nicht als Analyse bestimmter persönlicher Daten betrachtet werden kann.",
     "sendData": {
       "wait": "Das Senden der Daten kann ein paar Minuten dauern. Bitte warten Sie und lassen Sie diese Seite geöffnet. Danke!"
     },
