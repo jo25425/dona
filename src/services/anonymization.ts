@@ -45,10 +45,14 @@ export async function anonymizeData(dataSourceValue: DataSourceValue, files: Fil
     }
 
     // Filter conversations based on messages and contacts
-    const filteredConversations = result.anonymizedConversations.filter(conv =>
-        conv.messages.length + conv.messagesAudio.length >= CONFIG.MIN_MESSAGES_PER_CHAT &&
+    const filteredConversations = result.anonymizedConversations.filter(conv => {
+        console.log(conv)
+        console.log(conv.messages.length + conv.messagesAudio.length, conv.participants.length)
+        return conv.messages.length + conv.messagesAudio.length >= CONFIG.MIN_MESSAGES_PER_CHAT &&
         conv.participants.length >= CONFIG.MIN_CONTACTS_PER_CHAT
+    }
     );
+    console.log(filteredConversations)
 
     // Final validation for the number of conversations after filtering
     if (!validateMinChatsForDonation(filteredConversations)) {

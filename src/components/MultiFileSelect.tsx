@@ -78,6 +78,8 @@ const MultiFileSelect: React.FC<MultiFileSelectProps> = ({dataSourceValue, onDon
 
     // Handle clearing files
     const handleClearFiles = () => {
+        setError(null);
+        setDateRangeError(null);
         setSelectedFiles([]);
         setAnonymizationResult(null);
         setFilteredConversations([]);
@@ -139,11 +141,15 @@ const MultiFileSelect: React.FC<MultiFileSelectProps> = ({dataSourceValue, onDon
             {/* Display anonymized data */}
             {!error && !isLoading && anonymizationResult && filteredConversations && (
                 <Box sx={{my: 3}}>
-                    <DateRangePicker
-                        calculatedRange={calculatedRange}
-                        setSelectedRange={handleDateRangeChange}
-                    />
-                    {dateRangeError && <UploadAlert>{t(`errors.${dateRangeError}`)}</UploadAlert>}
+                    {dataSourceValue !== DataSourceValue.Facebook && dataSourceValue !== DataSourceValue.Instagram && (
+                        <>
+                            <DateRangePicker
+                                calculatedRange={calculatedRange}
+                                setSelectedRange={handleDateRangeChange}
+                            />
+                            {dateRangeError && <UploadAlert>{t(`errors.${dateRangeError}`)}</UploadAlert>}
+                        </>
+                    )}
                     <AnonymizationPreview
                         dataSourceValue={dataSourceValue}
                         anonymizedConversations={filteredConversations}

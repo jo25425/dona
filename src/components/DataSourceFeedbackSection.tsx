@@ -80,7 +80,7 @@ export default function DataSourceFeedbackSection({ dataSourceValue, graphData }
     );
 
     return (
-        <Accordion>
+        <Accordion defaultExpanded>
             <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
                 <Typography variant="h6">{t("sourceTitle", { source: dataSourceValue })}</Typography>
             </AccordionSummary>
