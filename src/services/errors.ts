@@ -63,7 +63,6 @@ export function getErrorMessage(
     error: unknown,
     formatOptions?: Record<string, any>
 ): string {
-    console.log(formatOptions)
     if (error && typeof error === 'object' && 'reason' in error) {
         const reasonKey = `errors.${(error as DonationError).reason}`;
         const formattedKey = `${reasonKey}_format`;

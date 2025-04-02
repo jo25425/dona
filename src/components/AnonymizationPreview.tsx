@@ -83,7 +83,7 @@ const AnonymizationPreview: React.FC<AnonymizationPreviewProps> = (
                 {donation.t("contacts-mapping.subtitle", {"dataSourceInitials":  dataSourceValue.slice(0, 2).toWellFormed()})}
             </Typography>
             <Typography variant="body2">
-                {donation.rich("chat-selection", {
+                {donation.rich("chat-selection", undefined, true, {
                     "min_num": CONFIG.MIN_FEEDBACK_CHATS.toString(),
                     "max_num": CONFIG.MAX_FEEDBACK_CHATS.toString(),
                     "default_num": CONFIG.DEFAULT_FEEDBACK_CHATS.toString()

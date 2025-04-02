@@ -35,7 +35,7 @@ export function useRichTranslations(namespace: string) {
     return {
         [namespace]: {
             t: translate,
-            rich: (key: string, urlKeys?: Record<string, string>, newTab: boolean = true) =>
+            rich: (key: string, urlKeys?: Record<string, string>, newTab: boolean = true, templateValues?:  Record<string, any>) =>
                 translate.rich(key, {
                     ...makeLinkHandlers(urlKeys, newTab),
                     br: () => <br />,
@@ -46,7 +46,7 @@ export function useRichTranslations(namespace: string) {
                     em: (content) => <em>{content}</em>,
                     strong: (content) => <strong>{content}</strong>,
                     email: (address) => <a href={"mailto:" + address}>{address}</a>,
-                    ...urlKeys // Ensure placeholders are included
+                    ...templateValues,
                 }),
             link: linkHandler, // Standalone function for direct use
         },

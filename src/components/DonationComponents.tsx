@@ -11,7 +11,7 @@ export function FileUploadButton({ onChange, loading, accept }: {
     const t = useTranslations('donation');
 
     return (
-        <Button variant="contained" component="label" disabled={loading} sx={{ mb: 2 }}>
+        <Button variant="contained" component="label" disabled={loading} sx={{ my: 1 }}>
             {t('select-data.browse')}
             <input
                 type="file"
@@ -20,6 +20,19 @@ export function FileUploadButton({ onChange, loading, accept }: {
                 accept={accept}
                 onChange={onChange}
             />
+        </Button>
+    );
+}
+
+export function RemoveButton({ onClick, loading }: {
+    onClick:  React.MouseEventHandler<HTMLButtonElement>;
+    loading: boolean;
+}) {
+    const t = useTranslations('donation');
+
+    return (
+        <Button variant="outlined" disabled={loading} sx={{ my: 1 }} onClick={onClick}>
+            {t('select-data.remove')}
         </Button>
     );
 }

@@ -38,9 +38,6 @@ export default function Footer() {
                 >
                     {/* Left: Buttons */}
                     <Stack direction="row" spacing={2} sx={{ flexWrap: "wrap", justifyContent: isMobile ? "center" : "flex-start" }}>
-                        <FooterButton variant="outlined" size={isMobile ? "small" : "medium"} href={urls("report-problem")}>
-                            {links("report-problem")}
-                        </FooterButton>
                         <FooterButton variant="text" size={isMobile ? "small" : "medium"} href="/data-protection">
                             {links("data-protection")}
                         </FooterButton>

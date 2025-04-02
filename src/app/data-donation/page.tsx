@@ -62,6 +62,7 @@ export default function DataDonationPage() {
     };
 
     const onDataDonationUpload = async () => {
+        document.body.scrollTo(0, 0);
         setLoading(true);
         setErrorMessage(null);
 
@@ -83,11 +84,9 @@ export default function DataDonationPage() {
                     router.push("/donation-feedback");
                 } else {
                     setErrorMessage(getErrorMessage(donation.t, result.error));
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
                 }
             } catch (err) {
                 setErrorMessage(getErrorMessage(donation.t, err));
-                window.scrollTo({ top: 0, behavior: 'smooth' });
             } finally {
                 setLoading(false);
             }

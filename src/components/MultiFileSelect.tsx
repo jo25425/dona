@@ -13,7 +13,8 @@ import Typography from "@mui/material/Typography";
 import AnonymizationPreview from "@components/AnonymizationPreview";
 import DateRangePicker from "@components/DateRangePicker";
 import LoadingSpinner from "@components/LoadingSpinner";
-import {FileList, FileUploadButton} from "@components/DonationComponents";
+import {FileList, FileUploadButton, RemoveButton} from "@components/DonationComponents";
+import Button from "@mui/material/Button";
 import styled from "@mui/material/styles/styled";
 import {CONFIG} from "@/config";
 
@@ -75,6 +76,14 @@ const MultiFileSelect: React.FC<MultiFileSelectProps> = ({dataSourceValue, onDon
         }
     };
 
+    // Handle clearing files
+    const handleClearFiles = () => {
+        setSelectedFiles([]);
+        setAnonymizationResult(null);
+        setFilteredConversations([]);
+        onDonatedConversationsChange([]);
+    };
+
     // Handle date range selection
     const handleDateRangeChange = (newRange: NullableRange) => {
         // Validate the selected range
@@ -107,11 +116,14 @@ const MultiFileSelect: React.FC<MultiFileSelectProps> = ({dataSourceValue, onDon
             <Typography variant="body2" gutterBottom>
                 Only conversations with at least 100 messages and 2 contacts will be used.
             </Typography>
-            <FileUploadButton
-                onChange={handleFileSelection}
-                loading={isLoading}
-                accept={acceptedFileTypes}
-            />
+            <Box sx={{ display: 'flex', gap: 2 }}>
+                <FileUploadButton
+                    onChange={handleFileSelection}
+                    loading={isLoading}
+                    accept={acceptedFileTypes}
+                />
+                <RemoveButton onClick={handleClearFiles} loading={isLoading}/>
+            </Box>
 
             {/* Show selected files for feedback */}
             {selectedFiles.length > 0 && (
