@@ -44,23 +44,16 @@ export async function anonymizeData(dataSourceValue: DataSourceValue, files: Fil
         throw DonationValidationError(DonationErrors.TooFewChats, { minChats: CONFIG.MIN_CHATS_FOR_DONATION });
     }
 
-    // Filter conversations based on messages and contacts
+    // Filter conversations based on messages and contacts, for validation
     const filteredConversations = result.anonymizedConversations.filter(conv => {
-        console.log(conv)
-        console.log(conv.messages.length + conv.messagesAudio.length, conv.participants.length)
         return conv.messages.length + conv.messagesAudio.length >= CONFIG.MIN_MESSAGES_PER_CHAT &&
         conv.participants.length >= CONFIG.MIN_CONTACTS_PER_CHAT
-    }
-    );
-    console.log(filteredConversations)
+    });
 
     // Final validation for the number of conversations after filtering
     if (!validateMinChatsForDonation(filteredConversations)) {
         throw DonationValidationError(DonationErrors.TooFewContactsOrMessages, { minChats: CONFIG.MIN_CHATS_FOR_DONATION });
     }
 
-    return {
-        ...result,
-        anonymizedConversations: filteredConversations
-    };
+    return result;
 }

@@ -13,13 +13,11 @@ import {CHART_BOX_PROPS, CHART_COLORS, CHART_LAYOUT, COMMON_CHART_OPTIONS} from 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
 interface AnimatedWordCountBarChartProps {
-    dataMonthlyPerConversation: SentReceivedPoint[][];
-    listOfConversations: string[];
+    dataMonthlyPerConversation: Record<string, SentReceivedPoint[]>;
 }
 
 const AnimatedWordCountBarChart: React.FC<AnimatedWordCountBarChartProps> = ({
-    dataMonthlyPerConversation,
-    listOfConversations
+    dataMonthlyPerConversation
 }) => {
     const CHART_NAME = "intensity-interaction-hbarchart";
     const container_name = `chart-wrapper-${CHART_NAME}`;
@@ -38,16 +36,16 @@ const AnimatedWordCountBarChart: React.FC<AnimatedWordCountBarChartProps> = ({
             counts,
             sortedMonths,
             globalMax
-        } = prepareCountsOverTimeData(dataMonthlyPerConversation, listOfConversations);
+        } = prepareCountsOverTimeData(dataMonthlyPerConversation);
         setCumulativeCounts(counts);
         setLabels(sortedMonths);
         setGlobalMax(globalMax);
-    }, [dataMonthlyPerConversation, listOfConversations]);
+    }, [dataMonthlyPerConversation]);
 
     const generateChartData = (frameIndex: number) => {
         const monthKey = labels[frameIndex];
         return {
-            labels: listOfConversations,
+            labels: Object.keys(dataMonthlyPerConversation),
             datasets: [
                 {
                     label: chartTexts("legend"),

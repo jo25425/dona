@@ -16,13 +16,11 @@ const Z_SCORE_LIMIT = 1.96;
 const BACKGROUND_IMAGE = "images/charts/FeedbackBackgroundForPolarPlot.svg";
 
 interface AnimatedIntensityPolarChartProps {
-    dataMonthlyPerConversation: SentReceivedPoint[][];
-    listOfConversations: string[];
+    dataMonthlyPerConversation: Record<string, SentReceivedPoint[]>;
 }
 
 const AnimatedIntensityPolarChart: React.FC<AnimatedIntensityPolarChartProps> = ({
                                                                    dataMonthlyPerConversation,
-                                                                   listOfConversations,
                                                                }) => {
     const CHART_NAME = "intensity-interaction-polar";
     const container_name = `chart-wrapper-${CHART_NAME}`;
@@ -37,7 +35,6 @@ const AnimatedIntensityPolarChart: React.FC<AnimatedIntensityPolarChartProps> = 
     useEffect(() => {
         const { counts, sortedMonths } = prepareCountsOverTimeData(
             dataMonthlyPerConversation,
-            listOfConversations,
             "sent+received"
         );
 
@@ -45,14 +42,14 @@ const AnimatedIntensityPolarChart: React.FC<AnimatedIntensityPolarChartProps> = 
 
         setLabels(sortedMonths);
         setFrames(zScoreFrames);
-    }, [dataMonthlyPerConversation, listOfConversations]);
+    }, [dataMonthlyPerConversation]);
 
     const generateChartData = (frameIndex: number) => {
         const monthKey = labels[frameIndex];
         const conversationData = frames[monthKey] || [];
 
         return {
-            labels: listOfConversations,
+            labels: Object.keys(dataMonthlyPerConversation),
             datasets: [
                 {
                     label: chartTexts("legend.others"),

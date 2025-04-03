@@ -12,11 +12,11 @@ import {CHART_BOX_PROPS, CHART_COLORS, CHART_LAYOUT, BARCHART_OPTIONS} from "@co
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
 interface AnimatedDayPartsActivityChartProps {
-    dailySentHoursPerConversation: DailyHourPoint[][];
+    dailySentHours: DailyHourPoint[];
 }
 
 const AnimatedDayPartsActivityChart: React.FC<AnimatedDayPartsActivityChartProps> = ({
-                                                                                         dailySentHoursPerConversation,
+                                                                                         dailySentHours,
                                                                                      }) => {
     const CHART_NAME = "day-parts-activity-barchart";
     const container_name = `chart-wrapper-${CHART_NAME}`;
@@ -33,18 +33,16 @@ const AnimatedDayPartsActivityChart: React.FC<AnimatedDayPartsActivityChartProps
         const groupedByMonth: Record<string, number[]> = {};
         const monthsSet = new Set<string>();
 
-        dailySentHoursPerConversation.forEach((conversation) => {
-            conversation.forEach(({ year, month, hour, wordCount }) => {
-                const bucketIndex = hour < 6 ? 0 : hour < 12 ? 1 : hour < 18 ? 2 : 3;
-                const monthKey = `${year}-${String(month).padStart(2, "0")}`;
-                monthsSet.add(monthKey);
+        dailySentHours.forEach(({ year, month, hour, wordCount }) => {
+            const bucketIndex = hour < 6 ? 0 : hour < 12 ? 1 : hour < 18 ? 2 : 3;
+            const monthKey = `${year}-${String(month).padStart(2, "0")}`;
+            monthsSet.add(monthKey);
 
-                if (!groupedByMonth[monthKey]) {
-                    groupedByMonth[monthKey] = new Array(buckets.length).fill(0);
-                }
+            if (!groupedByMonth[monthKey]) {
+                groupedByMonth[monthKey] = new Array(buckets.length).fill(0);
+            }
 
-                groupedByMonth[monthKey][bucketIndex] += wordCount || 0;
-            });
+            groupedByMonth[monthKey][bucketIndex] += wordCount || 0;
         });
 
         const sortedMonths = Array.from(monthsSet).sort();
@@ -62,7 +60,7 @@ const AnimatedDayPartsActivityChart: React.FC<AnimatedDayPartsActivityChartProps
         const { counts, sortedMonths } = preprocessData();
         setPreparedData(counts);
         setLabels(sortedMonths);
-    }, [dailySentHoursPerConversation]);
+    }, [dailySentHours]);
 
     const generateChartData = (frameIndex: number) => {
         const monthKey = labels[frameIndex];

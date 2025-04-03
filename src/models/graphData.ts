@@ -42,13 +42,14 @@ export interface BasicStatistics {
 }
 
 export interface GraphData {
-    monthlySentReceivedPerConversation: SentReceivedPoint[][];
-    dailyWords: DailySentReceivedPoint[];
+    focusConversations: string[];
+    monthlySentReceivedPerConversation: Record<string, SentReceivedPoint[]>;
     dailyWordsPerConversation: DailySentReceivedPoint[][];
-    slidingWindowMeanPerConversation: DailySentReceivedPoint[][];
-    dailySentHoursPerConversation: DailyHourPoint[][];
-    dailyReceivedHoursPerConversation: DailyHourPoint[][];
+    participantsPerConversation: string[][];
+    dailyWords: DailySentReceivedPoint[];
+    slidingWindowMeanDailyWords: DailySentReceivedPoint[];
+    dailySentHours: DailyHourPoint[];
+    dailyReceivedHours: DailyHourPoint[];
     answerTimes: AnswerTimePoint[];
     basicStatistics: BasicStatistics;
-    participantsPerConversation: string[][];
 }

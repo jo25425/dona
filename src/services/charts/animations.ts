@@ -10,12 +10,11 @@ interface CountsOverTimeData {
  * Prepares cumulative counts over time for conversations based on the provided mode.
  *
  * @param dataMonthlyPerConversation - Monthly sent/received/word data for each conversation.
- * @param listOfConversations - Array of conversation identifiers.
  * @param mode - Determines whether to count "sent", "received", "sent+received", or "word" (fallback to "sent").
  * @returns An object containing counts per month, sorted month keys, and the global maximum count.
  */
 
-interface DataPoint {
+interface SentReceivedPoint {
     year: number;
     month: number;
     wordCount?: number;
@@ -24,8 +23,7 @@ interface DataPoint {
 }
 
 export const prepareCountsOverTimeData = (
-    dataMonthlyPerConversation: DataPoint[][],
-    listOfConversations: string[],
+    dataMonthlyPerConversation: Record<string, SentReceivedPoint[]>,
     mode: CountMode = "sent"
 ): CountsOverTimeData => {
     if (!["sent", "received", "sent+received", "word"].includes(mode)) {
@@ -36,13 +34,13 @@ export const prepareCountsOverTimeData = (
     const monthsSet = new Set<string>();
     let globalMax = 0;
 
-    dataMonthlyPerConversation.forEach((conversationData, convIdx) => {
+    Object.entries(dataMonthlyPerConversation).forEach(([conversationId, conversationData], convIdx) => {
         let cumulativeSum = 0;
         conversationData.forEach((dataPoint) => {
             const monthKey = `${dataPoint.year}-${dataPoint.month.toString().padStart(2, "0")}`;
             monthsSet.add(monthKey);
 
-            if (!counts[monthKey]) counts[monthKey] = Array(listOfConversations.length).fill(0);
+            if (!counts[monthKey]) counts[monthKey] = Array(Object.keys(dataMonthlyPerConversation).length).fill(0);
 
             const value =
                 mode === "word"
@@ -61,7 +59,7 @@ export const prepareCountsOverTimeData = (
     });
 
     const sortedMonths = Array.from(monthsSet).sort();
-    let lastValues = Array(listOfConversations.length).fill(0);
+    let lastValues = Array(Object.keys(dataMonthlyPerConversation).length).fill(0);
     sortedMonths.forEach((monthKey) => {
         if (!counts[monthKey]) counts[monthKey] = [...lastValues];
         lastValues = counts[monthKey];

@@ -7,13 +7,13 @@ import DownloadButtons from "@components/charts/DownloadButtons";
 import {BARCHART_OPTIONS, CHART_COLORS, CHART_LAYOUT, TOOLTIP, TOP_LEGEND} from "@components/charts/chartConfig";
 
 interface DayPartsActivityOverallPlotProps {
-    dailySentHoursPerConversation: DailyHourPoint[][];
-    dailyReceivedHoursPerConversation: DailyHourPoint[][];
+    dailySentHours: DailyHourPoint[];
+    dailyReceivedHours: DailyHourPoint[];
 }
 
 const DayPartsActivityOverallChart: React.FC<DayPartsActivityOverallPlotProps> = ({
-                                                                                     dailySentHoursPerConversation,
-                                                                                     dailyReceivedHoursPerConversation,
+                                                                                     dailySentHours,
+                                                                                     dailyReceivedHours,
                                                                                  }) => {
     const CHART_NAME = "dayparts-activity-overall-barchart";
     const container_name = `chart-wrapper-${CHART_NAME}`;
@@ -24,20 +24,16 @@ const DayPartsActivityOverallChart: React.FC<DayPartsActivityOverallPlotProps> =
     const sentCounts = [0, 0, 0, 0];
     const receivedCounts = [0, 0, 0, 0];
 
-    dailySentHoursPerConversation.forEach((conversation) => {
-        conversation.forEach((point) => {
-            const bucketIndex =
-                point.hour < 6 ? 0 : point.hour < 12 ? 1 : point.hour < 18 ? 2 : 3;
-            sentCounts[bucketIndex] += point.wordCount;
-        });
+    dailySentHours.forEach((point) => {
+        const bucketIndex =
+            point.hour < 6 ? 0 : point.hour < 12 ? 1 : point.hour < 18 ? 2 : 3;
+        sentCounts[bucketIndex] += point.wordCount;
     });
 
-    dailyReceivedHoursPerConversation.forEach((conversation) => {
-        conversation.forEach((point) => {
-            const bucketIndex =
-                point.hour < 6 ? 0 : point.hour < 12 ? 1 : point.hour < 18 ? 2 : 3;
-            receivedCounts[bucketIndex] += point.wordCount;
-        });
+    dailyReceivedHours.forEach((point) => {
+        const bucketIndex =
+            point.hour < 6 ? 0 : point.hour < 12 ? 1 : point.hour < 18 ? 2 : 3;
+        receivedCounts[bucketIndex] += point.wordCount;
     });
 
     const totalSent = sentCounts.reduce((sum, count) => sum + count, 0);

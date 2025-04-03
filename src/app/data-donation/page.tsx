@@ -71,10 +71,9 @@ export default function DataDonationPage() {
             return conversations
                 .map(conversation => ({
                     ...conversation,
-                    includeInFeedback: feedbackChats.has(conversation.conversationPseudonym)
+                    focusInFeedback: feedbackChats.has(conversation.conversationPseudonym)
                 }));
         });
-        console.log(allConversations);
 
         if (allConversations.length > 0) {
             try {

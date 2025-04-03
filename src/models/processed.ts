@@ -42,7 +42,7 @@ export interface Conversation {
     messagesAudio: Array<MessageAudio>,
     participants: Array<Participant>,
     conversationPseudonym: string,
-    includeInFeedback?: boolean
+    focusInFeedback?: boolean
 }
 
 export interface AnonymizationResult {

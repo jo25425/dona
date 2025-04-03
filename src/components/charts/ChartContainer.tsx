@@ -2,6 +2,7 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import {GraphData} from "@models/graphData";
+import pick from "@services/basicHelpers";
 import ResponseTimeBarChart from "@components/charts/ResponseTimeBarChart";
 import AnimatedWordCountBarChart from "@components/charts/AnimatedWordCountBarChart";
 import AnimatedIntensityPolarChart from "@components/charts/AnimatedIntensityPolarChart";
@@ -16,27 +17,31 @@ import SentReceivedSlidingWindowChart from "@components/charts/SentReceivedSlidi
 interface ChartContainerProps {
     type: string;
     data: GraphData;
-    listOfConversations: string[];
     dataSourceValue?: string;
 }
 
-export default function ChartContainer({ type, data, listOfConversations }: ChartContainerProps) {
+export default function ChartContainer({ type, data }: ChartContainerProps) {
+    // For charts that show data per conversation, keep only the ones selected by the user
+    const selectedConversations = pick(data.monthlySentReceivedPerConversation, data.focusConversations);
+
     const renderChart = () => {
         switch (type) {
+
+            // Focus conversations only
             case "animatedIntensityPolarChart":
                 return (
                     <AnimatedIntensityPolarChart
-                        dataMonthlyPerConversation={data.monthlySentReceivedPerConversation}
-                        listOfConversations={listOfConversations}
+                        dataMonthlyPerConversation={selectedConversations}
                     />
                 );
             case "animatedWordCountBarChart":
                 return (
                     <AnimatedWordCountBarChart
-                        dataMonthlyPerConversation={data.monthlySentReceivedPerConversation}
-                        listOfConversations={listOfConversations}
+                        dataMonthlyPerConversation={selectedConversations}
                     />
                 );
+
+            // Aggregated data only
             case "wordCountOverallBarChart":
                 return (
                     <WordCountOverallBarChart
@@ -47,42 +52,31 @@ export default function ChartContainer({ type, data, listOfConversations }: Char
             case "sentReceivedSlidingWindowMean":
                 return (
                     <SentReceivedSlidingWindowChart
-                        slidingWindowMeanPerConversation={data.slidingWindowMeanPerConversation}
-                        listOfConversations={listOfConversations}
+                        slidingWindowMeanDailyWords={data.slidingWindowMeanDailyWords}
                     />
                 );
             case "responseTimeBarChart":
                 return (
-                    <ResponseTimeBarChart
-                        responseTimes={data.answerTimes}
-                        isOnlyOneOrLessConv={listOfConversations.length <= 1}
-                    />
+                    <ResponseTimeBarChart responseTimes={data.answerTimes}/>
                 );
             case "animatedResponseTimeBarChart":
                 return (
-                    <AnimatedResponseTimeBarChart
-                        answerTimes={data.answerTimes}
-                    />
+                    <AnimatedResponseTimeBarChart answerTimes={data.answerTimes}/>
                 );
             case "dailyActivityHoursChart":
                 return (
-                    <DailyActivityChart
-                        dataSent={data.dailySentHoursPerConversation}
-                        listOfConversations={listOfConversations}
-                    />
+                    <DailyActivityChart dataSent={data.dailySentHours}/>
                 );
             case "dayPartsActivityOverallChart":
                 return (
                     <DayPartsActivityOverallChart
-                        dailySentHoursPerConversation={data.dailySentHoursPerConversation}
-                        dailyReceivedHoursPerConversation={data.dailyReceivedHoursPerConversation}
+                        dailySentHours={data.dailySentHours}
+                        dailyReceivedHours={data.dailyReceivedHours}
                     />
                 );
             case "animatedDayPartsActivityChart":
                 return (
-                    <AnimatedDayPartsActivityChart
-                        dailySentHoursPerConversation={data.dailySentHoursPerConversation}
-                    />
+                    <AnimatedDayPartsActivityChart dailySentHours={data.dailySentHours}/>
                 );
             default:
                 return (

@@ -115,9 +115,6 @@ const MultiFileSelect: React.FC<MultiFileSelectProps> = ({dataSourceValue, onDon
             <Typography sx={{fontWeight: "bold"}}>
                 {t('select-data.instruction')}
             </Typography>
-            <Typography variant="body2" gutterBottom>
-                Only conversations with at least 100 messages and 2 contacts will be used.
-            </Typography>
             <Box sx={{ display: 'flex', gap: 2 }}>
                 <FileUploadButton
                     onChange={handleFileSelection}

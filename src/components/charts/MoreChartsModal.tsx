@@ -9,7 +9,6 @@ interface MoreChartsModalProps {
     open: boolean;
     onClose: () => void;
     graphData: GraphData;
-    listOfConversations: string[];
     section: "responseTimes" | "dailyActivityTimes" | "interactionIntensity";
 }
 
@@ -17,7 +16,6 @@ const MoreChartsModal: React.FC<MoreChartsModalProps> = ({
                                                              open,
                                                              onClose,
                                                              graphData,
-                                                             listOfConversations,
                                                              section,
                                                          }) => {
     const t = useTranslations(`feedback.${section}`);
@@ -55,7 +53,6 @@ const MoreChartsModal: React.FC<MoreChartsModalProps> = ({
                         <ChartContainer
                             type={chartType}
                             data={graphData}
-                            listOfConversations={listOfConversations}
                         />
                     </Box>
                 ))}

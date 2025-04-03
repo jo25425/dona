@@ -5,7 +5,7 @@ export const createConversation = (
     dataSource: string,
     messages: Array<[number, number, number, string]>, // Format: [year, month, date, sender]
     audioMessages: Array<[number, number, number, string, number]> = [], // Format: [year, month, date, sender, lengthSeconds]
-    includeInFeedback: boolean = true
+    focusInFeedback: boolean = true
 ): Conversation => {
     const parsedMessages = messages.map(([year, month, date, sender]) => ({
         timestamp: new Date(year, month - 1, date, 12, 0).getTime(),
@@ -29,6 +29,6 @@ export const createConversation = (
         messagesAudio: parsedAudioMessages,
         dataSource,
         conversationPseudonym: "test-convo",
-        includeInFeedback
+        focusInFeedback
     };
 };

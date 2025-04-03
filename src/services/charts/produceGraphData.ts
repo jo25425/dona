@@ -12,63 +12,64 @@ import produceBasicStatistics from "@services/charts/produceBasicStatistics";
 import {calculateMinMaxDates} from "@services/rangeFiltering";
 
 export default function produceGraphData(donorId: string, allConversations: Conversation[]): Record<string, GraphData> {
-    const filteredConversations = allConversations.filter(conversation => conversation.includeInFeedback);
-
     return Object.fromEntries(
-        Map.groupBy(filteredConversations, ({ dataSource }) => dataSource)
+        Map.groupBy(allConversations, ({ dataSource }) => dataSource)
             .entries()
             .map(([dataSourceValue, conversations]) => {
-                // Compute various data points for each conversation
+                // Extract focus conversations
+                const focusConversations = conversations
+                    .filter((conversation) => conversation.focusInFeedback)
+                    .map((conversation) => conversation.conversationPseudonym);
+
+                // Per conversation data
                 const dailyWordsPerConversation = conversations.map((conversation) =>
                     produceDailyWordsPerConversation(donorId, conversation)
                 );
-                const allDailyWords = aggregateDailyWords(dailyWordsPerConversation);
 
-                // Determine the global date range using calculateMinMaxDates
-                const { minDate, maxDate } = calculateMinMaxDates(conversations, true);
-                let slidingWindowMeanPerConversation: DailySentReceivedPoint[][] = [];
-                if (minDate && maxDate) {
-                    // Generate the complete list of all days within the global date range
-                    const completeDaysList = produceAllDays(minDate, maxDate);
-
-                    // Create sliding window mean using the complete days list
-                    slidingWindowMeanPerConversation = dailyWordsPerConversation.map((dailyWords) =>
-                        produceSlidingWindowMean(dailyWords, completeDaysList)
-                    );
-                }
-
-                // Compute other data points
-                const monthlySentReceivedPerConversation = conversations.map((conversation) =>
-                    produceMonthlySentReceivedWords(donorId, [conversation])
-                );
-                const dailySentHoursPerConversation = conversations.map((conversation) =>
-                    produceWordCountDailyHours(donorId, conversation, true)
-                );
-                const dailyReceivedHoursPerConversation = conversations.map((conversation) =>
-                    produceWordCountDailyHours(donorId, conversation, false)
-                );
-                const answerTimes = conversations.flatMap((conversation) =>
-                    produceAnswerTimesPerConversation(donorId, conversation)
+                const monthlySentReceivedPerConversation = Object.fromEntries(
+                    conversations.map((conversation) => [
+                        conversation.conversationPseudonym,
+                        produceMonthlySentReceivedWords(donorId, [conversation]),
+                    ])
                 );
                 const participantsPerConversation = conversations.map((conversation) =>
                     conversation.participants.filter((participant) => participant !== donorId)
                 );
 
+                // Aggregated conversations data
+                const dailyWords = aggregateDailyWords(dailyWordsPerConversation);
+
+                // Determine the global date range using calculateMinMaxDates
+                const { minDate, maxDate } = calculateMinMaxDates(conversations, true);
+                let slidingWindowMeanDailyWords: DailySentReceivedPoint[] = [];
+                if (minDate && maxDate) {
+                    // Generate the complete list of all days within the global date range
+                    const completeDaysList = produceAllDays(minDate, maxDate);
+                    // Create sliding window mean using the complete days list
+                    slidingWindowMeanDailyWords = produceSlidingWindowMean(dailyWords, completeDaysList);
+                }
+                const dailySentHours = produceWordCountDailyHours(donorId, conversations, true);
+                const dailyReceivedHours = produceWordCountDailyHours(donorId, conversations, false);
+
+                const answerTimes = conversations.flatMap((conversation) =>
+                    produceAnswerTimesPerConversation(donorId, conversation)
+                );
                 // General statistics
                 const messageCounts = produceMonthlySentReceivedMessages(donorId, conversations);
-                const wordCounts = monthlySentReceivedPerConversation.flat();
+                const wordCounts = Object.values(monthlySentReceivedPerConversation).flat();
                 const basicStatistics = produceBasicStatistics(messageCounts, wordCounts);
 
                 // Return all graph data for the data source
                 return [
                     dataSourceValue,
                     {
+                        focusConversations,
                         monthlySentReceivedPerConversation,
-                        dailyWords: allDailyWords,
-                        slidingWindowMeanPerConversation,
+                        dailyWords,
+                        slidingWindowMeanDailyWords,
                         dailyWordsPerConversation,
-                        dailySentHoursPerConversation,
-                        dailyReceivedHoursPerConversation,
+                        dailySentHours,
+                        dailyReceivedHours,
                         answerTimes,
                         basicStatistics,
                         participantsPerConversation,
