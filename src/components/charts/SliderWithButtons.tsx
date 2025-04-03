@@ -1,7 +1,19 @@
 import React, {useRef} from "react";
-import {Box, Slider} from "@mui/material";
+import {Box, Slider, useMediaQuery, useTheme} from "@mui/material";
 import {useTranslations} from "next-intl";
 import {ChartControlButton} from "@/styles/StyledButtons";
+import { styled } from '@mui/material/styles';
+
+const RotatedLabelsSlider = styled(Slider)(({ theme }) => ({
+    '& .MuiSlider-markLabel': {
+        transform: 'translateX(-60%) rotate(-30deg)',
+        transformOrigin: 'center center',
+        marginTop: '1px',
+        marginBottom: '100px',
+        whiteSpace: 'nowrap',
+        fontSize: '0.75rem',
+    },
+}));
 
 interface SliderWithButtonsProps {
     value: number;
@@ -16,6 +28,9 @@ const SliderWithButtons: React.FC<SliderWithButtonsProps> = ({
                                                              }) => {
     const labels = useTranslations("feedback.chartLabels");
     const animationRef = useRef<NodeJS.Timeout | null>(null);
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+    const maxTicks = isMobile ? 6 : 10; // Example values for max ticks
 
     const handleStartAnimation = () => {
         if (animationRef.current) clearInterval(animationRef.current);
@@ -49,16 +64,15 @@ const SliderWithButtons: React.FC<SliderWithButtonsProps> = ({
             mb={{ xs: 2, sm: 0 }}
         >
             {/* Slider up to 60% width */}
-            <Box flexGrow={1} width={{ xs: "100%", sm: "60%" }} minWidth="150px" px={2}>
-                <Slider
+            <Box flexGrow={1} width={{ xs: "100%", sm: "60%" }} minWidth="150px" px={2} mb={1}>
+                <RotatedLabelsSlider
                     value={value}
                     onChange={(_, newValue) => setCurrentFrame(newValue as number)}
                     min={0}
-                    max={marks.length - 1}
+                    max={Math.min(marks.length - 1, maxTicks - 1)}
                     step={1}
-                    marks={marks}
+                    marks={marks.slice(0, maxTicks)}
                     valueLabelDisplay="auto"
-                    valueLabelFormat={(value) => marks[value]?.label}
                 />
             </Box>
 
@@ -72,7 +86,6 @@ const SliderWithButtons: React.FC<SliderWithButtonsProps> = ({
                 </ChartControlButton>
             </Box>
         </Box>
-
     );
 };
 

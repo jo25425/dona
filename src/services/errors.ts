@@ -4,12 +4,10 @@ export enum RangeErrors {
     NoMessagesInRange = "NoMessagesInRange"
 }
 
-// errors.ts
-
 export enum DonationErrors {
-    NoFiles = "NoFiles",
     SameFiles = "SameFiles",
-    Not5to7Files = "Not5to7Files",
+    NotSingleDBFile = "NotSingleDBFile",
+    TooFewChats = "TooFewChats",
     TooFewContactsOrMessages = "TooFewContactsOrMessages",
     NoProfile = "NoProfile",
     NoMessageEntries = "NoMessageEntries",

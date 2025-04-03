@@ -3,22 +3,36 @@ import {useTranslations} from 'next-intl';
 import {Button, Divider, List, ListItem, ListItemIcon, ListItemText} from '@mui/material';
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 
-export function FileUploadButton({ onChange, loading }: {
+export function FileUploadButton({ onChange, loading, accept }: {
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     loading: boolean;
+    accept: string;
 }) {
     const t = useTranslations('donation');
 
     return (
-        <Button variant="contained" component="label" disabled={loading} sx={{ mb: 2 }}>
+        <Button variant="contained" component="label" disabled={loading} sx={{ my: 1 }}>
             {t('select-data.browse')}
             <input
                 type="file"
                 hidden
                 multiple
-                accept=".txt,.zip"
+                accept={accept}
                 onChange={onChange}
             />
+        </Button>
+    );
+}
+
+export function RemoveButton({ onClick, loading }: {
+    onClick:  React.MouseEventHandler<HTMLButtonElement>;
+    loading: boolean;
+}) {
+    const t = useTranslations('donation');
+
+    return (
+        <Button variant="outlined" disabled={loading} sx={{ my: 1 }} onClick={onClick}>
+            {t('select-data.remove')}
         </Button>
     );
 }

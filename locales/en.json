@@ -35,6 +35,9 @@
       "ios-documentation": "https://faq.whatsapp.com/618575946635920/?cms_platform=iphone&helpref=platform_switcher",
       "android-documentation": "https://faq.whatsapp.com/en/android/23756533"
     },
+    "imessage": {
+      "external-documentation": "https://support.apple.com/en-us/HT201287"
+    },
     "secure-delete": "https://safecomputing.umich.edu/protect-yourself/prepare-devices-disposal/securely-delete-files",
     "delete-from-android": "https://wethegeek.com/best-file-data-shredder-apps-to-permanently-delete-data-from-android/",
     "delete-from-ios": "https://appletoolbox.com/how-to-delete-files-permanently-from-the-files-app-on-iphone-and-ipad/",
@@ -226,6 +229,30 @@
     "video": "/images/instagram/instagram_eng.mp4",
     "logo": "i-logo.svg"
   },
+  "imessage": {
+    "devices": {
+      "body": "To obtain your iMessage data, you will need access to an iPhone or a Mac. Ensure that you have the necessary permissions to access the data."
+    },
+    "duration": {
+      "title": "How long does the data export from iMessage take?",
+      "body": "The time it takes to export your data depends on the amount of data you have. Please be patient as the process may take some time."
+    },
+    "data-deletion": {
+      "body": "To delete your iMessage data, follow the instructions provided in the Messages app. Ensure that you have backed up any important data before deletion. Further information on the permanent deletion of files can be found <link>on the website of the University of Michigan</link>."
+    },
+    "description": "Make a request to export your iMessage data. You will need access to an iPhone or a Mac. Follow the steps below to export your data.",
+    "external-documentation": "For more detailed instructions, please refer to the official documentation <link>here</link>.",
+    "steps": {
+      "1": "Open the Messages app on your iPhone or Mac.",
+      "2": "Select the conversation you want to export.",
+      "3": "On an iPhone, tap and hold on a message, then tap 'More...' and select the messages you want to export. On a Mac, select the messages you want to export.",
+      "4": "Tap the 'Share' icon and choose 'Mail' or another method to send the messages to yourself.",
+      "5": "Repeat the steps for other conversations if needed.",
+      "6": "Download the exported messages from your email or other method to your computer."
+    },
+    "video": "/images/imessage/imessage_eng.mp4",
+    "logo": "imessage-logo.svg"
+  },
   "consent": {
     "title": "Informed Consent",
     "pdf": {
@@ -290,24 +317,22 @@
     },
     "contacts-mapping": {
       "title": "Aliases of your contacts:",
-      "subtitle": {
-        "facebook": "We have anonymized your data and your contacts. If, in the next step, you want to reconstruct which conversations and contacts are involved in the anonymized evaluation, make a note of the following assignments of contacts (e.g. A**** B*****) and chats (e.g. “F4\"). From now on, these are the anonymized names for your chats. The assignment is not saved and is lost as soon as you leave this page.",
-        "whatsapp": "We have anonymized your data and your contacts. If, in the next step, you want to reconstruct which conversations and contacts are involved in the anonymized evaluation, make a note of the following assignments of contacts (e.g. A**** B*****) and chats (e.g. “W4\"). From now on, these are the anonymized names for your chats. The assignment is not saved and is lost as soon as you leave this page.",
-        "instagram": "We have anonymized your data and your contacts. If, in the next step, you want to reconstruct which conversations and contacts are involved in the anonymized evaluation, make a note of the following assignments of contacts (e.g. A**** B*****) and chats (e.g. “I4\"). From now on, these are the anonymized names for your chats. The assignment is not saved and is lost as soon as you leave this page."
-      },
+      "subtitle": "We have anonymized your data and your contacts. If, in the next step, you want to reconstruct which conversations and contacts are involved in the anonymized evaluation, make a note of the following assignments of contacts (e.g. A**** B*****) and chats (e.g. \"{dataSourceInitials}4\"). From now on, these are the anonymized names for your chats. The assignment is not saved and is lost as soon as you leave this page.",
       "pseudonyms": "Pseudonyms",
       "contacts": "Contacts",
+      "donate": "Donate",
+      "feedback": "Feedback",
       "onlySeven": "These are just the contacts of your 7 chats in which overall the most words were sent. <b> Below you can also select different chats. </b>",
       "moreContacts": "and {0} others.",
       "onlyYouInConv": "You are the only member in this chat. This could be because the other people have left the chat."
     },
+    "chat-selection": "You can select up to {max_num} chats to receive feedback for, but you <b>must</b> select at least {min_num}, so that the feedback given to you cannot be considered the analysis of some specific personal data. The ones currently selected are the {default_num} with the highest word count in messages.",
     "sendData": {
       "wait": "Sending the data could take a few minutes. Please wait and keep this website open. Thanks!"
     },
     "alias-not-required": "Not required",
     "alias": "Username",
     "please-insert-alias": "Please enter your username to enable anonymization.",
-    "choose-files-here": "Select the files you would like to donate here:",
     "processing": "Your data is being extracted and anonymized...",
     "be-patient": "The data extraction process may take some time. Please be patient...",
     "successful": "Your data has been successfully anonymized.",
@@ -332,17 +357,14 @@
             "6": "Help us improve <a href=\"@messages(\"links.reportProblem\")\" target=\"_blank\">here</a>"
           }
         }
-      },
-      "chatSelection": {
-        "title": "You can select up to 10 chats to receive feedback for",
-        "clickHereToSelect": "Click here to choose different chats to receive feedback for"
       }
     },
     "errors": {
       "NoProfile": "The uploaded data does not include profile information.",
-      "SameFiles": "You can only select files that differ. Please choose your 5-7 most important conversations.",
-      "Not5to7Files_format": "Please choose your 5-7 most important conversations. You have selected {count}. Press and hold the ctrl/command key to select multiple files at the same time.",
-      "TooFewContactsOrMessages": "All your chats should contain at least 100 messages and at least one contact (other than yourself).",
+      "SameFiles": "You can only select files that differ.",
+      "NotSingleFile": "Please choose a single .db file. You can only donate one file of this type at a time.",
+      "TooFewChats_format": "There must be at least {MIN_CHATS_FOR_DONATION} chats.",
+      "TooFewContactsOrMessages_format": "There are less than {MIN_CHATS_FOR_DONATION} chats with at least {MIN_MESSAGES_PER_CHAT} messages and at least {MIN_CONTACTS_PER_CHAT} contacts (yourself included).",
       "NonsenseDateRange": "The selected period is not valid. Please check the correctness of the selected dates.",
       "NoMessagesInRange": "There are no messages in the selected period. Please select a longer and valid period.",
       "NotEnoughMonthsInRange": "To donate your data, please select a period of at least 6 months within the period of your donation.",

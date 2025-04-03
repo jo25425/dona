@@ -26,6 +26,7 @@
       "@components/*": ["./src/components/*"],
       "@models/*": ["./src/models/*"],
       "@services/*": ["./src/services/*"],
+      "@images/*": ["public/images/*"],
       "@/*": ["./src/*"]
     },
     "target": "ESNext",

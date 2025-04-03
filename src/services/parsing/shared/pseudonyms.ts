@@ -53,7 +53,7 @@ export class ChatPseudonyms {
     constructor(donorAlias: string, chatAlias: string, dataSourceValue: string) {
         this.donorAlias = donorAlias;
         this.chatAlias = chatAlias;
-        this.dataSourceInitial = dataSourceValue[0];
+        this.dataSourceInitial = dataSourceValue.slice(0, 2).toWellFormed();
     }
 
     getPseudonym(participants: string[]): string {

@@ -10,11 +10,8 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import InstagramIcon from "@mui/icons-material/Instagram";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import CircularProgress from "@mui/material/CircularProgress";
 import Alert from "@mui/material/Alert";
 import {Conversation, DataSourceValue} from "@models/processed";
@@ -25,8 +22,10 @@ import {useDonation} from "@/context/DonationContext";
 import {useTranslations} from "next-intl";
 import {MainTitle, RichText} from "@/styles/StyledTypography";
 import {getErrorMessage} from "@services/errors";
+import {FacebookIcon, IMessageIcon, InstagramIcon, WhatsAppIcon} from "@components/CustomIcon";
 
 type ConversationsBySource = Record<DataSourceValue, Conversation[]>;
+type SelectedChatsBySource = Record<DataSourceValue, Set<string>>;
 
 export default function DataDonationPage() {
     const router = useRouter();
@@ -36,6 +35,7 @@ export default function DataDonationPage() {
     const aliasConfig = useAliasConfig();
     const { setDonationData, loadExternalDonorIdFromCookie, externalDonorId } = useDonation();
     const [allDonatedConversationsBySource, setAllDonatedConversationsBySource] = useState<ConversationsBySource>({} as ConversationsBySource);
+    const [feedbackChatsBySource, setFeedbackChatsBySource] = useState<SelectedChatsBySource>({} as SelectedChatsBySource);
     const [loading, setLoading] = useState(false);
     const [validated, setValidated] = useState(false);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -54,15 +54,27 @@ export default function DataDonationPage() {
         setValidated(true);
     };
 
-    const donationChangeWrapper = (dataSource: DataSourceValue) => {
-        return (newConversations: Conversation[]) => handleDonatedConversationsChange(dataSource, newConversations);
+    const handleFeedbackChatsChange = (dataSource: DataSourceValue, newFeedbackChats: Set<string>) => {
+        setFeedbackChatsBySource((prev) => ({
+            ...prev,
+            [dataSource]: newFeedbackChats,
+        }));
     };
 
     const onDataDonationUpload = async () => {
+        document.body.scrollTo(0, 0);
         setLoading(true);
         setErrorMessage(null);
 
-        const allConversations = Object.values(allDonatedConversationsBySource).flat();
+        const allConversations = Object.entries(allDonatedConversationsBySource).flatMap(([dataSource, conversations]) => {
+            const feedbackChats = feedbackChatsBySource[dataSource as DataSourceValue] || new Set();
+            return conversations
+                .map(conversation => ({
+                    ...conversation,
+                    focusInFeedback: feedbackChats.has(conversation.conversationPseudonym)
+                }));
+        });
+
         if (allConversations.length > 0) {
             try {
                 const result = await addDonation(allConversations, aliasConfig.donorAlias, externalDonorId);
@@ -71,11 +83,9 @@ export default function DataDonationPage() {
                     router.push("/donation-feedback");
                 } else {
                     setErrorMessage(getErrorMessage(donation.t, result.error));
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
                 }
             } catch (err) {
                 setErrorMessage(getErrorMessage(donation.t, err));
-                window.scrollTo({ top: 0, behavior: 'smooth' });
             } finally {
                 setLoading(false);
             }
@@ -106,20 +116,22 @@ export default function DataDonationPage() {
                     </Box>
                 )}
                 <Box sx={{ my: 4, minWidth: "80%", textAlign: "left" }}>
-                    {[DataSourceValue.WhatsApp, DataSourceValue.Facebook, DataSourceValue.Instagram].map((source) => (
+                    {[DataSourceValue.WhatsApp, DataSourceValue.Facebook, DataSourceValue.Instagram, DataSourceValue.IMessage].map((source) => (
                         <Accordion key={source} sx={{ my: 1 }}>
                             <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
                                 {source === DataSourceValue.WhatsApp && <WhatsAppIcon sx={{ mr: 1, mt: 0.5 }} />}
                                 {source === DataSourceValue.Facebook && <FacebookIcon sx={{ mr: 1, mt: 0.5 }} />}
                                 {source === DataSourceValue.Instagram && <InstagramIcon sx={{ mr: 1, mt: 0.5 }} />}
+                                {source === DataSourceValue.IMessage && <IMessageIcon sx={{ mr: 1, mt: 0.5 }} />}
                                 <Typography variant="h6">
-                                    {donation.t("datasource-title_format", { datasource: source })}
+                                    {donation.t("datasource-title_format", { datasource: source == DataSourceValue.IMessage ? "iMessage" : source })}
                                 </Typography>
                             </AccordionSummary>
                             <AccordionDetails>
                                 <MultiFileSelect
                                     dataSourceValue={source}
-                                    onDonatedConversationsChange={donationChangeWrapper(source)}
+                                    onDonatedConversationsChange={(newConversations) => handleDonatedConversationsChange(source, newConversations)}
+                                    onFeedbackChatsChange={(newFeedbackChats) => handleFeedbackChatsChange(source, newFeedbackChats)}
                                 />
                             </AccordionDetails>
                         </Accordion>

@@ -11,6 +11,7 @@ import {useEffect, useState} from "react";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import HomeIcon from "@mui/icons-material/Home";
 import {Locale} from "@/config";
+import Button from "@mui/material/Button";
 
 export default function Header({ locale }: { locale: Locale }) {
     const theme = useTheme();
@@ -18,6 +19,8 @@ export default function Header({ locale }: { locale: Locale }) {
     const pathname = usePathname();
     const isLandingPage = pathname === "/";
     const t = useTranslations("landing.header");
+    const links = useTranslations("links");
+    const urls = useTranslations("urls");
 
     const [fadeIn, setFadeIn] = useState(false);
     useEffect(() => {
@@ -43,7 +46,7 @@ export default function Header({ locale }: { locale: Locale }) {
                 color: theme.palette.common.white, '& .MuiSvgIcon-root': { color: theme.palette.common.white }, // Ensure good visibility
             }}
         >
-            {/* Top bar with Home & Language Switcher */}
+            {/* Top bar with Home, Report Problem  & Language Switcher */}
             <Box
                 sx={{
                     width: "100%",
@@ -57,8 +60,22 @@ export default function Header({ locale }: { locale: Locale }) {
                     <HomeIcon fontSize="large" />
                 </IconButton>
 
-                {/* Right: Language Switcher */}
-                <LanguageSwitcher locale={locale} />
+                {/* Right: Report Problem Button and Language Switcher */}
+                <Box sx={{ display: "flex", alignItems: "stretch" }}>
+                    <Button
+                        variant="outlined"
+                        size="small"
+                        href={urls("report-problem")}
+                        sx={{
+                            color: theme.palette.common.white,
+                            borderColor: theme.palette.common.white,
+                            mr: 1,
+                        }}
+                    >
+                        {links("report-problem")}
+                    </Button>
+                    <LanguageSwitcher locale={locale} />
+                </Box>
             </Box>
 
             {/* Landing Page Header Text */}

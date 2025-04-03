@@ -1,10 +1,11 @@
 # Dona - Social Data Gathering Platform
 Dona is a platform developed to collect and de-identify social data to be later used as part of a research effort to characterize mental wellbeing.
 
+The previous version of the web application can be found in [this repository](https://github.com/mbp-lab/dona).
+
 ---------
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [
-`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Background
 #TODO

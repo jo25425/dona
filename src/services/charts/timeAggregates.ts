@@ -120,27 +120,29 @@ export const aggregateDailyWords = (
  * Aggregates the word counts per hour for a specific conversation, based on sent or received messages.
  *
  * @param donorId - The ID of the donor whose messages are being analyzed.
- * @param conversation - The conversation to process.
+ * @param conversations - The conversations to process.
  * @param sent - If true, computes word counts for sent messages; otherwise, for received messages.
  * @returns An array of DailyHourPoint objects, each representing word counts for a specific hour.
  */
 export const produceWordCountDailyHours = (
     donorId: string,
-    conversation: Conversation,
+    conversations: Conversation[],
     sent: boolean
 ): DailyHourPoint[] => {
     const hourlyMap = new Map<string, number>();
 
-    conversation.messages
-        .filter((message) =>
-            sent ? message.sender === donorId : message.sender !== donorId
-        )
-        .forEach((message) => {
-            const date = new Date(message.timestamp);
-            const key = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}-${date.getHours()}-${date.getMinutes()}`;
+    conversations.forEach((conversation) => {
+        conversation.messages
+            .filter((message) =>
+                sent ? message.sender === donorId : message.sender !== donorId
+            )
+            .forEach((message) => {
+                const date = new Date(message.timestamp);
+                const key = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}-${date.getHours()}-${date.getMinutes()}`;
 
-            hourlyMap.set(key, (hourlyMap.get(key) || 0) + message.wordCount);
-        });
+                hourlyMap.set(key, (hourlyMap.get(key) || 0) + message.wordCount);
+            });
+    })
 
     return Array.from(hourlyMap.entries()).map(([key, wordCount]) => {
         const [year, month, date, hour, minute] = key.split("-").map(Number);

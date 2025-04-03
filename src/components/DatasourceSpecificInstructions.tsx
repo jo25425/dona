@@ -13,7 +13,8 @@ export default function DatasourceSpecificInstructions({ dataSource }: { dataSou
 
     const isWhatsApp = dataSource === DataSourceValue.WhatsApp;
     const secondParagraph = isWhatsApp ? "selection" : "duration";
-    const stepsCount = isWhatsApp ? 8 : 10;
+    const stepsCount = dataSource === DataSourceValue.IMessage ? 6 : isWhatsApp ? 8 : 10;
+    const verticalVideo = isWhatsApp || dataSource === DataSourceValue.Instagram;
 
     const externalLinks = {
         link_android: `${dataSource.toLowerCase()}.android-documentation`,
@@ -43,16 +44,22 @@ export default function DatasourceSpecificInstructions({ dataSource }: { dataSou
 
     return (
         <Grid container spacing={2} mt={-2} justifyContent="center" alignItems="flex-start">
-            {isWhatsApp ? (
+            {verticalVideo ? (
                 <Grid container spacing={2} alignItems="flex-start">
                     <FirstBlock halfWidth />
                     <Grid size={{ xs: 12, md: 6 }}>
-                        <TabbedInstructionVideo
-                            iosVideoUrl={source.t("video.ios")}
-                            androidVideoUrl={source.t("video.android")}
-                            iosCaption={source.t("video.ios-caption")}
-                            androidCaption={source.t("video.android-caption")}
-                        />
+                        {
+                            isWhatsApp ? (
+                                <TabbedInstructionVideo
+                                    iosVideoUrl={source.t("video.ios")}
+                                    androidVideoUrl={source.t("video.android")}
+                                    iosCaption={source.t("video.ios-caption")}
+                                    androidCaption={source.t("video.android-caption")}
+                                />
+                            ) : (
+                                <InstructionVideo videoUrl={source.t("video")} />
+                            )
+                        }
                     </Grid>
                 </Grid>
             ) : (

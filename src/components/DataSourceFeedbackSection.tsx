@@ -55,15 +55,6 @@ export default function DataSourceFeedbackSection({ dataSourceValue, graphData }
         setCurrentSection(null);
     };
 
-    const listOfConversations = createListOfConversations(
-        graphData.participantsPerConversation,
-        anon("chat"),
-        dataSourceValue[0].toUpperCase(),
-        labels("chatWith"),
-        anon("contactInitial"),
-        anon("system")
-    );
-
     const openModalSpan = (content: ReactNode, translator: any, chartName: string) => (
         <span
             style={{ color: "blue", textDecoration: "underline", cursor: "pointer" }}
@@ -80,7 +71,7 @@ export default function DataSourceFeedbackSection({ dataSourceValue, graphData }
     );
 
     return (
-        <Accordion>
+        <Accordion defaultExpanded>
             <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
                 <Typography variant="h6">{t("sourceTitle", { source: dataSourceValue })}</Typography>
             </AccordionSummary>
@@ -115,7 +106,6 @@ export default function DataSourceFeedbackSection({ dataSourceValue, graphData }
                     <ChartContainer
                         type="animatedIntensityPolarChart"
                         data={graphData}
-                        listOfConversations={listOfConversations}
                         dataSourceValue={dataSourceValue}
                     />
                     <Box>
@@ -131,7 +121,6 @@ export default function DataSourceFeedbackSection({ dataSourceValue, graphData }
                     <ChartContainer
                         type="animatedWordCountBarChart"
                         data={graphData}
-                        listOfConversations={listOfConversations}
                         dataSourceValue={dataSourceValue}
                     />
                     <Button onClick={() => openSectionModal("interactionIntensity")}>
@@ -150,7 +139,6 @@ export default function DataSourceFeedbackSection({ dataSourceValue, graphData }
                     <ChartContainer
                         type="dailyActivityHoursChart"
                         data={graphData}
-                        listOfConversations={listOfConversations}
                         dataSourceValue={dataSourceValue}
                     />
                     <Button onClick={() => openSectionModal("dailyActivityTimes")}>
@@ -169,7 +157,6 @@ export default function DataSourceFeedbackSection({ dataSourceValue, graphData }
                     <ChartContainer
                         type="responseTimeBarChart"
                         data={graphData}
-                        listOfConversations={listOfConversations}
                         dataSourceValue={dataSourceValue}
                     />
                     <Button onClick={() => openSectionModal("responseTimes")}>
@@ -193,7 +180,6 @@ export default function DataSourceFeedbackSection({ dataSourceValue, graphData }
                     open={isSectionModalOpen}
                     onClose={closeSectionModal}
                     graphData={graphData}
-                    listOfConversations={listOfConversations}
                     section={currentSection}
                 />
             )}

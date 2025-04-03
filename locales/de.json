@@ -19,6 +19,7 @@
     "report-problem": "Problem Melden"
   },
   "urls": {
+    "learn-more": "/learn-more",
     "uni-bielefeld": "https://www.uni-bielefeld.de",
     "dona-responsible-homepage": "https://www.uni-bielefeld.de/fakultaeten/technische-fakultaet/arbeitsgruppen/multimodal-behavior-processing/",
     "limesurvey": "https://www.limesurvey.org",
@@ -57,11 +58,13 @@
       },
       "col2": {
         "title": "Sie bleiben anonym",
-        "body": "Wir werden Sie bitten, <strong><link>anonyme Chat-Metadaten</link></strong> (Wortanzahl bei Textnachrichten, Länge in Sekunden bei Sprachnachrichten, Zeitstempel der Nachricht und Pseudonyme der Chat-TeilnehmerInnen). Wir haben keinen Zugang zu Namen, Nachrichtentexten, Inhalten von Sprachnachrichten oder anderen Inhalten."
+        "body": "Wir werden Sie bitten, <strong><link>anonyme Chat-Metadaten</link></strong> (Wortanzahl bei Textnachrichten, Länge in Sekunden bei Sprachnachrichten, Zeitstempel der Nachricht und Pseudonyme der Chat-TeilnehmerInnen). Wir haben keinen Zugang zu Namen, Nachrichtentexten, Inhalten von Sprachnachrichten oder anderen Inhalten.",
+        "image-path": "/images/stay-anonymous-illustration.jpg"
       },
       "col3": {
         "title": "Unterstützen Sie die Forschung",
-        "body": "Die Ergebnisse dieser Studie werden zu dem übergeordneten Ziel beitragen, die Auswirkungen sozialer Interaktionen auf das menschliche Wohlbefinden besser zu verstehen."
+        "body": "Die Ergebnisse dieser Studie werden zu dem übergeordneten Ziel beitragen, die Auswirkungen sozialer Interaktionen auf das menschliche Wohlbefinden besser zu verstehen.",
+        "image-path": "/images/support-research-illustration.jpg"
       }
     },
     "how-to-participate": {
@@ -284,17 +287,16 @@
     },
     "contacts-mapping": {
       "title": "Decknamen Ihrer Kontakte:",
-      "subtitle": {
-        "facebook": "Wir haben Ihre Daten und Ihre Kontakte anonymisiert. Falls Sie in der anonymisierten Auswertung im nächsten Schritt rekonstruieren wollen, um welche Konversationen und Kontakte es sich jeweils handelt, notieren Sie sich die folgenden Zuordnungen von Kontakten (z.B. A**** B*****) und Chatnamen (z.B. “F4”). Ab jetzt sind dies die anonymisierten Decknamen für Ihre Chats. Die Zuordnung wird nicht gespeichert und geht verloren, sobald Sie diese Seite verlassen.",
-        "whatsapp": "Wir haben Ihre Daten und Ihre Kontakte anonymisiert. Falls Sie in der anonymisierten Auswertung im nächsten Schritt rekonstruieren wollen, um welche Konversationen und Kontakte es sich jeweils handelt, notieren Sie sich die folgenden Zuordnungen von Kontakten (z.B. A**** B*****) und Chatnamen (z.B. “W4” ). Ab jetzt sind dies die anonymisierten Decknamen für Ihre Chats. Die Zuordnung wird nicht gespeichert und geht verloren, sobald Sie diese Seite verlassen.",
-        "instagram": "Wir haben Ihre Daten und Ihre Kontakte anonymisiert. Falls Sie in der anonymisierten Auswertung im nächsten Schritt rekonstruieren wollen, um welche Konversationen und Kontakte es sich jeweils handelt, notieren Sie sich die folgenden Zuordnungen von Kontakten (z.B. A**** B*****) und Chatnamen (z.B. “I4”). Ab jetzt sind dies die anonymisierten Decknamen für Ihre Chats. Die Zuordnung wird nicht gespeichert und geht verloren, sobald Sie diese Seite verlassen."
-      },
+      "subtitle": "Wir haben Ihre Daten und Ihre Kontakte anonymisiert. Falls Sie in der anonymisierten Auswertung im nächsten Schritt rekonstruieren wollen, um welche Konversationen und Kontakte es sich jeweils handelt, notieren Sie sich die folgenden Zuordnungen von Kontakten (z.B. A**** B*****) und Chatnamen (z.B. \"{dataSourceInitials}4\"). Ab jetzt sind dies die anonymisierten Decknamen für Ihre Chats. Die Zuordnung wird nicht gespeichert und geht verloren, sobald Sie diese Seite verlassen.",
       "pseudonyms": "Pseudonyme",
       "contacts": "Kontakte",
+      "donate": "Spenden",
+      "feedback": "Feedback",
       "onlySeven": "Dies sind nur die Kontakte Ihrer 7 Chats, in denen insgesamt die meisten Wörter gesendet wurden. <b>Unten können Sie auch andere Chats auswählen. </b>",
       "moreContacts": "und {0} weitere.",
       "onlyYouInConv": "Nur Sie befinden sich in diesem Chat. Es könnte z.B. sein, dass die andere Person/en den Chat verlassen haben."
     },
+    "chat-selection": "Sie können bis zu {max_num} Chats auswählen, um Feedback zu erhalten, aber Sie <b>müssen</b> mindestens {min_num} auswählen, damit das Ihnen gegebene Feedback nicht als Analyse bestimmter persönlicher Daten betrachtet werden kann. Die derzeit ausgewählten sind die {default_num} mit der höchsten Wortanzahl in Nachrichten.",
     "sendData": {
       "wait": "Das Senden der Daten kann ein paar Minuten dauern. Bitte warten Sie und lassen Sie diese Seite geöffnet. Danke!"
     },
@@ -328,17 +330,14 @@
             "6": "Helfen Sie uns <a href=\"https://survey.mbp.tf.uni-bielefeld.de/index.php?r=survey/index&sid=486423&lang=de\" target=\"_blank\">hier</a> diese Anwendung zu verbessern."
           }
         }
-      },
-      "chatSelection": {
-        "title": "Sie können bis zu 10 Chats auswählen, für die Sie Feedback erhalten möchten",
-        "clickHereToSelect": "Klicken Sie hier, um andere Chats auszuwählen, für die Sie Feedback erhalten möchten"
       }
     },
     "errors": {
       "NoProfile": "Die Datei enthält keine Profildaten.",
       "SameFiles": "Sie können nur Dateien auswählen, die sich voneinander unterscheiden. Bitte wählen Sie Ihre 5-7 wichtigsten Unterhaltungen aus.",
-      "Not5to7Files_format": "Bitte wählen Sie Ihre 5-7 wichtigsten Unterhaltungen aus. Sie haben {count} ausgewählt. Drücken und halten Sie die Strg-/Befehlstaste, um mehrere Dateien gleichzeitig auszuwählen.",
-      "TooFewContactsOrMessages": "Alle Ihre Chats sollten mindestens 100 Nachrichten und mindestens einen Kontakt (der nicht Sie selbst sind) enthalten.",
+      "NotSingleFile": "Bitte wählen Sie eine einzelne .db-Datei aus. Sie können nur eine Datei dieses Typs auf einmal spenden.",
+      "TooFewChats_format": "Es müssen mindestens {MIN_CHATS_FOR_DONATION} Chats vorhanden sein.",
+      "TooFewContactsOrMessages_format": "Es gibt weniger als {MIN_CHATS_FOR_DONATION} Chats mit mindestens {MIN_MESSAGES_PER_CHAT} Nachrichten und mindestens {MIN_CONTACTS_PER_CHAT} Kontakten (Sie selbst eingeschlossen).",
       "NonsenseRange": "Der ausgewählte Zeitraum ist ungültig. Bitte überprüfen Sie die Richtigkeit der ausgewählten Daten.",
       "NotEnoughMonthsInRange": "Bitte wählen Sie zum Spenden Ihrer Daten einen Zeitraum von mindestens 6 Monaten innerhalb des Zeitraums Ihrer Spende aus.",
       "NoMessagesInRange": "In dem ausgewählten Zeitraum befinden sich keine Nachrichten. Bitte wählen Sie einen größeren und validen Zeitraum.",

@@ -28,13 +28,9 @@ const ranges = [
 
 interface ResponseTimeBarChartProps {
     responseTimes: AnswerTimePoint[];
-    isOnlyOneOrLessConv: boolean;
 }
 
-const ResponseTimeBarChart: React.FC<ResponseTimeBarChartProps> = ({
-                                                                         responseTimes,
-                                                                         isOnlyOneOrLessConv,
-                                                                     }) => {
+const ResponseTimeBarChart: React.FC<ResponseTimeBarChartProps> = ({ responseTimes }) => {
     const CHART_NAME = "response-times-barchart";
     const container_name = `chart-wrapper-${CHART_NAME}`;
 
@@ -64,7 +60,7 @@ const ResponseTimeBarChart: React.FC<ResponseTimeBarChartProps> = ({
     const contactPercentages = contactCounts.map((count) => (contactTotal > 0 ? (count / contactTotal) * 100 : 0));
 
     const datasets: ChartDataset<"bar", number[]>[] = [
-        !isOnlyOneOrLessConv && {
+        {
             label: chartTexts("legend.contacts"),
             data: contactPercentages,
             backgroundColor: CHART_COLORS.secondaryBar,

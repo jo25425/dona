@@ -17,7 +17,7 @@ describe("produceGraphData", () => {
                         [2023, 12, 1, donorId],
                         [2023, 12, 2, "participant1"],
                         [2023, 12, 3, donorId],
-                    ]),
+                    ], [], true),
                 ],
             },
             expectedGraph: {
@@ -66,7 +66,8 @@ describe("produceGraphData", () => {
                         ],
                         [
                             [2023, 12, 2, "participant2", 30], // Audio message => ignored in stats, word counts, etc
-                        ]
+                        ],
+                        true
                     ),
                 ],
             },
@@ -102,6 +103,20 @@ describe("produceGraphData", () => {
                 },
             },
         },
+        {
+            name: "Conversation excluded from feedback",
+            socialData: {
+                donorId,
+                conversations: [
+                    createConversation("Facebook", [
+                        [2023, 12, 1, donorId],
+                        [2023, 12, 2, "participant1"],
+                        [2023, 12, 3, donorId],
+                    ], [], false),
+                ],
+            },
+            expectedGraph: {},
+        },
     ];
 
     testCases.forEach(({ name, socialData, expectedGraph }) => {
@@ -132,3 +147,4 @@ describe("produceGraphData", () => {
         });
     });
 });
+

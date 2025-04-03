@@ -22,6 +22,7 @@ export const conversations = p.pgTable("conversations", {
     dataSourceId: p.integer("data_source_id").notNull().references(() => dataSources.id),
     donationId: p.uuid("donation_id").notNull().references(() => donations.id),
     conversationPseudonym: p.varchar("conversation_pseudonym", { length: 10 }).notNull(),
+    focusInFeedback: p.boolean("focus_in_feedback").default(true).notNull(),
 });
 
 export const conversationParticipants = p.pgTable("conversation_participants", {
