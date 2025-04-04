@@ -1,12 +1,11 @@
 "use client";
 
 import React, {ChangeEvent, useState} from "react";
-import {useTranslations} from "next-intl";
 import {AnonymizationResult, Conversation, DataSourceValue} from "@models/processed";
 import {anonymizeData} from "@/services/anonymization";
 import {calculateMinMaxDates, filterDataByRange, NullableRange, validateDateRange} from "@services/rangeFiltering";
-import {getErrorMessage} from "@services/errors";
-import {validateMinChatsForDonation, validateMinMessagesPerChat} from "@services/validation";
+import {DonationError, DonationErrors, DonationValidationError, getErrorMessage} from "@services/errors";
+import {validateMinChatsForDonation, validateMinImportantChatsForDonation} from "@services/validation";
 import Alert, {AlertProps} from "@mui/material/Alert";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -14,9 +13,9 @@ import AnonymizationPreview from "@components/AnonymizationPreview";
 import DateRangePicker from "@components/DateRangePicker";
 import LoadingSpinner from "@components/LoadingSpinner";
 import {FileList, FileUploadButton, RemoveButton} from "@components/DonationComponents";
-import Button from "@mui/material/Button";
 import styled from "@mui/material/styles/styled";
 import {CONFIG} from "@/config";
+import {useRichTranslations} from "@/hooks/useRichTranslations";
 
 
 const UploadAlert = styled((props: AlertProps) => (
@@ -34,7 +33,7 @@ interface MultiFileSelectProps {
 }
 
 const MultiFileSelect: React.FC<MultiFileSelectProps> = ({dataSourceValue, onDonatedConversationsChange, onFeedbackChatsChange}) => {
-    const t = useTranslations('donation');
+    const donation = useRichTranslations('donation');
     const acceptedFileTypes = (
         dataSourceValue == DataSourceValue.WhatsApp ? ".txt, .zip" :
             dataSourceValue == DataSourceValue.IMessage ? ".db" :
@@ -69,7 +68,7 @@ const MultiFileSelect: React.FC<MultiFileSelectProps> = ({dataSourceValue, onDon
             setFilteredConversations(result.anonymizedConversations);
             onDonatedConversationsChange(result.anonymizedConversations); // Update data for parent
         } catch (err) {
-            const errorMessage = getErrorMessage(t, err as Error, CONFIG);
+            const errorMessage = getErrorMessage(donation.t, err as Error, CONFIG);
             setError(errorMessage);
         } finally {
             setIsLoading(false);
@@ -92,19 +91,19 @@ const MultiFileSelect: React.FC<MultiFileSelectProps> = ({dataSourceValue, onDon
         const errorReason = validateDateRange(anonymizationResult?.anonymizedConversations!, newRange);
         setDateRangeError(errorReason);
 
-        if (!error && anonymizationResult) {
+        if (!errorReason && !error && anonymizationResult) {
             const filteredConversations = filterDataByRange(anonymizationResult.anonymizedConversations, newRange);
 
             // Validation
             if (!validateMinChatsForDonation(filteredConversations)) {
-                setDateRangeError(t('errors.minChatsForDonation'));
+                setDateRangeError(DonationErrors.TooFewChats);
                 return;
             }
-            if (!validateMinMessagesPerChat(filteredConversations)) {
-                setDateRangeError(t('errors.minMessagesPerChat'));
+            if (!validateMinImportantChatsForDonation(filteredConversations)) {
+                setDateRangeError(DonationErrors.TooFewContactsOrMessages);
                 return;
             }
-
+            setDateRangeError(null);
             setFilteredConversations(filteredConversations);
             onDonatedConversationsChange(filteredConversations); // Update parent with filtered data
         }
@@ -113,7 +112,7 @@ const MultiFileSelect: React.FC<MultiFileSelectProps> = ({dataSourceValue, onDon
     return (
         <Box>
             <Typography sx={{fontWeight: "bold"}}>
-                {t('select-data.instruction')}
+                {donation.t('select-data.instruction')}
             </Typography>
             <Box sx={{ display: 'flex', gap: 2 }}>
                 <FileUploadButton
@@ -133,7 +132,7 @@ const MultiFileSelect: React.FC<MultiFileSelectProps> = ({dataSourceValue, onDon
             )}
 
             {/* Loading indicator */}
-            {isLoading && <LoadingSpinner message={t('sendData.wait')}/>}
+            {isLoading && <LoadingSpinner message={donation.t('sendData.wait')}/>}
 
             {/* Display anonymized data */}
             {!error && !isLoading && anonymizationResult && filteredConversations && (
@@ -144,7 +143,7 @@ const MultiFileSelect: React.FC<MultiFileSelectProps> = ({dataSourceValue, onDon
                                 calculatedRange={calculatedRange}
                                 setSelectedRange={handleDateRangeChange}
                             />
-                            {dateRangeError && <UploadAlert>{t(`errors.${dateRangeError}`)}</UploadAlert>}
+                            {dateRangeError && <UploadAlert>{getErrorMessage(donation.t, dateRangeError, CONFIG)}</UploadAlert>}
                         </>
                     )}
                     <AnonymizationPreview
