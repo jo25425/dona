@@ -20,17 +20,24 @@ export default async function deIdentify(
     chatPseudonyms.setDonorName(donorName);
     contactPseudonyms.setPseudonym(donorName, aliasConfig.donorAlias);
 
+
     const deIdentifiedConversations: Conversation[] = await Promise.all(
         parsedConversations.map(async (jsonContent): Promise<Conversation | null> => {
-            const participantPseudonyms = new Set<string>();
+
             const textMessages: Message[] = [];
             const audioMessages: MessageAudio[] = [];
+
+            // Generate participant pseudonyms first (using participants array, not messages)
+            const participantPseudonyms = new Set<string>();
+            jsonContent.participants.forEach(participant => {
+                const participantName = contactPseudonyms.getPseudonym(participant.name);
+                participantPseudonyms.add(participantName);
+            });
 
             await Promise.all(
                 jsonContent.messages.map(async (messageData) => {
                     const timestamp = messageData.timestamp_ms;
                     const senderName = contactPseudonyms.getPseudonym(messageData.sender_name);
-                    participantPseudonyms.add(senderName);
 
                     if (isVoiceMessage(messageData)) {
                         const audioUri = messageData.audio_files?.[0]?.uri

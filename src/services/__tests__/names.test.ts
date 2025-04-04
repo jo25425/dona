@@ -31,8 +31,13 @@ describe('maskName', () => {
         expect(maskName("!?")).toBe("!?");
     });
 
-    it('should handle names with special characters', () => {
+    it('should handle names with other characters', () => {
         expect(maskName("John_Doe")).toBe("Jo******");
         expect(maskName("Jane@Doe")).toBe("Ja******");
+    });
+
+    it('should handle names with special characters', () => {
+        expect(maskName("Ukraine - Hilfe Koblenz e.V. 🇺🇦")).toBe("Uk***** - Hi*** Ko***** e.** 🇺🇦");
+        expect(maskName("Someone Happy 😊😊😊")).toBe("So***** Ha*** 😊😊*");
     });
 });
