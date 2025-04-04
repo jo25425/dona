@@ -42,6 +42,7 @@ const MultiFileSelect: React.FC<MultiFileSelectProps> = ({dataSourceValue, onDon
 
     // States
     const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
+    const [fileInputKey, setFileInputKey] = useState<number>(0); // Add a key state for file input
     const [error, setError] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [anonymizationResult, setAnonymizationResult] = useState<AnonymizationResult | null>(null);
@@ -83,6 +84,7 @@ const MultiFileSelect: React.FC<MultiFileSelectProps> = ({dataSourceValue, onDon
         setAnonymizationResult(null);
         setFilteredConversations([]);
         onDonatedConversationsChange([]);
+        setFileInputKey(prevKey => prevKey + 1); // Update the key to reset the file input
     };
 
     // Handle date range selection
@@ -116,6 +118,7 @@ const MultiFileSelect: React.FC<MultiFileSelectProps> = ({dataSourceValue, onDon
             </Typography>
             <Box sx={{ display: 'flex', gap: 2 }}>
                 <FileUploadButton
+                    key={fileInputKey} // Add the key prop here
                     onChange={handleFileSelection}
                     loading={isLoading}
                     accept={acceptedFileTypes}
