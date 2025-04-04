@@ -4,11 +4,11 @@
  *
  * @example
  * maskName("John Doe");
- * // Returns: "J*** D**"
+ * // Returns: "Jo** Do*"
  *
  * @example
  * maskName("  Dr. Jane Smith  ");
- * // Returns: "D** J*** S****"
+ * // Returns: "Dr* Ja** Sm***"
  */
 export const maskName = (name: string): string => {
     if (!name.trim()) {
@@ -17,7 +17,7 @@ export const maskName = (name: string): string => {
     return name
         .trim()
         .split(/\s+/)
-        .map(word => word[0] + "*".repeat(word.length - 1))
+        .map(word => word.substring(0, 2) + (word.length > 2? "*".repeat(word.length - 2): ""))
         .join(" ");
 };
 
