@@ -58,6 +58,8 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({calculatedRange, setSe
                             value={startDate}
                             onChange={handleStartDateChange}
                             format="DD/MM/YYYY"
+                            minDate={calculatedRange[0] ? dayjs(calculatedRange[0]) : undefined}
+                            maxDate={calculatedRange[1] ? dayjs(calculatedRange[1]) : undefined}
                             slotProps={{ textField: { size: 'small' } }}
                         />
                     </LocalizationProvider>
@@ -69,7 +71,8 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({calculatedRange, setSe
                             value={endDate}
                             onChange={handleEndDateChange}
                             format="DD/MM/YYYY"
-                            minDate={startDate || undefined}
+                            minDate={startDate || calculatedRange[0] ? dayjs(calculatedRange[0]) : undefined}
+                            maxDate={calculatedRange[1] ? dayjs(calculatedRange[1]) : undefined}
                             slotProps={{ textField: { size: 'small' } }}
                         />
                     </LocalizationProvider>
@@ -89,3 +92,4 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({calculatedRange, setSe
 };
 
 export default DateRangePicker;
+

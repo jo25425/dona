@@ -70,6 +70,11 @@ export function getErrorMessage(
         if (t.has(formattedKey)) return t(formattedKey, formatOptions);
         if (t.has(reasonKey)) return t(reasonKey);
     }
+    else if (error && typeof error === 'string') {
+        const formattedKey = `errors.${error}_format`;
+        if (t.has(formattedKey)) return t(formattedKey, formatOptions);
+        if (t.has(`errors.${error}`)) return t(`errors.${error}`);
+    }
 
     return t('errors.UnknownError');
 }

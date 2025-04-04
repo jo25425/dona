@@ -324,9 +324,9 @@
       "feedback": "Feedback",
       "onlySeven": "These are just the contacts of your 7 chats in which overall the most words were sent. <b> Below you can also select different chats. </b>",
       "moreContacts": "and {0} others.",
-      "onlyYouInConv": "You are the only member in this chat. This could be because the other people have left the chat."
+      "onlyYouInConv": "<i>You are the only member in this chat. This could be because the other people have left the chat.</i>"
     },
-    "chat-selection": "You can select up to {max_num} chats to receive feedback for, but you <b>must</b> select at least {min_num}, so that the feedback given to you cannot be considered the analysis of some specific personal data. The ones currently selected are the {default_num} with the highest word count in messages.",
+    "chat-selection": "You can select up to {max_num} chats to receive focused feedback on, but you <b>must</b> select at least {min_num}, so that the feedback given to you cannot be considered the analysis of your contacts' personal data. The ones currently selected are the {default_num} with the highest word count in messages.",
     "sendData": {
       "wait": "Sending the data could take a few minutes. Please wait and keep this website open. Thanks!"
     },
@@ -367,7 +367,7 @@
       "TooFewContactsOrMessages_format": "There are less than {MIN_CHATS_FOR_DONATION} chats with at least {MIN_MESSAGES_PER_CHAT} messages and at least {MIN_CONTACTS_PER_CHAT} contacts (yourself included).",
       "NonsenseDateRange": "The selected period is not valid. Please check the correctness of the selected dates.",
       "NoMessagesInRange": "There are no messages in the selected period. Please select a longer and valid period.",
-      "NotEnoughMonthsInRange": "To donate your data, please select a period of at least 6 months within the period of your donation.",
+      "NotEnoughMonthsInRange_format": "To donate your data, please select a period of at least {MIN_DONATION_TIME_PERIOD_MONTHS} months within the period of your donation.",
       "TransactionFailed": "The donation data couldn't be saved. Check the connection and try again.",
       "UnknownError": "There is an error somewhere. Please check your data donation.",
 

@@ -1,5 +1,5 @@
 import deIdentify from "./deIdentify";
-import {DonationValidationError, DonationErrors} from "@services/errors";
+import {DonationErrors, DonationValidationError} from "@services/errors";
 import {
     extractEntriesFromZips,
     getEntryText,
@@ -7,7 +7,7 @@ import {
     ValidEntry
 } from "@services/parsing/shared/zipExtraction";
 import {AnonymizationResult, DataSourceValue} from "@models/processed";
-import {decode} from "@services/parsing/shared/names";
+import {decode, processJsonContent} from "@services/parsing/shared/decoding";
 
 interface ParsedMessage {
     sender_name: string;
@@ -101,7 +101,7 @@ async function handleMetaZipFiles(
         const donorName = userNameExtractor(await getEntryText(profileInfoEntry));
 
         // Extract message contents from message entries
-        const parsedConversations = await getConversationsFromEntries(messageEntries)
+        const parsedConversations = await getConversationsFromEntries(messageEntries);
 
         // Process the extracted data
         return deIdentify(parsedConversations, audioEntries, donorName, dataSourceValue);
@@ -116,12 +116,21 @@ const getConversationsFromEntries = async (messageEntries: ValidEntry[]): Promis
     const jsonContents: Map<string, ParsedConversation> = new Map();
 
     textList.forEach((textContent) => {
-        const jsonContent: ParsedConversation = JSON.parse(textContent);
-        if (jsonContents.has(jsonContent.thread_path)) {
-            jsonContents.get(jsonContent.thread_path)!.messages.push(...jsonContent.messages);
-        } else {
-            jsonContents.set(jsonContent.thread_path, jsonContent);
+        try {
+            // First parse the JSON directly
+            const jsonContent: ParsedConversation = JSON.parse(textContent);
+
+            // Then handle any special character encoding in the parsed object
+            const fullyDecodedContent = processJsonContent(jsonContent);
+
+            if (jsonContents.has(fullyDecodedContent.thread_path)) {
+                jsonContents.get(fullyDecodedContent.thread_path)!.messages.push(...fullyDecodedContent.messages);
+            } else {
+                jsonContents.set(fullyDecodedContent.thread_path, fullyDecodedContent);
+            }
+        } catch (error) {
+            console.error("Error processing message entry:", error);
         }
     });
     return Array.from(jsonContents.values());
-}
+};

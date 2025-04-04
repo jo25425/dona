@@ -114,7 +114,9 @@ const AnonymizationPreview: React.FC<AnonymizationPreviewProps> = (
                                     )}
                                 </ResponsiveTableCell>
                                 <ResponsiveTableCell component="th" scope="row">{chatPseudonym}</ResponsiveTableCell>
-                                <ResponsiveTableCell>{chatParticipants.join(", ")}</ResponsiveTableCell>
+                                <ResponsiveTableCell>
+                                    {chatParticipants.join(", ") || donation.rich("contacts-mapping.onlyYouInConv")}
+                                </ResponsiveTableCell>
                             </TableRow>
                         ))}
                     </TableBody>

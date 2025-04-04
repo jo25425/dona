@@ -1,4 +1,5 @@
-import {decode, maskName} from "@services/parsing/shared/names";
+import {maskName} from "@services/parsing/shared/names";
+import {decode} from "@services/parsing/shared/decoding";
 
 /**
  * Class that generates a map from contact names (e.g. Jane Doe) to pseudonyms (e.g. Contact4)
@@ -59,7 +60,8 @@ export class ChatPseudonyms {
     getPseudonym(participants: string[]): string {
         const decodedNames = participants.map(decode);
         const pseudonym = `${this.chatAlias} ${this.dataSourceInitial}${this.counter++}`;
-        this.chatPseudonymToParticipants.set(pseudonym, decodedNames.map(maskName));
+        const maskedNames = decodedNames.map(maskName);
+        this.chatPseudonymToParticipants.set(pseudonym, maskedNames);
         return pseudonym;
     }
 

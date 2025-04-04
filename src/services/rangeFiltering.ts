@@ -1,5 +1,6 @@
 import {Conversation} from "@models/processed";
 import {RangeErrors} from "@services/errors";
+import {CONFIG} from "@/config";
 
 export type NullableRange = [Date | null, Date | null];
 
@@ -46,7 +47,7 @@ export const validateDateRange = (conversations: Conversation[], range: Nullable
     const diffTime = Math.abs(range[1].getTime() - range[0]!.getTime());
     const diffMonths = diffTime / (1000 * 3600 * 24 * 30); // Approx. months difference
 
-    if (diffMonths < 6) return RangeErrors.NotEnoughMonthsInRange;
+    if (diffMonths < CONFIG.MIN_DONATION_TIME_PERIOD_MONTHS) return RangeErrors.NotEnoughMonthsInRange;
 
     const filteredData = filterDataByRange(conversations, range);
     if (filteredData.length === 0) return RangeErrors.NoMessagesInRange;
