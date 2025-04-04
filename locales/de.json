@@ -294,7 +294,7 @@
       "feedback": "Feedback",
       "onlySeven": "Dies sind nur die Kontakte Ihrer 7 Chats, in denen insgesamt die meisten Wörter gesendet wurden. <b>Unten können Sie auch andere Chats auswählen. </b>",
       "moreContacts": "und {0} weitere.",
-      "onlyYouInConv": "Nur Sie befinden sich in diesem Chat. Es könnte z.B. sein, dass die andere Person/en den Chat verlassen haben."
+      "onlyYouInConv": "<i>Nur Sie befinden sich in diesem Chat. Es könnte z.B. sein, dass die andere Person/en den Chat verlassen haben.</i>"
     },
     "chat-selection": "Sie können bis zu {max_num} Chats auswählen, um gezieltes Feedback zu erhalten, aber Sie <b>müssen</b> mindestens {min_num} auswählen, damit das Ihnen gegebene Feedback nicht als Analyse der persönlichen Daten Ihrer Kontakte betrachtet werden kann. Derzeit sind die {default_num} mit der höchsten Wortzahl in den Nachrichten ausgewählt.",
     "sendData": {
