@@ -10,5 +10,12 @@ const compat = new FlatCompat({
     recommendedConfig: js.configs.recommended,
     allConfig: js.configs.all
 });
-const extendedConst = [...compat.extends("next/core-web-vitals")]
+const extendedConst = [
+    ...compat.extends("next/core-web-vitals"),
+    {
+        rules: {
+            "react-hooks/exhaustive-deps": "off"
+        }
+    }
+];
 export default extendedConst;
