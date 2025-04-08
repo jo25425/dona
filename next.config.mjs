@@ -1,6 +1,5 @@
 import createNextIntlPlugin from "next-intl/plugin";
-import { validateEnv } from "./src/services/validateEnv.mjs";
-import webpack from 'webpack';
+import {validateEnv} from "./src/services/validateEnv.mjs";
 
 const env = validateEnv();
 
@@ -16,6 +15,12 @@ const nextConfig = {
         NEXT_PUBLIC_DONOR_SURVEY_LINK: env.DONOR_SURVEY_LINK,
         NEXT_PUBLIC_FEEDBACK_SURVEY_ENABLED: env.FEEDBACK_SURVEY_ENABLED,
         NEXT_PUBLIC_FEEDBACK_SURVEY_LINK: env.FEEDBACK_SURVEY_LINK
+    },
+    experimental: {
+        serverActions: {
+            bodySizeLimit: 50 * 1024 * 1024, // Optional limit (50MB)
+            allowedOrigins: ['nyu.dona.tf.uni-bielefeld.de', '127.0.0.1:9012'],
+        }
     },
     webpack: (config) => {
         // Ignores fs module so that sql.js can be used in the browser
