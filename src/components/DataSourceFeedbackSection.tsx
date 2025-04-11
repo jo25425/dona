@@ -10,12 +10,11 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import StatisticsCard from "@components/StatisticsCard";
-import ChartContainer from "@components/charts/ChartContainer";
+import ChartContainer, {ChartType} from "@components/charts/ChartContainer";
 import ChartExplanationModal from "@components/charts/ChartExplanationModal";
 import MoreChartsModal from "@components/charts/MoreChartsModal";
 import {DataSourceValue} from "@models/processed";
 import {GraphData} from "@models/graphData";
-import {createListOfConversations} from "@services/charts/preprocessing";
 
 export default function DataSourceFeedbackSection({ dataSourceValue, graphData }: { dataSourceValue: string; graphData: GraphData }) {
     const showCustomDataSourceAlert = [DataSourceValue.Facebook, DataSourceValue.Instagram] as string[];
@@ -104,22 +103,37 @@ export default function DataSourceFeedbackSection({ dataSourceValue, graphData }
                         </Typography>
                     </Box>
                     <ChartContainer
-                        type="animatedIntensityPolarChart"
+                        type={ChartType.AnimatedIntensityPolarChart}
                         data={graphData}
                         dataSourceValue={dataSourceValue}
                     />
                     <Box>
                         <Typography variant="body1" fontWeight="fontWeightBold">
-                            {ii("animatedWordCountBarChart.title")}
+                            {ii("animatedWordsPerChatBarChart.title")}
                         </Typography>
                         <Typography variant="body2">
-                            {ii.rich("animatedWordCountBarChart.description", {
-                                button: (label) => openModalSpan(label, ii, "animatedWordCountBarChart"),
+                            {ii.rich("animatedWordsPerChatBarChart.description", {
+                                button: (label) => openModalSpan(label, ii, "animatedWordsPerChatBarChart"),
                             })}
                         </Typography>
                     </Box>
                     <ChartContainer
-                        type="animatedWordCountBarChart"
+                        type={ChartType.AnimateWordsPerChatBarChart}
+                        data={graphData}
+                        dataSourceValue={dataSourceValue}
+                    />
+                    <Box>
+                        <Typography variant="body1" fontWeight="fontWeightBold">
+                            {ii("animatedSecondsPerChatBarChart.title")}
+                        </Typography>
+                        <Typography variant="body2">
+                            {ii.rich("animatedSecondsPerChatBarChart.description", {
+                                button: (label) => openModalSpan(label, ii, "animatedSecondsPerChatBarChart"),
+                            })}
+                        </Typography>
+                    </Box>
+                    <ChartContainer
+                        type={ChartType.AnimatedSecondsPerChatBarChart}
                         data={graphData}
                         dataSourceValue={dataSourceValue}
                     />
@@ -137,7 +151,7 @@ export default function DataSourceFeedbackSection({ dataSourceValue, graphData }
                         </Typography>
                     </Box>
                     <ChartContainer
-                        type="dailyActivityHoursChart"
+                        type={ChartType.DailyActivityHoursChart}
                         data={graphData}
                         dataSourceValue={dataSourceValue}
                     />
@@ -155,7 +169,7 @@ export default function DataSourceFeedbackSection({ dataSourceValue, graphData }
                         </Typography>
                     </Box>
                     <ChartContainer
-                        type="responseTimeBarChart"
+                        type={ChartType.ResponseTimeBarChart}
                         data={graphData}
                         dataSourceValue={dataSourceValue}
                     />

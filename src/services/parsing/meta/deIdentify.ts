@@ -20,7 +20,6 @@ export default async function deIdentify(
     chatPseudonyms.setDonorName(donorName);
     contactPseudonyms.setPseudonym(donorName, aliasConfig.donorAlias);
 
-
     const deIdentifiedConversations: Conversation[] = await Promise.all(
         parsedConversations.map(async (jsonContent): Promise<Conversation | null> => {
 
@@ -40,6 +39,7 @@ export default async function deIdentify(
                     const senderName = contactPseudonyms.getPseudonym(messageData.sender_name);
 
                     if (isVoiceMessage(messageData)) {
+                        console.log('Audio message detected');
                         const audioUri = messageData.audio_files?.[0]?.uri
                         const audioFile = !audioUri ? undefined : audioEntries.find(
                             (entry) => entry.filename.endsWith(audioUri)

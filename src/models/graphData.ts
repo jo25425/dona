@@ -1,3 +1,5 @@
+export type CountOption =  "words" | "seconds" | "messages";
+
 export interface SentReceivedPoint {
     year: number;
     month: number;
@@ -43,9 +45,11 @@ export interface BasicStatistics {
 
 export interface GraphData {
     focusConversations: string[];
-    monthlySentReceivedPerConversation: Record<string, SentReceivedPoint[]>;
+    monthlyWordsPerConversation: Record<string, SentReceivedPoint[]>;
+    monthlySecondsPerConversation: Record<string, SentReceivedPoint[]>;
     dailyWordsPerConversation: DailySentReceivedPoint[][];
     participantsPerConversation: string[][];
+
     dailyWords: DailySentReceivedPoint[];
     slidingWindowMeanDailyWords: DailySentReceivedPoint[];
     dailySentHours: DailyHourPoint[];

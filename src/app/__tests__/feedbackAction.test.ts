@@ -10,7 +10,7 @@ jest.mock("next/headers");
 
 const mockGraphData: Record<string, GraphData> = {
     Facebook: {
-        monthlySentReceivedPerConversation: [],
+        monthlyWordsPerConversation: [],
         dailyWords: [],
         dailyWordsPerConversation: [],
         slidingWindowMeanPerConversation: [],

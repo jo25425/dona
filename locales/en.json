@@ -365,6 +365,7 @@
       "NotSingleFile": "Please choose a single .db file. You can only donate one file of this type at a time.",
       "TooFewChats_format": "There must be at least {MIN_CHATS_FOR_DONATION} chats.",
       "TooFewContactsOrMessages_format": "There are less than {MIN_CHATS_FOR_DONATION} chats with at least {MIN_MESSAGES_PER_CHAT} messages and at least {MIN_CONTACTS_PER_CHAT} contacts (yourself included).",
+      "TooShortTimePeriod_format": "Your data must cover a time period of at least {MIN_DONATION_TIME_PERIOD_MONTHS} months.",
       "NonsenseDateRange": "The selected period is not valid. Please check the correctness of the selected dates.",
       "NoMessagesInRange": "There are no messages in the selected period. Please select a longer and valid period.",
       "NotEnoughMonthsInRange_format": "To donate your data, please select a period of at least {MIN_DONATION_TIME_PERIOD_MONTHS} months within the period of your donation.",
@@ -532,11 +533,21 @@
           "text": "<p><b>(1)</b> Here the white solid dot is very close to the large yellow dot in the center. This means that in the month shown below, the communication in this chat was very intense compared to the previous months and the other chats. In this example, there are only a few transparent small dots on the trajectory. This is because the data only covers a few months.</p><p><b>(2)</b> Hardly any transparent history dots can be seen here, as they all lie on top of each other in roughly the same place. This is because the intensity has been very stable over the months in this chat.</p><p><b>(3)</b> In contrast to (2), many transparent points are visible here. So the intensity of this chat has changed a lot over the months. In the currently displayed month, the big intense white dot is further away than some other transparent small points: Accordingly, there were months before in which more words were exchanged in this chat. However, there have also been months when the intensity was lower.</p><p><b>(4)</b> Click this icon to download the graph.</p>"
         }
       },
-      "animatedWordCountBarChart": {
+      "animatedWordsPerChatBarChart": {
         "title": "Total sent words",
         "description": "Here you can see the total amount of words you sent in your different chats adding up per month. In the time-slider below you can see and select the month and year for which the data is shown. Click <button>HERE</button> to see an explanation with an example.",
         "legend": "Sent words",
         "xAxis": "Number of sent words",
+        "example": {
+          "image": "images/charts/feedback_example_horizontalBarChart_english.svg",
+          "text": "<p><b>(1)</b> In this example, over the entire period the most words were sent in the chat with F9, F10: just over 140 thousand.</p><p><b>(2)</b> In contrast to (1), this example chat had the fewest sent words.</p><p><b>(3)</b> The year and month are displayed here. You can see how many words were sent in the chats per month. Try out the time slider!</p><p><b>(4)</b> Click this icon to download the graph.</p>"
+        }
+      },
+      "animatedSecondsPerChatBarChart": {
+        "title": "Total sent seconds of audio",
+        "description": "Here you can see the total amount of audio you sent in your different chats adding up per month. In the time-slider below you can see and select the month and year for which the data is shown. Click <button>HERE</button> to see an explanation with an example.",
+        "legend": "Sent seconds of audio",
+        "xAxis": "Number of sent seconds of audio",
         "example": {
           "image": "images/charts/feedback_example_horizontalBarChart_english.svg",
           "text": "<p><b>(1)</b> In this example, over the entire period the most words were sent in the chat with F9, F10: just over 140 thousand.</p><p><b>(2)</b> In contrast to (1), this example chat had the fewest sent words.</p><p><b>(3)</b> The year and month are displayed here. You can see how many words were sent in the chats per month. Try out the time slider!</p><p><b>(4)</b> Click this icon to download the graph.</p>"

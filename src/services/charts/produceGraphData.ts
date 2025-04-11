@@ -1,10 +1,10 @@
 import {Conversation, DataSourceValue} from "@models/processed";
-import {DailySentReceivedPoint, GraphData} from "@models/graphData";
+import {CountOption, DailySentReceivedPoint, GraphData} from "@models/graphData";
 import {
-    aggregateDailyWords, produceAllDays,
+    aggregateDailyWords, monthlyCountsPerConversation, produceAllDays,
     produceAnswerTimesPerConversation,
-    produceDailyWordsPerConversation, produceMonthlySentReceivedMessages,
-    produceMonthlySentReceivedWords,
+    produceDailyWordsPerConversation,
+    produceMonthlySentReceived,
     produceSlidingWindowMean,
     produceWordCountDailyHours
 } from "@services/charts/timeAggregates";
@@ -25,22 +25,18 @@ export default function produceGraphData(donorId: string, allConversations: Conv
                 const dailyWordsPerConversation = conversations.map((conversation) =>
                     produceDailyWordsPerConversation(donorId, conversation)
                 );
-
-                const monthlySentReceivedPerConversation = Object.fromEntries(
-                    conversations.map((conversation) => [
-                        conversation.conversationPseudonym,
-                        produceMonthlySentReceivedWords(donorId, [conversation]),
-                    ])
-                );
                 const participantsPerConversation = conversations.map((conversation) =>
                     conversation.participants.filter((participant) => participant !== donorId)
                 );
+                const monthlyWordsPerConversation = monthlyCountsPerConversation(donorId, conversations, "words");
+                const monthlySecondsPerConversation = monthlyCountsPerConversation(donorId, conversations, "seconds");
 
                 // Aggregated conversations data
                 const dailyWords = aggregateDailyWords(dailyWordsPerConversation);
 
                 // Determine the global date range using calculateMinMaxDates
                 const { minDate, maxDate } = calculateMinMaxDates(conversations, true);
+                console.log(minDate, maxDate);
                 let slidingWindowMeanDailyWords: DailySentReceivedPoint[] = [];
                 if (minDate && maxDate) {
                     // Generate the complete list of all days within the global date range
@@ -54,9 +50,10 @@ export default function produceGraphData(donorId: string, allConversations: Conv
                 const answerTimes = conversations.flatMap((conversation) =>
                     produceAnswerTimesPerConversation(donorId, conversation)
                 );
+
                 // General statistics
-                const messageCounts = produceMonthlySentReceivedMessages(donorId, conversations);
-                const wordCounts = Object.values(monthlySentReceivedPerConversation).flat();
+                const messageCounts = produceMonthlySentReceived(donorId, conversations, "messages");
+                const wordCounts = Object.values(monthlyWordsPerConversation).flat();
                 const basicStatistics = produceBasicStatistics(messageCounts, wordCounts);
 
                 // Return all graph data for the data source
@@ -64,7 +61,8 @@ export default function produceGraphData(donorId: string, allConversations: Conv
                     dataSourceValue,
                     {
                         focusConversations,
-                        monthlySentReceivedPerConversation,
+                        monthlyWordsPerConversation,
+                        monthlySecondsPerConversation,
                         dailyWords,
                         slidingWindowMeanDailyWords,
                         dailyWordsPerConversation,

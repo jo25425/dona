@@ -1,6 +1,6 @@
 import React from "react";
 import {Box, Typography} from "@mui/material";
-import ChartContainer from "@components/charts/ChartContainer";
+import ChartContainer, {ChartType} from "@components/charts/ChartContainer";
 import {GraphData} from "@models/graphData";
 import {useTranslations} from "next-intl";
 import FullSizeModal from "@components/FullSizeModal";
@@ -23,17 +23,17 @@ const MoreChartsModal: React.FC<MoreChartsModalProps> = ({
     const chartsData = (
         section == "interactionIntensity" ?
            [
-               {"descriptionKey": "wordCountOverallBarChart", "chartType": "wordCountOverallBarChart"},
-               {"descriptionKey": "sentReceivedSlidingWindowMean", "chartType": "sentReceivedSlidingWindowMean"}
+               {"descriptionKey": "wordCountOverallBarChart", "chartType": ChartType.WordCountOverallBarChart},
+               {"descriptionKey": "sentReceivedSlidingWindowMean", "chartType": ChartType.SentReceivedSlidingWindowMean}
            ]
         : section == "dailyActivityTimes" ?
             [
-                {"descriptionKey": "dayPartsOverall", "chartType": "dayPartsActivityOverallChart"},
-                {"descriptionKey": "dayPartsMonthly", "chartType": "animatedDayPartsActivityChart"}
+                {"descriptionKey": "dayPartsOverall", "chartType": ChartType.DayPartsActivityOverallChart},
+                {"descriptionKey": "dayPartsMonthly", "chartType": ChartType.AnimatedDayPartsActivityChart}
             ]
         : section == "responseTimes" ?
             [
-                {"descriptionKey": "responseTimeBarChartMonthly", "chartType": "animatedResponseTimeBarChart"}
+                {"descriptionKey": "responseTimeBarChartMonthly", "chartType": ChartType.AnimatedResponseTimeBarChart}
             ]
         : []
     );

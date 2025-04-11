@@ -133,7 +133,7 @@ describe("produceGraphData", () => {
 
             Object.entries(expectedGraph).forEach(([key, expectedData]) => {
                 it(`should produce the expected graph data for dataSource: ${key}`, () => {
-                    expect(result[key].monthlySentReceivedPerConversation).toEqual(
+                    expect(result[key].monthlyWordsPerConversation).toEqual(
                         expectedData.monthlySentReceivedPerConversation
                     );
                     expect(result[key].dailyWords).toEqual(expectedData.dailyWords);

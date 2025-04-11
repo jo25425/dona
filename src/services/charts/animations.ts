@@ -1,18 +1,8 @@
-type CountMode =  "sent" | "received" | "sent+received" | "word";
-
 interface CountsOverTimeData {
     counts: Record<string, number[]>;
     sortedMonths: string[];
     globalMax: number;
 }
-
-/**
- * Prepares cumulative counts over time for conversations based on the provided mode.
- *
- * @param dataMonthlyPerConversation - Monthly sent/received/word data for each conversation.
- * @param mode - Determines whether to count "sent", "received", "sent+received", or "word" (fallback to "sent").
- * @returns An object containing counts per month, sorted month keys, and the global maximum count.
- */
 
 interface SentReceivedPoint {
     year: number;
@@ -22,14 +12,16 @@ interface SentReceivedPoint {
     receivedCount?: number;
 }
 
+/**
+ * Prepares cumulative counts over time for conversations based on the provided mode.
+ *
+ * @param dataMonthlyPerConversation - Monthly sent/received/word data for each conversation.
+ * @returns An object containing counts per month, sorted month keys, and the global maximum count.
+ */
 export const prepareCountsOverTimeData = (
     dataMonthlyPerConversation: Record<string, SentReceivedPoint[]>,
-    mode: CountMode = "sent"
+    mode: "sent+received" | "sent"  = "sent+received",
 ): CountsOverTimeData => {
-    if (!["sent", "received", "sent+received", "word"].includes(mode)) {
-        throw new Error(`Invalid mode: ${mode}. Expected 'sent', 'received', 'sent+received', or 'word'.`);
-    }
-
     const counts: Record<string, number[]> = {};
     const monthsSet = new Set<string>();
     let globalMax = 0;
@@ -43,13 +35,8 @@ export const prepareCountsOverTimeData = (
             if (!counts[monthKey]) counts[monthKey] = Array(Object.keys(dataMonthlyPerConversation).length).fill(0);
 
             const value =
-                mode === "word"
-                    ? dataPoint.wordCount || 0
-                    : mode === "sent"
-                        ? dataPoint.sentCount || 0
-                        : mode === "received"
-                            ? dataPoint.receivedCount || 0
-                            : (dataPoint.sentCount || 0) + (dataPoint.receivedCount || 0);
+                 mode === "sent" ? dataPoint.sentCount || 0
+                     : (dataPoint.sentCount || 0) + (dataPoint.receivedCount || 0);
 
             cumulativeSum += value;
             counts[monthKey][convIdx] = cumulativeSum;
