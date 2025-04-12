@@ -427,7 +427,8 @@
       "yearMonth": "Jahr-Monat:",
       "chatWith": "Chat mit:",
       "time": "Zeit",
-      "overallData": "Alle Chats"
+      "overallData": "Alle Chats",
+      "numberMessages": "Anzahl der Nachrichten"
     },
     "statisticsCard": {
       "title": "Überblick über die gesamte Aktivität",
@@ -521,7 +522,6 @@
     },
     "graph": {
       "messages-over-time": "%s Nachrichten über die Zeit",
-      "number-of-messages": "Anzahl der Nachrichten",
       "response-times": "%s Antwortszeiten",
       "response-time": "Antwortszeit",
       "median-response-time": "Mediane Antwortszeit",

@@ -28,7 +28,7 @@ export const prepareCountsOverTimeData = (
     let globalMax = 0;
 
     const numConversations = Object.keys(dataMonthlyPerConversation).length;
-    Object.entries(dataMonthlyPerConversation).forEach(([conversationId, conversationData], convIdx) => {
+    Object.entries(dataMonthlyPerConversation).forEach(([_, conversationData], convIdx) => {
         let cumulativeSum = 0;
         conversationData
             .sort((a, b) => a.year - b.year || a.month - b.month)

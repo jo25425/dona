@@ -589,11 +589,11 @@
       "yearMonth": "Year-Month:",
       "chatWith": "Chat with:",
       "time": "Time",
-      "overallData": "All chats"
+      "overallData": "All chats",
+      "numberMessages": "Number of messages"
     },
     "graph": {
       "messages-over-time": "%s messages over time",
-      "number-of-messages": "Number of messages",
       "response-times": "%s response times",
       "response-time": "Response time",
       "median-response-time": "Median response time",

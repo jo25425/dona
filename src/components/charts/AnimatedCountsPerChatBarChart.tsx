@@ -34,7 +34,6 @@ const AnimatedCountsBarChart: React.FC<AnimatedCountsBarChartProps> = ({
     const [currentFrame, setCurrentFrame] = useState<number>(0);
 
     useEffect(() => {
-        console.log(mode, "useEffect dataMonthlyPerConversation", dataMonthlyPerConversation);
         const {
             counts,
             sortedMonths,

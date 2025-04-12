@@ -429,7 +429,8 @@
       "yearMonth": "Տարի-ամիս",
       "chatWith": "Չատ",
       "time": "Ժամանակ",
-      "overallData": "Բոլոր չատերը"
+      "overallData": "Բոլոր չատերը",
+      "numberMessages": "Հաղորդագրությունների քանակ"
     },
     "statisticsCard": {
       "title": "Պատկերացում Ձեր ակտիվության մասին",
@@ -523,7 +524,6 @@
     },
     "graph": {
       "messages-over-time": "%s հաղորդագրություն",
-      "number-of-messages": "Հաղորդագրությունների քանակ",
       "response-times": "%s պատասխանի արագություն",
       "response-time": "Պատասխանի արագություն",
       "median-response-time": "Պատասխանի արագության միջինը (մեդիան) արժեքը",
