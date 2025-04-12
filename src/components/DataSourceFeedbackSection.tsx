@@ -3,7 +3,6 @@ import {useTranslations} from "next-intl";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
-import Alert from "@mui/material/Alert";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
@@ -16,12 +15,12 @@ import MoreChartsModal from "@components/charts/MoreChartsModal";
 import {DataSourceValue} from "@models/processed";
 import {GraphData} from "@models/graphData";
 
-export default function DataSourceFeedbackSection({ dataSourceValue, graphData }: { dataSourceValue: string; graphData: GraphData }) {
-    const showCustomDataSourceAlert = [DataSourceValue.Facebook, DataSourceValue.Instagram] as string[];
+type SectionName = "responseTimes" | "dailyActivityTimes" | "interactionIntensity";
 
+export default function DataSourceFeedbackSection({ dataSourceValue, graphData }: { dataSourceValue: DataSourceValue; graphData: GraphData }) {
+    const showAudioAnalysis = [DataSourceValue.Facebook, DataSourceValue.Instagram].includes(dataSourceValue);
+    console.log("DataSourceFeedbackSection graphData", graphData);
     let t = useTranslations("feedback");
-    const labels = useTranslations("feedback.chartLabels");
-    const anon = useTranslations("donation.anonymisation");
     const ii = useTranslations("feedback.interactionIntensity");
     const dat = useTranslations("feedback.dailyActivityTimes");
     const rt = useTranslations("feedback.responseTimes");
@@ -32,7 +31,7 @@ export default function DataSourceFeedbackSection({ dataSourceValue, graphData }
 
     // State for MoreChartsModal
     const [isSectionModalOpen, setIsSectionModalOpen] = useState(false);
-    const [currentSection, setCurrentSection] = useState<"responseTimes" | "dailyActivityTimes" | "interactionIntensity" | null>(null);
+    const [currentSection, setCurrentSection] = useState<SectionName | null>(null);
 
     // Handlers for ChartExplanationModal
     const openExplanationModal = (title: string, contentHtml: string, imageSrc?: string) => {
@@ -45,7 +44,7 @@ export default function DataSourceFeedbackSection({ dataSourceValue, graphData }
     };
 
     // Handlers for MoreChartsModal
-    const openSectionModal = (section: "responseTimes" | "dailyActivityTimes" | "interactionIntensity") => {
+    const openSectionModal = (section: SectionName) => {
         setCurrentSection(section);
         setIsSectionModalOpen(true);
     };
@@ -80,12 +79,6 @@ export default function DataSourceFeedbackSection({ dataSourceValue, graphData }
                     spacing={2}
                     sx={{ display: "flex", textAlign: "center", bgcolor: "background.paper" }}
                 >
-                    {showCustomDataSourceAlert.includes(dataSourceValue) && (
-                        <Alert severity="info" sx={{ my: 2 }}>
-                            {t("selectedDataMessage", { source: dataSourceValue })}
-                        </Alert>
-                    )}
-
                     {/* Statistics card */}
                     <Typography variant="h6">{t("statisticsCard.title")}</Typography>
                     <StatisticsCard stats={graphData.basicStatistics} />
@@ -118,64 +111,68 @@ export default function DataSourceFeedbackSection({ dataSourceValue, graphData }
                         </Typography>
                     </Box>
                     <ChartContainer
-                        type={ChartType.AnimateWordsPerChatBarChart}
+                        type={ChartType.AnimatedWordsPerChatBarChart}
                         data={graphData}
                         dataSourceValue={dataSourceValue}
                     />
-                    <Box>
-                        <Typography variant="body1" fontWeight="fontWeightBold">
-                            {ii("animatedSecondsPerChatBarChart.title")}
-                        </Typography>
-                        <Typography variant="body2">
-                            {ii.rich("animatedSecondsPerChatBarChart.description", {
-                                button: (label) => openModalSpan(label, ii, "animatedSecondsPerChatBarChart"),
-                            })}
-                        </Typography>
-                    </Box>
-                    <ChartContainer
-                        type={ChartType.AnimatedSecondsPerChatBarChart}
-                        data={graphData}
-                        dataSourceValue={dataSourceValue}
-                    />
+                    {showAudioAnalysis && (
+                        <>
+                            <Box>
+                                <Typography variant="body1" fontWeight="fontWeightBold">
+                                    {ii("animatedSecondsPerChatBarChart.title")}
+                                </Typography>
+                                <Typography variant="body2">
+                                    {ii.rich("animatedSecondsPerChatBarChart.description", {
+                                        button: (label) => openModalSpan(label, ii, "animatedSecondsPerChatBarChart"),
+                                    })}
+                                </Typography>
+                            </Box>
+                            <ChartContainer
+                                type={ChartType.AnimatedSecondsPerChatBarChart}
+                                data={graphData}
+                                dataSourceValue={dataSourceValue}
+                            />
+                        </>
+                    )}
                     <Button onClick={() => openSectionModal("interactionIntensity")}>
                         {ii("moreAbout")}
                     </Button>
 
                     {/* Daily Activity Times */}
-                    <Typography variant="h6">{dat("title")}</Typography>
-                    <Box>
-                        <Typography variant="body2">
-                            {dat.rich("dailyActivityHoursChart.description", {
-                                button: (label) => openModalSpan(label, dat, "dailyActivityHoursChart"),
-                            })}
-                        </Typography>
-                    </Box>
-                    <ChartContainer
-                        type={ChartType.DailyActivityHoursChart}
-                        data={graphData}
-                        dataSourceValue={dataSourceValue}
-                    />
-                    <Button onClick={() => openSectionModal("dailyActivityTimes")}>
-                        {dat("moreAbout")}
-                    </Button>
+                    {/*<Typography variant="h6">{dat("title")}</Typography>*/}
+                    {/*<Box>*/}
+                    {/*    <Typography variant="body2">*/}
+                    {/*        {dat.rich("dailyActivityHoursChart.description", {*/}
+                    {/*            button: (label) => openModalSpan(label, dat, "dailyActivityHoursChart"),*/}
+                    {/*        })}*/}
+                    {/*    </Typography>*/}
+                    {/*</Box>*/}
+                    {/*<ChartContainer*/}
+                    {/*    type={ChartType.DailyActivityHoursChart}*/}
+                    {/*    data={graphData}*/}
+                    {/*    dataSourceValue={dataSourceValue}*/}
+                    {/*/>*/}
+                    {/*<Button onClick={() => openSectionModal("dailyActivityTimes")}>*/}
+                    {/*    {dat("moreAbout")}*/}
+                    {/*</Button>*/}
 
-                    {/* Response Times */}
-                    <Typography variant="h6">{rt("title")}</Typography>
-                    <Box>
-                        <Typography variant="body2">
-                            {rt.rich("responseTimeBarChart.description", {
-                                button: (label) => openModalSpan(label, rt, "responseTimeBarChart"),
-                            })}
-                        </Typography>
-                    </Box>
-                    <ChartContainer
-                        type={ChartType.ResponseTimeBarChart}
-                        data={graphData}
-                        dataSourceValue={dataSourceValue}
-                    />
-                    <Button onClick={() => openSectionModal("responseTimes")}>
-                        {rt("moreAbout")}
-                    </Button>
+                    {/*/!* Response Times *!/*/}
+                    {/*<Typography variant="h6">{rt("title")}</Typography>*/}
+                    {/*<Box>*/}
+                    {/*    <Typography variant="body2">*/}
+                    {/*        {rt.rich("responseTimeBarChart.description", {*/}
+                    {/*            button: (label) => openModalSpan(label, rt, "responseTimeBarChart"),*/}
+                    {/*        })}*/}
+                    {/*    </Typography>*/}
+                    {/*</Box>*/}
+                    {/*<ChartContainer*/}
+                    {/*    type={ChartType.ResponseTimeBarChart}*/}
+                    {/*    data={graphData}*/}
+                    {/*    dataSourceValue={dataSourceValue}*/}
+                    {/*/>*/}
+                    {/*<Button onClick={() => openSectionModal("responseTimes")}>*/}
+                    {/*    {rt("moreAbout")}*/}
+                    {/*</Button>*/}
                 </Stack>
             </AccordionDetails>
 

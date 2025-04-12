@@ -1,4 +1,10 @@
-export type CountOption =  "words" | "seconds" | "messages";
+export type CountOption =  "words" | "seconds";
+
+export type MessageCounts = {
+    textMessages: { sent: number; received: number };
+    audioMessages: { sent: number; received: number };
+    allMessages: { sent: number; received: number };
+}
 
 export interface SentReceivedPoint {
     year: number;
@@ -37,10 +43,12 @@ export interface BasicStatistics {
     receivedMessagesTotal: number;
     sentWordsTotal: number;
     receivedWordsTotal: number;
+    sentSecondsTotal: number;
+    receivedSecondsTotal: number;
     numberOfActiveMonths: number;
     numberOfActiveYears: number;
-    sentPerActiveMonth: number;
-    receivedPerActiveMonth: number;
+    sentWordsPerActiveMonth: number;
+    receivedWordsPerActiveMonth: number;
 }
 
 export interface GraphData {

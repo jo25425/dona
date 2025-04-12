@@ -15,7 +15,7 @@ import WordCountOverallBarChart from "@components/charts/WordCountOverallBarChar
 
 export enum ChartType {
     AnimatedIntensityPolarChart = "animatedIntensityPolarChart",
-    AnimateWordsPerChatBarChart = "animatedWordsPerChatBarChart",
+    AnimatedWordsPerChatBarChart = "animatedWordsPerChatBarChart",
     AnimatedSecondsPerChatBarChart = "animatedSecondsPerChatBarChart",
     WordCountOverallBarChart = "wordCountOverallBarChart",
     SentReceivedSlidingWindowMean = "sentReceivedSlidingWindowMean",
@@ -45,7 +45,8 @@ export default function ChartContainer({ type, data }: ChartContainerProps) {
                 return (
                     <AnimatedIntensityPolarChart dataMonthlyPerConversation={selectedChatsWordsData}/>
                 );
-            case ChartType.AnimateWordsPerChatBarChart:
+            case ChartType.AnimatedWordsPerChatBarChart:
+                console.log("ChartContainer selectedChatsWordsData", selectedChatsWordsData);
                 return (
                     <AnimatedCountsPerChatBarChart dataMonthlyPerConversation={selectedChatsWordsData} mode="text"/>
                 );

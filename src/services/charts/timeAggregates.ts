@@ -3,7 +3,7 @@ import {
     AnswerTimePoint,
     CountOption,
     DailyHourPoint,
-    DailySentReceivedPoint,
+    DailySentReceivedPoint, MessageCounts,
     SentReceivedPoint
 } from "@models/graphData";
 
@@ -12,6 +12,41 @@ type DatePoint = {
     month: number;
     date: number;
 };
+
+export const produceMessagesSentReceivedPerType = (
+    donorId: string,
+    conversations: Conversation[]
+): MessageCounts => {
+    const result: MessageCounts = {
+        textMessages: { sent: 0, received: 0 },
+        audioMessages: { sent: 0, received: 0 },
+        allMessages: { sent: 0, received: 0 },
+    };
+
+    conversations.forEach((conversation) => {
+        conversation.messages.forEach((message) => {
+            if (message.sender === donorId) {
+                result.textMessages.sent++;
+                result.allMessages.sent++;
+            } else {
+                result.textMessages.received++;
+                result.allMessages.received++;
+            }
+        });
+
+        conversation.messagesAudio.forEach((messageAudio) => {
+            if (messageAudio.sender === donorId) {
+                result.audioMessages.sent++;
+                result.allMessages.sent++;
+            } else {
+                result.audioMessages.received++;
+                result.allMessages.received++;
+            }
+        });
+    });
+
+    return result;
+}
 
 /**
  * Aggregates the total sent and received for a various count types (words, seconds, messages) per month for a set of conversations.
@@ -29,12 +64,9 @@ export const produceMonthlySentReceived = (
     if (toCount === "words") {
         getMessages = (conversation: Conversation) => conversation.messages;
         getToCount = (message: Message) => message.wordCount;
-    } else if (toCount === "seconds") {
+    } else {
         getMessages = (conversation: Conversation) => conversation.messagesAudio;
         getToCount = (message: MessageAudio) => message.lengthSeconds;
-    } else {
-        getMessages = (conversation: Conversation) => [...conversation.messages, ...conversation.messagesAudio];
-        getToCount = () => 1; // Default count for messages
     }
 
     conversations.forEach(conversation => {

@@ -1,7 +1,7 @@
 import {AnonymizationResult, DataSourceValue} from "@models/processed";
 import handleWhatsappTxtFiles from "@services/parsing/whatsapp/whatsappHandler";
 import {extractTxtFilesFromZip} from "@services/parsing/shared/zipExtraction";
-import {DonationValidationError, DonationErrors} from "@services/errors";
+import {DonationErrors, DonationValidationError} from "@services/errors";
 import {handleFacebookZipFiles, handleInstagramZipFiles} from "@services/parsing/meta/metaHandlers";
 import handleImessageDBFiles from "@services/parsing/imessage/imessageHandler";
 import {
@@ -9,8 +9,6 @@ import {
     validateMinImportantChatsForDonation,
     validateMinTimePeriodForDonation
 } from "@services/validation";
-import {CONFIG} from "@/config";
-import {calculateMinMaxDates} from "@services/rangeFiltering";
 
 export async function anonymizeData(dataSourceValue: DataSourceValue, files: File[]): Promise<AnonymizationResult> {
     let resultPromise;
@@ -54,7 +52,6 @@ export async function anonymizeData(dataSourceValue: DataSourceValue, files: Fil
     }
     // Validation for the time period of the conversations
     if (!validateMinTimePeriodForDonation(result.anonymizedConversations)) {
-        console.log("failed date range validation");
         throw DonationValidationError(DonationErrors.TooShortTimePeriod);
     }
 

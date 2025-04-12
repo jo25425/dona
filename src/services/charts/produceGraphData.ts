@@ -1,9 +1,11 @@
 import {Conversation, DataSourceValue} from "@models/processed";
-import {CountOption, DailySentReceivedPoint, GraphData} from "@models/graphData";
+import {DailySentReceivedPoint, GraphData} from "@models/graphData";
 import {
-    aggregateDailyWords, monthlyCountsPerConversation, produceAllDays,
+    aggregateDailyWords,
+    monthlyCountsPerConversation,
+    produceAllDays,
     produceAnswerTimesPerConversation,
-    produceDailyWordsPerConversation,
+    produceDailyWordsPerConversation, produceMessagesSentReceivedPerType,
     produceMonthlySentReceived,
     produceSlidingWindowMean,
     produceWordCountDailyHours
@@ -36,7 +38,6 @@ export default function produceGraphData(donorId: string, allConversations: Conv
 
                 // Determine the global date range using calculateMinMaxDates
                 const { minDate, maxDate } = calculateMinMaxDates(conversations, true);
-                console.log(minDate, maxDate);
                 let slidingWindowMeanDailyWords: DailySentReceivedPoint[] = [];
                 if (minDate && maxDate) {
                     // Generate the complete list of all days within the global date range
@@ -52,11 +53,11 @@ export default function produceGraphData(donorId: string, allConversations: Conv
                 );
 
                 // General statistics
-                const messageCounts = produceMonthlySentReceived(donorId, conversations, "messages");
+                const messageCounts = produceMessagesSentReceivedPerType(donorId, conversations);
                 const wordCounts = Object.values(monthlyWordsPerConversation).flat();
-                const basicStatistics = produceBasicStatistics(messageCounts, wordCounts);
+                const secondCounts = Object.values(monthlySecondsPerConversation).flat();
+                const basicStatistics = produceBasicStatistics(messageCounts, wordCounts, secondCounts);
 
-                // Return all graph data for the data source
                 return [
                     dataSourceValue,
                     {

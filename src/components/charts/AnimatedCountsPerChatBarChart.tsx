@@ -34,11 +34,12 @@ const AnimatedCountsBarChart: React.FC<AnimatedCountsBarChartProps> = ({
     const [currentFrame, setCurrentFrame] = useState<number>(0);
 
     useEffect(() => {
+        console.log(mode, "useEffect dataMonthlyPerConversation", dataMonthlyPerConversation);
         const {
             counts,
             sortedMonths,
             globalMax
-        } = prepareCountsOverTimeData(dataMonthlyPerConversation);
+        } = prepareCountsOverTimeData(dataMonthlyPerConversation, true);
         setCumulativeCounts(counts);
         setLabels(sortedMonths);
         setGlobalMax(globalMax);
