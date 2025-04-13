@@ -8,15 +8,29 @@ import { BasicStatistics } from "@models/graphData";
 const CARD_COLOR_PRIMARY = "#f5f5f5";
 const CARD_COLOR_SECONDARY = "#e3f2fd";
 
+const formatPercentage = (value: number, total: number): string => {
+    if (total === 0) return "0%";
+    return `${((value / total) * 100).toFixed(0)}%`;
+};
+
 export default function StatisticsCard({ stats }: { stats: BasicStatistics }) {
     const t = useTranslations("feedback.statisticsCard");
-    console.log("StatisticsCard stats", stats);
 
     const renderStatBox = (value: number, label: string, caption: string, bgcolor: string) => (
         <Box sx={{ textAlign: "center", bgcolor, p: 2, borderRadius: 1 }}>
             <Typography variant="h6">{value}</Typography>
             <Typography variant="body2">{label.toUpperCase()}</Typography>
             <Typography variant="caption">{caption}</Typography>
+        </Box>
+    );
+    const renderTypeBreakdownBox = (valueText: number, valueAudio: number, valueTotal: number, bgcolor: string) => (
+        <Box sx={{ textAlign: "center", bgcolor, p: 2, borderRadius: 1 }}>
+            <Typography variant="body2">
+                ✏️ {valueText} {t("text")} ({formatPercentage(valueText, valueTotal)})
+            </Typography>
+            <Typography variant="body2">
+                🎙️ {valueAudio} {t("audio")} ({formatPercentage(valueAudio, valueTotal)})
+            </Typography>
         </Box>
     );
 
@@ -53,13 +67,25 @@ export default function StatisticsCard({ stats }: { stats: BasicStatistics }) {
                     t("active-years-explanation_format", { years: stats.numberOfActiveYears }),
                     [
                         renderStatBox(
-                            stats.sentMessagesTotal,
+                            stats.messagesTotal.allMessages.sent,
                             t("messages"), t("sent"),
                             CARD_COLOR_PRIMARY
                         ),
                         renderStatBox(
-                            stats.receivedMessagesTotal,
+                            stats.messagesTotal.allMessages.received,
                             t("messages"), t("received"),
+                            CARD_COLOR_SECONDARY
+                        ),
+                        renderTypeBreakdownBox(
+                            stats.messagesTotal.textMessages.sent,
+                            stats.messagesTotal.audioMessages.sent,
+                            stats.messagesTotal.allMessages.sent,
+                            CARD_COLOR_PRIMARY
+                        ),
+                        renderTypeBreakdownBox(
+                            stats.messagesTotal.textMessages.received,
+                            stats.messagesTotal.audioMessages.received,
+                            stats.messagesTotal.allMessages.received,
                             CARD_COLOR_SECONDARY
                         ),
                     ]
@@ -71,13 +97,25 @@ export default function StatisticsCard({ stats }: { stats: BasicStatistics }) {
                     t("active-months-explanation_format", { months: stats.numberOfActiveMonths }),
                     [
                         renderStatBox(
-                            stats.sentWordsPerActiveMonth,
+                            stats.wordsPerActiveMonth.sent,
                             t("messages"), t("sent"),
                             CARD_COLOR_PRIMARY
                         ),
                         renderStatBox(
-                            stats.receivedWordsPerActiveMonth,
+                            stats.wordsPerActiveMonth.received,
                             t("messages"), t("received"),
+                            CARD_COLOR_SECONDARY
+                        ),
+                        renderTypeBreakdownBox(
+                            stats.messagesPerActiveMonth.textMessages.sent,
+                            stats.messagesPerActiveMonth.audioMessages.sent,
+                            stats.messagesPerActiveMonth.allMessages.sent,
+                            CARD_COLOR_PRIMARY
+                        ),
+                        renderTypeBreakdownBox(
+                            stats.messagesPerActiveMonth.textMessages.received,
+                            stats.messagesPerActiveMonth.audioMessages.received,
+                            stats.messagesPerActiveMonth.allMessages.received,
                             CARD_COLOR_SECONDARY
                         ),
                     ]

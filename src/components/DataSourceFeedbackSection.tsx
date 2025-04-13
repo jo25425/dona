@@ -18,7 +18,7 @@ import {GraphData} from "@models/graphData";
 type SectionName = "responseTimes" | "dailyActivityTimes" | "interactionIntensity";
 
 export default function DataSourceFeedbackSection({ dataSourceValue, graphData }: { dataSourceValue: DataSourceValue; graphData: GraphData }) {
-    const showAudioAnalysis = [DataSourceValue.Facebook, DataSourceValue.Instagram].includes(dataSourceValue);
+    const showDetailedAudioFeedback = [DataSourceValue.Facebook, DataSourceValue.Instagram].includes(dataSourceValue);
     console.log("DataSourceFeedbackSection graphData", graphData);
     let t = useTranslations("feedback");
     const ii = useTranslations("feedback.interactionIntensity");
@@ -115,7 +115,7 @@ export default function DataSourceFeedbackSection({ dataSourceValue, graphData }
                         data={graphData}
                         dataSourceValue={dataSourceValue}
                     />
-                    {showAudioAnalysis && (
+                    {showDetailedAudioFeedback && (
                         <>
                             <Box>
                                 <Typography variant="body1" fontWeight="fontWeightBold">
@@ -192,6 +192,7 @@ export default function DataSourceFeedbackSection({ dataSourceValue, graphData }
                     onClose={closeSectionModal}
                     graphData={graphData}
                     section={currentSection}
+                    showDetailedAudioFeedback={showDetailedAudioFeedback}
                 />
             )}
         </Accordion>

@@ -453,6 +453,10 @@
       "active-years-explanation_format": "In total, there are {years} years in which you participated in conversation (i.e. you sent or received at least one message during the year)",
       "active-months-explanation_format": "In total, there are {months} months in which you participated in conversation (i.e. you sent or received at least one message during the month)",
       "messages": "Messages",
+      "total-breakdown": "Total by type",
+      "average-breakdown": "Average per active month by type",
+      "text": "Text",
+      "audio": "Audio",
       "sent": "Sent",
       "received": "Received"
     },
@@ -521,6 +525,8 @@
     },
     "interactionIntensity": {
       "title": "Interaction Intensity",
+      "textHeader": "In text messages",
+      "audioHeader": "In audio messages",
       "animatedIntensityPolarChart": {
         "title": "Planet representation",
         "description": "This visualization displays you as the yellow dot in the middle. The chats you donated are the white dots around you. The closer a dot is to you, the more words you have written in this chat. In the time-slider below you can see and select the month and year for which the data is shown. The smaller lighter white dots show the activity in the respective chats in other months. Click <button>HERE</button> to see an explanation with an example.",
@@ -566,14 +572,38 @@
           "received": "Received"
         }
       },
-      "sentReceivedSlidingWindowMean": {
-        "description": "Here you can see the average number of your sent and received words per day (more precisely, we calculate a so-called sliding window average with a window size of 30 days). At the top left you can also select your individual chats to see the graph of your sent words for the selected chat.<br/><br/><i>If there is no value for the <u>received words</u> in the overview for one or more days, then it has been hidden due to data protection reasons. Only aggregated information from which no direct conclusions can be drawn about your individual contacts is displayed.</i>",
+      "secondCountOverallBarChart": {
+        "description": "This graph shows the total number of seconds of audio you received and sent across all your donated chats.",
+        "legend": {
+          "sent": "Sent seconds of audio",
+          "received": "Received seconds of audio"
+        },
+        "xAxis": "Number of seconds",
+        "yAxis": {
+          "sent": "Sent",
+          "received": "Received"
+        }
+      },
+      "wordCountSlidingWindowMean": {
+        "description": "Here you can see the average number of your sent and received words per day (more precisely, we calculate a so-called sliding window average with a window size of 30 days).",
         "legend": {
           "sent": "Sent words",
           "received": "Received words",
           "receivedNotShown": "Privacy: Received words are not displayed"
         },
         "yAxis": "Average number of words",
+        "example": {
+          "image": "images/feedback_example_slidingWindowMean_english.svg",
+          "text": "<p class=\"text-left\"><b>(1)</b> In this example, a significant increase in the number of sent and received words can be observed. In this period the sent words were more than the received words. </p><p class=\"text-left\"><b>(2)</b> Here you can see an even bigger increase in sent and received words. But in that period, across all chats, more words were received.</p>"
+        }
+      },
+      "secondCountSlidingWindowMean": {
+        "description": "Here you can see the average number of your sent and received seconds of audio per day (more precisely, we calculate a so-called sliding window average with a window size of 30 days).",
+        "legend": {
+          "sent": "Sent seconds of audio",
+          "received": "Received seconds of audio"
+        },
+        "yAxis": "Average seconds of audio",
         "example": {
           "image": "images/feedback_example_slidingWindowMean_english.svg",
           "text": "<p class=\"text-left\"><b>(1)</b> In this example, a significant increase in the number of sent and received words can be observed. In this period the sent words were more than the received words. </p><p class=\"text-left\"><b>(2)</b> Here you can see an even bigger increase in sent and received words. But in that period, across all chats, more words were received.</p>"

@@ -11,14 +11,16 @@ import AnimatedResponseTimeBarChart from "@components/charts/AnimatedResponseTim
 import DailyActivityChart from "@components/charts/DailyActivityChart";
 import DayPartsActivityOverallChart from "@components/charts/DayPartsActivityOverallChart";
 import SentReceivedSlidingWindowChart from "@components/charts/SentReceivedSlidingWindowChart";
-import WordCountOverallBarChart from "@components/charts/WordCountOverallBarChart";
+import CountsOverallBarChart from "@components/charts/CountsOverallBarChart";
 
 export enum ChartType {
     AnimatedIntensityPolarChart = "animatedIntensityPolarChart",
     AnimatedWordsPerChatBarChart = "animatedWordsPerChatBarChart",
     AnimatedSecondsPerChatBarChart = "animatedSecondsPerChatBarChart",
     WordCountOverallBarChart = "wordCountOverallBarChart",
-    SentReceivedSlidingWindowMean = "sentReceivedSlidingWindowMean",
+    SecondCountOverallBarChart = "secondCountOverallBarChart",
+    WordCountSlidingWindowMean = "wordCountSlidingWindowMean",
+    SecondCountSlidingWindowMean = "secondCountSlidingWindowMean",
     ResponseTimeBarChart = "responseTimeBarChart",
     AnimatedResponseTimeBarChart = "animatedResponseTimeBarChart",
     DailyActivityHoursChart = "dailyActivityHoursChart",
@@ -42,31 +44,39 @@ export default function ChartContainer({ type, data }: ChartContainerProps) {
 
             // Focus conversations only
             case ChartType.AnimatedIntensityPolarChart:
-                return (
-                    <AnimatedIntensityPolarChart dataMonthlyPerConversation={selectedChatsWordsData}/>
-                );
+                return <AnimatedIntensityPolarChart dataMonthlyPerConversation={selectedChatsWordsData}/>;
             case ChartType.AnimatedWordsPerChatBarChart:
-                console.log("ChartContainer selectedChatsWordsData", selectedChatsWordsData);
-                return (
-                    <AnimatedCountsPerChatBarChart dataMonthlyPerConversation={selectedChatsWordsData} mode="text"/>
-                );
+                return <AnimatedCountsPerChatBarChart dataMonthlyPerConversation={selectedChatsWordsData} mode="text"/>;
             case ChartType.AnimatedSecondsPerChatBarChart:
-                return (
-                    <AnimatedCountsPerChatBarChart dataMonthlyPerConversation={selectedChatsSecondsData} mode="audio"/>
-                );
+                return <AnimatedCountsPerChatBarChart dataMonthlyPerConversation={selectedChatsSecondsData} mode="audio"/>;
 
             // Aggregated data only
             case ChartType.WordCountOverallBarChart:
                 return (
-                    <WordCountOverallBarChart
-                        sentWordsTotal={data.basicStatistics.sentWordsTotal}
-                        receivedWordsTotal={data.basicStatistics.receivedWordsTotal}
+                    <CountsOverallBarChart
+                        sentWordsTotal={data.basicStatistics.wordsTotal.sent}
+                        receivedWordsTotal={data.basicStatistics.wordsTotal.received}
+                        mode="text"
                     />
                 );
-            case ChartType.SentReceivedSlidingWindowMean:
+            case ChartType.SecondCountOverallBarChart:
+                return (
+                    <CountsOverallBarChart
+                        sentWordsTotal={data.basicStatistics.secondsTotal.sent}
+                        receivedWordsTotal={data.basicStatistics.secondsTotal.received}
+                        mode="audio"
+                    />
+                );
+            case ChartType.WordCountSlidingWindowMean:
                 return (
                     <SentReceivedSlidingWindowChart
-                        slidingWindowMeanDailyWords={data.slidingWindowMeanDailyWords}
+                        slidingWindowMeanDailyWords={data.slidingWindowMeanDailyWords} mode="text"
+                    />
+                );
+            case ChartType.SecondCountSlidingWindowMean:
+                return (
+                    <SentReceivedSlidingWindowChart
+                        slidingWindowMeanDailyWords={data.slidingWindowMeanDailySeconds} mode="audio"
                     />
                 );
             case ChartType.ResponseTimeBarChart:

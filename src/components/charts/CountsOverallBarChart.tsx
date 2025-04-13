@@ -11,15 +11,17 @@ ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 interface WordCountOverallBarChartProps {
     sentWordsTotal: number;
     receivedWordsTotal: number;
+    mode: "text" | "audio";
 }
 
-const WordCountOverallBarChart: React.FC<WordCountOverallBarChartProps> = (
-    { sentWordsTotal, receivedWordsTotal }
-) => {
-    const CHART_NAME = "word-count-overall-barchart";
+const CountsOverallBarChart: React.FC<WordCountOverallBarChartProps> = ({
+    sentWordsTotal, receivedWordsTotal, mode
+}) => {
+    const CHART_NAME = `count-overall-${mode}-barchart`;
     const container_name = `chart-wrapper-${CHART_NAME}`;
 
-    const chartTexts = useTranslations("feedback.interactionIntensity.wordCountOverallBarChart");
+    const property = mode === "text" ? "word" : "second";
+    const chartTexts = useTranslations(`feedback.interactionIntensity.${property}CountOverallBarChart`);
 
     const generateChartData = () => {
         return {
@@ -64,4 +66,4 @@ const WordCountOverallBarChart: React.FC<WordCountOverallBarChartProps> = (
     );
 };
 
-export default WordCountOverallBarChart;
+export default CountsOverallBarChart;

@@ -13,6 +13,23 @@ type DatePoint = {
     date: number;
 };
 
+/**
+ * Returns the appropriate getters for messages and message value based on the provided toCount option.
+ * @param toCount - The type of count to aggregate: "words" or "seconds".
+ * @returns An object containing the getters for messages and toCount.
+ */
+const gettersFromToCount = (toCount: CountOption) => {
+    let getMessages, getToCount: (message: any) => number;
+    if (toCount === "words") {
+        getMessages = (conversation: Conversation) => conversation.messages;
+        getToCount = (message: Message) => message.wordCount;
+    } else {
+        getMessages = (conversation: Conversation) => conversation.messagesAudio;
+        getToCount = (message: MessageAudio) => message.lengthSeconds;
+    }
+    return {getMessages, getToCount};
+}
+
 export const produceMessagesSentReceivedPerType = (
     donorId: string,
     conversations: Conversation[]
@@ -59,15 +76,7 @@ export const produceMonthlySentReceived = (
     donorId: string, conversations: Conversation[], toCount: CountOption
 ): SentReceivedPoint[] => {
     const monthlyMap = new Map<string, { sent: number; received: number }>();
-
-    let getMessages, getToCount: (message: any) => number;
-    if (toCount === "words") {
-        getMessages = (conversation: Conversation) => conversation.messages;
-        getToCount = (message: Message) => message.wordCount;
-    } else {
-        getMessages = (conversation: Conversation) => conversation.messagesAudio;
-        getToCount = (message: MessageAudio) => message.lengthSeconds;
-    }
+    const {getMessages, getToCount} = gettersFromToCount(toCount);
 
     conversations.forEach(conversation => {
         const selectedMessages = getMessages(conversation);
@@ -112,23 +121,25 @@ export const monthlyCountsPerConversation = (
  *
  * @param donorId - The ID of the donor whose messages are being analyzed.
  * @param conversation - The conversation to process.
+ * @param toCount - The type of count to aggregate: "words" or "seconds".
  * @returns An array of DailySentReceivedPoint objects, each representing word counts for a specific day.
  */
-export const produceDailyWordsPerConversation = (
-    donorId: string,
-    conversation: Conversation
+export const produceDailyCountsPerConversation = (
+    donorId: string, conversation: Conversation, toCount: CountOption
 ): DailySentReceivedPoint[] => {
     const dailyMap = new Map<string, { sent: number; received: number }>();
+    const {getMessages, getToCount} = gettersFromToCount(toCount);
 
-    conversation.messages.forEach((message) => {
+    getMessages(conversation).forEach((message) => {
         const date = new Date(message.timestamp);
         const key = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
 
         if (!dailyMap.has(key)) dailyMap.set(key, { sent: 0, received: 0 });
 
         const stats = dailyMap.get(key)!;
-        if (message.sender === donorId) stats.sent += message.wordCount;
-        else stats.received += message.wordCount;
+        const value = getToCount(message);
+        if (message.sender === donorId) stats.sent += value;
+        else stats.received += value;
     });
 
     return Array.from(dailyMap.entries()).map(([key, { sent, received }]) => {
@@ -139,12 +150,12 @@ export const produceDailyWordsPerConversation = (
 }
 
 /**
- * Aggregates the total sent and received word counts per day for a set of conversations.
+ * Aggregates the total sent and received counts per day for a set of conversations.
  *
- * @param perConversationData - An array of DailySentReceivedPoint objects, each representing word counts for a specific day.
+ * @param perConversationData - An array of DailySentReceivedPoint objects, each representing counts for a specific day.
  * @returns An array of DailySentReceivedPoint objects, each representing word counts for a specific day across all conversations.
  */
-export const aggregateDailyWords = (
+export const aggregateDailyCounts = (
     perConversationData: DailySentReceivedPoint[][]
 ): DailySentReceivedPoint[] => {
     const aggregateMap = new Map<string, { sent: number; received: number }>();

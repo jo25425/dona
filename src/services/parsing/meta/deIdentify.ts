@@ -39,7 +39,6 @@ export default async function deIdentify(
                     const senderName = contactPseudonyms.getPseudonym(messageData.sender_name);
 
                     if (isVoiceMessage(messageData)) {
-                        console.log('Audio message detected');
                         const audioUri = messageData.audio_files?.[0]?.uri
                         const audioFile = !audioUri ? undefined : audioEntries.find(
                             (entry) => entry.filename.endsWith(audioUri)

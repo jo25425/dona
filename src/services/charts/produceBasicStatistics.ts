@@ -1,18 +1,17 @@
 import {BasicStatistics, MessageCounts, SentReceivedPoint} from "@models/graphData";
 
 const produceBasicStatistics = (messageCounts: MessageCounts, wordCounts: SentReceivedPoint[], secondCounts: SentReceivedPoint[]): BasicStatistics => {
-    console.log("messageCounts", messageCounts);
-    console.log("wordCounts", wordCounts);
-    console.log("secondCounts", secondCounts);
-
     // Totals
-   const calculateTotal = (data: SentReceivedPoint[], key: keyof SentReceivedPoint): number =>
-       data.map((point) => point[key]).reduce((a, b) => a + b, 0);
+    const calculateTotal = (data: SentReceivedPoint[], key: keyof SentReceivedPoint): number =>
+        data.map((point) => point[key]).reduce((a, b) => a + b, 0);
 
-   const sentWordsTotal = calculateTotal(wordCounts, "sentCount");
-   const receivedWordsTotal = calculateTotal(wordCounts, "receivedCount");
-   const sentSecondsTotal = calculateTotal(secondCounts, "sentCount");
-   const receivedSecondsTotal = calculateTotal(secondCounts, "receivedCount");
+    const calculateActiveMonthAverage = (totalCount: number, numMonths: number): number =>
+        numMonths > 0 ? Math.round(totalCount / numMonths) : 0;
+
+    const sentWordsTotal = calculateTotal(wordCounts, "sentCount");
+    const receivedWordsTotal = calculateTotal(wordCounts, "receivedCount");
+    const sentSecondsTotal = calculateTotal(secondCounts, "sentCount");
+    const receivedSecondsTotal = calculateTotal(secondCounts, "receivedCount");
 
     // Averages
     const activeMonths = new Set([...wordCounts, ...secondCounts].map((point) => `${point.year}-${point.month}`)).size;
@@ -22,16 +21,35 @@ const produceBasicStatistics = (messageCounts: MessageCounts, wordCounts: SentRe
     const receivedPerActiveMonth = activeMonths > 0 ? Math.round(messageCounts.allMessages.received / activeMonths) : 0;
 
     return {
-        sentMessagesTotal: messageCounts.allMessages.sent,
-        receivedMessagesTotal: messageCounts.allMessages.received,
-        sentWordsTotal,
-        receivedWordsTotal,
-        sentSecondsTotal,
-        receivedSecondsTotal,
+        messagesTotal: messageCounts,
+        wordsTotal: {sent: sentWordsTotal, received: receivedWordsTotal},
+        secondsTotal: {sent: sentSecondsTotal, received: receivedSecondsTotal},
+
         numberOfActiveMonths: activeMonths,
         numberOfActiveYears: activeYears,
-        sentWordsPerActiveMonth: sentPerActiveMonth,
-        receivedWordsPerActiveMonth: receivedPerActiveMonth,
+
+        messagesPerActiveMonth: {
+            textMessages: {
+                sent: calculateActiveMonthAverage(messageCounts.textMessages.sent, activeMonths),
+                received: calculateActiveMonthAverage(messageCounts.textMessages.received, activeMonths),
+            },
+            audioMessages: {
+                sent: calculateActiveMonthAverage(messageCounts.audioMessages.sent, activeMonths),
+                received: calculateActiveMonthAverage(messageCounts.audioMessages.received, activeMonths),
+            },
+            allMessages: {
+                sent: sentPerActiveMonth,
+                received: receivedPerActiveMonth,
+            },
+        },
+        wordsPerActiveMonth: {
+            sent: calculateActiveMonthAverage(sentWordsTotal, activeMonths),
+            received: calculateActiveMonthAverage(receivedWordsTotal, activeMonths)
+        },
+        secondsPerActiveMonth: {
+            sent: calculateActiveMonthAverage(sentSecondsTotal, activeMonths),
+            received: calculateActiveMonthAverage(receivedSecondsTotal, activeMonths)
+        },
     };
 }
 

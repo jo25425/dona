@@ -1,10 +1,5 @@
 export type CountOption =  "words" | "seconds";
 
-export type MessageCounts = {
-    textMessages: { sent: number; received: number };
-    audioMessages: { sent: number; received: number };
-    allMessages: { sent: number; received: number };
-}
 
 export interface SentReceivedPoint {
     year: number;
@@ -38,17 +33,26 @@ export interface DailyHourPoint {
     epochSeconds: number;
 }
 
+export type SentReceived = {
+    sent: number;
+    received: number;
+};
+
+export type MessageCounts = {
+    textMessages: SentReceived;
+    audioMessages: SentReceived;
+    allMessages: SentReceived;
+}
+
 export interface BasicStatistics {
-    sentMessagesTotal: number;
-    receivedMessagesTotal: number;
-    sentWordsTotal: number;
-    receivedWordsTotal: number;
-    sentSecondsTotal: number;
-    receivedSecondsTotal: number;
+    messagesTotal: MessageCounts;
+    wordsTotal: SentReceived;
+    secondsTotal: SentReceived;
     numberOfActiveMonths: number;
     numberOfActiveYears: number;
-    sentWordsPerActiveMonth: number;
-    receivedWordsPerActiveMonth: number;
+    messagesPerActiveMonth: MessageCounts;
+    wordsPerActiveMonth: SentReceived;
+    secondsPerActiveMonth: SentReceived;
 }
 
 export interface GraphData {
@@ -57,9 +61,9 @@ export interface GraphData {
     monthlySecondsPerConversation: Record<string, SentReceivedPoint[]>;
     dailyWordsPerConversation: DailySentReceivedPoint[][];
     participantsPerConversation: string[][];
-
     dailyWords: DailySentReceivedPoint[];
     slidingWindowMeanDailyWords: DailySentReceivedPoint[];
+    slidingWindowMeanDailySeconds: DailySentReceivedPoint[];
     dailySentHours: DailyHourPoint[];
     dailyReceivedHours: DailyHourPoint[];
     answerTimes: AnswerTimePoint[];

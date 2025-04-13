@@ -4,28 +4,37 @@ import ChartContainer, {ChartType} from "@components/charts/ChartContainer";
 import {GraphData} from "@models/graphData";
 import {useTranslations} from "next-intl";
 import FullSizeModal from "@components/FullSizeModal";
+import {BlockTitle, MainTitle, RichText} from "@/styles/StyledTypography";
 
 interface MoreChartsModalProps {
     open: boolean;
     onClose: () => void;
     graphData: GraphData;
     section: "responseTimes" | "dailyActivityTimes" | "interactionIntensity";
+    showDetailedAudioFeedback: boolean;
 }
 
 const MoreChartsModal: React.FC<MoreChartsModalProps> = ({
-                                                             open,
-                                                             onClose,
-                                                             graphData,
-                                                             section,
-                                                         }) => {
-    const t = useTranslations(`feedback.${section}`);
+     open, onClose, graphData, section, showDetailedAudioFeedback
+ }) => {
+    const sectionTexts = useTranslations(`feedback.${section}`);
 
     const chartsData = (
         section == "interactionIntensity" ?
-           [
-               {"descriptionKey": "wordCountOverallBarChart", "chartType": ChartType.WordCountOverallBarChart},
-               {"descriptionKey": "sentReceivedSlidingWindowMean", "chartType": ChartType.SentReceivedSlidingWindowMean}
-           ]
+            showDetailedAudioFeedback ?
+                [
+                    {"headerKey": "textHeader"},
+                    {"descriptionKey": "wordCountOverallBarChart", "chartType": ChartType.WordCountOverallBarChart},
+                    {"descriptionKey": "wordCountSlidingWindowMean", "chartType": ChartType.WordCountSlidingWindowMean},
+                    {"headerKey": "audioHeader"},
+                    {"descriptionKey": "secondCountOverallBarChart", "chartType": ChartType.SecondCountOverallBarChart},
+                    {"descriptionKey": "secondCountSlidingWindowMean", "chartType": ChartType.SecondCountSlidingWindowMean}
+                ]
+            :
+                [
+                    {"descriptionKey": "wordCountOverallBarChart", "chartType": ChartType.WordCountOverallBarChart},
+                    {"descriptionKey": "wordCountSlidingWindowMean", "chartType": ChartType.WordCountSlidingWindowMean}
+                ]
         : section == "dailyActivityTimes" ?
             [
                 {"descriptionKey": "dayPartsOverall", "chartType": ChartType.DayPartsActivityOverallChart},
@@ -40,20 +49,21 @@ const MoreChartsModal: React.FC<MoreChartsModalProps> = ({
 
     return (
         <FullSizeModal open={open} onClose={onClose}>
-            <Typography variant="h6" mb={2}>
-                {t("moreAbout")}
-            </Typography>
+            <MainTitle variant="h5">
+                {sectionTexts("moreAbout")}
+            </MainTitle>
             <Box sx={{textAlign: "center"}}>
-                {chartsData.map(({descriptionKey, chartType}, index) => (
-                    <Box key={index} mb={4}>
-                        <Typography
-                            variant="body1" mb={2}
-                            dangerouslySetInnerHTML={{ __html: t.raw(`${descriptionKey}.description`)}}
-                        />
-                        <ChartContainer
-                            type={chartType}
-                            data={graphData}
-                        />
+                {chartsData.map(({headerKey, descriptionKey, chartType}, chartIndex) => (
+                    <Box key={chartIndex} mb={4}>
+                        {headerKey && (
+                            <BlockTitle>{sectionTexts(headerKey)}</BlockTitle>
+                        )}
+                        {descriptionKey && (
+                            <RichText>{sectionTexts.rich(`${descriptionKey}.description`)}</RichText>
+                        )}
+                        {chartType && (
+                            <ChartContainer type={chartType} data={graphData}/>
+                        )}
                     </Box>
                 ))}
             </Box>
