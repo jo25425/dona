@@ -12,8 +12,10 @@ import DailyActivityChart from "@components/charts/DailyActivityChart";
 import DayPartsActivityOverallChart from "@components/charts/DayPartsActivityOverallChart";
 import SentReceivedSlidingWindowChart from "@components/charts/SentReceivedSlidingWindowChart";
 import CountsOverallBarChart from "@components/charts/CountsOverallBarChart";
+import MessageTypesBarChart from "@components/charts/MessageTypesBarChart";
 
 export enum ChartType {
+    MessageTypesBarChart = "messageTypesBarChart",
     AnimatedIntensityPolarChart = "animatedIntensityPolarChart",
     AnimatedWordsPerChatBarChart = "animatedWordsPerChatBarChart",
     AnimatedSecondsPerChatBarChart = "animatedSecondsPerChatBarChart",
@@ -50,6 +52,14 @@ export default function ChartContainer({ type, data }: ChartContainerProps) {
             case ChartType.AnimatedSecondsPerChatBarChart:
                 return <AnimatedCountsPerChatBarChart dataMonthlyPerConversation={selectedChatsSecondsData} mode="audio"/>;
 
+            // Message composition
+            case ChartType.MessageTypesBarChart:
+                return (
+                    <MessageTypesBarChart
+                        basicStatistics={data.basicStatistics}
+                    />
+                );
+
             // Aggregated data only
             case ChartType.WordCountOverallBarChart:
                 return (
@@ -79,10 +89,14 @@ export default function ChartContainer({ type, data }: ChartContainerProps) {
                         slidingWindowMeanDailyWords={data.slidingWindowMeanDailySeconds} mode="audio"
                     />
                 );
+
+            // Response times
             case ChartType.ResponseTimeBarChart:
                 return <ResponseTimeBarChart responseTimes={data.answerTimes}/>;
             case ChartType.AnimatedResponseTimeBarChart:
                 return <AnimatedResponseTimeBarChart answerTimes={data.answerTimes}/>;
+
+            // Daily activity times
             case ChartType.DailyActivityHoursChart:
                 return <DailyActivityChart dataSent={data.dailySentHours}/>;
             case ChartType.DayPartsActivityOverallChart:
@@ -94,6 +108,7 @@ export default function ChartContainer({ type, data }: ChartContainerProps) {
                 );
             case ChartType.AnimatedDayPartsActivityChart:
                 return <AnimatedDayPartsActivityChart dailySentHours={data.dailySentHours}/>;
+
             default:
                 return (
                     <Box

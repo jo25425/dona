@@ -51,7 +51,7 @@
 //                     label: chartTexts("legend"),
 //                     data: cumulativeCounts[monthKey] || [],
 //                     backgroundColor: CHART_COLORS.primaryBar,
-//                     barThickness: CHART_LAYOUT.barThickness,
+//                     hBarThickness: CHART_LAYOUT.hBarThickness,
 //                 },
 //             ],
 //         };

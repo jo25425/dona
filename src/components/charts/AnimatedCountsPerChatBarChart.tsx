@@ -53,7 +53,7 @@ const AnimatedCountsBarChart: React.FC<AnimatedCountsBarChartProps> = ({
                     label: chartTexts("legend"),
                     data: cumulativeCounts[monthKey] || [],
                     backgroundColor: CHART_COLORS.primaryBar,
-                    barThickness: CHART_LAYOUT.barThickness,
+                    barThickness: CHART_LAYOUT.hBarThickness,
                 },
             ],
         };

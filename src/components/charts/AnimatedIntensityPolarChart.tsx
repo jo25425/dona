@@ -9,7 +9,7 @@ import {prepareCountsOverTimeData} from "@services/charts/animations";
 import DownloadButtons from "@components/charts/DownloadButtons";
 import {useTranslations} from "next-intl";
 import {calculateZScores} from "@services/charts/zScores";
-import {POLAR_CHART_COLORS, TOOLTIP} from "@components/charts/chartConfig";
+import {POLAR_CHART_COLORS, PCT_TOOLTIP} from "@components/charts/chartConfig";
 
 ChartJS.register(RadialLinearScale, Tooltip, Legend, LineElement, PointElement);
 
@@ -141,7 +141,7 @@ const AnimatedIntensityPolarChart: React.FC<AnimatedIntensityPolarChartProps> = 
                                     },
                                 },
                                 tooltip: {
-                                    ...TOOLTIP,
+                                    ...PCT_TOOLTIP,
                                     callbacks: {
                                         label: (context: any) => {
                                             const dataIndex = context.dataIndex;

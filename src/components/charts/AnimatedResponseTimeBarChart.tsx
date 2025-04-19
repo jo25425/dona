@@ -87,7 +87,7 @@ const AnimatedResponseTimeBarChart: React.FC<AnimatedResponseTimeBarChartProps> 
                     label: chartTexts("legend.donor"),
                     data: preparedData?.[monthKey] || [],
                     backgroundColor: CHART_COLORS.primaryBar,
-                    barThickness: CHART_LAYOUT.barThickness,
+                    barThickness: CHART_LAYOUT.hBarThickness,
                 },
             ],
         };

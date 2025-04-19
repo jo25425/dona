@@ -212,7 +212,7 @@ export const produceWordCountDailyHours = (
 }
 
 /**
- * Calculates the answer times between messages in a specific conversation.
+ * Calculates the answer times between messages (of any type) in a specific conversation.
  *
  * @param donorId - The ID of the donor whose messages are being analyzed.
  * @param conversation - The conversation to process.
@@ -222,7 +222,7 @@ export const produceAnswerTimesPerConversation = (
     donorId: string,
     conversation: Conversation
 ): AnswerTimePoint[] => {
-    const sortedMessages = [...conversation.messages].sort((a, b) => a.timestamp - b.timestamp);
+    const sortedMessages = [...conversation.messages, ...conversation.messagesAudio].sort((a, b) => a.timestamp - b.timestamp);
 
     return sortedMessages
         .slice(1)
